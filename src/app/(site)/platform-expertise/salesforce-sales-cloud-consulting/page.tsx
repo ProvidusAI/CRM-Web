@@ -88,24 +88,90 @@ export default function SalesforceSalesCloudConsultingPage() {
 
       {/* 5. Tabs Section (What We Do) */}
       <WhatWeDoSection
-        title="Our Sales Cloud Services"
+        title="Salesforce Sales Cloud Solutions & Services We Offer"
         tabs={[
           {
-            id: "implementation",
-            label: "Implementation",
+            id: "consulting",
+            label: "Salesforce Sales Cloud Consulting",
             content: {
-              heading: "Sales Cloud Implementation",
-              text: "We configure Sales Cloud to match your exact business requirements from day one.",
-              bullets: ["Requirement Gathering", "Data Migration", "Custom Configuration"]
+              heading: "Salesforce Sales Cloud Consulting",
+              text: "Sales Cloud setups often go off the rails quickly when nobody inside the business agrees on what the platform should actually do. Our Salesforce consulting service settles that question properly at the very start, before any configuration begins or any licence costs start running.\n\nOur Salesforce Sales Cloud consultants work with your sales, operations, and IT teams to map how deals genuinely flow today, including the quiet workarounds people have built up over the years. We then decide which Sales Cloud features fit your situation, which licences make sense, what to build first, and what to deploy later.",
+              bullets: [
+                "Discovery sessions with sales, ops, and leadership",
+                "Licence and feature recommendations that fit your budget",
+                "A phased roadmap with timelines and priorities",
+                "Defined scope, so costs stay predictable from day one"
+              ]
             }
           },
           {
-            id: "optimization",
-            label: "Optimization",
+            id: "implementation",
+            label: "Salesforce Sales Cloud Implementation",
             content: {
-              heading: "Org Optimization & Audit",
-              text: "We review your existing setup and restructure it for better performance and adoption.",
-              bullets: ["Health Checks", "Code Refactoring", "Process Improvement"]
+              heading: "Salesforce Sales Cloud Implementation",
+              text: "Salesforce Sales Cloud implementation goes way beyond basic setup. It’s about customising and configuring Sales Cloud around your processes so your sales team genuinely wants to use it from day one, rather than quietly going back to the spreadsheets.\n\nOur certified consultants configure Sales Cloud end to end, covering lead capture, lead routing, opportunity stages, sales paths, and the approvals and validations that keep records clean over time.\n\nWe build dashboards to train your sales reps effectively and create AI-enabled workflows to improve operational efficiency.",
+              bullets: [
+                "Sales path, stages, and opportunity Kanban configured properly",
+                "Lead routing and auto-assignment that match your team structure",
+                "Approval flows and validation rules to keep records clean",
+                "Salesforce mobile setup for sales teams working in the field"
+              ]
+            }
+          },
+          {
+            id: "data-migration",
+            label: "Data Migration & Management",
+            content: {
+              heading: "Data Migration & Management",
+              text: "Moving years of accounts, contacts, opportunities, and history to Salesforce Sales Cloud can be a rather risky hassle. You can’t afford to lose your data during migration nor can you risk user adoption.\n\nOur consultants migrate your records carefully, mapping each field to the correct Sales Cloud object and cleaning out duplicates as we move data across.\n\nWe also set up de-duplication rules, validation rules, and ongoing data hygiene processes that keep your records accurate well after go-live.",
+              bullets: [
+                "Accurate field mapping from your old CRM into Sales Cloud",
+                "De-duplication during the move and ongoing afterwards",
+                "Validation rules to keep records clean over time",
+                "Data hygiene processes built into daily workflows"
+              ]
+            }
+          },
+          {
+            id: "automation",
+            label: "AI-enabled Sales Automation",
+            content: {
+              heading: "AI-enabled Sales Automation",
+              text: "Clean data and clear rules are crucial for accurate AI automation. Integrate AI into a messy org, and you’ll be working with hallucinations.\n\nWe configure Agentforce Sales Cloud and Einstein AI on top of a properly structured org. Einstein scores leads based on real signals and predicts which deals are most likely to close inside the quarter.\n\nAgentforce handles qualifying, follow-ups, and the routine record updates that drain rep time across the working week. Each agent runs on your rules and your data, so you stay in full control of what it does and does not do.",
+              bullets: [
+                "Einstein lead scoring and opportunity insights set up properly",
+                "Agentforce configured around your sales rules",
+                "Automation built on clean, structured data",
+                "AI that frees reps to sell, not just answer prompts"
+              ]
+            }
+          },
+          {
+            id: "analytics",
+            label: "Sales Analytics & Reporting",
+            content: {
+              heading: "Sales Analytics & Reporting",
+              text: "Your sales team and stakeholders must have complete visibility into your workflows and campaigns. Our consultants build the reporting layer Sales Cloud should genuinely deliver out of the box, but rarely does without proper setup\n\nWe design custom report types, dashboards, and forecasting views around the real questions your leaders ask in meetings: pipeline by stage, win rates by source, rep performance over time, deal velocity, and forecast accuracy across the quarter.\n\nWe then layer in CRM Analytics where deeper analysis is genuinely needed for the business, rather than just for show or to fill slides.",
+              bullets: [
+                "Custom report types built around your real KPIs",
+                "Dashboards for reps, managers, and leadership",
+                "Forecasting views that match how you actually forecast",
+                "CRM Analytics where deeper insight is needed"
+              ]
+            }
+          },
+          {
+            id: "managed-services",
+            label: "Managed Services",
+            content: {
+              heading: "Managed Services",
+              text: "A Sales Cloud org needs ongoing support, maintenance, and upgrades. Without that, technical debt builds up quietly in the background, automations break in unexpected ways, and the system slowly drifts away from how your team actually works today.\n\nOur managed services for Sales Cloud help keep your org healthy over the course of time. We handle releases, monitor automation, fix issues quickly when they appear, and tune the setup as your sales process evolves with the business.\n\nWith each Salesforce platform release, our team checks what is changing and makes sure nothing important breaks for your users during the update window or in the days after it.",
+              bullets: [
+                "Ongoing admin, support, and configuration changes",
+                "Release management aligned to Salesforce updates",
+                "Proactive monitoring and quick issue resolution",
+                "Continuous improvements as your business evolves"
+              ]
             }
           }
         ]}
@@ -184,37 +250,37 @@ export default function SalesforceSalesCloudConsultingPage() {
         items={[
           {
             title: "Service Cloud",
-            text: "Transform customer service with structured queues, automated routing, and a 360-degree customer history on every ticket. We implement robust Service Cloud configurations around actual support processes, reducing resolution times and giving agents the context they need to help clients on their first touch.",
+            text: "Our consultants set up Service Cloud so support agents resolve cases faster and managers see the full picture of service performance. We configure case routing, escalation rules, and consoles your support teams genuinely want to use day after day, not just in the first week after launch.",
             icon: "/images/service-cloud.webp",
             bgGradient: "linear-gradient(59.61deg, #F4F4F4 45%, #FFDBED 119.24%)",
           },
           {
             title: "Experience Cloud",
-            text: "Build branded portals, partner communities, and self-service hubs directly connected to Salesforce data. Our Experience Cloud configurations include proper access controls, record visibility, and CRM integration, so external users see exactly what they should and nothing more.",
+            text: "Our consultants build Experience Cloud portals for customers, partners, and employees that connect properly to your underlying Salesforce data. We configure sharing and access rules carefully so each user sees only what they should, with self-service that genuinely works without raising support tickets every time.",
             icon: "/images/experience-cloud.webp",
             bgGradient: "linear-gradient(59.61deg, #F4F4F4 45%, #CAEFFF 119.24%)",
           },
           {
             title: "Data Cloud",
-            text: "Bring customer data from every source into one unified profile inside Salesforce. At ProvidusCRM, we implement Data Cloud to connect website activity, transaction records, and third-party data into a single view that powers smarter segmentation, personalisation, and reporting across every cloud.",
+            text: "Our consultants implement Data Cloud to pull web, transaction, and third-party data sources into one unified customer profile that updates in real time. That single view then makes every other cloud, report, dashboard, and AI feature you run on top of it far more reliable and useful.",
             icon: "/images/data-cloud.webp",
             bgGradient: "linear-gradient(59.61deg, #F4F4F4 45%, #E8EAFF 119.24%)",
           },
           {
             title: "Agentforce",
-            text: "Deploy autonomous AI agents that handle routine customer queries, qualify leads, and trigger follow-up tasks without human input. At ProvidusCRM, we configure Agentforce to act securely within existing Salesforce workflows so AI operates within your real business rules.",
+            text: "Most AI tools answer questions and stop there. Agentforce agents go further and actually do the work. Our consultants build agents that qualify leads, route cases, and complete routine tasks inside your workflows. Each agent runs on rules you control and data you genuinely trust.",
             icon: "/images/agent-force.webp",
             bgGradient: "linear-gradient(59.61deg, #F4F4F4 45%, #D8E9FF 119.24%)",
           },
           {
             title: "Marketing Cloud",
-            text: "Create personalised, cross-channel customer journeys that deliver the right message at the right time. We configure Marketing Cloud to align your marketing and sales efforts, driving engagement and maximizing ROI across email, mobile, social, and web.",
+            text: "Our consultants implement Marketing Cloud so journeys, data extensions, and reporting all connect properly to your CRM data. We build campaigns that target the right people at the right time, track real engagement across every channel, and tie back cleanly to revenue rather than vanity metrics.",
             icon: "/images/marketing-cloud.webp",
             bgGradient: "linear-gradient(59.61deg, #F4F4F4 45%, #FFDBED 119.24%)",
           },
           {
             title: "Revenue Cloud",
-            text: "Streamline your quote-to-cash process and accelerate revenue growth. We implement Revenue Cloud to automate pricing, quoting, and billing, giving your sales team the tools they need to close complex deals faster and more accurately.",
+            text: "Our consultants configure Revenue Cloud and CPQ so quotes stay fast and accurate, even as your product catalogue and business grow more complex over time. Discounts follow clear, agreed rules, contracts move smoothly through approvals, and revenue logic holds clean from quote to cash.",
             icon: "/images/revenue-cloud.webp",
             bgGradient: "linear-gradient(59.61deg, #F4F4F4 45%, #CAEFFF 119.24%)",
           }
