@@ -29,7 +29,7 @@ export function ServiceCaseStudiesSection({
 
   return (
     <Section className="bg-white py-16 md:py-24">
-      <Container size="lg">
+      <Container size="xl">
         <div className="text-center">
           <Image
             src="/images/green-line.svg"

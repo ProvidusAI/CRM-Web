@@ -10,6 +10,9 @@ interface HeroSectionProps {
   image?: string;
   imageClassName?: string;
   hideImage?: boolean;
+  subtitle?: string;
+  bullets?: string[];
+  hideCta?: boolean;
 }
 
 interface BlurScaleHeadingProps {
@@ -111,6 +114,9 @@ export function HeroSection({
   image = "/images/hero-img.webp",
   imageClassName = "object-cover object-center",
   hideImage = false,
+  subtitle,
+  bullets,
+  hideCta = false,
 }: HeroSectionProps) {
   const defaultTitle = (
     <>
@@ -182,6 +188,13 @@ export function HeroSection({
                   </div>
                 </div>
 
+                {/* Subtitle */}
+                {subtitle && (
+                  <Text variant="p4" className="text-white font-medium">
+                    {subtitle}
+                  </Text>
+                )}
+
                 {/* Heading + squiggle */}
                 <div>
                   <Heading as="h1" className="text-white max-w-[560px]">
@@ -192,16 +205,30 @@ export function HeroSection({
                 </div>
 
                 {/* Subtext */}
-                <Text variant="p2" className="text-white/90 max-w-md">
+                <Text variant="p3" className="text-white/90 max-w-md">
                   {description || defaultDescription}
                 </Text>
 
+                {/* Bullets */}
+                {bullets && bullets.length > 0 && (
+                  <ul className="text-white/90 flex flex-col gap-2 list-none p-0 m-0">
+                    {bullets.map((bullet, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <span className="text-white mt-1">•</span>
+                        <Text variant="p3" className="text-white/90">{bullet}</Text>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
                 {/* CTA */}
-                <div>
-                  <CtaButton variant="white" size="md">
-                    Book a Call
-                  </CtaButton>
-                </div>
+                {!hideCta && (
+                  <div>
+                    <CtaButton variant="white" size="md">
+                      Book a Call
+                    </CtaButton>
+                  </div>
+                )}
               </div>
 
               {/* Right — image */}

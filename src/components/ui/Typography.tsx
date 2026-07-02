@@ -14,7 +14,7 @@ interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
 const headingClasses: Record<HeadingLevel, string> = {
   h1: "typography-h1 !text-[36px] !leading-[40px] !tracking-[-0.4px] md:!text-[60px] md:!leading-[60.9px] md:!tracking-[-1.24px]",
   h2: "typography-h2 !text-[34px] !leading-[38px] md:!text-[50px] md:!leading-[45px]",
-  h3: "typography-h3 !text-[30px] !leading-[34px] !tracking-[-0.2px] md:!text-[45px] md:!leading-[25px] md:!tracking-[-0.39px]",
+  h3: "typography-h3 !text-[30px] !leading-[34px] !tracking-[-0.2px] md:!text-[40px] md:!leading-[45px] md:!tracking-[-0.39px]",
   h4: "typography-h4 !text-[24px] !leading-[30px] md:!text-[30px] md:!leading-[35px]",
 };
 

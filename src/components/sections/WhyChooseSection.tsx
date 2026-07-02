@@ -11,22 +11,22 @@ export interface WhyChooseReason {
 
 export const reasons: WhyChooseReason[] = [
   {
-    title: "We're Different",
+    title: "Operational Excellence",
     color: "var(--color-soft-indigo)",
     icon: "/images/different.webp",
-    text: "Most Salesforce partners just sell hours. We sell outcomes. Every engagement starts with understanding what the business actually needs, not what is easiest to configure. Our consultants challenge requirements before building anything, so the solution that goes live is the one that holds up six months later."
+    text: "We help you build and implement Salesforce orgs that’re designed around your processes, delivering business value from day one. Our goal is to drive successful roll-outs, enable adoption across your teams, and ensure Salesforce aligns perfectly with your operations and objectives."
   },
   {
-    title: "We're Better",
+    title: "Technical Depth",
     color: "var(--color-soft-purple)",
     icon: "/images/better.webp",
-    text: "Certified across every core Salesforce platform. Experienced across six industry verticals. Built on a delivery framework that has never relied on 'we'll figure it out as we go.' While other partners staff projects with junior consultants and learn on the job, our team brings deep platform knowledge and real implementation experience to every engagement."
+    text: "Our team of Salesforce consultants is highly skilled and technically proficient, while boasting certifications across the Salesforce ecosystem. From sales to marketing to service operations, we help you reinvent your processes, boost revenue, and drive operational efficiency."
   },
   {
-    title: "We're a Leading Salesforce Partner in the UK",
+    title: "Business-First Approach",
     color: "var(--color-salesforce-blue)",
     icon: "/images/salesforce-partner.webp",
-    text: "ProvidusCRM combines the technical depth of a large consultancy with the responsiveness of a specialist partner. Certified consultants across Sales Cloud, Service Cloud, Marketing Cloud, Data Cloud, Experience Cloud, and Agentforce. A delivery track record across nonprofit, financial services, healthcare, education, manufacturing, and commerce. One UK Salesforce partner covering the full platform, the full project lifecycle, and the full range of industries that depend on CRM done right"
+    text: "No generic solutions. No one-size-fits-all orgs. Your business is unique. Your requirements are different. We provide you with a viable solution that’s not only intuitive but also supports your growth initiatives and innovation goals."
   }
 ];
 

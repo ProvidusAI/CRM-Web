@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { Heading } from "@/components/ui/Typography";
+import { ArrowRight } from "lucide-react";
 
 interface CtaSectionProps {
   title?: string;
@@ -57,15 +58,14 @@ export function CtaSection({
             ))}
           </Heading>
 
-          <Link href={buttonHref} className="inline-block">
-            <button className="flex items-center gap-2 bg-brand-green text-white px-6 py-3 rounded-full hover:bg-[#2e8b16] transition-colors group cursor-pointer">
-              <div className="bg-white rounded-full p-1 group-hover:scale-110 transition-transform">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9 18L15 12L9 6" stroke="var(--color-brand-green)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              </div>
-              <span className="font-semibold">{buttonLabel}</span>
-            </button>
+          <Link
+            href={buttonHref}
+            className="inline-flex items-center gap-3 bg-brand-green text-white rounded-full py-2 pr-6 pl-2 hover:bg-[#2d8716] transition-colors mt-2"
+          >
+            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shrink-0">
+              <ArrowRight className="w-4 h-4 text-brand-green" />
+            </div>
+            <span className="font-medium text-[16px] font-body">{buttonLabel}</span>
           </Link>
         </div>
       </Container>
