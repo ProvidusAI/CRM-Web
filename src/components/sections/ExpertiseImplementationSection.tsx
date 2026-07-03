@@ -1,7 +1,10 @@
+"use client";
+
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Heading, Text } from "@/components/ui/Typography";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export interface ExpertiseImplementationItem {
   title: string;
@@ -23,7 +26,13 @@ export function ExpertiseImplementationSection({
   return (
     <Section className="py-16 md:py-24 bg-white">
       <Container>
-        <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center"
+        >
           <div className="text-[#A0FF88] mb-4">
             <svg
               width="64"
@@ -52,11 +61,18 @@ export function ExpertiseImplementationSection({
           <Heading as="h2" className="text-slate-900 font-bold leading-tight">
             {heading}
           </Heading>
-        </div>
+        </motion.div>
 
         <div className="flex flex-col gap-6 md:gap-8">
           {items.map((item, index) => (
-            <div key={index} className="flex flex-col lg:flex-row gap-6 md:gap-8 items-stretch">
+            <motion.div 
+              key={index} 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+              className="flex flex-col lg:flex-row gap-6 md:gap-8 items-stretch"
+            >
               {/* Image Column */}
               <div className="lg:w-[35%] relative min-h-[250px] lg:min-h-full rounded-[18px] overflow-hidden shrink-0">
                 <Image
@@ -78,7 +94,7 @@ export function ExpertiseImplementationSection({
                   {item.text}
                 </Text>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </Container>

@@ -1,3 +1,5 @@
+"use client";
+
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Heading } from "@/components/ui/Typography";
@@ -5,6 +7,7 @@ import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 interface ExpertiseCtaSectionProps {
   title: string;
@@ -26,7 +29,13 @@ export function ExpertiseCtaSection({
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left Column: Side-by-side Images */}
-          <div className="flex flex-row items-stretch gap-4 md:gap-6 w-full min-h-[280px] md:min-h-[360px]">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-row items-stretch gap-4 md:gap-6 w-full min-h-[280px] md:min-h-[360px]"
+          >
             {/* Image 1 (Team Meeting) */}
             <div className="relative flex-1 rounded-[24px] overflow-hidden shadow-md">
               <Image
@@ -45,10 +54,16 @@ export function ExpertiseCtaSection({
                 className="object-contain"
               />
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Content */}
-          <div className="flex flex-col items-start lg:pl-16 gap-8">
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className="flex flex-col items-start lg:pl-16 gap-8"
+          >
             <GreenLineMark className="w-16 h-auto -mb-4" />
 
             <Heading as="h3" className="text-black font-bold! max-w-xl">
@@ -64,7 +79,7 @@ export function ExpertiseCtaSection({
               </div>
               <span className="font-medium text-[16px] font-body">{buttonText}</span>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </Container>
     </Section>

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/Carousel";
 import { Heading, Text } from "@/components/ui/Typography";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export interface ExpertisePlatformItem {
   title: string;
@@ -49,7 +50,13 @@ export function ExpertisePlatformsSection({
   return (
     <Section className="py-20 md:py-32 bg-white relative overflow-hidden">
       <Container>
-        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24 flex flex-col items-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center max-w-3xl mx-auto mb-16 md:mb-24 flex flex-col items-center"
+        >
           <div className="text-[#A0FF88] mb-4">
             <svg
               width="64"
@@ -78,7 +85,7 @@ export function ExpertisePlatformsSection({
           <Heading as="h2" className="text-slate-900 font-bold leading-tight">
             {title}
           </Heading>
-        </div>
+        </motion.div>
       </Container>
 
       <div className="relative">

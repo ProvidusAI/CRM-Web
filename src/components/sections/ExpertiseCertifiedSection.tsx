@@ -1,6 +1,9 @@
+"use client";
+
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface ExpertiseCertifiedSectionProps {
   images: string[];
@@ -11,7 +14,13 @@ export function ExpertiseCertifiedSection({ images }: ExpertiseCertifiedSectionP
 
   return (
     <Section className="py-12 bg-white overflow-hidden">
-      <div className="relative w-full flex items-center">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative w-full flex items-center"
+      >
         <div className="flex items-center gap-8 md:gap-16 animate-marquee w-fit">
           {/* First set of logos */}
           {images.map((src, idx) => (
@@ -36,7 +45,7 @@ export function ExpertiseCertifiedSection({ images }: ExpertiseCertifiedSectionP
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </Section>
   );
 }
