@@ -107,7 +107,7 @@ export function BlogSection({ posts, searchQuery, onSearchChange }: BlogSectionP
                       >
                         {firstItem.title}
                       </Heading>
-                      <span className="inline-block mt-2 font-body font-normal text-[16px] md:text-[20px] text-[#8C8C8C] leading-[30px]">
+                      <span className="inline-block mt-2 font-body font-normal text-[16px] text-[#8C8C8C] leading-[30px]">
                         {firstItem.date}
                       </span>
                       <Text variant="p3" className="mt-3 max-w-2xl text-[#5F5F5F]">
@@ -143,7 +143,7 @@ export function BlogSection({ posts, searchQuery, onSearchChange }: BlogSectionP
                           >
                             {item.title}
                           </Heading>
-                          <span className="inline-block mt-1 font-body font-normal text-[16px] lg:text-[20px] text-[#8C8C8C] leading-[30px]">
+                          <span className="inline-block mt-1 font-body font-normal text-[16px] text-[#8C8C8C] leading-[30px]">
                             {item.date}
                           </span>
                         </Reveal>
@@ -180,7 +180,7 @@ export function BlogSection({ posts, searchQuery, onSearchChange }: BlogSectionP
                       >
                         {item.title}
                       </Heading>
-                      <span className="inline-block mt-2 font-body font-normal text-[16px] md:text-[20px] text-[#8C8C8C] leading-[30px]">
+                      <span className="inline-block mt-2 font-body font-normal text-[16px] text-[#8C8C8C] leading-[30px]">
                         {item.date}
                       </span>
                       <Text variant="p3" className="mt-3 text-[#5F5F5F]">
@@ -228,12 +228,12 @@ export function BlogSection({ posts, searchQuery, onSearchChange }: BlogSectionP
             )}
 
             {/* Load More Button */}
-            <div className="flex justify-center mt-8">
+            {/* <div className="flex justify-center mt-8">
               <button className="flex items-center gap-2 border border-gray-300 text-black px-8 py-3.5 rounded-full hover:bg-gray-50 transition-all font-semibold cursor-pointer">
                 Load More
                 <ArrowRight className="w-5 h-5" />
               </button>
-            </div>
+            </div> */}
           </div>
         )}
       </Container>
