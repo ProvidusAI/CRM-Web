@@ -33,3 +33,5 @@ export { ServiceBenefitsSection } from "./ServiceBenefitsSection";
 export { SalesforceConsultCtaSection } from "./SalesforceConsultCtaSection";
 export { SalesforceProcessSection } from "./SalesforceProcessSection";
 export { MigrationPlatformsSection } from "./MigrationPlatformsSection";
+export { IdentityResolutionSection } from "./IdentityResolutionSection";
+export { DataCloudVsWarehouseSection } from "./DataCloudVsWarehouseSection";
