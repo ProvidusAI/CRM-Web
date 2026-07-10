@@ -1,7 +1,6 @@
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Heading, Text } from "@/components/ui/Typography";
-import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import React from "react";

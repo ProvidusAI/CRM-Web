@@ -29,18 +29,6 @@ export function FaqSection({ title = "Frequently Asked Questions", faqs = [] }: 
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const displayTitleParts = title.split(" ").reduce((acc, word, idx, arr) => {
-    // Basic logic to split at the first word if it's 3 words
-    if (idx === 0) {
-      acc.push(word);
-    } else if (idx === 1) {
-      acc.push(" " + word);
-    } else {
-      acc[1] += " " + word;
-    }
-    return acc;
-  }, [] as string[]);
-  
   // Try to cleanly split the title into two lines if it's the default
   const formattedTitle = title === "Frequently Asked Questions" 
     ? <><span className="block">Frequently</span><span className="block">Asked Questions</span></>

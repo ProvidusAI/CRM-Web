@@ -74,7 +74,7 @@ export function IdentityResolutionSection() {
               The Two Failure modes
             </Heading>
             <Text variant="p4" className="text-gray-600 leading-relaxed mb-6">
-              Exact-match-only rules miss obvious duplicates: "John Smith" and "J. Smith" pointing at the same phone number stay as separate profiles.
+              Exact-match-only rules miss obvious duplicates: &quot;John Smith&quot; and &quot;J. Smith&quot; pointing at the same phone number stay as separate profiles.
             </Text>
             <Text variant="p4" className="text-gray-600 leading-relaxed">
               Loose, misdirected matching goes the other way, merging two different people who share a common name and a nearby postcode. The right configuration sits between these extremes.
@@ -90,10 +90,10 @@ export function IdentityResolutionSection() {
             className="md:px-12 md:border-r border-gray-300"
           >
             <Heading as="h4" className="text-black font-bold mb-6">
-              Here's An Example
+              Here&apos;s An Example
             </Heading>
             <Text variant="p4" className="text-gray-600 leading-relaxed mb-6">
-              Consider "J. Smith, jsmith@email.com, mobile ending 4471, London SW1" and "John Smith, john.smith@personalemail.com, mobile ending 4471, London SW1".
+              Consider &quot;J. Smith, jsmith@email.com, mobile ending 4471, London SW1&quot; and &quot;John Smith, john.smith@personalemail.com, mobile ending 4471, London SW1&quot;.
             </Text>
             <Text variant="p4" className="text-gray-600 leading-relaxed">
               A default configuration keeps them as two profiles. A properly configured multi-attribute rule merges them into one unified profile with two known email addresses, tuned against real sample data.
@@ -112,10 +112,10 @@ export function IdentityResolutionSection() {
               Survivorship Rules
             </Heading>
             <Text variant="p4" className="text-gray-600 leading-relaxed mb-6">
-              Once records merge, Data Cloud picks which field values win. Consent should use "most restrictive wins" to avoid contacting opt-outs.
+              Once records merge, Data Cloud picks which field values win. Consent should use &quot;most restrictive wins&quot; to avoid contacting opt-outs.
             </Text>
             <Text variant="p4" className="text-gray-600 leading-relaxed">
-              Loyalty status should use "highest value wins" to avoid downgrading customers. Our consultants make these decisions field by field, documented with your data owners.
+              Loyalty status should use &quot;highest value wins&quot; to avoid downgrading customers. Our consultants make these decisions field by field, documented with your data owners.
             </Text>
           </motion.div>
         </div>

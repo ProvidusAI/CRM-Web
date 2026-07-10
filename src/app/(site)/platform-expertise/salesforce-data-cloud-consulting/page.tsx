@@ -16,7 +16,6 @@ import {
   FaqSection,
   IdentityResolutionSection,
   DataCloudVsWarehouseSection,
-  reasons as whyChooseReasonsFallback,
 } from "@/components/sections";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { CtaSection } from "@/components/sections/CtaSection";

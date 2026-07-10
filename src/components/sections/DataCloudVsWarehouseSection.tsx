@@ -1,7 +1,6 @@
 "use client";
 
 import { Container } from "@/components/layout/Container";
-import { Section } from "@/components/layout/Section";
 import { Heading, Text } from "@/components/ui/Typography";
 import { motion } from "framer-motion";
 

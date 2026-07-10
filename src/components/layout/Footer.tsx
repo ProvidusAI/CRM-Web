@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "./Container";
-import { Heading, Text } from "@/components/ui/Typography";
+import { Text } from "@/components/ui/Typography";
 
 const servicesLinks = [
   { label: "Salesforce Nonprofit Implementation", href: "/services/salesforce-nonprofit-implementation" },
