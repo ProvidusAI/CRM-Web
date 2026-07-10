@@ -23,7 +23,7 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: {
     default: "ProvidusCRM | Certified Salesforce Partner UK",
-    template: "%s",
+    template: "%s | ProvidusCRM",
   },
   description:
     "ProvidusCRM provides certified Salesforce consulting, implementation, development, integration, migration, and managed services in the UK.",

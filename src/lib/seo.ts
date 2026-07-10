@@ -34,7 +34,7 @@ export function buildPageMetadata({
     toAbsoluteUrl(seo?.twitterImage?.asset?.url) || imageUrl;
 
   return {
-    title,
+    title: title.includes("ProvidusCRM") ? { absolute: title } : title,
     description,
     keywords: seo?.keywords,
     alternates: canonicalUrl
