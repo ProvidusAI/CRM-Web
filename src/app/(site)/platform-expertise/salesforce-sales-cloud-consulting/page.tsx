@@ -14,7 +14,6 @@ import {
   ExpertiseImplementationSection,
   WhyChooseSection,
   FaqSection,
-  reasons as whyChooseReasonsFallback,
 } from "@/components/sections";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { CtaSection } from "@/components/sections/CtaSection";
@@ -42,7 +41,7 @@ export default function SalesforceSalesCloudConsultingPage() {
           "Certified Sales Cloud consultants",
           "Setup matched to your sales process",
           "Clean pipeline data and accurate forecasts",
-          "AI and Agentforce ready solutions"
+          "AI and Agentforce-ready solutions"
         ]}
         hideCta
       />
@@ -214,7 +213,7 @@ export default function SalesforceSalesCloudConsultingPage() {
 
       {/* 7. Expertise CTA */}
       <ExpertiseCtaSection
-        title="Connect With Our Salesforce Consultants To Discuss Your CRM Needs And Business Goals."
+        title="Connect With Our Salesforce Sales Cloud Consultants To Discuss Your Challenges And Goals."
         buttonText="Let's Connect"
         buttonHref="/contact"
         image1="/images/platform-expertise/expertise-cta-1.png"
@@ -223,8 +222,8 @@ export default function SalesforceSalesCloudConsultingPage() {
 
       {/* 8. Salesforce Section */}
       <ExpertiseSalesforceSection
-        heading="Salesforce Consulting Services That Secure Your CRM Investments"
-        text="ProvidusCRM is a certified Salesforce consulting partner, helping organizations in the UK drive operational efficiency, reduce costs, and integrate their CRM systems securely and reliably with other tools and platforms. Every project we work on involves our experienced, certified teams and their relentless efforts towards meeting your specific needs and goals, enabling you to derive maximum value from your Salesforce investments."
+        heading="We're a Certified Salesforce Sales Cloud Consulting & Implementation Partner"
+        text="Our team holds numerous Salesforce certifications and has set up Sales Cloud in complex business environments. Our consultants know which approach fits your situation best, which to avoid carefully, and how to build an org that holds up well long after go-live."
         image="/images/platform-expertise/salesforce-partner.webp"
       />
 
@@ -246,7 +245,7 @@ export default function SalesforceSalesCloudConsultingPage() {
 
       {/* 10. Platforms Expertise */}
       <ExpertisePlatformsSection
-        title="Our End-to-End Salesforce Platform Expertise"
+        title="Explore Our Expertise Across The Salesforce Ecosystem"
         items={[
           {
             title: "Service Cloud",
@@ -289,40 +288,36 @@ export default function SalesforceSalesCloudConsultingPage() {
 
       {/* 11. Expertise Implementation */}
       <ExpertiseImplementationSection
-        heading={
-          <>
-            How We Implement<br />Salesforce Across Industries
-          </>
-        }
+        heading={<>Industries We Impact</>}
         items={[
           {
-            title: "Non-Profit Cloud",
-            text: "Charities and nonprofit organisations run on relationships, but most CRM systems were never built for how nonprofits actually work. Our Nonprofit Cloud consultants configure donor lifecycles, track programme outcomes, automate gift processing, and consolidate fundraising data in one place. From donation pages and recurring giving to grant tracking and volunteer management, every setup reflects how nonprofit teams operate day to day.",
+            title: "Non-Profit",
+            text: "Charities run on relationships rather than transactions, and standard CRMs rarely fit that operating reality well. Our consultants implement Nonprofit Cloud to handle donor records, gift processing, and grant tracking in one connected place, so your fundraising teams spend less time on admin and more on the mission.",
             image: "/images/platform-expertise/non-profit.png"
           },
           {
-            title: "Education Cloud",
-            text: "Universities, colleges, and training providers manage thousands of relationships across recruitment, admissions, student success, and alumni engagement. Our Education Cloud specialists connect every stage of the student lifecycle in one platform. Recruitment pipelines, application tracking, student case management, and alumni fundraising all run from the same data, so no department works in isolation, and no student record falls through the gaps.",
-            image: "/images/platform-expertise/education.png"
-          },
-          {
-            title: "Commerce Cloud",
-            text: "Selling online gets complicated fast. Product catalogues grow, pricing rules multiply, and customers expect the same experience across every channel. Our Commerce Cloud consultants build B2B and B2C storefronts connected directly to CRM data, order management, and marketing automation. Inventory visibility, pricing logic, checkout flows, and post-purchase journeys all live inside one platform, so the commerce experience matches what the rest of the business already knows about the customer.",
+            title: "Retail & eCommerce",
+            text: "Online selling needs joined-up stock, pricing, and customer data across every channel and physical store. Our consultants configure Commerce Cloud and the connected tools around it so the buying experience matches what the rest of your business already knows about each individual customer.",
             image: "/images/platform-expertise/commerce.png"
           },
           {
-            title: "Health Cloud",
-            text: "Patient data is sensitive, care coordination is complex, and compliance is not optional. Our Health Cloud implementation experts give healthcare providers a complete view of every patient across referrals, appointments, care plans, and follow-ups. Clinical and non-clinical teams work from the same record, consent tracking is built into every workflow, and reporting meets regulatory standards. Better care coordination with less administrative overhead.",
+            title: "Healthcare",
+            text: "Patient data is genuinely sensitive, and care coordination is complex across providers, settings, and time. Our consultants set up Health Cloud with consent tracking and access rules built in from the very start, so your clinical teams see one trusted record without ever compromising compliance.",
             image: "/images/platform-expertise/health.png"
           },
           {
-            title: "Financial Services Cloud",
-            text: "Banks, lenders, wealth managers, and fintechs need CRM that understands financial relationships, not just contacts and opportunities. Our Financial Services Cloud consultants set up client household management, financial account tracking, compliance workflow automation, and full advisor dashboards. KYC processes, referral tracking, and pipeline management all operate within a platform built specifically for how financial services teams work and what regulators expect.",
+            title: "Education",
+            text: "Students move from prospect to applicant to student to alumnus across systems that rarely talk to each other properly. Our consultants implement Education Cloud to connect that full lifecycle journey, so advisers, fundraisers, and faculty work from the same history without any gaps between departments.",
+            image: "/images/platform-expertise/education.png"
+          },
+          {
+            title: "Financial Services",
+            text: "Banks, lenders, and wealth firms need a CRM built around households and financial accounts rather than just individual contacts. Our consultants set up Financial Services Cloud with KYC workflows and compliance steps embedded inside the process, not bolted on as an afterthought later in the project.",
             image: "/images/platform-expertise/finance.png"
           },
           {
-            title: "Manufacturing Cloud",
-            text: "Manufacturers deal with long sales cycles, complex account hierarchies, and forecasting that depends on both sales agreements and actual production capacity. Our Manufacturing Cloud specialists connect sales forecasts with operations data, manage account-based agreements, and give commercial teams accurate visibility into run-rate business and new opportunities. Rebate management, partner collaboration, and demand planning all run from one system instead of five disconnected spreadsheets.",
+            title: "Manufacturing",
+            text: "Manufacturers plan against sales agreements and production capacity at the same time, and the two rarely sit together cleanly inside one system. Our consultants implement Manufacturing Cloud to connect commercial forecasts with operations data, so your teams forecast against what the business can actually deliver each month.",
             image: "/images/platform-expertise/manufacturing.png"
           }
         ]}
@@ -330,8 +325,27 @@ export default function SalesforceSalesCloudConsultingPage() {
 
       {/* 12. Why Choose Section */}
       <WhyChooseSection
-        title="Why Choose ProvidusCRM for Sales Cloud?"
-        customReasons={whyChooseReasonsFallback}
+        title="Why Implement Salesforce Sales Cloud With ProvidusCRM"
+        customReasons={[
+          {
+            title: "Certified, Experienced Teams",
+            color: "var(--color-soft-indigo)",
+            icon: "/images/different.webp",
+            text: "Our consultants hold Salesforce certifications and have delivered Sales Cloud projects across multiple industries and company sizes. You get guidance and expertise that only comes from complex, successful implementations."
+          },
+          {
+            title: "Proven Implementation Process",
+            color: "var(--color-soft-purple)",
+            icon: "/images/better.webp",
+            text: "We follow a structured process from initial discovery through configuration, testing, training, and final release into production. Each phase has clear ownership and defined outputs, so your project moves forward predictably from kickoff to go-live."
+          },
+          {
+            title: "Long-Term Support After Go-Live",
+            color: "var(--color-salesforce-blue)",
+            icon: "/images/salesforce-partner.webp",
+            text: "Our team stays close to your business after launch. We monitor the org, fix issues quickly when they appear, and adjust the setup as your business changes over time. Your Sales Cloud investment keeps paying off year after year."
+          }
+        ]}
         image="/images/platform-expertise/expertise-choose.png"
         backgroundOverlayColor="#616161"
       />
@@ -341,16 +355,36 @@ export default function SalesforceSalesCloudConsultingPage() {
         title="Frequently Asked Questions"
         faqs={[
           {
-            question: "How long does a typical Sales Cloud implementation take?",
-            answer: "A standard implementation usually takes between 4 to 8 weeks, depending on the complexity of your processes, the amount of data to migrate, and any custom integrations required."
+            question: "What does a Salesforce Sales Cloud consultant do?",
+            answer: "A Salesforce Sales Cloud consultant maps how your sales team works today, and then configures Sales Cloud to match that process step by step. They handle setup, training, integrations, and the careful design choices that decide whether your team adopts the system properly or quietly avoids using it."
           },
           {
-            question: "Do you provide user training after implementation?",
-            answer: "Yes, we offer comprehensive, role-based training sessions for your sales reps, managers, and system administrators to ensure smooth adoption."
+            question: "What Salesforce Sales Cloud solutions does ProvidusCRM offer in the UK?",
+            answer: "Our Salesforce Sales Cloud consultants in the UK offer consulting, implementation, customisation, data migration, AI-enabled sales automation with Einstein and Agentforce, and analytics setup. We configure every solution around your sales process and team structure."
           },
           {
-            question: "Can Sales Cloud integrate with our existing ERP?",
-            answer: "Absolutely. Salesforce has robust APIs, and our team has extensive experience integrating Sales Cloud with various ERPs like NetSuite, SAP, and Microsoft Dynamics."
+            question: "What Salesforce Sales Cloud services do you provide in the UK?",
+            answer: "The Sales Cloud services we provide in the UK cover advisory, implementation, optimisation of existing orgs, integrations with your finance and marketing tools, ongoing managed services, user training, and post-go-live support across releases. We work with you across every stage of your Sales Cloud implementation lifecycle."
+          },
+          {
+            question: "What does a Salesforce Sales Cloud Implementation Partner do?",
+            answer: "A Salesforce Sales Cloud implementation partner takes you from licensing to deployment to user adoption. They configure objects, automation, reports, and integrations to fit your specific business, then train your team properly so user adoption holds up well after go-live and beyond the first review."
+          },
+          {
+            question: "What is the difference between a Salesforce Sales Cloud consultant and an implementation partner?",
+            answer: "A consultant advises on what Sales Cloud should do for you and how to design it properly. An implementation partner actually builds the configured system you need. ProvidusCRM does both well, so your strategy and the build never drift apart across the course of the project."
+          },
+          {
+            question: "How long does a Salesforce Sales Cloud implementation take?",
+            answer: "Sales Cloud implementation typically runs eight to sixteen weeks from kickoff to go-live, depending on scope and integrations involved. Larger, multi-region, or integration-heavy projects can take longer. Our consultants give you a realistic timeline after the discovery phase."
+          },
+          {
+            question: "What industries do your Salesforce Sales Cloud consultants in the UK work with?",
+            answer: "Our consultants work across nonprofit, retail and ecommerce, healthcare, education, financial services, and manufacturing sectors regularly. We bring sector context and relevant prior experience to each Sales Cloud project, so the configuration fits how your industry actually sells and serves its end customers."
+          },
+          {
+            question: "How much do Salesforce Sales Cloud services cost in the UK?",
+            answer: "Consulting and implementation costs depend on factors such as scope, integrations needed, licence counts, and the size of your sales team. Pricing starts at around £30,000 and goes upwards for complex multi-cloud projects with integrations. At ProvidusCRM, our consultants share a clear quote after discovery."
           }
         ]}
       />
