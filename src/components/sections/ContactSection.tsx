@@ -100,7 +100,7 @@ export function ContactSection() {
                       <MapPin className="w-6 h-6 text-brand-green-light" aria-hidden="true" />
                     </div>
                     <span className="font-body font-normal text-[15px] md:text-[18px] text-white/90 leading-relaxed max-w-sm">
-                      1st Floor, Portfolio Place 498 Broadway Oldham, United Kingdom OL9 9PY
+                      9 Appold St, London EC2A 2AP, <br />United Kingdom
                     </span>
                   </div>
                 </Reveal>
@@ -127,10 +127,10 @@ export function ContactSection() {
                       <Phone className="w-6 h-6 text-brand-green-light" aria-hidden="true" />
                     </div>
                     <a
-                      href="tel:+971581090882"
+                      href="tel:+447777973577"
                       className="font-body font-normal text-[15px] md:text-[18px] text-white hover:text-brand-green-light transition-colors leading-relaxed"
                     >
-                      +971 58 109 0882
+                      +44 7777 973577
                     </a>
                   </div>
                 </Reveal>

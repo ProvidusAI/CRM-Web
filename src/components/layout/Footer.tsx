@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { MapPin, Mail, Phone } from "lucide-react";
 import { Container } from "./Container";
 import { Text } from "@/components/ui/Typography";
 
@@ -32,7 +33,7 @@ export function Footer() {
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16">
           {/* Column 1: Logo, Description, Socials */}
-          <div className="md:col-span-5 flex flex-col items-start gap-8">
+          <div className="md:col-span-4 flex flex-col items-start gap-8">
             <Image
               src="/images/logo-footer.svg"
               alt="ProvidusCRM"
@@ -69,10 +70,8 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="md:col-span-1 hidden md:block"></div>
-
           {/* Column 2: Services */}
-          <div className="md:col-span-4 flex flex-col gap-4">
+          <div className="md:col-span-3 flex flex-col gap-4">
             <h2 className="typography-p2 align-middle text-white mb-2">
               Services
             </h2>
@@ -105,6 +104,35 @@ export function Footer() {
                 </Link>
               ))}
             </nav>
+          </div>
+
+          {/* Column 4: Contact */}
+          <div className="md:col-span-3 flex flex-col gap-4">
+            <h2 className="typography-p2 align-middle text-white mb-2">
+              Contact
+            </h2>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 shrink-0 text-brand-green-light mt-0.5" aria-hidden="true" />
+                <span className="typography-p4 text-white/80">
+                  9 Appold St, London EC2A 2AP, United Kingdom
+                </span>
+              </div>
+              <a
+                href="mailto:connect@providuscrm.co.uk"
+                className="flex items-center gap-3 typography-p4 text-white/80 hover:text-white transition-colors"
+              >
+                <Mail className="w-5 h-5 shrink-0 text-brand-green-light" aria-hidden="true" />
+                connect@providuscrm.co.uk
+              </a>
+              <a
+                href="tel:+447777973577"
+                className="flex items-center gap-3 typography-p4 text-white/80 hover:text-white transition-colors"
+              >
+                <Phone className="w-5 h-5 shrink-0 text-brand-green-light" aria-hidden="true" />
+                +44 7777 973577
+              </a>
+            </div>
           </div>
         </div>
 
