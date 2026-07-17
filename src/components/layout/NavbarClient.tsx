@@ -219,6 +219,29 @@ function DesktopDropdown({ item }: { item: DropdownNavItem }) {
   );
 }
 
+const platformExpertisePages: NavItem[] = [
+  {
+    label: "Salesforce Sales Cloud Consulting",
+    href: "/platform-expertise/salesforce-sales-cloud-consulting",
+  },
+  {
+    label: "Salesforce Service Cloud Consulting",
+    href: "/platform-expertise/salesforce-service-cloud-consulting",
+  },
+  {
+    label: "Salesforce Marketing Cloud Consulting",
+    href: "/platform-expertise/salesforce-marketing-cloud-consulting",
+  },
+  {
+    label: "Salesforce Experience Cloud Consulting",
+    href: "/platform-expertise/salesforce-experience-cloud-consulting",
+  },
+  {
+    label: "Salesforce Data Cloud Consulting",
+    href: "/platform-expertise/salesforce-data-cloud-consulting",
+  },
+];
+
 function getNavItems(salesforceServices: NavItem[]): DropdownNavItem[] {
   return [
     { label: "About", href: "/about" },
@@ -228,7 +251,11 @@ function getNavItems(salesforceServices: NavItem[]): DropdownNavItem[] {
       children: salesforceServices,
     },
     { label: "Industry", href: "/industries" },
-    { label: "Platform Expertise", href: "/platform-expertise" },
+    {
+      label: "Platform Expertise",
+      href: "/platform-expertise",
+      children: platformExpertisePages,
+    },
     { label: "Case Studies", href: "/case-studies" },
     { label: "Blog", href: "/blog" },
   ];
