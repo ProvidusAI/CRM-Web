@@ -42,6 +42,7 @@ export function ExpertiseCtaSection({
                 src={image1}
                 alt="Consultation Team"
                 fill
+                sizes="(max-width: 1024px) 50vw, 25vw"
                 className="object-cover"
               />
             </div>
@@ -51,6 +52,7 @@ export function ExpertiseCtaSection({
                 src={image2}
                 alt="Salesforce Astro"
                 fill
+                sizes="(max-width: 1024px) 50vw, 25vw"
                 className="object-contain"
               />
             </div>

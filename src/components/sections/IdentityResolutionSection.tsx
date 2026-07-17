@@ -50,11 +50,22 @@ export function IdentityResolutionSection() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="relative w-full mb-16 md:mb-24"
         >
-          <div className="relative w-full aspect-[1236/193] min-h-[120px] md:min-h-[190px]">
+          {/* Desktop: wide horizontal diagram */}
+          <div className="relative hidden md:block w-full aspect-[1236/193] min-h-[190px]">
             <Image
               src="/images/data-cloud-identity.svg"
               alt="How Identity Resolution Works Diagram"
               fill
+              className="object-contain"
+            />
+          </div>
+          {/* Mobile: tall vertical diagram */}
+          <div className="relative md:hidden w-full max-w-[420px] mx-auto aspect-[599/1323]">
+            <Image
+              src="/images/platform-expertise/identiy-mob.png"
+              alt="How Identity Resolution Works Diagram"
+              fill
+              sizes="(max-width: 768px) 100vw, 420px"
               className="object-contain"
             />
           </div>

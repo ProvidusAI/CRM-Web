@@ -19,13 +19,18 @@ import {
 } from "@/components/sections";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { CtaSection } from "@/components/sections/CtaSection";
+import { getPageCaseStudies } from "@/lib/pageCaseStudies";
 
 export const metadata: Metadata = {
   title: "Salesforce Data Cloud Consulting | ProvidusCRM",
   description: "Salesforce Data Cloud Consulting Services",
 };
 
-export default function SalesforceDataCloudConsultingPage() {
+export default async function SalesforceDataCloudConsultingPage() {
+  const caseStudies = await getPageCaseStudies(
+    "salesforce-data-cloud-consulting"
+  );
+
   return (
     <div className="overflow-x-hidden bg-white">
       {/* 1. Hero Section */}
@@ -72,17 +77,17 @@ export default function SalesforceDataCloudConsultingPage() {
           {
             title: "Fragmented Customer\nRecords",
             description: "Your website, CRM, ecommerce, and support tools each hold a different version of the same customer. Segments target the wrong people, reports contradict each other, and AI features surface confident recommendations built on records that should never have existed as separate profiles.",
-            icon: "/images/platform-expertise/Mask group (1).png"
+            icon: "/images/platform-expertise/Mask group (1).webp"
           },
           {
             title: "Unclear Sales\nPipeline Structure",
             description: "The same customer sits in your systems three times, sometimes five. Each duplicate carries partial history and partial preferences. So your reports overcount, your marketing sends the same email twice with different subject lines, and your customer notices the amateur hour.",
-            icon: "/images/platform-expertise/Mask group (2).png"
+            icon: "/images/platform-expertise/Mask group (2).webp"
           },
           {
             title: "Manual\nAdministration",
             description: "Einstein and Agentforce run on the data you give them. Feed them fragmented records, and they generate confident nonsense your team quickly learns to ignore. The result? Your AI investment stalls, not because the technology fails, but because the underlying data quietly undermines it.",
-            icon: "/images/platform-expertise/Mask group (3).png"
+            icon: "/images/platform-expertise/Mask group (3).webp"
           }
         ]}
       />
@@ -97,16 +102,16 @@ export default function SalesforceDataCloudConsultingPage() {
       {/* 6. Certified Marque */}
       <ExpertiseCertifiedSection
         images={[
-          "/images/certified-badges/1.png",
-          "/images/certified-badges/2.png",
-          "/images/certified-badges/3.png",
-          "/images/certified-badges/4.png",
-          "/images/certified-badges/5.png",
-          "/images/certified-badges/6.png",
-          "/images/certified-badges/7.png",
-          "/images/certified-badges/8.png",
-          "/images/certified-badges/9.png",
-          "/images/certified-badges/10.png",
+          "/images/certified-badges/1.webp",
+          "/images/certified-badges/2.webp",
+          "/images/certified-badges/3.webp",
+          "/images/certified-badges/4.webp",
+          "/images/certified-badges/5.webp",
+          "/images/certified-badges/6.webp",
+          "/images/certified-badges/7.webp",
+          "/images/certified-badges/8.webp",
+          "/images/certified-badges/9.webp",
+          "/images/certified-badges/10.webp",
         ]}
       />
 
@@ -202,47 +207,21 @@ export default function SalesforceDataCloudConsultingPage() {
         backgroundOverlayColor="#616161"
       />
 
-      {/* 8. Case Studies (First 4 fallback) */}
-      <ServiceCaseStudiesSection
-        caseStudies={[
-          {
-            title: "Global Manufacturing Firm Transforms Data",
-            slug: "global-manufacturing-firm",
-            image: "/images/platform-expertise/0882dc9511818687452216a90ddac20a710efcf0.png",
-            label: "Data Cloud",
-            category: "Manufacturing",
-          },
-          {
-            title: "Financial Services Provider Increases Win Rates by 30%",
-            slug: "financial-services-provider",
-            image: "/images/platform-expertise/0d003666468f3b3b463f19926696c6228525fc0c.png",
-            label: "Data Cloud",
-            category: "Financial Services",
-          },
-          {
-            title: "Retail Brand Achieves 360-Degree Customer View",
-            slug: "retail-brand-360",
-            image: "/images/platform-expertise/40de88188cc45b6c279db8314135b88f97be49f0.png",
-            label: "Data Cloud",
-            category: "Retail",
-          },
-          {
-            title: "Tech Startup Automates Lead Routing",
-            slug: "tech-startup-lead-routing",
-            image: "/images/platform-expertise/7280b567b367bac0947be408373273e6553327eb.png",
-            label: "Data Cloud",
-            category: "Technology",
-          }
-        ]}
-      />
+      {/* 8. Case Studies — selected in Sanity ("Page case studies" → Data Cloud) */}
+      {caseStudies.cards.length > 0 && (
+        <ServiceCaseStudiesSection
+          title={caseStudies.title}
+          caseStudies={caseStudies.cards}
+        />
+      )}
 
       {/* 9. Expertise CTA */}
       <ExpertiseCtaSection
         title="Still struggling to have a single source of truth for your customer data? Reach out to our team today!"
         buttonText="Let's Connect"
         buttonHref="/contact"
-        image1="/images/platform-expertise/expertise-cta-1.png"
-        image2="/images/platform-expertise/expertise-cta-2.png"
+        image1="/images/platform-expertise/expertise-cta-1.webp"
+        image2="/images/platform-expertise/expertise-cta-2.webp"
       />
 
       {/* 10. Platforms Expertise */}
@@ -332,32 +311,32 @@ export default function SalesforceDataCloudConsultingPage() {
           {
             title: "Non-Profit",
             text: "Donor, supporter, volunteer, and beneficiary data often live in separate systems. Our consultants configure Data Cloud alongside Nonprofit Cloud so fundraising, programme delivery, and stewardship teams share one accurate view of each supporter across the organisation.",
-            image: "/images/platform-expertise/non-profit.png"
+            image: "/images/platform-expertise/non-profit.webp"
           },
           {
             title: "Retail & eCommerce",
             text: "Retail customers move across mobile, desktop, in-store, and support in a single week. Our consultants configure Data Cloud and align it with Commerce Cloud to resolve these signals against a unified profile in real time, so loyalty attributes and browsing behaviour sit under one identity.",
-            image: "/images/platform-expertise/commerce.png"
+            image: "/images/platform-expertise/commerce.webp"
           },
           {
             title: "Healthcare",
             text: "Patient identity resolution carries higher stakes than any other sector. Our consultants configure Data Cloud alongside Health Cloud with match rules that respect patient identifiers and consent scopes, treating identity accuracy as a compliance obligation rather than a marketing optimisation.",
-            image: "/images/platform-expertise/health.png"
+            image: "/images/platform-expertise/health.webp"
           },
           {
             title: "Education",
             text: "Students, applicants, alumni, and donors sit inside education data. Our consultants implement Data Cloud alongside Education Cloud to connect that lifecycle, so recruitment and advancement teams work from the same view without gaps between departments.",
-            image: "/images/platform-expertise/education.png"
+            image: "/images/platform-expertise/education.webp"
           },
           {
             title: "Financial Services",
             text: "Banks, lenders, and wealth firms need household matching under regulatory constraints. Our consultants configure Data Cloud match and household rules that reflect these relationships accurately, while keeping KYC and consent boundaries intact for compliance teams.",
-            image: "/images/platform-expertise/finance.png"
+            image: "/images/platform-expertise/finance.webp"
           },
           {
             title: "Manufacturing",
             text: "Manufacturers hold customer data across sales, distributors, service, and IoT signals from installed products. Our consultants implement Data Cloud alongside Manufacturing Cloud to unify these signals, so account teams work from a full picture rather than fragments.",
-            image: "/images/platform-expertise/manufacturing.png"
+            image: "/images/platform-expertise/manufacturing.webp"
           }
         ]}
       />

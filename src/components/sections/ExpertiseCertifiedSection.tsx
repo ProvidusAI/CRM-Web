@@ -28,6 +28,7 @@ export function ExpertiseCertifiedSection({ images }: ExpertiseCertifiedSectionP
                 src={src}
                 alt={`Certification ${idx + 1}`}
                 fill
+                sizes="150px"
                 className="object-contain"
               />
             </div>
@@ -39,6 +40,7 @@ export function ExpertiseCertifiedSection({ images }: ExpertiseCertifiedSectionP
                 src={src}
                 alt={`Certification ${idx + 1}`}
                 fill
+                sizes="150px"
                 className="object-contain"
               />
             </div>

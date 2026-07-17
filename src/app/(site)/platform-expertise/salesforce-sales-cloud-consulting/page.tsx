@@ -17,13 +17,18 @@ import {
 } from "@/components/sections";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { CtaSection } from "@/components/sections/CtaSection";
+import { getPageCaseStudies } from "@/lib/pageCaseStudies";
 
 export const metadata: Metadata = {
   title: "Salesforce Sales Cloud Consulting | ProvidusCRM",
   description: "Salesforce Sales Cloud Consulting Services",
 };
 
-export default function SalesforceSalesCloudConsultingPage() {
+export default async function SalesforceSalesCloudConsultingPage() {
+  const caseStudies = await getPageCaseStudies(
+    "salesforce-sales-cloud-consulting"
+  );
+
   return (
     <div className="overflow-x-hidden bg-white">
       {/* 1. Hero Section */}
@@ -36,7 +41,7 @@ export default function SalesforceSalesCloudConsultingPage() {
         }
         subtitle="Salesforce Sales Cloud Consulting & Implementation"
         description="Partner with ProvidusCRM's certified consultants to set up Sales Cloud around how your sales team functions and plans to grow. Sell more and forecast better with our end-to-end Sales Cloud consulting and implementation services."
-        image="/images/platform-expertise/pe-cloud-hero.png"
+        image="/images/platform-expertise/pe-cloud-hero.webp"
         bullets={[
           "Certified Sales Cloud consultants",
           "Setup matched to your sales process",
@@ -70,17 +75,17 @@ export default function SalesforceSalesCloudConsultingPage() {
           {
             title: "Messy,\nDuplicated Data",
             description: "Duplicate accounts, half-finished records, and contacts spread across different touchpoints ruin forecast efficiency. Your sales reps stop trusting the system within weeks of go-live. Investing in Sales Cloud stops making sense when your team ultimately goes back to spreadsheets and your underlying data quality only gets worse.",
-            icon: "/images/platform-expertise/Mask group (1).png"
+            icon: "/images/platform-expertise/Mask group (1).webp"
           },
           {
             title: "Unclear Sales Pipeline\nStructure",
             description: "When your stages and sales paths are vague or inconsistent, every rep ends up tracking deals slightly differently. Reports stop matching reality, forecasts slip from one week to the next, and your managers chase status updates instead of coaching the team properly to close.",
-            icon: "/images/platform-expertise/Mask group (2).png"
+            icon: "/images/platform-expertise/Mask group (2).webp"
           },
           {
             title: "Manual\nAdministration",
             description: "Your sales reps spend hours each week updating fields, logging activities, and chasing approvals through email threads that nobody actually reads. Without proper automation, Sales Cloud becomes an admin tax on your team rather than a productivity boost.",
-            icon: "/images/platform-expertise/Mask group (3).png"
+            icon: "/images/platform-expertise/Mask group (3).webp"
           }
         ]}
       />
@@ -177,47 +182,21 @@ export default function SalesforceSalesCloudConsultingPage() {
         backgroundOverlayColor="#616161"
       />
 
-      {/* 6. Case Studies (First 4 fallback) */}
-      <ServiceCaseStudiesSection
-        caseStudies={[
-          {
-            title: "Global Manufacturing Firm Transforms Sales Cycle",
-            slug: "global-manufacturing-firm",
-            image: "/images/platform-expertise/0882dc9511818687452216a90ddac20a710efcf0.png",
-            label: "Sales Cloud",
-            category: "Manufacturing",
-          },
-          {
-            title: "Financial Services Provider Increases Win Rates by 30%",
-            slug: "financial-services-provider",
-            image: "/images/platform-expertise/0d003666468f3b3b463f19926696c6228525fc0c.png",
-            label: "Sales Cloud",
-            category: "Financial Services",
-          },
-          {
-            title: "Retail Brand Achieves 360-Degree Customer View",
-            slug: "retail-brand-360",
-            image: "/images/platform-expertise/40de88188cc45b6c279db8314135b88f97be49f0.png",
-            label: "Sales Cloud",
-            category: "Retail",
-          },
-          {
-            title: "Tech Startup Automates Lead Routing",
-            slug: "tech-startup-lead-routing",
-            image: "/images/platform-expertise/7280b567b367bac0947be408373273e6553327eb.png",
-            label: "Sales Cloud",
-            category: "Technology",
-          }
-        ]}
-      />
+      {/* 6. Case Studies — selected in Sanity ("Page case studies" → Sales Cloud) */}
+      {caseStudies.cards.length > 0 && (
+        <ServiceCaseStudiesSection
+          title={caseStudies.title}
+          caseStudies={caseStudies.cards}
+        />
+      )}
 
       {/* 7. Expertise CTA */}
       <ExpertiseCtaSection
         title="Connect With Our Salesforce Sales Cloud Consultants To Discuss Your Challenges And Goals."
         buttonText="Let's Connect"
         buttonHref="/contact"
-        image1="/images/platform-expertise/expertise-cta-1.png"
-        image2="/images/platform-expertise/expertise-cta-2.png"
+        image1="/images/platform-expertise/expertise-cta-1.webp"
+        image2="/images/platform-expertise/expertise-cta-2.webp"
       />
 
       {/* 8. Salesforce Section */}
@@ -230,16 +209,16 @@ export default function SalesforceSalesCloudConsultingPage() {
       {/* 9. Certified Marque */}
       <ExpertiseCertifiedSection
         images={[
-          "/images/certified-badges/1.png",
-          "/images/certified-badges/2.png",
-          "/images/certified-badges/3.png",
-          "/images/certified-badges/4.png",
-          "/images/certified-badges/5.png",
-          "/images/certified-badges/6.png",
-          "/images/certified-badges/7.png",
-          "/images/certified-badges/8.png",
-          "/images/certified-badges/9.png",
-          "/images/certified-badges/10.png",
+          "/images/certified-badges/1.webp",
+          "/images/certified-badges/2.webp",
+          "/images/certified-badges/3.webp",
+          "/images/certified-badges/4.webp",
+          "/images/certified-badges/5.webp",
+          "/images/certified-badges/6.webp",
+          "/images/certified-badges/7.webp",
+          "/images/certified-badges/8.webp",
+          "/images/certified-badges/9.webp",
+          "/images/certified-badges/10.webp",
         ]}
       />
 
@@ -293,32 +272,32 @@ export default function SalesforceSalesCloudConsultingPage() {
           {
             title: "Non-Profit",
             text: "Charities run on relationships rather than transactions, and standard CRMs rarely fit that operating reality well. Our consultants implement Nonprofit Cloud to handle donor records, gift processing, and grant tracking in one connected place, so your fundraising teams spend less time on admin and more on the mission.",
-            image: "/images/platform-expertise/non-profit.png"
+            image: "/images/platform-expertise/non-profit.webp"
           },
           {
             title: "Retail & eCommerce",
             text: "Online selling needs joined-up stock, pricing, and customer data across every channel and physical store. Our consultants configure Commerce Cloud and the connected tools around it so the buying experience matches what the rest of your business already knows about each individual customer.",
-            image: "/images/platform-expertise/commerce.png"
+            image: "/images/platform-expertise/commerce.webp"
           },
           {
             title: "Healthcare",
             text: "Patient data is genuinely sensitive, and care coordination is complex across providers, settings, and time. Our consultants set up Health Cloud with consent tracking and access rules built in from the very start, so your clinical teams see one trusted record without ever compromising compliance.",
-            image: "/images/platform-expertise/health.png"
+            image: "/images/platform-expertise/health.webp"
           },
           {
             title: "Education",
             text: "Students move from prospect to applicant to student to alumnus across systems that rarely talk to each other properly. Our consultants implement Education Cloud to connect that full lifecycle journey, so advisers, fundraisers, and faculty work from the same history without any gaps between departments.",
-            image: "/images/platform-expertise/education.png"
+            image: "/images/platform-expertise/education.webp"
           },
           {
             title: "Financial Services",
             text: "Banks, lenders, and wealth firms need a CRM built around households and financial accounts rather than just individual contacts. Our consultants set up Financial Services Cloud with KYC workflows and compliance steps embedded inside the process, not bolted on as an afterthought later in the project.",
-            image: "/images/platform-expertise/finance.png"
+            image: "/images/platform-expertise/finance.webp"
           },
           {
             title: "Manufacturing",
             text: "Manufacturers plan against sales agreements and production capacity at the same time, and the two rarely sit together cleanly inside one system. Our consultants implement Manufacturing Cloud to connect commercial forecasts with operations data, so your teams forecast against what the business can actually deliver each month.",
-            image: "/images/platform-expertise/manufacturing.png"
+            image: "/images/platform-expertise/manufacturing.webp"
           }
         ]}
       />
@@ -346,7 +325,7 @@ export default function SalesforceSalesCloudConsultingPage() {
             text: "Our team stays close to your business after launch. We monitor the org, fix issues quickly when they appear, and adjust the setup as your business changes over time. Your Sales Cloud investment keeps paying off year after year."
           }
         ]}
-        image="/images/platform-expertise/expertise-choose.png"
+        image="/images/platform-expertise/expertise-choose.webp"
         backgroundOverlayColor="#616161"
       />
 

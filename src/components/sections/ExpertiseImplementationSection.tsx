@@ -79,6 +79,7 @@ export function ExpertiseImplementationSection({
                   src={item.image}
                   alt={item.title}
                   fill
+                  sizes="(max-width: 1024px) 100vw, 35vw"
                   className="object-cover object-center"
                 />
               </div>
