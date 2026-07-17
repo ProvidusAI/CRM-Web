@@ -42,5 +42,11 @@ export async function POST(request: NextRequest) {
     revalidatePath("/blog");
   }
 
+  // Keyed by pageKey rather than slug, so refresh every page that renders a
+  // selection. Editing a caseStudy is already covered by the "case-studies" tag.
+  if (body._type === "pageCaseStudies") {
+    revalidateTag("page-case-studies");
+  }
+
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }

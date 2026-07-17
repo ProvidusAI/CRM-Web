@@ -107,6 +107,12 @@ export interface CaseStudy extends CaseStudyListItem {
   jsonLd?: JsonLdField;
 }
 
+export interface PageCaseStudies {
+  pageKey: string;
+  sectionTitle?: string;
+  caseStudies?: CaseStudyListItem[];
+}
+
 export type ServicePageStatus = "published" | "draft";
 
 export type ServicePageSectionKey =

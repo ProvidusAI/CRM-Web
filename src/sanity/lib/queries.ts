@@ -62,6 +62,27 @@ export const STATIC_PAGE_SEO_QUERY = defineQuery(`
   }
 `);
 
+export const PAGE_CASE_STUDIES_QUERY = defineQuery(`
+  *[_type == "pageCaseStudies" && pageKey == $pageKey][0] {
+    pageKey,
+    sectionTitle,
+    caseStudies[]->{
+      _id,
+      title,
+      slug,
+      excerpt,
+      publishedAt,
+      clientName,
+      industry,
+      technologies,
+      resultSummary,
+      coverImage {
+        ${imageProjection}
+      }
+    }
+  }
+`);
+
 export const BLOG_CATEGORIES_QUERY = defineQuery(`
   *[_type == "category" && defined(slug.current)] | order(title asc) {
     title,

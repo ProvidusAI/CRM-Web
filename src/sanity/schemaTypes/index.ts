@@ -3,6 +3,7 @@ import { blockContent } from "./blockContent";
 import { caseStudy } from "./caseStudy";
 import { category } from "./category";
 import { jsonLd } from "./jsonLd";
+import { pageCaseStudies } from "./pageCaseStudies";
 import { post } from "./post";
 import { seo } from "./seo";
 import { servicePage } from "./servicePage";
@@ -15,6 +16,7 @@ export const schemaTypes = [
   servicePage,
   staticPageSeo,
   sitePageJsonLd,
+  pageCaseStudies,
   author,
   category,
   blockContent,
