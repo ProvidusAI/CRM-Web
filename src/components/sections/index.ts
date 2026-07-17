@@ -14,6 +14,7 @@ export { WhyChooseSection, reasons } from "./WhyChooseSection";
 export { FaqSection } from "./FaqSection";
 export { ExpertiseDescriptionSection } from "./ExpertiseDescriptionSection";
 export { ExpertiseFeaturesSection } from "./ExpertiseFeaturesSection";
+export { ExpertiseChallengesSection } from "./ExpertiseChallengesSection";
 export { ExpertiseCtaSection } from "./ExpertiseCtaSection";
 export { ExpertiseSalesforceSection } from "./ExpertiseSalesforceSection";
 export { ExpertiseCertifiedSection } from "./ExpertiseCertifiedSection";
