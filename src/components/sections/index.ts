@@ -20,6 +20,8 @@ export { ExpertiseSalesforceSection } from "./ExpertiseSalesforceSection";
 export { ExpertiseCertifiedSection } from "./ExpertiseCertifiedSection";
 export { ExpertisePlatformsSection } from "./ExpertisePlatformsSection";
 export { ExpertiseImplementationSection } from "./ExpertiseImplementationSection";
+export { IndustryCtaSection } from "./IndustryCtaSection";
+export { OrganisationTypesSection } from "./OrganisationTypesSection";
 export { TeamSection } from "./TeamSection";
 export { CategoriesSection } from "./CategoriesSection";
 export { BelieveSection } from "./BelieveSection";
