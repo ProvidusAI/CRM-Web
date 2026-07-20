@@ -22,6 +22,10 @@ const pageOptions = [
     value: "salesforce-data-cloud-consulting",
   },
   { title: "Industries", value: "industries" },
+  {
+    title: "Industries — Nonprofit",
+    value: "salesforce-nonprofit-consulting",
+  },
 ];
 
 export const pageCaseStudies = defineType({

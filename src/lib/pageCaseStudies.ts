@@ -11,7 +11,8 @@ export type PageCaseStudyKey =
   | "salesforce-marketing-cloud-consulting"
   | "salesforce-experience-cloud-consulting"
   | "salesforce-data-cloud-consulting"
-  | "industries";
+  | "industries"
+  | "salesforce-nonprofit-consulting";
 
 interface PageCaseStudiesResult {
   /** Optional heading override. Undefined falls back to the section default. */
