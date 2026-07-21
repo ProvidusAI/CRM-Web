@@ -63,7 +63,7 @@ src/
 ## Running the Project
 ```bash
 npm install
-npm run dev        # Development server on http://localhost:3000
+npm run dev        # Development server on http://localhost:3002
 npm run build      # Production build
 npm run type-check # TypeScript validation
 npm run lint       # ESLint

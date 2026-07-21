@@ -1,15 +1,9 @@
 import { defineField, defineType } from "sanity";
+import { STATIC_PAGE_OPTIONS } from "@/lib/pageKeys";
 
-const pageOptions = [
-  { title: "Home", value: "home" },
-  { title: "About", value: "about" },
-  { title: "Services", value: "services" },
-  { title: "Platform Expertise", value: "platform-expertise" },
-  { title: "Industries", value: "industries" },
-  { title: "Blog", value: "blog" },
-  { title: "Case Studies", value: "case-studies" },
-  { title: "Contact", value: "contact" },
-];
+// Sourced from src/lib/pageKeys.ts so this dropdown, the JSON-LD dropdown, and
+// the StaticPageKey union can never drift apart. Add new pages there.
+const pageOptions = [...STATIC_PAGE_OPTIONS];
 
 export const staticPageSeo = defineType({
   name: "staticPageSeo",

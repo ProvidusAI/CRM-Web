@@ -38,7 +38,7 @@ export function Heading({
 
 // ─── Text ─────────────────────────────────────────────────────
 type TextVariant = "p1" | "p2" | "p3" | "p4";
-type TextTag = "p" | "span" | "div" | "li" | "label";
+type TextTag = "p" | "span" | "div" | "li" | "label" | "dt" | "dd";
 
 interface TextProps extends React.HTMLAttributes<HTMLElement> {
   variant?: TextVariant;

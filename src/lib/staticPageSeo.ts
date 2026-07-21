@@ -5,16 +5,9 @@ import { buildPageMetadata } from "@/lib/seo";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { STATIC_PAGE_SEO_QUERY } from "@/sanity/lib/queries";
 import type { StaticPageSeo } from "@/sanity/lib/types";
+import type { StaticPageKey } from "@/lib/pageKeys";
 
-export type StaticPageKey =
-  | "home"
-  | "about"
-  | "services"
-  | "platform-expertise"
-  | "industries"
-  | "blog"
-  | "case-studies"
-  | "contact";
+export type { StaticPageKey };
 
 interface StaticPageMetadataFallback {
   title: string;

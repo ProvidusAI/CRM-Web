@@ -12,7 +12,7 @@ This project uses Sanity for blog posts and case studies.
 NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2026-03-01
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SITE_URL=http://localhost:3002
 SANITY_REVALIDATE_SECRET=use-a-long-random-string
 ```
 
@@ -29,7 +29,7 @@ pnpm dev
 5. Open the embedded Studio:
 
 ```text
-http://localhost:3000/studio
+http://localhost:3002/studio
 ```
 
 ## Content Models
@@ -74,7 +74,7 @@ Add the same environment variables to your hosting provider.
 In Sanity, add CORS origins for:
 
 ```text
-http://localhost:3000
+http://localhost:3002
 https://your-production-domain.com
 ```
 

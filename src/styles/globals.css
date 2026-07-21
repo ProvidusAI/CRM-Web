@@ -40,6 +40,32 @@
   /* Shadows */
   --shadow-partner: 0px 24.85px 51.88px -21.86px #4eb83545;
 
+  /* True Cost section (Figma 172:4) — exact values from the design */
+  --color-cost-card-green: #f5fff2;
+  --color-cost-card-blue: #f0f7ff;
+  --color-cost-icon-blue: #2271ce;
+  --color-cost-label: #a46335;
+  --color-cost-panel: #ffebdc;
+  --color-card-border: #d9d9d9;
+  --color-text-heading: #2a2a2a;
+  --color-text-body: #3e3e3e;
+  --shadow-cost-card: 0px 4px 23px 10px rgba(0, 0, 0, 0.05);
+  /* DIY vs Partner comparison (Figma 53:123) — exact values from the design */
+  --color-compare-grey: #f2f2f2;
+  --color-compare-blue-start: #1c95da;
+  --color-compare-blue-end: #236fab;
+  --color-compare-muted: rgba(13, 13, 13, 0.7);
+  --shadow-vs-badge: 0px 0.627px 1.128px -0.347px rgba(0, 0, 0, 0.05),
+    0px 2.382px 4.287px -0.694px rgba(0, 0, 0, 0.07),
+    0px 10.407px 18.733px -1.041px rgba(0, 0, 0, 0.16);
+
+  --shadow-cost-icon: 0px 0.655px 0.655px -0.502px rgba(171, 171, 171, 0.64),
+    0px 1.676px 1.676px -1.005px rgba(171, 171, 171, 0.63),
+    0px 3.36px 3.36px -1.507px rgba(171, 171, 171, 0.61),
+    0px 6.369px 6.369px -2.01px rgba(171, 171, 171, 0.58),
+    0px 12.659px 12.659px -2.512px rgba(171, 171, 171, 0.51),
+    0px 27.829px 27.829px -3.015px rgba(171, 171, 171, 0.35);
+
   /* Brand-adjacent colors used in sections */
   --color-explore-blue: #0c8cc3;
   --color-explore-purple: #ac2c6d;

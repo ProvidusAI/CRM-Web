@@ -22,6 +22,8 @@ export { ExpertisePlatformsSection } from "./ExpertisePlatformsSection";
 export { ExpertiseImplementationSection } from "./ExpertiseImplementationSection";
 export { IndustryCtaSection } from "./IndustryCtaSection";
 export { OrganisationTypesSection } from "./OrganisationTypesSection";
+export { TrueCostSection } from "./TrueCostSection";
+export { ComparisonSection } from "./ComparisonSection";
 export { TeamSection } from "./TeamSection";
 export { CategoriesSection } from "./CategoriesSection";
 export { BelieveSection } from "./BelieveSection";

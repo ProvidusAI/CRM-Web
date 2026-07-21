@@ -1,14 +1,9 @@
 import { defineField, defineType } from "sanity";
+import { STATIC_PAGE_OPTIONS } from "@/lib/pageKeys";
 
-const pageOptions = [
-  { title: "Home", value: "home" },
-  { title: "About", value: "about" },
-  { title: "Industries", value: "industries" },
-  { title: "Platform Expertise", value: "platform-expertise" },
-  { title: "Case Studies", value: "case-studies" },
-  { title: "Blog", value: "blog" },
-  { title: "Services", value: "services" },
-];
+// Sourced from src/lib/pageKeys.ts — see staticPageSeo.ts. This list previously
+// drifted and was missing Contact.
+const pageOptions = [...STATIC_PAGE_OPTIONS];
 
 export const sitePageJsonLd = defineType({
   name: "sitePageJsonLd",

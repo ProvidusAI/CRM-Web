@@ -80,10 +80,10 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3002](http://localhost:3002).
 
 For CMS setup, see `SANITY.md`. The embedded Studio runs at
-[http://localhost:3000/studio](http://localhost:3000/studio) after Sanity
+[http://localhost:3002/studio](http://localhost:3002/studio) after Sanity
 environment variables are configured.
 
 ## Scripts

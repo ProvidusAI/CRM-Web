@@ -23,6 +23,10 @@ const pageOptions = [
   },
   { title: "Industries", value: "industries" },
   {
+    title: "Industries — Health Cloud",
+    value: "salesforce-health-cloud-consulting",
+  },
+  {
     title: "Industries — Nonprofit",
     value: "salesforce-nonprofit-consulting",
   },

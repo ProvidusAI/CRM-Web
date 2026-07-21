@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
 import { Fragment } from "react";
 import {
   HeroSection,
@@ -19,10 +20,13 @@ import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { getPageCaseStudies } from "@/lib/pageCaseStudies";
 
-export const metadata: Metadata = {
-  title: "Salesforce Sales Cloud Consulting | ProvidusCRM",
-  description: "Salesforce Sales Cloud Consulting Services",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return generateStaticPageMetadata("salesforce-sales-cloud-consulting", {
+    title: "Salesforce Sales Cloud Consulting | ProvidusCRM",
+    description: "Salesforce Sales Cloud Consulting Services",
+    canonicalPath: "/platform-expertise/salesforce-sales-cloud-consulting",
+  });
+}
 
 export default async function SalesforceSalesCloudConsultingPage() {
   const caseStudies = await getPageCaseStudies(
