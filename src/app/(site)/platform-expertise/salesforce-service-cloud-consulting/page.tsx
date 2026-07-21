@@ -43,6 +43,7 @@ export default async function SalesforceServiceCloudConsultingPage() {
           </>
         }
         subtitle="Salesforce Service Cloud Consulting & Implementation"
+        subtitleAsH1
         description="At ProvidusCRM, we leverage our extensive Salesforce Service Cloud expertise to configure and optimise case routing, the agent console, and reporting so cases reach the right agent and metrics reflect what really happened."
         image="/images/platform-expertise/pr-service-cloud-hero.webp"
         bullets={[

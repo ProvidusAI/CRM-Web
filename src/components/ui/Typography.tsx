@@ -38,7 +38,9 @@ export function Heading({
 
 // ─── Text ─────────────────────────────────────────────────────
 type TextVariant = "p1" | "p2" | "p3" | "p4";
-type TextTag = "p" | "span" | "div" | "li" | "label" | "dt" | "dd";
+// h1/h2 are allowed so a heading tag can carry small body styling — e.g. a hero
+// kicker that is semantically the page h1 but visually a p4.
+type TextTag = "p" | "span" | "div" | "li" | "label" | "dt" | "dd" | "h1" | "h2";
 
 interface TextProps extends React.HTMLAttributes<HTMLElement> {
   variant?: TextVariant;

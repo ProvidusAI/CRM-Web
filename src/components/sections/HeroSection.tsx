@@ -11,6 +11,13 @@ interface HeroSectionProps {
   imageClassName?: string;
   hideImage?: boolean;
   subtitle?: string;
+  /**
+   * Promotes the subtitle to the page <h1> and drops the title to <h2>, keeping
+   * both visual sizes unchanged. Used by the platform-expertise detail pages,
+   * where the kicker carries the target keyword. Explicit rather than inferred
+   * from `subtitle` so adding a kicker elsewhere never moves the h1 silently.
+   */
+  subtitleAsH1?: boolean;
   bullets?: string[];
   hideCta?: boolean;
 }
@@ -115,6 +122,7 @@ export function HeroSection({
   imageClassName = "object-cover object-center",
   hideImage = false,
   subtitle,
+  subtitleAsH1 = false,
   bullets,
   hideCta = false,
 }: HeroSectionProps) {
@@ -190,14 +198,22 @@ export function HeroSection({
 
                 {/* Subtitle */}
                 {subtitle && (
-                  <Text variant="p4" className="text-white font-medium">
+                  <Text
+                    as={subtitleAsH1 ? "h1" : "p"}
+                    variant="p4"
+                    className="text-white font-medium"
+                  >
                     {subtitle}
                   </Text>
                 )}
 
                 {/* Heading + squiggle */}
                 <div>
-                  <Heading as="h1" className="text-white max-w-[560px]">
+                  <Heading
+                    as={subtitleAsH1 ? "h2" : "h1"}
+                    level="h1"
+                    className="text-white max-w-[560px]"
+                  >
                     <BlurScaleHeading>
                       {title || defaultTitle}
                     </BlurScaleHeading>

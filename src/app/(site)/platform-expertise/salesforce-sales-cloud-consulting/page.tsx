@@ -44,6 +44,7 @@ export default async function SalesforceSalesCloudConsultingPage() {
           </>
         }
         subtitle="Salesforce Sales Cloud Consulting & Implementation"
+        subtitleAsH1
         description="Partner with ProvidusCRM's certified consultants to set up Sales Cloud around how your sales team functions and plans to grow. Sell more and forecast better with our end-to-end Sales Cloud consulting and implementation services."
         image="/images/platform-expertise/pe-cloud-hero.webp"
         bullets={[

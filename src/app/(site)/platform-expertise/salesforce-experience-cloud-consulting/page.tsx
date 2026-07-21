@@ -43,6 +43,7 @@ export default async function SalesforceExperienceCloudConsultingPage() {
           </>
         }
         subtitle="Salesforce Experience Cloud Consulting & Implementation Partner"
+        subtitleAsH1
         description="Configure Salesforce Experience Cloud so customer, partner, and employee portals connect directly to Salesforce records, permissions, and workflows with our ProvidusCRM. Our consultants define sharing rules and test them before launch, ensuring users see exactly the records they should and the portal reflects live Salesforce data."
         image="/images/platform-expertise/pe-cloud-consult.webp"
         bullets={[

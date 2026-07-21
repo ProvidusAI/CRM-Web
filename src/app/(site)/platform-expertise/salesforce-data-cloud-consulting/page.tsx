@@ -45,7 +45,8 @@ export default async function SalesforceDataCloudConsultingPage() {
             <GreenLineMark className="inline-block h-10 w-auto align-baseline ml-1" />
           </>
         }
-        subtitle="& Implementation Partner"
+        subtitle="Salesforce Data Cloud Consulting & Implementation Partner"
+        subtitleAsH1
         description="At ProvidusCRM, we configure Salesforce Data Cloud so that customer records from your CRM, website, transactions, and other tools merge correctly into a single profile. Your segments, reports, and AI features run on data your team can actually trust."
         image="/images/platform-expertise/data-cloud-hero.webp"
         bullets={[

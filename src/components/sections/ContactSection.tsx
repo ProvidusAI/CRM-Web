@@ -82,7 +82,9 @@ export function ContactSection() {
                   className="inline-block h-8 w-auto align-baseline ml-1"
                 />
 
-                <Heading as="h2" className="text-white !text-[34px] !leading-[38px] md:!text-[50px] md:!leading-[60.9px] font-bold font-heading mb-4">
+                {/* This is the only heading on /contact, so it carries the page
+                    h1. Visual size is unchanged. */}
+                <Heading as="h1" level="h2" className="text-white !text-[34px] !leading-[38px] md:!text-[50px] md:!leading-[60.9px] font-bold font-heading mb-4">
                   Let&apos;s Connect
                 </Heading>
 

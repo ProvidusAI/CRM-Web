@@ -43,6 +43,7 @@ export default async function SalesforceMarketingCloudConsultingPage() {
           </>
         }
         subtitle="Certified Salesforce Marketing Cloud Consultants"
+        subtitleAsH1
         description="We're ProvidusCRM, your trusted Salesforce Marketing Cloud consulting and implementation partner, reinventing your marketing campaigns and workflows so every journey, email, and ad drives engagement and conversions consistently."
         image="/images/platform-expertise/pr-marketing-cloud-hero.webp"
         bullets={[
