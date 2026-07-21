@@ -34,7 +34,10 @@ export function buildPageMetadata({
     toAbsoluteUrl(seo?.twitterImage?.asset?.url) || imageUrl;
 
   return {
-    title: title.includes("ProvidusCRM") ? { absolute: title } : title,
+    // Titles that already carry the brand are marked absolute so the root
+    // layout's "%s | ProvidusCRM" template does not append it a second time.
+    // Matched loosely on purpose: CMS values use "Providus CRM" with a space.
+    title: hasBrand(title) ? { absolute: title } : title,
     description,
     keywords: seo?.keywords,
     alternates: canonicalUrl
@@ -63,6 +66,11 @@ export function buildPageMetadata({
       images: twitterImageUrl ? [twitterImageUrl] : undefined,
     },
   };
+}
+
+/** Tolerates "ProvidusCRM", "Providus CRM", and any casing. */
+export function hasBrand(title: string) {
+  return /providus\s*crm/i.test(title);
 }
 
 function toAbsoluteUrl(value?: string) {

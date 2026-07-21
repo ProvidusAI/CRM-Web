@@ -42,3 +42,6 @@ content/
 
 .claude/
 .agents/
+# Playwright artifacts
+/test-results/
+/playwright-report/
