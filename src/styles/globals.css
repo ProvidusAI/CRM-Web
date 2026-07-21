@@ -50,6 +50,14 @@
   --color-text-heading: #2a2a2a;
   --color-text-body: #3e3e3e;
   --shadow-cost-card: 0px 4px 23px 10px rgba(0, 0, 0, 0.05);
+  /* Nonprofit / solution types (Figma 54:394) — exact values from the design */
+  --color-type-teal: #1ba6a8;
+  --color-type-purple: #431ba8;
+  --color-type-magenta: #a81b64;
+  --color-type-amber: #a87b1b;
+  --color-type-title: #0d0901;
+  --color-type-body: #4f4d4b;
+
   /* DIY vs Partner comparison (Figma 53:123) — exact values from the design */
   --color-compare-grey: #f2f2f2;
   --color-compare-blue-start: #1c95da;

@@ -24,6 +24,7 @@ export { IndustryCtaSection } from "./IndustryCtaSection";
 export { OrganisationTypesSection } from "./OrganisationTypesSection";
 export { TrueCostSection } from "./TrueCostSection";
 export { ComparisonSection } from "./ComparisonSection";
+export { SolutionTypesSection } from "./SolutionTypesSection";
 export { TeamSection } from "./TeamSection";
 export { CategoriesSection } from "./CategoriesSection";
 export { BelieveSection } from "./BelieveSection";
