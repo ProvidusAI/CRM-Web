@@ -6,7 +6,8 @@ test.describe("Hero Section", () => {
   });
 
   test("renders the Salesforce Partner badge", async ({ page }) => {
-    const badge = page.getByRole("img", { name: "Salesforce Partner" });
+    // The badge image is present twice (responsive variants); assert the first.
+    const badge = page.getByRole("img", { name: "Salesforce Partner" }).first();
     await expect(badge).toBeVisible();
   });
 
@@ -14,19 +15,24 @@ test.describe("Hero Section", () => {
     page,
   }) => {
     const hero = page.locator("section").first();
-    await expect(hero.getByText("Certified")).toBeVisible();
-    await expect(hero.getByText("Salesforce Partner")).toBeVisible();
-    await expect(hero.getByText("in the UK")).toBeVisible();
+    await expect(hero.getByText("Certified").first()).toBeVisible();
+    await expect(hero.getByText("Salesforce Partner").first()).toBeVisible();
+    await expect(hero.getByText("in the UK").first()).toBeVisible();
   });
 
   test("renders H1 heading with correct text", async ({ page }) => {
+    // The hero H1 animates per-character, so its visible textContent is
+    // doubled ("CustomCustom …"). The accessible name (via sr-only words,
+    // with the animated glyphs aria-hidden) carries the real copy.
     const heading = page.getByRole("heading", { level: 1 });
     await expect(heading).toBeVisible();
-    await expect(heading).toContainText("Custom Salesforce Solutions");
-    await expect(heading).toContainText("CRM Innovation Goals");
+    await expect(heading).toHaveAccessibleName(
+      /Custom Salesforce Solutions For Your CRM Innovation Goals/
+    );
   });
 
   test("H1 heading has large font size (≥ 50px)", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
     const heading = page.getByRole("heading", { level: 1 });
     const fontSize = await heading.evaluate(
       (el) => parseFloat(getComputedStyle(el).fontSize)

@@ -8,7 +8,7 @@ test.describe("Home Page", () => {
 
   test("has correct page title", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Brand/i);
+    await expect(page).toHaveTitle(/ProvidusCRM/i);
   });
 
   test("has no console errors on load", async ({ page }) => {
@@ -49,20 +49,37 @@ test.describe("Home Page", () => {
     await expect(page.locator("section").first()).toBeVisible();
   });
 
-  test("all images load without broken src", async ({ page }) => {
+  test("no image renders with a broken src", async ({ page }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
 
-    const images = page.locator("img");
-    const count = await images.count();
+    // A lazy image that is still below the fold legitimately reports
+    // naturalWidth 0 because it has not been fetched yet. Only assert images
+    // that the browser has actually attempted to load — anything eager or
+    // scrolled into view must decode successfully.
+    const broken = await page.locator("img").evaluateAll((imgs) =>
+      (imgs as HTMLImageElement[])
+        .filter((el) => {
+          const rect = el.getBoundingClientRect();
+          const inViewport =
+            rect.top < window.innerHeight && rect.bottom > 0;
+          const isLazy = el.getAttribute("loading") === "lazy";
+          const attempted = !isLazy || inViewport;
+          return attempted && el.complete && el.naturalWidth === 0;
+        })
+        .map((el) => el.currentSrc || el.src)
+    );
+    expect(broken, `broken images: ${broken.join(", ")}`).toHaveLength(0);
+  });
 
-    for (let i = 0; i < count; i++) {
-      const img = images.nth(i);
-      const naturalWidth = await img.evaluate(
-        (el: HTMLImageElement) => el.naturalWidth
-      );
-      expect(naturalWidth).toBeGreaterThan(0);
-    }
+  test("no image has an empty src", async ({ page }) => {
+    await page.goto("/");
+    const empty = await page.locator("img").evaluateAll((imgs) =>
+      (imgs as HTMLImageElement[])
+        .filter((el) => !el.getAttribute("src")?.trim())
+        .map((el) => el.outerHTML.slice(0, 80))
+    );
+    expect(empty, `images with empty src: ${empty.join(", ")}`).toHaveLength(0);
   });
 
   test("CtaButton arrow icon is visible in hero", async ({ page }) => {
@@ -71,6 +88,6 @@ test.describe("Home Page", () => {
     await expect(ctaButton).toBeVisible();
     // Arrow SVG inside the button
     const svg = ctaButton.locator("svg");
-    await expect(svg).toBeVisible();
+    await expect(svg.first()).toBeVisible();
   });
 });
