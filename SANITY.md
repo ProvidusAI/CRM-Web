@@ -100,6 +100,16 @@ The endpoint revalidates:
 - Blog index and detail pages for `post`
 - Case study index and detail pages for `caseStudy`
 - Blog categories for `category`
+- Any page's case-study selection for `pageCaseStudies`
+- Any page's title/description/OG tags for `staticPageSeo`
+- Any page's JSON-LD structured data for `sitePageJsonLd`
+
+The last three are keyed by `pageKey`, not `slug`, so a publish revalidates
+every page that reads that document — the webhook doesn't need per-page
+routing. If your webhook has a document-type filter configured in Sanity
+(rather than sending every mutation), make sure `staticPageSeo` and
+`sitePageJsonLd` are included in it, or their edits will only appear once
+each fetch's own 300s revalidate window elapses instead of immediately.
 
 ## Notes
 

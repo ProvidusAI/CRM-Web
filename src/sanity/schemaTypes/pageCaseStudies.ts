@@ -30,6 +30,10 @@ const pageOptions = [
     title: "Industries — Nonprofit",
     value: "salesforce-nonprofit-consulting",
   },
+  {
+    title: "Industries — Financial Services Cloud",
+    value: "salesforce-financial-services-cloud-consulting",
+  },
 ];
 
 export const pageCaseStudies = defineType({

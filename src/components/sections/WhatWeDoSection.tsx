@@ -289,19 +289,19 @@ export function WhatWeDoSection({
               {activeLink ? (
                 activeLink.isExternal ? (
                   <a href={activeLink.href} target="_blank" rel="noopener noreferrer" className="inline-block hover:opacity-80 transition-opacity">
-                    <Heading as="h3" className="text-black mb-8 !text-[28px] !leading-[32px] md:!text-[45px] md:!leading-[25px]">
+                    <Heading as="h3" className="text-black mb-8 !text-[28px] !leading-[32px] md:!text-[45px] md:!leading-[50px]">
                       {activeContent?.heading}
                     </Heading>
                   </a>
                 ) : (
                   <a href={activeLink.href} className="inline-block hover:opacity-80 transition-opacity">
-                    <Heading as="h3" className="text-black mb-8 !text-[28px] !leading-[32px] md:!text-[45px] md:!leading-[25px]">
+                    <Heading as="h3" className="text-black mb-8 !text-[28px] !leading-[32px] md:!text-[45px] md:!leading-[50px]">
                       {activeContent?.heading}
                     </Heading>
                   </a>
                 )
               ) : (
-                <Heading as="h3" className="text-black mb-8 !text-[28px] !leading-[32px] md:!text-[45px] md:!leading-[25px]">
+                <Heading as="h3" className="text-black mb-8 !text-[28px] !leading-[32px] md:!text-[45px] md:!leading-[50px]">
                   {activeContent?.heading}
                 </Heading>
               )}

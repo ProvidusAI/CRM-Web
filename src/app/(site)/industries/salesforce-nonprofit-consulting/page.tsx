@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
+import { JsonLdScript } from "@/components/seo/JsonLdScript";
+import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import {
   SalesforceServiceHero,
   PartnersSection,
@@ -31,8 +33,25 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function SalesforceNonprofitConsultingPage() {
   const caseStudies = await getPageCaseStudies("salesforce-nonprofit-consulting");
 
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Salesforce Nonprofit Consulting & Implementation Partner",
+    "description": "Certified Salesforce Nonprofit Cloud and NPSP consultants in the UK. We connect donor, programme, grant, and volunteer data in one system with reporting that holds up in a board meeting.",
+    "url": "https://providuscrm.co.uk/industries/salesforce-nonprofit-consulting",
+    "provider": {
+      "@type": "Organization",
+      "name": "ProvidusCRM",
+      "url": "https://providuscrm.co.uk",
+      "logo": "https://providuscrm.co.uk/images/salesforce-partner.webp",
+    },
+  };
+  const jsonLd = await getSitePageJsonLd("salesforce-nonprofit-consulting", schema);
+
   return (
     <div className="overflow-x-hidden bg-white">
+      <JsonLdScript data={jsonLd} />
+
       {/* 1. Hero Section (with form) */}
       <SalesforceServiceHero
         badgeTitle="Certified"

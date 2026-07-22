@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
+import { JsonLdScript } from "@/components/seo/JsonLdScript";
+import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import {
   HeroSection,
   PartnersSection,
@@ -30,8 +32,25 @@ export default async function SalesforceServiceCloudConsultingPage() {
     "salesforce-service-cloud-consulting"
   );
 
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Salesforce Service Cloud Consulting | ProvidusCRM",
+    "description": "Salesforce Service Cloud Consulting Services",
+    "url": "https://providuscrm.co.uk/platform-expertise/salesforce-service-cloud-consulting",
+    "provider": {
+      "@type": "Organization",
+      "name": "ProvidusCRM",
+      "url": "https://providuscrm.co.uk",
+      "logo": "https://providuscrm.co.uk/images/salesforce-partner.webp",
+    },
+  };
+  const jsonLd = await getSitePageJsonLd("salesforce-service-cloud-consulting", schema);
+
   return (
     <div className="overflow-x-hidden bg-white">
+      <JsonLdScript data={jsonLd} />
+
       {/* 1. Hero Section */}
       <HeroSection
         title={

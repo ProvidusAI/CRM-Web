@@ -53,6 +53,10 @@ export const STATIC_PAGE_OPTIONS = [
     title: "Industries — Nonprofit",
     value: "salesforce-nonprofit-consulting",
   },
+  {
+    title: "Industries — Financial Services Cloud",
+    value: "salesforce-financial-services-cloud-consulting",
+  },
 ] as const;
 
 export type StaticPageKey = (typeof STATIC_PAGE_OPTIONS)[number]["value"];

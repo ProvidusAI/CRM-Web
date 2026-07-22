@@ -41,7 +41,7 @@ export function OrganisationTypesSection({
           </Heading>
         </div>
 
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-14">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,530px)] lg:gap-14">
           {/* Accordion */}
           <div className="flex flex-col">
             {items.map((item, index) => {
@@ -110,13 +110,18 @@ export function OrganisationTypesSection({
               {images.map((src, index) => (
                 <div
                   key={index}
-                  className="relative aspect-[3/2] w-full overflow-hidden rounded-[20px]"
+                  className={cn(
+                    "relative w-full overflow-hidden rounded-[20px] lg:max-w-[530px]",
+                    // First image (or a lone image) is 480px tall; a second
+                    // image sits at 380px.
+                    index === 0 ? "h-[480px]" : "h-[380px]"
+                  )}
                 >
                   <Image
                     src={src}
                     alt=""
                     fill
-                    sizes="(max-width: 1024px) 100vw, 420px"
+                    sizes="(max-width: 1024px) 100vw, 530px"
                     className="object-cover"
                   />
                 </div>

@@ -48,5 +48,16 @@ export async function POST(request: NextRequest) {
     revalidateTag("page-case-studies");
   }
 
+  // Same pageKey-keyed pattern as pageCaseStudies above. Without these, edits
+  // to a page's SEO or JSON-LD only appear once the fetch's own revalidate
+  // window (300s) elapses, instead of immediately on publish.
+  if (body._type === "staticPageSeo") {
+    revalidateTag("static-page-seo");
+  }
+
+  if (body._type === "sitePageJsonLd") {
+    revalidateTag("json-ld");
+  }
+
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }

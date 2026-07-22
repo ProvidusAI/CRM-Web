@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
+import { JsonLdScript } from "@/components/seo/JsonLdScript";
+import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import {
   SalesforceServiceHero,
   PartnersSection,
@@ -33,8 +35,25 @@ export default async function SalesforceHealthCloudConsultingPage() {
     "salesforce-health-cloud-consulting"
   );
 
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Salesforce Health Cloud Consultant & Implementation Partner in the UK",
+    "description": "Certified Salesforce Health Cloud consultants in the UK. We connect Health Cloud to your EHR, telehealth, and clinical systems with UK GDPR and NHS DSPT-compliant configuration.",
+    "url": "https://providuscrm.co.uk/industries/salesforce-health-cloud-consulting",
+    "provider": {
+      "@type": "Organization",
+      "name": "ProvidusCRM",
+      "url": "https://providuscrm.co.uk",
+      "logo": "https://providuscrm.co.uk/images/salesforce-partner.webp",
+    },
+  };
+  const jsonLd = await getSitePageJsonLd("salesforce-health-cloud-consulting", schema);
+
   return (
     <div className="overflow-x-hidden bg-white">
+      <JsonLdScript data={jsonLd} />
+
       {/* 1. Hero Section (with form) */}
       <SalesforceServiceHero
         badgeTitle="Certified"
