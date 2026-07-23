@@ -22,6 +22,15 @@ interface PortableImageValue extends SanityImageType {
   caption?: string;
 }
 
+interface TableRowValue {
+  _key: string;
+  cells: string[];
+}
+
+interface TableValue {
+  rows?: TableRowValue[];
+}
+
 const components: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
@@ -103,6 +112,52 @@ const components: PortableTextComponents = {
     },
   },
   types: {
+    table: ({ value }) => {
+      const { rows } = value as TableValue;
+
+      if (!rows || rows.length === 0) {
+        return null;
+      }
+
+      const [headerRow, ...bodyRows] = rows;
+
+      return (
+        <div className="my-4 overflow-x-auto">
+          <table className="w-full min-w-[480px] border-collapse text-left">
+            <thead>
+              <tr className="bg-gray-100-bg">
+                {headerRow.cells.map((cell, index) => (
+                  <Text
+                    key={index}
+                    as="th"
+                    variant="p3"
+                    className="border border-gray-border px-4 py-3 font-semibold text-black"
+                  >
+                    {cell}
+                  </Text>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {bodyRows.map((row) => (
+                <tr key={row._key}>
+                  {row.cells.map((cell, index) => (
+                    <Text
+                      key={index}
+                      as="td"
+                      variant="p3"
+                      className="border border-gray-border px-4 py-3 text-gray-500"
+                    >
+                      {cell}
+                    </Text>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    },
     image: ({ value }) => {
       const image = value as PortableImageValue;
 
