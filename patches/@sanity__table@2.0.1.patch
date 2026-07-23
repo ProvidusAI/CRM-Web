@@ -1,0 +1,28 @@
+diff --git a/lib/index.cjs b/lib/index.cjs
+index c9491f7dc24fc1f00033719e28ab9a5b73b4f96b..0bd92d60be3d8f95869d85ff4b1f3e0717bd1536 100644
+--- a/lib/index.cjs
++++ b/lib/index.cjs
+@@ -261,8 +261,7 @@ const deepClone = (_a = globalThis.structuredClone) != null ? _a : (data) => JSO
+   }, updateCell = (e, rowIndex, cellIndex) => {
+     if (!value)
+       return;
+-    const newValue = deepClone(value);
+-    return newValue.rows[rowIndex].cells[cellIndex] = e.target.value, updateValue(newValue);
++    return onChange(sanity.set(e.target.value, ["rows", { _key: value.rows[rowIndex]._key }, "cells", cellIndex]));
+   };
+   return /* @__PURE__ */ jsxRuntime.jsxs("div", { children: [
+     dialog && /* @__PURE__ */ jsxRuntime.jsx(
+diff --git a/lib/index.js b/lib/index.js
+index 5d8dfb1306227c8ff9858bde90456a79a49635b8..9c94228625d2032536f1841e547b4a0a35559380 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -264,8 +264,7 @@ const deepClone = (_a = globalThis.structuredClone) != null ? _a : (data) => JSO
+   }, updateCell = (e, rowIndex, cellIndex) => {
+     if (!value)
+       return;
+-    const newValue = deepClone(value);
+-    return newValue.rows[rowIndex].cells[cellIndex] = e.target.value, updateValue(newValue);
++    return onChange(set(e.target.value, ["rows", { _key: value.rows[rowIndex]._key }, "cells", cellIndex]));
+   };
+   return /* @__PURE__ */ jsxs("div", { children: [
+     dialog && /* @__PURE__ */ jsx(
