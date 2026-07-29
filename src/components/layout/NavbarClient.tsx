@@ -219,6 +219,21 @@ function DesktopDropdown({ item }: { item: DropdownNavItem }) {
   );
 }
 
+const industryPages: NavItem[] = [
+  {
+    label: "Salesforce Health Cloud Consulting",
+    href: "/industries/salesforce-health-cloud-consulting",
+  },
+  {
+    label: "Salesforce Nonprofit Consulting",
+    href: "/industries/salesforce-nonprofit-consulting",
+  },
+  {
+    label: "Salesforce Financial Services Cloud Consulting",
+    href: "/industries/salesforce-financial-services-cloud-consulting",
+  },
+];
+
 const platformExpertisePages: NavItem[] = [
   {
     label: "Salesforce Sales Cloud Consulting",
@@ -250,7 +265,11 @@ function getNavItems(salesforceServices: NavItem[]): DropdownNavItem[] {
       href: "/services",
       children: salesforceServices,
     },
-    { label: "Industry", href: "/industries" },
+    {
+      label: "Industry",
+      href: "/industries",
+      children: industryPages,
+    },
     {
       label: "Platform Expertise",
       href: "/platform-expertise",
