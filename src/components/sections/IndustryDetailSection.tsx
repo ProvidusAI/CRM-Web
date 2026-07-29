@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 import { cn } from "@/lib/utils";
@@ -8,11 +9,21 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import type { MotionValue } from "framer-motion";
 
-const industries = [
+// `href` is set only for industries that have a dedicated internal page; those
+// headings link, the rest stay plain text.
+interface Industry {
+  title: string;
+  image: string;
+  description: string;
+  href?: string;
+}
+
+const industries: Industry[] = [
   {
     title: "Nonprofit",
     image: "/images/industries/non-profit.webp",
-    description: "We help charities and nonprofit organisations manage donor relationships, automate fundraising workflows, track programme outcomes, and consolidate grant data. Teams spend less time on admin and more time on mission delivery."
+    description: "We help charities and nonprofit organisations manage donor relationships, automate fundraising workflows, track programme outcomes, and consolidate grant data. Teams spend less time on admin and more time on mission delivery.",
+    href: "/industries/salesforce-nonprofit-consulting"
   },
   {
     title: "Education",
@@ -27,12 +38,14 @@ const industries = [
   {
     title: "Healthcare",
     image: "/images/industries/healthcare.webp",
-    description: "We help healthcare providers manage patient records, coordinate care plans, track referrals, and maintain compliance. Additionally, clinical and non-clinical teams work from the same data, so nothing gets lost between departments."
+    description: "We help healthcare providers manage patient records, coordinate care plans, track referrals, and maintain compliance. Additionally, clinical and non-clinical teams work from the same data, so nothing gets lost between departments.",
+    href: "/industries/salesforce-health-cloud-consulting"
   },
   {
     title: "Financial Services",
     image: "/images/industries/financial-services.webp",
-    description: "We help banks, lenders, wealth managers, and fintechs manage client relationships, automate compliance workflows, and track financial accounts. Furthermore, KYC processes and advisor dashboards run from one platform built for how regulators expect firms to operate."
+    description: "We help banks, lenders, wealth managers, and fintechs manage client relationships, automate compliance workflows, and track financial accounts. Furthermore, KYC processes and advisor dashboards run from one platform built for how regulators expect firms to operate.",
+    href: "/industries/salesforce-financial-services-cloud-consulting"
   },
   {
     title: "Manufacturing",
@@ -68,7 +81,7 @@ export function IndustryDetailSection() {
 }
 
 interface IndustryCardProps {
-  item: typeof industries[0];
+  item: Industry;
   index: number;
   progress: MotionValue<number>;
   totalCards: number;
@@ -148,9 +161,21 @@ function IndustryCard({ item, index, progress, totalCards }: IndustryCardProps) 
 
         {/* Text Content */}
         <div className="flex-1 text-white py-4 flex flex-col gap-4">
-          <Heading as="h3" className="text-white !text-[28px] !leading-[32px] md:!text-[40px] md:!leading-[25px] font-heading font-bold">
-            {item.title}
-          </Heading>
+          {item.href ? (
+            <Link
+              href={item.href}
+              className="w-fit transition-opacity hover:opacity-80"
+              aria-label={`Explore Salesforce for ${item.title}`}
+            >
+              <Heading as="h3" className="text-white !text-[28px] !leading-[32px] md:!text-[40px] md:!leading-[25px] font-heading font-bold underline-offset-4 hover:underline">
+                {item.title}
+              </Heading>
+            </Link>
+          ) : (
+            <Heading as="h3" className="text-white !text-[28px] !leading-[32px] md:!text-[40px] md:!leading-[25px] font-heading font-bold">
+              {item.title}
+            </Heading>
+          )}
           <Text variant="p2" className="text-white/90 !text-[15px] md:!text-[18px] leading-relaxed">
             {item.description}
           </Text>

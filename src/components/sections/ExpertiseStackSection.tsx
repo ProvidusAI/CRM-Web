@@ -1,11 +1,24 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 import { motion } from "framer-motion";
 
-const expertiseData = [
+// `href` is set only for clouds with a dedicated internal page; those cards'
+// arrow buttons link, the rest render a non-interactive arrow.
+interface ExpertiseItem {
+  title: string;
+  subtitle: string;
+  text: string;
+  color: string;
+  icon: string;
+  image: string;
+  href?: string;
+}
+
+const expertiseData: ExpertiseItem[] = [
   {
     title: "Experience Cloud",
     subtitle: "Give customers, partners, and teams a self-service portal that works.",
@@ -13,6 +26,7 @@ const expertiseData = [
     color: "var(--color-explore-blue)",
     icon: "/images/experience-cloud.webp",
     image: "/images/experience-cloud-expertise.webp",
+    href: "/platform-expertise/salesforce-experience-cloud-consulting",
   },
   {
     title: "Service Cloud",
@@ -21,6 +35,7 @@ const expertiseData = [
     color: "var(--color-explore-purple)",
     icon: "/images/service-cloud.webp",
     image: "/images/service-cloud-expertise.webp",
+    href: "/platform-expertise/salesforce-service-cloud-consulting",
   },
   {
     title: "Marketing Cloud",
@@ -29,6 +44,7 @@ const expertiseData = [
     color: "var(--color-explore-orange)",
     icon: "/images/marketing-cloud.webp",
     image: "/images/marketing-cloud-expertise.webp",
+    href: "/platform-expertise/salesforce-marketing-cloud-consulting",
   },
   {
     title: "Data Cloud",
@@ -37,6 +53,7 @@ const expertiseData = [
     color: "var(--color-explore-lavender)",
     icon: "/images/data-cloud.webp",
     image: "/images/data-cloud-expertise.webp",
+    href: "/platform-expertise/salesforce-data-cloud-consulting",
   },
   {
     title: "Agentforce",
@@ -61,6 +78,7 @@ const expertiseData = [
     color: "var(--color-explore-teal)",
     icon: "/images/sales-cloud.webp",
     image: "/images/sales-cloud-expertise.webp",
+    href: "/platform-expertise/salesforce-sales-cloud-consulting",
   },
 ];
 
@@ -90,9 +108,28 @@ interface CardProps {
   color: string;
   icon: string;
   image: string;
+  href?: string;
 }
 
-function Card({ index, title, subtitle, text, color, icon, image }: CardProps) {
+function Card({ index, title, subtitle, text, color, icon, image, href }: CardProps) {
+  const arrowIcon = (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="md:w-[24px] md:h-[24px]"
+    >
+      <line x1="7" y1="17" x2="17" y2="7"></line>
+      <polyline points="7 7 17 7 17 17"></polyline>
+    </svg>
+  );
+  const arrowClasses =
+    "w-10 h-10 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center transition-all hover:bg-white shrink-0";
   return (
     <div 
       className="h-[80vh] md:h-[90vh] flex items-start justify-center sticky pt-8"
@@ -144,25 +181,23 @@ function Card({ index, title, subtitle, text, color, icon, image }: CardProps) {
                 {title}
               </Heading>
             </div>
-            <div
-              className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center transition-all hover:bg-white shrink-0"
-              style={{ borderColor: color, color: color }}
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="md:w-[24px] md:h-[24px]"
+            {href ? (
+              <Link
+                href={href}
+                className={arrowClasses}
+                style={{ borderColor: color, color: color }}
+                aria-label={`Explore ${title} consulting`}
               >
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
-            </div>
+                {arrowIcon}
+              </Link>
+            ) : (
+              <div
+                className={arrowClasses}
+                style={{ borderColor: color, color: color }}
+              >
+                {arrowIcon}
+              </div>
+            )}
           </div>
 
           {/* Border line */}
