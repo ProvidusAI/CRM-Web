@@ -4,6 +4,7 @@ import {
   GoogleTagManagerNoScript,
   GoogleTagManagerScript,
 } from "@/components/analytics/GoogleTagManager";
+import { MicrosoftClarityScript } from "@/components/analytics/MicrosoftClarity";
 import "@/styles/globals.css";
 
 const afacad = Afacad({
@@ -46,6 +47,7 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
         <GoogleTagManagerScript />
+        <MicrosoftClarityScript />
       </head>
       <body>
         <GoogleTagManagerNoScript />
