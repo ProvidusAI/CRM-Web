@@ -78,9 +78,9 @@ export default async function HomePage() {
       <HeroSection />
       <PartnersSection />
       <CertifiedSection />
+      <EcosystemSection />
       <BentoSection />
       <WhatWeDoSection />
-      <EcosystemSection />
       <ExpertiseSection />
       <IndustriesSection />
       <WhyChooseSection />

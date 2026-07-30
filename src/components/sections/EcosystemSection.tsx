@@ -45,7 +45,7 @@ export function EcosystemSection() {
             className="mx-auto h-auto w-16"
           />
           <Heading as="h2" className="mx-auto mt-5 max-w-3xl text-black">
-            Meet the Ecosystem Behind Providus CRM
+            Who We Are
           </Heading>
         </div>
 
