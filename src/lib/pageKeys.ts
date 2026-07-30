@@ -43,6 +43,10 @@ export const STATIC_PAGE_OPTIONS = [
     title: "Platform Expertise — Data Cloud",
     value: "salesforce-data-cloud-consulting",
   },
+  {
+    title: "Platform Expertise — Agentforce",
+    value: "salesforce-agentforce-consulting",
+  },
 
   // Industries — internal pages
   {

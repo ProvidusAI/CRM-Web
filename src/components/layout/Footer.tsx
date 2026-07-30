@@ -68,6 +68,26 @@ export function Footer() {
                 </Link>
               ))}
             </div>
+
+            <div className="flex items-center gap-6 w-full">
+              <Text variant="p3" className="text-white/90">
+                Powered By
+              </Text>
+              <Image
+                src="/images/providus-logo-white.webp"
+                alt="Providus"
+                width={130}
+                height={31}
+                className="h-[26px] w-auto"
+              />
+              <Image
+                src="/images/providus-ai-logo-white.webp"
+                alt="Providus AI"
+                width={160}
+                height={31}
+                className="h-[26px] w-auto"
+              />
+            </div>
           </div>
 
           {/* Column 2: Services */}

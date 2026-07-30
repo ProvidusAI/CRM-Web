@@ -41,3 +41,5 @@ export { SalesforceProcessSection } from "./SalesforceProcessSection";
 export { MigrationPlatformsSection } from "./MigrationPlatformsSection";
 export { IdentityResolutionSection } from "./IdentityResolutionSection";
 export { DataCloudVsWarehouseSection } from "./DataCloudVsWarehouseSection";
+export { ExplainerCardsSection } from "./ExplainerCardsSection";
+export { EcosystemSection } from "./EcosystemSection";

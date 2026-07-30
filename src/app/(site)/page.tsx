@@ -3,6 +3,7 @@ import {
   CtaSection,
   CertifiedSection,
   WhatWeDoSection,
+  EcosystemSection,
   ExpertiseSection,
   IndustriesSection,
   WhyChooseSection,
@@ -79,6 +80,7 @@ export default async function HomePage() {
       <CertifiedSection />
       <BentoSection />
       <WhatWeDoSection />
+      <EcosystemSection />
       <ExpertiseSection />
       <IndustriesSection />
       <WhyChooseSection />

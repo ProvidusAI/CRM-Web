@@ -21,6 +21,10 @@ const pageOptions = [
     title: "Platform Expertise — Data Cloud",
     value: "salesforce-data-cloud-consulting",
   },
+  {
+    title: "Platform Expertise — Agentforce",
+    value: "salesforce-agentforce-consulting",
+  },
   { title: "Industries", value: "industries" },
   {
     title: "Industries — Health Cloud",

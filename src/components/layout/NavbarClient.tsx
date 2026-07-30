@@ -255,6 +255,10 @@ const platformExpertisePages: NavItem[] = [
     label: "Salesforce Data Cloud Consulting",
     href: "/platform-expertise/salesforce-data-cloud-consulting",
   },
+  {
+    label: "Salesforce Agentforce Consulting",
+    href: "/platform-expertise/salesforce-agentforce-consulting",
+  },
 ];
 
 function getNavItems(salesforceServices: NavItem[]): DropdownNavItem[] {

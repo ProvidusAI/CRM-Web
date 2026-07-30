@@ -11,6 +11,7 @@ export type PageCaseStudyKey =
   | "salesforce-marketing-cloud-consulting"
   | "salesforce-experience-cloud-consulting"
   | "salesforce-data-cloud-consulting"
+  | "salesforce-agentforce-consulting"
   | "industries"
   | "salesforce-health-cloud-consulting"
   | "salesforce-nonprofit-consulting"

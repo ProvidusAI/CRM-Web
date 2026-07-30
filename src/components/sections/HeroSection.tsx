@@ -79,6 +79,10 @@ export function BlurScaleHeading({ children, className }: BlurScaleHeadingProps)
     }
 
     if (React.isValidElement<{ children?: React.ReactNode }>(node)) {
+      if (node.type === "br") {
+        return <br key={path} />;
+      }
+
       if (node.props.children !== undefined) {
         const parsedChildren = React.Children.map(
           node.props.children,

@@ -62,6 +62,7 @@ const expertiseData: ExpertiseItem[] = [
     color: "var(--color-explore-sky)",
     icon: "/images/agent-force.webp",
     image: "/images/agentforce-expertise.webp",
+    href: "/platform-expertise/salesforce-agentforce-consulting",
   },
   {
     title: "Revenue Cloud",
