@@ -58,9 +58,7 @@ export default async function SalesforceAgentforceConsultingPage() {
       <HeroSection
         title={
           <>
-            Automate Your Workflows With Agentforce.
-            <br />
-            Scale ROI With Salesforce & ProvidusCRM{" "}
+            Automate Your Workflows with Agentforce & ProvidusCRM
             <GreenLineMark className="inline-block h-10 w-auto align-baseline ml-1" />
           </>
         }
