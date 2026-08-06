@@ -11,6 +11,8 @@ import { motion } from "framer-motion";
 
 interface ExpertiseCtaSectionProps {
   title: string;
+  /** Optional — makes the heading a link when this CTA promotes a different page than the one it's on. */
+  titleHref?: string;
   buttonText: string;
   buttonHref: string;
   image1: string;
@@ -19,6 +21,7 @@ interface ExpertiseCtaSectionProps {
 
 export function ExpertiseCtaSection({
   title,
+  titleHref,
   buttonText,
   buttonHref,
   image1,
@@ -68,9 +71,17 @@ export function ExpertiseCtaSection({
           >
             <GreenLineMark className="w-16 h-auto -mb-4" />
 
-            <Heading as="h3" className="text-black font-bold! max-w-xl">
-              {title}
-            </Heading>
+            {titleHref ? (
+              <Link href={titleHref} className="hover:underline">
+                <Heading as="h3" className="text-black font-bold! max-w-xl">
+                  {title}
+                </Heading>
+              </Link>
+            ) : (
+              <Heading as="h3" className="text-black font-bold! max-w-xl">
+                {title}
+              </Heading>
+            )}
 
             <Link
               href={buttonHref}

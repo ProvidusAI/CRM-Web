@@ -161,18 +161,6 @@ export function Footer() {
           <Text variant="p4" className=" text-white/60">
             © Copyright 2026, All Rights Reserved
           </Text>
-
-          <div className="flex gap-6">
-            <Link href="/faq" className="text-[12px] leading-[24px] font-roboto text-white/60 hover:text-white">
-              FAQ
-            </Link>
-            <Link href="/terms" className="text-[12px] leading-[24px] font-roboto text-white/60 hover:text-white">
-              Term of Service
-            </Link>
-            <Link href="/privacy" className="text-[12px] leading-[24px] font-roboto text-white/60 hover:text-white">
-              Privacy Policy
-            </Link>
-          </div>
         </div>
       </Container>
     </footer>

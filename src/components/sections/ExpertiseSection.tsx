@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import {
@@ -11,6 +12,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/Carousel";
 import { Heading, Text } from "@/components/ui/Typography";
+import { PLATFORM_HREFS } from "@/lib/platformPages";
 
 export interface ExpertiseItem {
   id: number | string;
@@ -104,7 +106,7 @@ export function ExpertiseSection({ title, items }: ExpertiseSectionProps) {
           {carouselItems.map((item, index) => (
             <CarouselItem
               key={`${item.id}-${index}`}
-              className="basis-[84%] sm:basis-[48%] lg:basis-[31%] xl:basis-[26%]"
+              className="basis-[84%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
             >
               <div
                 className="flex min-h-[310px] h-full w-full flex-col items-center rounded-[8px] bg-gradient-to-b from-white to-brand-blue-light p-8 text-center transition-transform hover:-translate-y-1"
@@ -121,9 +123,21 @@ export function ExpertiseSection({ title, items }: ExpertiseSectionProps) {
                   />
                 </div>
 
-                <Text variant="p1" className="text-black mb-4 shrink-0">
-                  {item.title}
-                </Text>
+                {PLATFORM_HREFS[item.title] ? (
+                  <Link
+                    href={PLATFORM_HREFS[item.title]}
+                    className="mb-4 shrink-0 hover:underline"
+                    aria-label={`Explore ${item.title} consulting`}
+                  >
+                    <Text as="span" variant="p1" className="text-black">
+                      {item.title}
+                    </Text>
+                  </Link>
+                ) : (
+                  <Text variant="p1" className="text-black mb-4 shrink-0">
+                    {item.title}
+                  </Text>
+                )}
 
                 <div className="w-full h-[1px] bg-gray-200 mb-6 shrink-0" />
 

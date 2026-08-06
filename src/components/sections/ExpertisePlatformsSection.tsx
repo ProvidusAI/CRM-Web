@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import {
@@ -8,8 +9,11 @@ import {
   type CarouselApi,
   CarouselContent,
   CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
 } from "@/components/ui/Carousel";
 import { Heading, Text } from "@/components/ui/Typography";
+import { PLATFORM_HREFS } from "@/lib/platformPages";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
@@ -96,11 +100,11 @@ export function ExpertisePlatformsSection({
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <CarouselContent className="px-4 md:px-8 py-8 -ml-4 md:-ml-8">
+          <CarouselContent className="pb-2 pt-2">
             {items.map((item, index) => (
               <CarouselItem
                 key={`${item.title}-${index}`}
-                className="pl-4 md:pl-8 basis-[90%] sm:basis-[60%] md:basis-[45%] lg:basis-[30%] xl:basis-[28%]"
+                className="basis-[84%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
               >
                 <div 
                   className="relative overflow-hidden rounded-[24px] p-8 md:p-10 h-full min-h-[380px] flex flex-col items-start transition-transform hover:-translate-y-1 shadow-sm"
@@ -118,9 +122,21 @@ export function ExpertisePlatformsSection({
                   )}
 
                   <div className="mt-auto w-full pt-20">
-                    <h4 className="typography-p1 text-black font-semibold mb-4">
-                      {item.title}
-                    </h4>
+                    {PLATFORM_HREFS[item.title] ? (
+                      <Link
+                        href={PLATFORM_HREFS[item.title]}
+                        className="inline-block hover:underline"
+                        aria-label={`Explore ${item.title} consulting`}
+                      >
+                        <h4 className="typography-p1 text-black font-semibold mb-4">
+                          {item.title}
+                        </h4>
+                      </Link>
+                    ) : (
+                      <h4 className="typography-p1 text-black font-semibold mb-4">
+                        {item.title}
+                      </h4>
+                    )}
 
                     <Text variant="p4" className="text-gray-800 leading-relaxed">
                       {item.text}
@@ -130,6 +146,11 @@ export function ExpertisePlatformsSection({
               </CarouselItem>
             ))}
           </CarouselContent>
+
+          <div className="mt-10 flex justify-center gap-4">
+            <CarouselPrevious className="static h-12 w-12 translate-y-0 border-0 bg-brand-blue text-white shadow-lg hover:bg-blue-600 disabled:opacity-100" />
+            <CarouselNext className="static h-12 w-12 translate-y-0 border-0 bg-brand-blue text-white shadow-lg hover:bg-blue-600 disabled:opacity-100" />
+          </div>
         </Carousel>
       </div>
     </Section>

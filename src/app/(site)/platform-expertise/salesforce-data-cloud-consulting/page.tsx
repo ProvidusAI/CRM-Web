@@ -265,9 +265,9 @@ export default async function SalesforceDataCloudConsultingPage() {
             bgGradient: "linear-gradient(59.61deg, #F4F4F4 45%, #CAEFFF 119.24%)",
           },
           {
-            title: "Data Cloud",
-            text: "Our consultants implement Data Cloud to pull web, transaction, and third-party data sources into one unified customer profile that updates in real time.",
-            icon: "/images/data-cloud.webp",
+            title: "Sales Cloud",
+            text: "Our consultants configure Sales Cloud around how your sales team works day to day. We map lead routing, opportunity stages, and forecasting views to your process, so reps sell more and managers coach better.",
+            icon: "/images/sales-cloud.webp",
             bgGradient: "linear-gradient(59.61deg, #F4F4F4 45%, #E8EAFF 119.24%)",
           },
           {
