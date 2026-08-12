@@ -21,6 +21,7 @@ export const STATIC_PAGE_OPTIONS = [
   { title: "Blog", value: "blog" },
   { title: "Case Studies", value: "case-studies" },
   { title: "Contact", value: "contact" },
+  { title: "Partnership", value: "partnership" },
 
   // Platform Expertise — internal pages
   {

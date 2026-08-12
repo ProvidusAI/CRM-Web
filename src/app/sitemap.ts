@@ -23,6 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticUrls: MetadataRoute.Sitemap = [
     { url: 'https://providuscrm.co.uk', lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
     { url: 'https://providuscrm.co.uk/about', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+    { url: 'https://providuscrm.co.uk/partnership', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: 'https://providuscrm.co.uk/services', lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
     { url: 'https://providuscrm.co.uk/industries', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: 'https://providuscrm.co.uk/industries/salesforce-health-cloud-consulting', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },

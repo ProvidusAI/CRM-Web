@@ -7,7 +7,7 @@ import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Reveal } from "@/components/ui/Reveal";
 
-const believeCards = [
+const believeCards: CardItem[] = [
   {
     title: "Build What Matters",
     description: "We dig past surface-level requirements to understand what the business actually needs. As a result, the solutions we deliver fix root causes, not symptoms.",
@@ -34,7 +34,15 @@ const believeCards = [
   }
 ];
 
-export function BelieveSection() {
+interface BelieveSectionProps {
+  title?: string;
+  cards?: CardItem[];
+}
+
+export function BelieveSection({
+  title = "What We Believe In",
+  cards = believeCards,
+}: BelieveSectionProps) {
   return (
     <section className="relative overflow-hidden py-24 bg-white">
       <Image
@@ -57,14 +65,14 @@ export function BelieveSection() {
               className="w-16 h-auto mb-6"
             />
             <Heading as="h2" className="text-black font-bold">
-              What We Believe In
+              {title}
             </Heading>
           </div>
         </Reveal>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 pt-8">
-          {believeCards.map((card, index) => (
+          {cards.map((card, index) => (
             <Reveal
               key={index}
               direction="up"
@@ -83,7 +91,8 @@ interface CardItem {
   title: string;
   description: string;
   icon: string;
-  bgImage: string;
+  bgImage?: string;
+  bgColor?: string;
 }
 
 function BelieveCard({ card }: { card: CardItem }) {
@@ -110,9 +119,13 @@ function BelieveCard({ card }: { card: CardItem }) {
         <motion.div
           className="w-full h-[220px] relative flex items-center justify-center cursor-pointer shrink-0"
           style={{
-            backgroundImage: `url('${card.bgImage}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            ...(card.bgImage
+              ? {
+                  backgroundImage: `url('${card.bgImage}')`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }
+              : { backgroundColor: card.bgColor || "var(--color-brand-blue-light)" }),
             boxShadow: "0px 11.81px 25.83px 0px #0000000A, 0px 46.49px 46.49px 0px #0000000A, 0px 104.79px 62.73px 0px #00000005, 0px 185.97px 74.53px 0px #00000003, 0px 290.02px 81.18px 0px #00000000",
             backdropFilter: "blur(23.614662170410156px)",
             borderRadius: "24px",

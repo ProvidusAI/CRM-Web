@@ -3,7 +3,7 @@ import { Container } from "@/components/layout/Container";
 import { Heading } from "@/components/ui/Typography";
 import { Reveal } from "@/components/ui/Reveal";
 
-const logos = [
+const defaultLogos = [
   "/images/platform-logos/1.webp",
   "/images/platform-logos/2.webp",
   "/images/platform-logos/3.webp",
@@ -20,12 +20,14 @@ const logos = [
 
 interface PlatformsSectionProps {
   title?: string;
+  logos?: string[];
   limit?: number;
 }
 
-export function PlatformsSection({ 
-  title = "Platforms We Work With", 
-  limit 
+export function PlatformsSection({
+  title = "Platforms We Work With",
+  logos = defaultLogos,
+  limit,
 }: PlatformsSectionProps) {
   const displayLogos = limit ? logos.slice(0, limit) : logos;
 

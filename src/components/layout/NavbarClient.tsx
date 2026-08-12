@@ -279,6 +279,7 @@ function getNavItems(salesforceServices: NavItem[]): DropdownNavItem[] {
       href: "/platform-expertise",
       children: platformExpertisePages,
     },
+    { label: "Partnership", href: "/partnership" },
     { label: "Case Studies", href: "/case-studies" },
     { label: "Blog", href: "/blog" },
   ];
