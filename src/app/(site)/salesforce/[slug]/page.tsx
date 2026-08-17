@@ -398,6 +398,7 @@ function toIndustryItems(page: ServicePage): IndustrySectionItem[] | undefined {
     title: item.title,
     description: item.description || "",
     image: imageUrl(item.image) || "/images/industries.webp",
+    href: item.link,
   }));
 }
 

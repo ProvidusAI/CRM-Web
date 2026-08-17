@@ -32,8 +32,8 @@ export function PlatformsSection({
   const displayLogos = limit ? logos.slice(0, limit) : logos;
 
   return (
-    <section 
-      className="py-24 bg-[#EEFFEA] border-y border-[#38A81B]"
+    <section
+      className="pt-24 pb-32 bg-[#EEFFEA] border-y border-[#38A81B]"
     >
       <Container>
         <div className="flex flex-col items-center mb-16">

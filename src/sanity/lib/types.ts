@@ -243,6 +243,7 @@ export interface ServiceExpertiseContent {
 export interface ServiceIndustryItem {
   title: string;
   description?: string;
+  link?: string;
   image?: SanityImage;
 }
 

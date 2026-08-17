@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 
@@ -6,6 +7,8 @@ export interface IndustrySectionItem {
   title: string;
   image: string;
   description: string;
+  /** Optional — makes the card heading clickable. Editors set this per item in Sanity for dynamic pages. */
+  href?: string;
 }
 
 interface IndustriesSectionProps {
@@ -17,7 +20,8 @@ const industries: IndustrySectionItem[] = [
   {
     title: "Non-Profit Cloud",
     image: "/images/non-profit.webp",
-    description: "Charities and nonprofit organisations run on relationships, but most CRM systems were never built for how nonprofits actually work. Our Nonprofit Cloud consultants configure donor lifecycles, track programme outcomes, automate gift processing, and consolidate fundraising data in one place. From donation pages and recurring giving to grant tracking and volunteer management, every setup reflects how nonprofit teams operate day to day."
+    description: "Charities and nonprofit organisations run on relationships, but most CRM systems were never built for how nonprofits actually work. Our Nonprofit Cloud consultants configure donor lifecycles, track programme outcomes, automate gift processing, and consolidate fundraising data in one place. From donation pages and recurring giving to grant tracking and volunteer management, every setup reflects how nonprofit teams operate day to day.",
+    href: "/industries/salesforce-nonprofit-consulting",
   },
   {
     title: "Education Cloud",
@@ -32,12 +36,14 @@ const industries: IndustrySectionItem[] = [
   {
     title: "Health Cloud",
     image: "/images/health-cloud.webp",
-    description: "Patient data is sensitive, care coordination is complex, and compliance is not optional. Our Health Cloud implementation experts give healthcare providers a complete view of every patient across referrals, appointments, care plans, and follow-ups. Clinical and non-clinical teams work from the same record, consent tracking is built into every workflow, and reporting meets regulatory standards. Better care coordination with less administrative overhead."
+    description: "Patient data is sensitive, care coordination is complex, and compliance is not optional. Our Health Cloud implementation experts give healthcare providers a complete view of every patient across referrals, appointments, care plans, and follow-ups. Clinical and non-clinical teams work from the same record, consent tracking is built into every workflow, and reporting meets regulatory standards. Better care coordination with less administrative overhead.",
+    href: "/industries/salesforce-health-cloud-consulting",
   },
   {
     title: "Financial Services Cloud",
     image: "/images/finance-services-cloud.webp",
-    description: "Banks, lenders, wealth managers, and fintechs need CRM that understands financial relationships, not just contacts and opportunities. Our Financial Services Cloud consultants set up client household management, financial account tracking, compliance workflow automation, and full advisor dashboards. KYC processes, referral tracking, and pipeline management all operate within a platform built specifically for how financial services teams work and what regulators expect."
+    description: "Banks, lenders, wealth managers, and fintechs need CRM that understands financial relationships, not just contacts and opportunities. Our Financial Services Cloud consultants set up client household management, financial account tracking, compliance workflow automation, and full advisor dashboards. KYC processes, referral tracking, and pipeline management all operate within a platform built specifically for how financial services teams work and what regulators expect.",
+    href: "/industries/salesforce-financial-services-cloud-consulting",
   },
   {
     title: "Manufacturing Cloud",
@@ -93,9 +99,21 @@ export function IndustriesSection({ title, items }: IndustriesSectionProps) {
 
               {/* Text Content */}
               <div className="flex flex-col justify-center px-4 pb-7 md:px-0 md:pb-0">
-                <Text variant="p1" className="text-black font-bold mb-4">
-                  {item.title}
-                </Text>
+                {item.href ? (
+                  <Link
+                    href={item.href}
+                    className="mb-4 w-fit hover:underline"
+                    aria-label={`Explore ${item.title} consulting`}
+                  >
+                    <Text as="span" variant="p1" className="text-black font-bold">
+                      {item.title}
+                    </Text>
+                  </Link>
+                ) : (
+                  <Text variant="p1" className="text-black font-bold mb-4">
+                    {item.title}
+                  </Text>
+                )}
                 <Text variant="p4" className="text-[#4F4D4B] leading-relaxed">
                   {item.description}
                 </Text>

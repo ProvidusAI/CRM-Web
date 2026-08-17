@@ -27,24 +27,28 @@ const partnershipCards = [
     description:
       "Providus (operating as ProvidusCRM in the UK) is a certified Salesforce consulting partner, having successfully delivered proven CRM solutions across Sales Cloud, Service Cloud, Marketing Cloud, Data Cloud, Agentforce, and industry clouds including Nonprofit Cloud, Health Cloud, and Financial Services Cloud.",
     icon: "/images/partnership-logos/salesforce.png",
+    bgImage: "/images/build-matters-bg.webp",
   },
   {
     title: "FinDock",
     description:
       "As a FinDock partner, we configure payment architecture inside Salesforce for nonprofits and subscription-based businesses. FinDock connects Salesforce to payment processors, direct debit systems, and recurring giving platforms, keeping payment data inside your CRM rather than in disconnected finance systems.",
     icon: "/images/partnership-logos/findock.png",
+    bgImage: "/images/get-it-right-bg.webp",
   },
   {
     title: "FundraiseUp",
     description:
       "We are a certified FundraiseUp partner, implementing conversion-optimised donation experiences for nonprofits, connected directly to Salesforce Nonprofit Cloud and NPSP. Donation forms, recurring giving, and donor facing checkout flows sit within FundraiseUp while donor data lands cleanly in Salesforce.",
     icon: "/images/partnership-logos/fundraiseup.png",
+    bgImage: "/images/outcome-bg.webp",
   },
   {
     title: "DotDigital",
     description:
       "As a Dotdigital partner, we deliver marketing automation for organisations that need something between Marketing Cloud and lightweight email tools. Dotdigital integrates with Salesforce for segmentation, journeys, and reporting, particularly well-suited to nonprofits, higher education, and mid-market businesses.",
     icon: "/images/partnership-logos/dotdigital.png",
+    bgImage: "/images/drive-self-bg.webp",
   },
 ];
 

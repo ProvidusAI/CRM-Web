@@ -345,6 +345,7 @@ export const SERVICE_PAGE_QUERY = defineQuery(`
       items[] {
         title,
         description,
+        link,
         image {
           ${imageProjection}
         }

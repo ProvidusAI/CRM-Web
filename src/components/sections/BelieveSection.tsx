@@ -145,20 +145,22 @@ function BelieveCard({ card }: { card: CardItem }) {
           transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
         >
           {/* Inner Card Icon Container - centered inside blue cover */}
-          <div className="relative w-[156px] h-[112px]">
-            <Image
-              src={card.icon}
-              alt={card.title}
-              fill
-              sizes="156px"
-              className="object-contain"
-            />
+          <div className="w-[156px] h-[112px] rounded-2xl bg-white p-4">
+            <div className="relative size-full">
+              <Image
+                src={card.icon}
+                alt={card.title}
+                fill
+                sizes="156px"
+                className="object-contain"
+              />
+            </div>
           </div>
         </motion.div>
 
         {/* Content Section - positioned below the blue cover height to clear space */}
         <div
-          className="flex flex-col items-center text-center px-6 pb-6 pt-[240px] h-full"
+          className="flex flex-col items-center text-center px-6 pb-12 pt-[240px] h-full"
         >
           <Text variant="p1" className="text-black font-semibold mb-3">
             {card.title}

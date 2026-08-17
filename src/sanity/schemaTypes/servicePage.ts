@@ -598,6 +598,18 @@ export const servicePage = defineType({
                   type: "text",
                   rows: 4,
                 }),
+                defineField({
+                  name: "link",
+                  title: "Heading link",
+                  description:
+                    "Optional. Makes the card heading clickable — e.g. /industries/salesforce-nonprofit-consulting. Leave empty for a static heading.",
+                  type: "url",
+                  validation: (rule) =>
+                    rule.uri({
+                      scheme: ["http", "https"],
+                      allowRelative: true,
+                    }),
+                }),
                 serviceImageField("image", "Image"),
               ],
             },
