@@ -18,7 +18,7 @@ import {
   WhyChooseSection,
   FaqSection,
   IdentityResolutionSection,
-  DataCloudVsWarehouseSection,
+  SplitComparisonSection,
 } from "@/components/sections";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { CtaSection } from "@/components/sections/CtaSection";
@@ -322,7 +322,49 @@ export default async function SalesforceDataCloudConsultingPage() {
       />
 
       {/* 13. Data Cloud vs Warehouse Section */}
-      <DataCloudVsWarehouseSection />
+      <SplitComparisonSection
+        heading="Data Cloud vs Your Data Warehouse, Do You Need Both?"
+        cards={[
+          {
+            title: (
+              <>
+                Data Cloud Is
+                <br />
+                The Operational Layer
+              </>
+            ),
+            color: "#33FF00",
+            text: "It keeps a live, unified view of each customer that Sales Cloud, Service Cloud, Marketing Cloud, and Agentforce can read from within seconds. Its strength is the speed of activation across your Salesforce ecosystem.",
+          },
+          {
+            title: (
+              <>
+                Your Data Warehouse Is
+                <br />
+                The Analytical Layer
+              </>
+            ),
+            color: "#308FFF",
+            text: "It holds large volumes of structured data across the whole business, so analysts can query it flexibly for reports, dashboards, and modelling. Its strength is analytical depth across every function, not just customer records.",
+          },
+          {
+            title: (
+              <>
+                Most Businesses Need Both,
+                <br />
+                Connected Properly
+              </>
+            ),
+            color: "#8800FF",
+            text: "Data Cloud handles operational customer activation. The warehouse handles cross-business analysis. Zero-copy sharing with Snowflake and Databricks lets both platforms reference data without duplicating storage.",
+          },
+          {
+            title: "The Common Mistake",
+            color: "#FFB030",
+            text: "Businesses purchase the Data Cloud license, expecting data warehouse-style reporting end up disappointed. Businesses that refuse Data Cloud because they already have a warehouse end up with Salesforce activation gaps. Our consultants map which layer holds which workload, based on how your business actually operates.",
+          },
+        ]}
+      />
 
       {/* 14. Expertise Implementation */}
       <ExpertiseImplementationSection

@@ -20,6 +20,8 @@ export interface ServiceBenefitCard {
   title: string;
   description: string;
   iconKey?: ServiceBenefitIconKey;
+  /** Wins over `iconKey`. For pages whose steps have no matching CMS icon key. */
+  icon?: LucideIcon;
   colorTheme?: ServiceBenefitColorTheme;
 }
 
@@ -73,7 +75,7 @@ export function ServiceBenefitsSection({
 
         <div className="relative mt-14 space-y-8">
           {items.map((item, index) => {
-            const Icon = iconMap[item.iconKey || "roi"];
+            const Icon = item.icon ?? iconMap[item.iconKey || "roi"];
             const theme = themeClasses[item.colorTheme || "blue"];
 
             return (

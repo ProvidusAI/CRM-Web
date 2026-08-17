@@ -261,6 +261,12 @@ const platformExpertisePages: NavItem[] = [
   },
 ];
 
+const partnerPages: NavItem[] = [
+  { label: "FinDock", href: "/partnership/findock" },
+  { label: "Fundraise Up", href: "/partnership/fundraise-up" },
+  { label: "Dotdigital", href: "/partnership/dotdigital" },
+];
+
 function getNavItems(salesforceServices: NavItem[]): DropdownNavItem[] {
   return [
     { label: "About", href: "/about" },
@@ -279,7 +285,11 @@ function getNavItems(salesforceServices: NavItem[]): DropdownNavItem[] {
       href: "/platform-expertise",
       children: platformExpertisePages,
     },
-    { label: "Partnership", href: "/partnership" },
+    {
+      label: "Partnership",
+      href: "/partnership",
+      children: partnerPages,
+    },
     { label: "Case Studies", href: "/case-studies" },
     { label: "Blog", href: "/blog" },
   ];

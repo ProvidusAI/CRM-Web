@@ -1,8 +1,10 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Heading, Text } from "@/components/ui/Typography";
 import { CtaButton } from "@/components/ui/CtaButton";
 import { Container } from "@/components/layout/Container";
+import { cn } from "@/lib/utils";
 
 interface HeroSectionProps {
   title?: React.ReactNode;
@@ -10,6 +12,13 @@ interface HeroSectionProps {
   image?: string;
   imageClassName?: string;
   hideImage?: boolean;
+  /** Without `ctaHref` the button stays unlinked, as on the older pages. */
+  ctaLabel?: string;
+  ctaHref?: string;
+  ctaVariant?: "white" | "filled";
+  /** "sm" keeps a primary + secondary pair on one line. */
+  ctaSize?: "sm" | "md";
+  secondaryCta?: { label: string; href: string };
   subtitle?: string;
   /**
    * Promotes the subtitle to the page <h1> and drops the title to <h2>, keeping
@@ -125,6 +134,11 @@ export function HeroSection({
   image = "/images/hero-img.webp",
   imageClassName = "object-cover object-center",
   hideImage = false,
+  ctaLabel = "Book a Call",
+  ctaHref,
+  ctaVariant = "white",
+  ctaSize = "md",
+  secondaryCta,
   subtitle,
   subtitleAsH1 = false,
   bullets,
@@ -243,10 +257,32 @@ export function HeroSection({
 
                 {/* CTA */}
                 {!hideCta && (
-                  <div>
-                    <CtaButton variant="white" size="md">
-                      Book a Call
-                    </CtaButton>
+                  <div className="flex flex-wrap items-center gap-4">
+                    {ctaHref ? (
+                      <Link href={ctaHref}>
+                        <CtaButton variant={ctaVariant} size={ctaSize}>
+                          {ctaLabel}
+                        </CtaButton>
+                      </Link>
+                    ) : (
+                      <CtaButton variant={ctaVariant} size={ctaSize}>
+                        {ctaLabel}
+                      </CtaButton>
+                    )}
+
+                    {secondaryCta && (
+                      <Link
+                        href={secondaryCta.href}
+                        className={cn(
+                          "inline-flex items-center rounded-full border-2 border-white font-body font-semibold text-white transition-colors hover:bg-white/10",
+                          ctaSize === "sm"
+                            ? "px-5 py-2 text-p3"
+                            : "px-7 py-3 text-p2"
+                        )}
+                      >
+                        {secondaryCta.label}
+                      </Link>
+                    )}
                   </div>
                 )}
               </div>

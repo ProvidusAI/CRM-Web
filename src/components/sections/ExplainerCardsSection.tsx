@@ -1,5 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { CtaButton } from "@/components/ui/CtaButton";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
@@ -7,13 +9,20 @@ import { Heading, Text } from "@/components/ui/Typography";
 export interface ExplainerCard {
   title: ReactNode;
   text: string;
-  /** Path to the glyph. Used as an alpha mask over the gradient icon tile. */
+  /**
+   * Path to the glyph. Under the default "tile" icon variant it is used as an
+   * alpha mask over the gradient icon tile; under "plain" it renders as-is.
+   */
   icon: string;
+  /** Adds a green pill button to the foot of the card. */
+  cta?: { label: string; href: string };
 }
 
 interface ExplainerCardsSectionProps {
   heading: ReactNode;
   cards: ExplainerCard[];
+  /** "plain" drops the gradient tile and renders the icon on its own. */
+  iconVariant?: "tile" | "plain";
 }
 
 // Figma 268:6 — 16px radius, 6px #F8F8F8 border, 72px radial-gradient icon tile.
@@ -33,6 +42,7 @@ function maskStyle(icon: string): CSSProperties {
 export function ExplainerCardsSection({
   heading,
   cards,
+  iconVariant = "tile",
 }: ExplainerCardsSectionProps) {
   return (
     <Section background="white">
@@ -55,28 +65,47 @@ export function ExplainerCardsSection({
           {cards.map((card, index) => (
             <article
               key={index}
-              className="rounded-[16px] border-[6px] border-[#F8F8F8] p-8"
+              className="flex flex-col rounded-[16px] border-[6px] border-[#F8F8F8] p-8"
             >
-              <div className="relative size-[72px]">
-                <Image
-                  src="/images/platform-expertise/agentforce-what-is/icon-bg.svg"
-                  alt=""
-                  aria-hidden="true"
-                  fill
-                  className="rounded-full"
-                />
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 bg-white"
-                  style={maskStyle(card.icon)}
-                />
-              </div>
+              {iconVariant === "plain" ? (
+                <div className="relative size-[48px]">
+                  <Image
+                    src={card.icon}
+                    alt=""
+                    aria-hidden="true"
+                    fill
+                    sizes="48px"
+                    className="object-contain object-left"
+                  />
+                </div>
+              ) : (
+                <div className="relative size-[72px]">
+                  <Image
+                    src="/images/platform-expertise/agentforce-what-is/icon-bg.svg"
+                    alt=""
+                    aria-hidden="true"
+                    fill
+                    className="rounded-full"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-white"
+                    style={maskStyle(card.icon)}
+                  />
+                </div>
+              )}
               <Heading as="h4" className="mt-6 text-[#19689F]">
                 {card.title}
               </Heading>
               <Text variant="p3" className="mt-4 text-black">
                 {card.text}
               </Text>
+
+              {card.cta && (
+                <Link href={card.cta.href} className="mt-auto pt-8">
+                  <CtaButton size="sm">{card.cta.label}</CtaButton>
+                </Link>
+              )}
             </article>
           ))}
         </div>

@@ -23,6 +23,11 @@ export const STATIC_PAGE_OPTIONS = [
   { title: "Contact", value: "contact" },
   { title: "Partnership", value: "partnership" },
 
+  // Partnership — partner pages
+  { title: "Partnership — FinDock", value: "partnership-findock" },
+  { title: "Partnership — Fundraise Up", value: "partnership-fundraise-up" },
+  { title: "Partnership — Dotdigital", value: "partnership-dotdigital" },
+
   // Platform Expertise — internal pages
   {
     title: "Platform Expertise — Sales Cloud",
