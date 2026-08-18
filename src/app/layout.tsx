@@ -5,6 +5,7 @@ import {
   GoogleTagManagerScript,
 } from "@/components/analytics/GoogleTagManager";
 import { MicrosoftClarityScript } from "@/components/analytics/MicrosoftClarity";
+import { HubSpotScript } from "@/components/analytics/HubSpot";
 import "@/styles/globals.css";
 
 const afacad = Afacad({
@@ -51,6 +52,7 @@ export default function RootLayout({
       </head>
       <body>
         <GoogleTagManagerNoScript />
+        <HubSpotScript />
         {children}
       </body>
     </html>
