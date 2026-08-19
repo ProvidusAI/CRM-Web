@@ -11,13 +11,24 @@ interface CtaButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
 
+/**
+ * The scale is padding and arrow-circle diameter; the label stays 16px at every
+ * size. Earlier revisions carried `text-p3`/`text-p2` here, which are not
+ * utilities in this project and rendered as nothing — every size has always
+ * shown a 16px label. Setting it explicitly keeps that appearance while making
+ * the code honest about it.
+ *
+ * Size the label with `typography-*`, never `text-*`: cn() runs tailwind-merge,
+ * which groups `text-*` together, so a size class there strips the caller's
+ * text colour.
+ */
 const sizeMap: Record<
   CtaButtonSize,
   { wrapper: string; circle: string; text: string }
 > = {
-  sm: { wrapper: "p-1.5 pr-5", circle: "w-8 h-8", text: "text-p3 px-2" },
-  md: { wrapper: "p-2 pr-7", circle: "w-11 h-11", text: "text-p2 px-3" },
-  lg: { wrapper: "p-2.5 pr-8", circle: "w-13 h-13", text: "text-p2 px-4" },
+  sm: { wrapper: "p-1.5 pr-5", circle: "w-8 h-8", text: "typography-p3 px-2" },
+  md: { wrapper: "p-2 pr-7", circle: "w-11 h-11", text: "typography-p3 px-3" },
+  lg: { wrapper: "p-2.5 pr-8", circle: "w-13 h-13", text: "typography-p3 px-4" },
 };
 
 function ArrowRight({ className }: { className?: string }) {
