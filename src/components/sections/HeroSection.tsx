@@ -273,11 +273,14 @@ export function HeroSection({
                     {secondaryCta && (
                       <Link
                         href={secondaryCta.href}
+                        // Sizing uses the typography-* utilities, not text-*:
+                        // tailwind-merge treats text-* as one group, so a size
+                        // class there silently strips text-white.
                         className={cn(
                           "inline-flex items-center rounded-full border-2 border-white font-body font-semibold text-white transition-colors hover:bg-white/10",
                           ctaSize === "sm"
-                            ? "px-5 py-2 text-p3"
-                            : "px-7 py-3 text-p2"
+                            ? "px-5 py-2 typography-p3"
+                            : "px-7 py-3 typography-p2"
                         )}
                       >
                         {secondaryCta.label}
