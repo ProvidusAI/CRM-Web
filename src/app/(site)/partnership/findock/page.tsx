@@ -209,7 +209,7 @@ export default async function FinDockPartnerPage() {
         ctaSize="sm"
         secondaryCta={{
           label: "Check Beyond NPSP Eligibility",
-          href: "/industries/salesforce-nonprofit-consulting",
+          href: "https://beyondnpsp.com/partners/providus",
         }}
       />
 

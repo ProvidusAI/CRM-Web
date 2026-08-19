@@ -31,6 +31,10 @@ interface HeroSectionProps {
   hideCta?: boolean;
 }
 
+function isExternalHref(href: string) {
+  return /^https?:\/\//i.test(href);
+}
+
 interface BlurScaleHeadingProps {
   children: React.ReactNode;
   className?: string;
@@ -273,6 +277,11 @@ export function HeroSection({
                     {secondaryCta && (
                       <Link
                         href={secondaryCta.href}
+                        // An off-site target opens in a new tab, so a visitor
+                        // reading a partner page does not lose their place.
+                        {...(isExternalHref(secondaryCta.href)
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
                         // Sizing uses the typography-* utilities, not text-*:
                         // tailwind-merge treats text-* as one group, so a size
                         // class there silently strips text-white.
