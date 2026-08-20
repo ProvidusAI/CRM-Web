@@ -16,6 +16,7 @@ export interface OrganisationTypeItem {
 
 interface OrganisationTypesSectionProps {
   title: string;
+  subtitle?: string;
   items: OrganisationTypeItem[];
   /** Stacked images shown alongside the accordion (the design uses two). */
   images?: string[];
@@ -23,6 +24,7 @@ interface OrganisationTypesSectionProps {
 
 export function OrganisationTypesSection({
   title,
+  subtitle,
   items,
   images = [],
 }: OrganisationTypesSectionProps) {
@@ -39,6 +41,11 @@ export function OrganisationTypesSection({
           <Heading as="h2" className="max-w-3xl text-black">
             {title}
           </Heading>
+          {subtitle && (
+            <Text variant="p3" className="mt-6 max-w-3xl text-[#4f4d4b]">
+              {subtitle}
+            </Text>
+          )}
         </div>
 
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,530px)] lg:gap-14">

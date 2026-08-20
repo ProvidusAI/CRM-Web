@@ -10,6 +10,8 @@ interface ExpertiseDescriptionSectionProps {
   paragraphs: string[];
   ctaText?: string;
   ctaHref?: string;
+  /** For pages where this block leads straight into cards and a button would crowd it. */
+  hideCta?: boolean;
 }
 
 export function ExpertiseDescriptionSection({
@@ -17,6 +19,7 @@ export function ExpertiseDescriptionSection({
   paragraphs,
   ctaText = "Let's Connect",
   ctaHref = "/contact",
+  hideCta = false,
 }: ExpertiseDescriptionSectionProps) {
   return (
     <Section className="py-16 md:py-24 bg-white">
@@ -28,15 +31,17 @@ export function ExpertiseDescriptionSection({
               {heading}
             </Heading>
 
-            <Link
-              href={ctaHref}
-              className="inline-flex items-center gap-3 bg-brand-green text-white rounded-full py-2 pr-6 pl-2 hover:bg-[#2d8716] transition-colors"
-            >
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shrink-0">
-                <ArrowRight className="w-4 h-4 text-brand-green" />
-              </div>
-              <span className="font-medium text-[16px] font-body">{ctaText}</span>
-            </Link>
+            {!hideCta && (
+              <Link
+                href={ctaHref}
+                className="inline-flex items-center gap-3 bg-brand-green text-white rounded-full py-2 pr-6 pl-2 hover:bg-[#2d8716] transition-colors"
+              >
+                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shrink-0">
+                  <ArrowRight className="w-4 h-4 text-brand-green" />
+                </div>
+                <span className="font-medium text-[16px] font-body">{ctaText}</span>
+              </Link>
+            )}
           </div>
 
           {/* Right Column: Paragraphs */}
