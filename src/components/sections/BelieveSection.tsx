@@ -77,6 +77,7 @@ export function BelieveSection({
               key={index}
               direction="up"
               delay={0.1 + index * 0.1}
+              height="100%"
             >
               <BelieveCard card={card} />
             </Reveal>
@@ -100,13 +101,13 @@ function BelieveCard({ card }: { card: CardItem }) {
 
   return (
     <div
-      className="relative w-full"
+      className="relative h-full w-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Static White Card Container with Fixed/Equal Height */}
       <div
-        className="bg-white flex flex-col items-center w-full h-[435px] transition-all duration-300"
+        className="bg-white flex flex-col items-center w-full h-full min-h-[435px] transition-all duration-300"
         style={{
           borderRadius: "24px",
           boxShadow: "0px 11.81px 25.83px 0px #0000000A, 0px 46.49px 46.49px 0px #0000000A, 0px 104.79px 62.73px 0px #00000005, 0px 185.97px 74.53px 0px #00000003, 0px 290.02px 81.18px 0px #00000000",
@@ -160,7 +161,7 @@ function BelieveCard({ card }: { card: CardItem }) {
 
         {/* Content Section - positioned below the blue cover height to clear space */}
         <div
-          className="flex flex-col items-center text-center px-6 pb-12 pt-[240px] h-full"
+          className="flex flex-col items-center text-center px-6 pb-12 pt-[240px] flex-1"
         >
           <Text variant="p1" className="text-black font-semibold mb-3">
             {card.title}
