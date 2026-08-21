@@ -107,7 +107,7 @@ function BelieveCard({ card }: { card: CardItem }) {
     >
       {/* Static White Card Container with Fixed/Equal Height */}
       <div
-        className="bg-white flex flex-col items-center w-full h-full min-h-[435px] transition-all duration-300"
+        className="bg-white flex flex-col items-center w-full h-full min-h-[435px] border border-[#eee] transition-all duration-300"
         style={{
           borderRadius: "24px",
           boxShadow: "0px 11.81px 25.83px 0px #0000000A, 0px 46.49px 46.49px 0px #0000000A, 0px 104.79px 62.73px 0px #00000005, 0px 185.97px 74.53px 0px #00000003, 0px 290.02px 81.18px 0px #00000000",

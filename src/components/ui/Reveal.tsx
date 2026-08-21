@@ -58,7 +58,7 @@ export const Reveal = ({
 
   if (reducedMotion) {
     return (
-      <div className={cn(className, "contain-layout")} style={{ position: "relative", width, height, overflow }}>
+      <div className={cn(className, overflow === "hidden" && "contain-layout")} style={{ position: "relative", width, height, overflow }}>
         {children}
       </div>
     );
@@ -67,7 +67,7 @@ export const Reveal = ({
   return (
     <div
       ref={ref}
-      className={cn(className, "contain-layout")}
+      className={cn(className, overflow === "hidden" && "contain-layout")}
       style={{ position: "relative", width, height, overflow }}
     >
       <motion.div
