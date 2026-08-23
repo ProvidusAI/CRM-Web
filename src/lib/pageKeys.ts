@@ -57,6 +57,10 @@ export const STATIC_PAGE_OPTIONS = [
     title: "Platform Expertise — Education Cloud",
     value: "salesforce-education-cloud-consulting",
   },
+  {
+    title: "Platform Expertise — Commerce Cloud",
+    value: "salesforce-commerce-cloud-consulting",
+  },
 
   // Industries — internal pages
   {

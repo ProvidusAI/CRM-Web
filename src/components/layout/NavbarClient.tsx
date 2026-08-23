@@ -263,6 +263,10 @@ const platformExpertisePages: NavItem[] = [
     label: "Salesforce Education Cloud Consulting",
     href: "/platform-expertise/salesforce-education-cloud-consulting",
   },
+  {
+    label: "Salesforce Commerce Cloud Consulting",
+    href: "/platform-expertise/salesforce-commerce-cloud-consulting",
+  },
 ];
 
 const partnerPages: NavItem[] = [
