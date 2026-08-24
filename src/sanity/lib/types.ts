@@ -113,6 +113,22 @@ export interface PageCaseStudies {
   caseStudies?: CaseStudyListItem[];
 }
 
+export interface PageBlogPost {
+  _id: string;
+  title: string;
+  slug: SanitySlug;
+  publishedAt: string;
+  /** Projected to plain strings by the query: categories[]->title */
+  categories?: string[];
+  heroImage?: SanityImage;
+}
+
+export interface PageBlogs {
+  pageKey: string;
+  sectionTitle?: string;
+  posts?: PageBlogPost[];
+}
+
 export type ServicePageStatus = "published" | "draft";
 
 export type ServicePageSectionKey =

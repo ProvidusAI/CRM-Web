@@ -83,6 +83,23 @@ export const PAGE_CASE_STUDIES_QUERY = defineQuery(`
   }
 `);
 
+export const PAGE_BLOGS_QUERY = defineQuery(`
+  *[_type == "pageBlogs" && pageKey == $pageKey][0] {
+    pageKey,
+    sectionTitle,
+    posts[]->{
+      _id,
+      title,
+      slug,
+      publishedAt,
+      "categories": categories[]->title,
+      heroImage {
+        ${imageProjection}
+      }
+    }
+  }
+`);
+
 export const BLOG_CATEGORIES_QUERY = defineQuery(`
   *[_type == "category" && defined(slug.current)] | order(title asc) {
     title,
