@@ -25,10 +25,6 @@ const pageOptions = [
     title: "Platform Expertise — Agentforce",
     value: "salesforce-agentforce-consulting",
   },
-  {
-    title: "Platform Expertise — Commerce Cloud",
-    value: "salesforce-commerce-cloud-consulting",
-  },
   { title: "Industries", value: "industries" },
   {
     title: "Industries — Health Cloud",
@@ -41,6 +37,10 @@ const pageOptions = [
   {
     title: "Industries — Financial Services Cloud",
     value: "salesforce-financial-services-cloud-consulting",
+  },
+  {
+    title: "Industries — Commerce Cloud",
+    value: "salesforce-commerce-cloud-consulting",
   },
 ];
 

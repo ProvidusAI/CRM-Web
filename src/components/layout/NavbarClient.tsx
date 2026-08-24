@@ -232,6 +232,14 @@ const industryPages: NavItem[] = [
     label: "Salesforce Financial Services Cloud Consulting",
     href: "/industries/salesforce-financial-services-cloud-consulting",
   },
+  {
+    label: "Salesforce Education Cloud Consulting",
+    href: "/industries/salesforce-education-cloud-consulting",
+  },
+  {
+    label: "Salesforce Commerce Cloud Consulting",
+    href: "/industries/salesforce-commerce-cloud-consulting",
+  },
 ];
 
 const platformExpertisePages: NavItem[] = [
@@ -258,14 +266,6 @@ const platformExpertisePages: NavItem[] = [
   {
     label: "Salesforce Agentforce Consulting",
     href: "/platform-expertise/salesforce-agentforce-consulting",
-  },
-  {
-    label: "Salesforce Education Cloud Consulting",
-    href: "/platform-expertise/salesforce-education-cloud-consulting",
-  },
-  {
-    label: "Salesforce Commerce Cloud Consulting",
-    href: "/platform-expertise/salesforce-commerce-cloud-consulting",
   },
 ];
 

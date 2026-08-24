@@ -56,6 +56,18 @@ const nextConfig: NextConfig = {
         destination: "/services/:slug",
         permanent: true,
       },
+      // Education and Commerce Cloud shipped under platform-expertise before
+      // being reclassified as industries.
+      {
+        source: "/platform-expertise/salesforce-education-cloud-consulting",
+        destination: "/industries/salesforce-education-cloud-consulting",
+        permanent: true,
+      },
+      {
+        source: "/platform-expertise/salesforce-commerce-cloud-consulting",
+        destination: "/industries/salesforce-commerce-cloud-consulting",
+        permanent: true,
+      },
     ];
   },
   images: {

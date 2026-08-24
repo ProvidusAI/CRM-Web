@@ -53,14 +53,6 @@ export const STATIC_PAGE_OPTIONS = [
     title: "Platform Expertise — Agentforce",
     value: "salesforce-agentforce-consulting",
   },
-  {
-    title: "Platform Expertise — Education Cloud",
-    value: "salesforce-education-cloud-consulting",
-  },
-  {
-    title: "Platform Expertise — Commerce Cloud",
-    value: "salesforce-commerce-cloud-consulting",
-  },
 
   // Industries — internal pages
   {
@@ -74,6 +66,14 @@ export const STATIC_PAGE_OPTIONS = [
   {
     title: "Industries — Financial Services Cloud",
     value: "salesforce-financial-services-cloud-consulting",
+  },
+  {
+    title: "Industries — Education Cloud",
+    value: "salesforce-education-cloud-consulting",
+  },
+  {
+    title: "Industries — Commerce Cloud",
+    value: "salesforce-commerce-cloud-consulting",
   },
 ] as const;
 

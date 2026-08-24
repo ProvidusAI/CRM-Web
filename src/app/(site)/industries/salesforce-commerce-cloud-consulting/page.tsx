@@ -26,8 +26,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return generateStaticPageMetadata("salesforce-commerce-cloud-consulting", {
     title: "Salesforce Commerce Cloud Consulting & Implementation",
     description: DESCRIPTION,
-    canonicalPath: "/platform-expertise/salesforce-commerce-cloud-consulting",
-    image: "/images/platform-expertise/commerce-cloud/hero.webp",
+    canonicalPath: "/industries/salesforce-commerce-cloud-consulting",
+    image: "/images/industries/commerce-cloud/hero.webp",
   });
 }
 
@@ -67,7 +67,7 @@ export default async function SalesforceCommerceCloudConsultingPage() {
     "@type": "Service",
     name: "Salesforce Commerce Cloud Consulting & Implementation",
     description: DESCRIPTION,
-    url: "https://providuscrm.co.uk/platform-expertise/salesforce-commerce-cloud-consulting",
+    url: "https://providuscrm.co.uk/industries/salesforce-commerce-cloud-consulting",
     provider: {
       "@type": "Organization",
       name: "ProvidusCRM",
@@ -102,7 +102,7 @@ export default async function SalesforceCommerceCloudConsultingPage() {
           "Transparent project scoping",
           "Integration with order management, ERP, and your Salesforce data",
         ]}
-        image="/images/platform-expertise/commerce-cloud/hero.webp"
+        image="/images/industries/commerce-cloud/hero.webp"
       />
 
       {/* 2. Trusted by */}
@@ -170,12 +170,14 @@ export default async function SalesforceCommerceCloudConsultingPage() {
             label: "B2B & B2C Commerce Solutions",
             content: {
               heading: "B2B & B2C Commerce Solutions",
-              text: "B2B and B2C commerce run on different rules. A B2C storefront optimises for browsing, promotion, and one-off conversion. A B2B store runs on account hierarchies, contract pricing, and reorder behaviour that a consumer storefront has no concept of.\n\nOur consultants configure the model your business actually sells under, and where you sell through both, we keep them on shared product and customer data rather than running two disconnected stores.",
+              text: "B2B and B2C commerce aren't interchangeable. B2C may involve high volume shopping, personalisation, promotions, and returns at scale.\n\nB2B may involve account-specific catalogues, contract pricing, bulk ordering, and purchasing teams. We configure Commerce Cloud around the buying model your business actually operates.",
               bullets: [
-                "B2C storefronts built around browsing, promotion, and checkout conversion",
-                "B2B account hierarchies, contract pricing, and quote workflows",
-                "Reorder, bulk order, and buyer-specific catalogue configuration",
-                "Shared product and customer data across both commerce models",
+                "B2C Commerce Cloud implementation",
+                "B2B Commerce configuration",
+                "Account-based buying journeys",
+                "Custom catalogues and pricing",
+                "Bulk ordering workflows",
+                "Headless and composable commerce architecture where appropriate",
               ],
             },
           },
@@ -184,12 +186,15 @@ export default async function SalesforceCommerceCloudConsultingPage() {
             label: "Platform Migration & Replatforming",
             content: {
               heading: "Platform Migration & Replatforming",
-              text: "Replatforming goes wrong when the migration is treated as a data transfer rather than a commercial event. Product catalogues, customer accounts, order history, and search rankings all have to land intact, and the cutover has to happen without losing trading days.\n\nOur consultants map what moves, what gets rebuilt, and what gets retired, then run the migration in stages you can verify before the switch.",
+              text: "We help you move from platforms like Shopify Plus, Magento, and BigCommerce to Salesforce Commerce Cloud.\n\nWe plan migrations around your catalogue, customer data, order data, integrations, custom functionality, and trading requirements.",
               bullets: [
-                "Migration from Magento, Shopify Plus, BigCommerce, and custom platforms",
-                "Catalogue, customer, and order history migration with validation",
-                "URL, redirect, and search equity preservation through cutover",
-                "Staged cutover planning that protects trading days",
+                "Platform migration",
+                "Product catalogue migration",
+                "Customer account migration",
+                "Order data migration",
+                "Integration migration",
+                "Post-migration validation",
+                "Performance testing",
               ],
             },
           },
@@ -198,12 +203,14 @@ export default async function SalesforceCommerceCloudConsultingPage() {
             label: "Integration & Order Management",
             content: {
               heading: "Integration & Order Management",
-              text: "A storefront that cannot see stock, or an ERP that learns about an order hours later, creates problems your customer service team absorbs. Commerce Cloud has to sit inside the systems that actually fulfil the order.\n\nOur consultants connect Commerce Cloud to your order management, ERP, and payment systems, then define what happens when those systems disagree rather than leaving it to be discovered in production.",
+              text: "Connect Commerce Cloud with third-party tools and systems that power your store across every transaction.\n\nWe integrate Commerce Cloud with OMS, ERP, payment, fulfilment, customer, and Salesforce systems.",
               bullets: [
-                "Salesforce Order Management implementation and configuration",
-                "ERP, warehouse, and inventory integration with agreed sync direction",
-                "Payment gateway, tax, and shipping provider connections",
-                "Error handling and reconciliation for orders that fail mid-flow",
+                "OMS integration",
+                "ERP integration",
+                "Payment gateway integration",
+                "Third-party integrations",
+                "Commerce and fulfilment data synchronisation",
+                "Data Cloud integration",
               ],
             },
           },
@@ -212,12 +219,14 @@ export default async function SalesforceCommerceCloudConsultingPage() {
             label: "Store Performance Optimisation",
             content: {
               heading: "Store Performance Optimisation",
-              text: "Peak trading is when performance problems become revenue problems. Slow category pages, a checkout that stalls under load, and search that returns the wrong products all cost conversion at exactly the moment traffic is highest.\n\nOur consultants profile your storefront against real traffic patterns, fix what is measurably slow, and prepare the org for peak-season load before the season starts.",
+              text: "Your storefront may perform perfectly on an ordinary Tuesday. That doesn't tell you what happens when traffic, transactions, promotions, and customer demand increase dramatically.\n\nWe help you prepare before peak trading periods by testing performance, identifying bottlenecks, and planning releases around your trading calendar.",
               bullets: [
-                "Storefront performance profiling and Core Web Vitals work",
-                "Cart and checkout conversion analysis",
-                "Search, merchandising, and product recommendation tuning",
-                "Peak-season load readiness and release freeze planning",
+                "Peak-period load testing",
+                "Performance auditing",
+                "Page-speed optimisation",
+                "Release freeze planning",
+                "Peak-trading readiness",
+                "Live performance monitoring",
               ],
             },
           },
@@ -226,12 +235,14 @@ export default async function SalesforceCommerceCloudConsultingPage() {
             label: "Salesforce Managed Services & Support",
             content: {
               heading: "Salesforce Managed Services & Support",
-              text: "Commerce orgs drift. Promotions change, catalogues grow, integrations get patched, and the configuration that fitted at launch stops matching how you trade a year later.\n\nOur consultants provide ongoing support across Salesforce releases, with a team that already knows your implementation rather than one reading it for the first time on every ticket.",
+              text: "Our team keeps Commerce Cloud working smoothly as your business evolves. We understand your storefront doesn't stay static. Your catalogue changes. Your campaigns change. Your integrations change. Salesforce releases change the platform.\n\nOur managed services support the ongoing configuration, monitoring, optimisation, and release management required to keep your online and offline retail operations up and running.",
               bullets: [
-                "Ongoing support from consultants who know your implementation",
-                "Salesforce release management and regression testing",
-                "Catalogue, promotion, and merchandising change support",
-                "Monitoring, incident response, and post-incident fixes",
+                "Ongoing configuration",
+                "Bug fixes",
+                "Platform monitoring",
+                "Salesforce release management",
+                "Personalisation and conversion optimisation",
+                "Agentforce Commerce readiness and configuration as applicable",
               ],
             },
           },
@@ -300,7 +311,7 @@ export default async function SalesforceCommerceCloudConsultingPage() {
       <WhyChooseSection
         title="Why Choose ProvidusCRM As Your Salesforce Consulting Partner"
         customReasons={whyChoose}
-        image="/images/platform-expertise/commerce-cloud/why-choose.webp"
+        image="/images/industries/commerce-cloud/why-choose.webp"
         imageAlt="Consultant reviewing store performance on a tablet"
       />
 
@@ -318,45 +329,45 @@ export default async function SalesforceCommerceCloudConsultingPage() {
             question:
               "Is Salesforce Commerce Cloud the same as Agentforce Commerce?",
             answer:
-              "Salesforce is repositioning Commerce Cloud as Agentforce Commerce, similar to how Nonprofit Cloud became Agentforce Nonprofit and Education Cloud became Agentforce Education. The underlying product is the same, with deeper Agentforce agent integration. Our consultants work with it under either name, depending on which term matches your Salesforce contact.",
+              "Salesforce is repositioning Commerce Cloud under the Agentforce Commerce naming as Agentforce capabilities become more deeply integrated into retail experiences.",
           },
           {
             question:
               "What's the difference between Salesforce B2B Commerce and B2C Commerce?",
             answer:
-              "B2C Commerce is built for selling to consumers: browsing, promotions, and high-volume one-off checkout. B2B Commerce is built for selling to businesses, with account hierarchies, contract pricing, negotiated terms, and repeat ordering. They share the Salesforce platform but model buying behaviour differently, so the right choice depends on who places the order, not only on what you sell.",
+              "B2C commerce typically focuses on high-volume customer shopping experiences, personalisation, promotions, and returns. B2B commerce often involves account-specific catalogues, contract pricing, bulk ordering, and purchasing teams.",
           },
           {
             question:
               "Can you migrate us from Magento or Shopify Plus to Commerce Cloud?",
             answer:
-              "Yes. We migrate product catalogues, customer accounts, and order history from Magento, Shopify Plus, BigCommerce, and custom platforms, and preserve URL structure and redirects so search rankings survive the move. The migration runs in stages you can verify before cutover, which is what keeps a replatform from costing you trading days.",
+              "Yes. Migration planning considers your existing platform, customisations, integrations, catalogue, customer data, order data, and the parts of the legacy experience. We scope your migration on the complexity of your existing storefront.",
           },
           {
             question: "Does Commerce Cloud support headless architecture?",
             answer:
-              "Yes. Commerce Cloud supports headless and composable builds through its APIs and PWA Kit, so you can run a custom front end while Commerce Cloud remains the commerce engine. Headless is worth the cost when you genuinely need front-end freedom; when you do not, SFRA is faster to build and cheaper to maintain. Our consultants tell you which case you are actually in.",
+              "Commerce Cloud can support headless implementations through APIs, allowing the frontend experience to be separated from the commerce platform. Whether that architecture makes sense depends on the flexibility, integrations, frontend requirements, and operational model of your business.",
           },
           {
             question: "Can Commerce Cloud integrate with our OMS or ERP?",
             answer:
-              "Yes. We connect Commerce Cloud to Salesforce Order Management, third-party order management platforms, and ERP systems including SAP, NetSuite, and Microsoft Dynamics. The part that matters is deciding which system owns which record and what happens when they disagree, and we agree that before the build rather than discovering it in production.",
+              "Yes. Commerce Cloud implementations commonly require connections between the storefront and systems responsible for order management, fulfilment, inventory, finance, payments, and other business processes. Our integration approach depends on your existing tech stack.",
           },
           {
             question: "How long does a Commerce Cloud implementation take?",
             answer:
-              "A straightforward B2C storefront on SFRA usually takes three to five months. Replatforming with catalogue and order history migration, or a build with several ERP and order management integrations, typically runs six to nine months. We scope the timeline against your integrations and your trading calendar, and plan around your peak season rather than through it.",
+              "The timeline depends on scope, integrations, custom development, data migration, testing, and trading requirements. We provide a project timeline after assessing the implementation requirements.",
           },
           {
             question:
               "What's the difference between a Commerce Cloud consultant and an implementation partner?",
             answer:
-              "A consultant advises on what your storefront should do and how it should be architected. An implementation partner builds and deploys it. ProvidusCRM does both, so the commercial thinking and the build never drift apart over the course of the project.",
+              "A consultant advises on architecture, platform decisions, and roadmap. An implementation partner also builds and delivers the solution. We provide both strategy and implementation.",
           },
           {
             question: "How much do Commerce Cloud consulting services cost?",
             answer:
-              "Cost depends on scope: the commerce model you sell under, how many systems have to be integrated, whether you are migrating an existing catalogue, and how much ongoing support you need after go-live. We scope transparently and give you a breakdown before any work starts, so you can see what drives the number rather than receiving a single figure.",
+              "Pricing depends on implementation scope, custom development, integrations, migration requirements, and ongoing services. We provide a project estimate after detailed discovery of your current CRM setup.",
           },
         ]}
       />

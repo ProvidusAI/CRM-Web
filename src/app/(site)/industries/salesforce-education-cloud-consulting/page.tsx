@@ -27,25 +27,25 @@ export async function generateMetadata() {
     title: "Salesforce Education Cloud Consulting & Implementation",
     description: DESCRIPTION,
     canonicalPath:
-      "/platform-expertise/salesforce-education-cloud-consulting",
-    image: "/images/platform-expertise/education-cloud/hero.webp",
+      "/industries/salesforce-education-cloud-consulting",
+    image: "/images/industries/education-cloud/hero.webp",
   });
 }
 
 const challenges = [
   {
     title: "A prospective student waits multiple days for a reply",
-    icon: "/images/platform-expertise/education-cloud/challenge-inquiry.webp",
+    icon: "/images/industries/education-cloud/challenge-inquiry.webp",
     text: "An inquiry comes in through the website. A follow-up happens through a separate recruitment tool. By the time an admissions counsellor actually responds, a competing institution that replied the same day has already moved the prospective student along.",
   },
   {
     title: "Advisors cannot see engagement data until it's too late",
-    icon: "/images/platform-expertise/education-cloud/challenge-engagement.webp",
+    icon: "/images/industries/education-cloud/challenge-engagement.webp",
     text: "A student's LMS engagement drops. Their grades slip. That information sits in a system advisors do not have visibility into. The intervention that could have helped happens after the student has already decided to withdraw, not before.",
   },
   {
     title: "Development officers work from partial alumni data",
-    icon: "/images/platform-expertise/education-cloud/challenge-alumni.webp",
+    icon: "/images/industries/education-cloud/challenge-alumni.webp",
     text: "Alumni giving history, event attendance, and career milestones live in disconnected systems. A development officer reaching out to a major gift prospect works from fragments of the relationship, not the whole picture.",
   },
 ];
@@ -110,7 +110,7 @@ export default async function SalesforceEducationCloudConsultingPage() {
     "@type": "Service",
     name: "Salesforce Education Cloud Consulting & Implementation",
     description: DESCRIPTION,
-    url: "https://providuscrm.co.uk/platform-expertise/salesforce-education-cloud-consulting",
+    url: "https://providuscrm.co.uk/industries/salesforce-education-cloud-consulting",
     serviceType: "Salesforce Education Cloud Consulting",
     areaServed: "GB",
     provider: {
@@ -150,7 +150,7 @@ export default async function SalesforceEducationCloudConsultingPage() {
           "Advising and admissions workflows built around live student data",
           "Ongoing support as your institution's systems and processes evolve",
         ]}
-        image="/images/platform-expertise/education-cloud/hero.webp"
+        image="/images/industries/education-cloud/hero.webp"
       />
 
       {/* 2. Trusted by */}
@@ -365,8 +365,8 @@ export default async function SalesforceEducationCloudConsultingPage() {
         subtitle="Every institution has different CRM needs. A large research university, a community college, and an online provider share very little of the same operational shape. Configuration reflects where your institution actually sits and how your teams work together across the student lifecycle."
         items={institutions}
         images={[
-          "/images/platform-expertise/education-cloud/institutions-1.webp",
-          "/images/platform-expertise/education-cloud/institutions-2.webp",
+          "/images/industries/education-cloud/institutions-1.webp",
+          "/images/industries/education-cloud/institutions-2.webp",
         ]}
       />
 
@@ -374,7 +374,7 @@ export default async function SalesforceEducationCloudConsultingPage() {
       <WhyChooseSection
         title="Why Choose ProvidusCRM As Your Education Cloud Consulting & Implementation Partner"
         customReasons={whyChoose}
-        image="/images/platform-expertise/education-cloud/why-choose.webp"
+        image="/images/industries/education-cloud/why-choose.webp"
         imageAlt="Student working on a laptop outdoors"
       />
 
