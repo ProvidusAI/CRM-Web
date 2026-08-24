@@ -48,6 +48,10 @@ export async function POST(request: NextRequest) {
     revalidateTag("page-case-studies");
   }
 
+  if (body._type === "pageBlogs") {
+    revalidateTag("page-blogs");
+  }
+
   // Same pageKey-keyed pattern as pageCaseStudies above. Without these, edits
   // to a page's SEO or JSON-LD only appear once the fetch's own revalidate
   // window (300s) elapses, instead of immediately on publish.

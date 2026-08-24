@@ -101,15 +101,31 @@ The endpoint revalidates:
 - Case study index and detail pages for `caseStudy`
 - Blog categories for `category`
 - Any page's case-study selection for `pageCaseStudies`
+- Any page's blog-post selection for `pageBlogs`
 - Any page's title/description/OG tags for `staticPageSeo`
 - Any page's JSON-LD structured data for `sitePageJsonLd`
 
-The last three are keyed by `pageKey`, not `slug`, so a publish revalidates
+The last four are keyed by `pageKey`, not `slug`, so a publish revalidates
 every page that reads that document — the webhook doesn't need per-page
 routing. If your webhook has a document-type filter configured in Sanity
-(rather than sending every mutation), make sure `staticPageSeo` and
-`sitePageJsonLd` are included in it, or their edits will only appear once
-each fetch's own 300s revalidate window elapses instead of immediately.
+(rather than sending every mutation), make sure `pageCaseStudies`, `pageBlogs`,
+`staticPageSeo`, and `sitePageJsonLd` are included in it, or their edits will
+only appear once each fetch's own 300s revalidate window elapses instead of
+immediately.
+
+## Page case studies
+
+Selects case studies for a single page, keyed by `pageKey`. Rendered as the
+main content block. Editing a `pageCaseStudies` document revalidates the
+`page-case-studies` tag; publishing a referenced case study revalidates
+`case-studies`, which these pages also subscribe to.
+
+## Page blogs
+
+Selects blog posts for a single page, keyed by `pageKey`. Rendered above the
+closing CTA. One to four posts. A page with no document hides the section.
+Editing a `pageBlogs` document revalidates the `page-blogs` tag; publishing a
+referenced post revalidates `posts`, which these pages also subscribe to.
 
 ## Notes
 
