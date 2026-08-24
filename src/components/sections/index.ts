@@ -44,3 +44,4 @@ export { SplitComparisonSection } from "./SplitComparisonSection";
 export { OutcomeCardsSection } from "./OutcomeCardsSection";
 export { ExplainerCardsSection } from "./ExplainerCardsSection";
 export { EcosystemSection } from "./EcosystemSection";
+export { PageBlogsSection } from "./PageBlogsSection";
