@@ -84,3 +84,21 @@ Strictly enforced — see `AGENTS.md` for the full token tables and the `providu
 - Animations (framer-motion, CSS marquees) must respect `prefers-reduced-motion` — existing components check it and there are reduced-motion overrides in `globals.css`.
 - `PROGRESS.md` tracks a completed SEO/a11y/performance/design-token audit; check it before "fixing" something that was already addressed intentionally.
 - `SANITY.md` covers CMS env setup, content models, and the revalidation webhook.
+
+## Deployment (Hostinger)
+
+Pushes to `main` auto-deploy. The build settings must stay on **pnpm** — the
+package manager dropdown, and `pnpm run build` as the build command.
+
+This matters more than it looks. Under `npm install` the deploy ignores
+`pnpm-lock.yaml` and re-resolves the whole dependency graph from the registry
+every time, which took builds to ~30 minutes (`next build` itself is ~20s) and
+made them flaky: timeouts surfaced as a one-line `ERROR: package.json file not
+found` and 503s, and the same commit would deploy fine on a retry.
+
+`pnpm-workspace.yaml` also carries `overrides`, `patchedDependencies`, and
+`allowBuilds` — there is no `pnpm` key in `package.json`. npm ignores that file
+entirely, and so do pnpm majors older than 10, in both cases **without failing
+the build**. When that happens the `@sanity/table` patch silently stops applying
+in production. `packageManager` in `package.json` pins the version to guard it;
+if an install ever looks wrong, check the pnpm version in the build log first.
