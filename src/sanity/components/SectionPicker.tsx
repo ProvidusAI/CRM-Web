@@ -34,7 +34,7 @@ export function SectionPicker(props: StringInputProps) {
     <MenuButton
       id={props.id}
       button={
-        <Button mode="ghost" padding={2}>
+        <Button mode="ghost" padding={2} disabled={props.readOnly}>
           <Flex align="center" gap={3}>
             <Thumb src={selected?.thumbnail} />
             <Text size={1}>{selected?.title ?? "Select a section"}</Text>

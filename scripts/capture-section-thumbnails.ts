@@ -1,5 +1,5 @@
 import { chromium } from "@playwright/test";
-import { mkdir, stat, writeFile } from "node:fs/promises";
+import { mkdir, stat, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const BASE_URL = process.env.BASE_URL ?? "http://localhost:3002";
@@ -8,7 +8,7 @@ const MIN_BYTES = 1024;
 
 type Source = { url: string; selector?: string };
 
-// The fallback page renders 11 of the 13 sections with no Sanity content.
+// The fallback page renders 10 of the 13 sections with no Sanity content.
 // `caseStudies`, `migrationPlatforms`, and `process` need explicit sources
 // because they render null (or empty) on the consulting-services fallback.
 const DEFAULT_URL = "/services/salesforce-consulting-services";
@@ -70,6 +70,7 @@ async function main() {
   try {
     for (const [key, source] of Object.entries(SOURCES)) {
       const selector = source.selector ?? `[data-section-key="${key}"]`;
+      const filePath = path.join(OUT_DIR, `${key}.webp`);
       try {
         await page.goto(`${BASE_URL}${source.url}`, { waitUntil: "load" });
         const locator = page.locator(selector).first();
@@ -78,16 +79,17 @@ async function main() {
         // Let lazy images and in-view (Reveal) animations settle.
         await page.waitForTimeout(600);
 
-        const filePath = path.join(OUT_DIR, `${key}.webp`);
         await encodeWebp(page, locator, filePath);
         const { size } = await stat(filePath);
         if (size < MIN_BYTES) {
           missed.push(`${key} (${size} bytes < ${MIN_BYTES})`);
+          await unlink(filePath).catch(() => {});
         } else {
           captured.push(key);
         }
       } catch (error) {
         missed.push(`${key}: ${error instanceof Error ? error.message : String(error)}`);
+        await unlink(filePath).catch(() => {});
       }
     }
   } finally {
@@ -101,4 +103,7 @@ async function main() {
   }
 }
 
-void main();
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
