@@ -137,7 +137,7 @@ export function Footer() {
         </div>
 
         {/* Powered By — own row, so the wordmarks never wrap inside a column */}
-        <div className="mb-12 flex flex-wrap items-center gap-x-6 gap-y-4">
+        {/* <div className="mb-12 flex flex-wrap items-center gap-x-6 gap-y-4">
           <Text variant="p3" className="text-white/90">
             Powered By
           </Text>
@@ -155,7 +155,7 @@ export function Footer() {
             height={31}
             className="h-[26px] w-auto"
           />
-        </div>
+        </div> */}
 
         {/* Lower Footer */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">

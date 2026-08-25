@@ -81,8 +81,8 @@ export default async function HomePage() {
       <HeroSection />
       <PartnersSection />
       <CertifiedSection />
-      <EcosystemSection />
-      <BentoSection />
+      {/* <EcosystemSection /> */}
+      {/* <BentoSection /> */}
       <WhatWeDoSection />
       <ExpertiseSection />
       <IndustriesSection />
