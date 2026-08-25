@@ -3,7 +3,6 @@ import {
   CtaSection,
   CertifiedSection,
   WhatWeDoSection,
-  EcosystemSection,
   ExpertiseSection,
   IndustriesSection,
   WhyChooseSection,
@@ -13,7 +12,6 @@ import NextDynamic from "next/dynamic";
 
 const PartnersSection = NextDynamic(() => import("@/components/sections/PartnersSection").then((mod) => mod.PartnersSection));
 const TeamSection = NextDynamic(() => import("@/components/sections/TeamSection").then((mod) => mod.TeamSection));
-const BentoSection = NextDynamic(() => import("@/components/sections/BentoSection").then((mod) => mod.BentoSection));
 
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
@@ -81,8 +79,6 @@ export default async function HomePage() {
       <HeroSection />
       <PartnersSection />
       <CertifiedSection />
-      {/* <EcosystemSection /> */}
-      {/* <BentoSection /> */}
       <WhatWeDoSection />
       <ExpertiseSection />
       <IndustriesSection />
