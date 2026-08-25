@@ -1,5 +1,6 @@
 import { createElement, type CSSProperties } from "react";
 import { defineField, defineType, type FieldProps } from "sanity";
+import { SectionPicker } from "../components/SectionPicker";
 
 const iconKeyOptions = [
   { title: "ROI", value: "roi" },
@@ -166,6 +167,7 @@ export const servicePage = defineType({
           name: "sectionKey",
           title: "Section",
           type: "string",
+          components: { input: SectionPicker },
           options: { list: sectionOrderOptions },
           validation: (rule) => rule.required(),
         }),
