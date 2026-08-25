@@ -9,6 +9,7 @@ import type { PageBlogPost } from "@/sanity/lib/types";
  */
 export function toBlogTeaserCards(posts?: PageBlogPost[]): BlogTeaserCard[] {
   return (posts ?? []).map((post) => ({
+    id: post._id,
     title: post.title,
     slug: post.slug.current,
     image: post.heroImage?.asset?.url ?? "/images/case-study.webp",

@@ -1,5 +1,6 @@
 import { PAGE_BLOG_OPTIONS, STATIC_PAGE_OPTIONS } from "../src/lib/pageKeys";
 import { toBlogTeaserCards } from "../src/lib/blogTeaserCards";
+import { PageBlogsSection } from "../src/components/sections/PageBlogsSection";
 import type { PageBlogPost } from "../src/sanity/lib/types";
 
 const failures: string[] = [];
@@ -60,6 +61,18 @@ check("leaves category undefined", mappedBare[0]?.category === undefined, `got $
 
 // sanityFetch returns null when Sanity is not configured.
 check("handles undefined input", toBlogTeaserCards(undefined).length === 0, "expected an empty array");
+
+check(
+  "renders nothing when a page has no posts",
+  PageBlogsSection({ posts: [] }) === null,
+  "expected null for an empty posts array"
+);
+
+check(
+  "renders something when a page has posts",
+  PageBlogsSection({ posts: mapped }) !== null,
+  "expected an element for a non-empty posts array"
+);
 
 if (failures.length > 0) {
   console.error("FAIL\n" + failures.map((f) => `  - ${f}`).join("\n"));

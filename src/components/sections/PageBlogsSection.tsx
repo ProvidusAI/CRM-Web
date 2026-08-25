@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -8,6 +9,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { formatDate } from "@/lib/format";
 
 export interface BlogTeaserCard {
+  id: string;
   title: string;
   slug: string;
   image: string;
@@ -48,7 +50,7 @@ export function PageBlogsSection({
         <div className="mt-12 grid gap-x-12 gap-y-14 md:grid-cols-2">
           {posts.map((post, index) => (
             <Reveal
-              key={post.slug}
+              key={post.id}
               direction="up"
               delay={index * 0.08}
               width="100%"

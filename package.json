@@ -16,6 +16,7 @@
     "perf:start": "next start -p 3001",
     "perf:guard": "tsx scripts/perf-guard.ts",
     "perf:vitals": "tsx scripts/core-web-vitals-probe.ts",
+    "check:page-blogs": "tsx scripts/check-page-blogs.ts",
     "import:migration": "tsx scripts/import-migration-page.ts",
     "sanity:deploy": "sanity deploy",
     "sanity:dataset": "sanity dataset list"
