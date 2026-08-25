@@ -18,6 +18,7 @@
     "perf:vitals": "tsx scripts/core-web-vitals-probe.ts",
     "check:page-blogs": "tsx scripts/check-page-blogs.ts",
     "import:migration": "tsx scripts/import-migration-page.ts",
+    "thumbs:sections": "tsx scripts/capture-section-thumbnails.ts",
     "sanity:deploy": "sanity deploy",
     "sanity:dataset": "sanity dataset list"
   },
