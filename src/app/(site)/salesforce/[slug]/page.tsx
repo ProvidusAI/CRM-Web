@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Fragment, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import {
   CertifiedSection,
   ExpertiseSection,
@@ -259,7 +259,9 @@ export default async function SalesforceServicePage({
         backgroundImage={imageUrl(page.hero?.backgroundImage)}
       />
       {orderedSectionKeys.map((sectionKey) => (
-        <Fragment key={sectionKey}>{sectionRenderers[sectionKey]}</Fragment>
+        <div key={sectionKey} data-section-key={sectionKey}>
+          {sectionRenderers[sectionKey]}
+        </div>
       ))}
     </div>
   );
