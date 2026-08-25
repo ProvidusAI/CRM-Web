@@ -29,19 +29,19 @@ const processIconOptions = [
 ];
 
 const sectionOrderOptions = [
-  { title: "Trusted partners", value: "partners" },
-  { title: "Certified section", value: "certified" },
-  { title: "Case studies", value: "caseStudies" },
-  { title: "Tabs section", value: "tabs" },
-  { title: "Consultant CTA (middle)", value: "consultantCta" },
-  { title: "Benefits timeline", value: "benefits" },
-  { title: "Salesforce process", value: "process" },
-  { title: "Migration platforms", value: "migrationPlatforms" },
-  { title: "Expertise carousel", value: "expertise" },
-  { title: "Industries grid", value: "industries" },
-  { title: "Why choose", value: "whyChoose" },
-  { title: "FAQs", value: "faqs" },
-  { title: "Footer CTA", value: "cta" },
+  { title: "Trusted partners", value: "partners", thumbnail: "/studio-thumbnails/partners.webp" },
+  { title: "Certified section", value: "certified", thumbnail: "/studio-thumbnails/certified.webp" },
+  { title: "Case studies", value: "caseStudies", thumbnail: "/studio-thumbnails/caseStudies.webp" },
+  { title: "Tabs section", value: "tabs", thumbnail: "/studio-thumbnails/tabs.webp" },
+  { title: "Consultant CTA (middle)", value: "consultantCta", thumbnail: "/studio-thumbnails/consultantCta.webp" },
+  { title: "Benefits timeline", value: "benefits", thumbnail: "/studio-thumbnails/benefits.webp" },
+  { title: "Salesforce process", value: "process", thumbnail: "/studio-thumbnails/process.webp" },
+  { title: "Migration platforms", value: "migrationPlatforms", thumbnail: "/studio-thumbnails/migrationPlatforms.webp" },
+  { title: "Expertise carousel", value: "expertise", thumbnail: "/studio-thumbnails/expertise.webp" },
+  { title: "Industries grid", value: "industries", thumbnail: "/studio-thumbnails/industries.webp" },
+  { title: "Why choose", value: "whyChoose", thumbnail: "/studio-thumbnails/whyChoose.webp" },
+  { title: "FAQs", value: "faqs", thumbnail: "/studio-thumbnails/faqs.webp" },
+  { title: "Footer CTA", value: "cta", thumbnail: "/studio-thumbnails/cta.webp" },
 ];
 
 const defaultSectionOrder = sectionOrderOptions.map((option) => option.value);
