@@ -3,10 +3,12 @@ import {
   IndustryDetailSection,
   PlatformsSection,
   ServiceCaseStudiesSection,
-  CtaSection
+  CtaSection,
+  PageBlogsSection
 } from "@/components/sections";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
+import { getPageBlogs } from "@/lib/pageBlogs";
 import { getPageCaseStudies } from "@/lib/pageCaseStudies";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
@@ -61,9 +63,10 @@ export default async function IndustriesPage() {
       }
     ]
   };
-  const [jsonLd, caseStudies] = await Promise.all([
+  const [jsonLd, caseStudies, blogs] = await Promise.all([
     getSitePageJsonLd("industries", schema),
     getPageCaseStudies("industries"),
+    getPageBlogs("industries"),
   ]);
 
   const heroTitle = (
@@ -90,6 +93,9 @@ export default async function IndustriesPage() {
           title={caseStudies.title}
           caseStudies={caseStudies.cards}
         />
+      )}
+      {blogs.posts.length > 0 && (
+        <PageBlogsSection title={blogs.title} posts={blogs.posts} />
       )}
       <CtaSection title="Ready to See How Salesforce Fits Your Industry?" />
     </>

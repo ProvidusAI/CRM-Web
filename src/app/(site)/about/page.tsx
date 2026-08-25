@@ -7,10 +7,12 @@ import {
   TeamThoughtsSection,
   PlatformsSection,
   ExploreSection,
-  CtaSection
+  CtaSection,
+  PageBlogsSection
 } from "@/components/sections";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
+import { getPageBlogs } from "@/lib/pageBlogs";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
 
@@ -40,6 +42,7 @@ export default async function AboutPage() {
     }
   };
   const jsonLd = await getSitePageJsonLd("about", schema);
+  const blogs = await getPageBlogs("about");
 
   const heroTitle = (
     <>
@@ -71,6 +74,9 @@ export default async function AboutPage() {
       />
       <TeamThoughtsSection />
       <ExploreSection />
+      {blogs.posts.length > 0 && (
+        <PageBlogsSection title={blogs.title} posts={blogs.posts} />
+      )}
       <CtaSection title="Ready to Reinvent Your CRM?" />
     </>
   );

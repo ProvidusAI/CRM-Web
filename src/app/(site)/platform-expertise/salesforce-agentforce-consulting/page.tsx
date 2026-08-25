@@ -14,9 +14,11 @@ import {
   ExpertisePlatformsSection,
   ExpertiseImplementationSection,
   FaqSection,
+  PageBlogsSection,
 } from "@/components/sections";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { CtaSection } from "@/components/sections/CtaSection";
+import { getPageBlogs } from "@/lib/pageBlogs";
 import { getPageCaseStudies } from "@/lib/pageCaseStudies";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -31,6 +33,7 @@ export default async function SalesforceAgentforceConsultingPage() {
   const caseStudies = await getPageCaseStudies(
     "salesforce-agentforce-consulting"
   );
+  const blogs = await getPageBlogs("salesforce-agentforce-consulting");
 
   const schema = {
     "@context": "https://schema.org",
@@ -367,6 +370,10 @@ export default async function SalesforceAgentforceConsultingPage() {
           },
         ]}
       />
+
+      {blogs.posts.length > 0 && (
+        <PageBlogsSection title={blogs.title} posts={blogs.posts} />
+      )}
 
       {/* 12. Footer CTA */}
       <CtaSection

@@ -14,9 +14,11 @@ import {
   ServiceBenefitsSection,
   SplitComparisonSection,
   CtaSection,
+  PageBlogsSection,
 } from "@/components/sections";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
+import { getPageBlogs } from "@/lib/pageBlogs";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
 
@@ -157,6 +159,7 @@ export default async function FundraiseUpPartnerPage() {
     },
   };
   const jsonLd = await getSitePageJsonLd("partnership-fundraise-up", schema);
+  const blogs = await getPageBlogs("partnership-fundraise-up");
 
   return (
     <>
@@ -224,7 +227,12 @@ export default async function FundraiseUpPartnerPage() {
         className="bg-linear-to-b from-white to-brand-blue-light"
       />
 
-      {/* 8. CTA */}
+      {/* 8. Blog strip */}
+      {blogs.posts.length > 0 && (
+        <PageBlogsSection title={blogs.title} posts={blogs.posts} />
+      )}
+
+      {/* 9. CTA */}
       <CtaSection
         title="Plan Fundraise Up and Salesforce Together"
         backgroundImage="/images/partnership/cta-bg.webp"

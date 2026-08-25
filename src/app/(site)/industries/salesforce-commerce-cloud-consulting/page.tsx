@@ -11,10 +11,12 @@ import {
   CertifiedSection,
   FaqSection,
   CtaSection,
+  PageBlogsSection,
 } from "@/components/sections";
 import type { WhyChooseReason } from "@/components/sections/WhyChooseSection";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
+import { getPageBlogs } from "@/lib/pageBlogs";
 import { getPageCaseStudies } from "@/lib/pageCaseStudies";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
@@ -61,6 +63,7 @@ export default async function SalesforceCommerceCloudConsultingPage() {
   const caseStudies = await getPageCaseStudies(
     "salesforce-commerce-cloud-consulting"
   );
+  const blogs = await getPageBlogs("salesforce-commerce-cloud-consulting");
 
   const schema = {
     "@context": "https://schema.org",
@@ -371,6 +374,10 @@ export default async function SalesforceCommerceCloudConsultingPage() {
           },
         ]}
       />
+
+      {blogs.posts.length > 0 && (
+        <PageBlogsSection title={blogs.title} posts={blogs.posts} />
+      )}
 
       {/* 11. CTA */}
       <CtaSection

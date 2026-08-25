@@ -13,9 +13,11 @@ import {
   CertifiedSection,
   FaqSection,
   CtaSection,
+  PageBlogsSection,
 } from "@/components/sections";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
+import { getPageBlogs } from "@/lib/pageBlogs";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
 
@@ -105,6 +107,7 @@ const whyChoose = [
 ];
 
 export default async function SalesforceEducationCloudConsultingPage() {
+  const blogs = await getPageBlogs("salesforce-education-cloud-consulting");
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -420,6 +423,10 @@ export default async function SalesforceEducationCloudConsultingPage() {
           },
         ]}
       />
+
+      {blogs.posts.length > 0 && (
+        <PageBlogsSection title={blogs.title} posts={blogs.posts} />
+      )}
 
       {/* 14. CTA */}
       <CtaSection

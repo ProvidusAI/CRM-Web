@@ -2,10 +2,12 @@ import {
   HeroSection,
   PartnersSection,
   ExpertiseStackSection,
-  CtaSection
+  CtaSection,
+  PageBlogsSection
 } from "@/components/sections";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
+import { getPageBlogs } from "@/lib/pageBlogs";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
 
@@ -65,6 +67,7 @@ export default async function PlatformExpertisePage() {
     ]
   };
   const jsonLd = await getSitePageJsonLd("platform-expertise", schema);
+  const blogs = await getPageBlogs("platform-expertise");
 
   const heroTitle = (
     <>
@@ -84,6 +87,9 @@ export default async function PlatformExpertisePage() {
       />
       <PartnersSection />
       <ExpertiseStackSection />
+      {blogs.posts.length > 0 && (
+        <PageBlogsSection title={blogs.title} posts={blogs.posts} />
+      )}
       <CtaSection title="Drive CRM Innovation For Your Organisation" />
     </>
   );

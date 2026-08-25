@@ -15,9 +15,11 @@ import {
   SplitComparisonSection,
   OutcomeCardsSection,
   CtaSection,
+  PageBlogsSection,
 } from "@/components/sections";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
+import { getPageBlogs } from "@/lib/pageBlogs";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
 
@@ -185,6 +187,7 @@ export default async function FinDockPartnerPage() {
     },
   };
   const jsonLd = await getSitePageJsonLd("partnership-findock", schema);
+  const blogs = await getPageBlogs("partnership-findock");
 
   return (
     <>
@@ -280,7 +283,12 @@ export default async function FinDockPartnerPage() {
         className="bg-linear-to-b from-white to-brand-blue-light"
       />
 
-      {/* 9. CTA */}
+      {/* 9. Blog strip */}
+      {blogs.posts.length > 0 && (
+        <PageBlogsSection title={blogs.title} posts={blogs.posts} />
+      )}
+
+      {/* 10. CTA */}
       <CtaSection
         title="Bring Payment Management Into Salesforce"
         buttonLabel="Book a FinDock Consultation"

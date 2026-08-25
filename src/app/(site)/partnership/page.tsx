@@ -5,9 +5,11 @@ import {
   BelieveSection,
   PlatformsSection,
   CtaSection,
+  PageBlogsSection,
 } from "@/components/sections";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
+import { getPageBlogs } from "@/lib/pageBlogs";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
 
@@ -85,6 +87,7 @@ export default async function PartnershipPage() {
     },
   };
   const jsonLd = await getSitePageJsonLd("partnership", schema);
+  const blogs = await getPageBlogs("partnership");
 
   const heroTitle = (
     <>
@@ -114,6 +117,9 @@ export default async function PartnershipPage() {
         title="Platforms We Work With"
         logos={partnershipPlatformLogos}
       />
+      {blogs.posts.length > 0 && (
+        <PageBlogsSection title={blogs.title} posts={blogs.posts} />
+      )}
       <CtaSection title="Ready To Talk About Your CRM Needs?" />
     </>
   );

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { ContactSection, CtaSection } from "@/components/sections";
+import { ContactSection, CtaSection, PageBlogsSection } from "@/components/sections";
+import { getPageBlogs } from "@/lib/pageBlogs";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -12,10 +13,15 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const blogs = await getPageBlogs("contact");
+
   return (
     <>
       <ContactSection />
+      {blogs.posts.length > 0 && (
+        <PageBlogsSection title={blogs.title} posts={blogs.posts} />
+      )}
       <CtaSection />
     </>
   );

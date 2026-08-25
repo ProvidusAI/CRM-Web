@@ -13,9 +13,11 @@ import {
   ServiceBenefitsSection,
   ExpertiseSalesforceSection,
   CtaSection,
+  PageBlogsSection,
 } from "@/components/sections";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
+import { getPageBlogs } from "@/lib/pageBlogs";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
 
@@ -154,6 +156,7 @@ export default async function DotdigitalPartnerPage() {
     },
   };
   const jsonLd = await getSitePageJsonLd("partnership-dotdigital", schema);
+  const blogs = await getPageBlogs("partnership-dotdigital");
 
   return (
     <>
@@ -225,7 +228,12 @@ export default async function DotdigitalPartnerPage() {
         ctaHref="/contact"
       />
 
-      {/* 7. CTA */}
+      {/* 7. Blog strip */}
+      {blogs.posts.length > 0 && (
+        <PageBlogsSection title={blogs.title} posts={blogs.posts} />
+      )}
+
+      {/* 8. CTA */}
       <CtaSection
         title="Ready to Connect Dotdigital With Salesforce?"
         backgroundImage="/images/partnership/cta-bg.webp"

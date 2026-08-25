@@ -15,9 +15,11 @@ import {
   ExpertiseSalesforceSection,
   ExpertiseCertifiedSection,
   FaqSection,
+  PageBlogsSection,
 } from "@/components/sections";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { CtaSection } from "@/components/sections/CtaSection";
+import { getPageBlogs } from "@/lib/pageBlogs";
 import { getPageCaseStudies } from "@/lib/pageCaseStudies";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -36,6 +38,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function SalesforceFinancialServicesCloudConsultingPage() {
   const caseStudies = await getPageCaseStudies(
+    "salesforce-financial-services-cloud-consulting"
+  );
+  const blogs = await getPageBlogs(
     "salesforce-financial-services-cloud-consulting"
   );
 
@@ -378,6 +383,10 @@ export default async function SalesforceFinancialServicesCloudConsultingPage() {
           },
         ]}
       />
+
+      {blogs.posts.length > 0 && (
+        <PageBlogsSection title={blogs.title} posts={blogs.posts} />
+      )}
 
       {/* 16. Footer CTA */}
       <CtaSection
