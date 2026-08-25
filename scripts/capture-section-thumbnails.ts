@@ -9,8 +9,8 @@ const MIN_BYTES = 1024;
 type Source = { url: string; selector?: string };
 
 // The fallback page renders 11 of the 13 sections with no Sanity content.
-// `caseStudies` and `migrationPlatforms` need explicit sources because they
-// return null on the fallback page.
+// `caseStudies`, `migrationPlatforms`, and `process` need explicit sources
+// because they render null (or empty) on the consulting-services fallback.
 const DEFAULT_URL = "/services/salesforce-consulting-services";
 
 const SOURCES: Record<string, Source> = {
@@ -23,7 +23,7 @@ const SOURCES: Record<string, Source> = {
   tabs: { url: DEFAULT_URL },
   consultantCta: { url: DEFAULT_URL },
   benefits: { url: DEFAULT_URL },
-  process: { url: DEFAULT_URL },
+  process: { url: "/services/salesforce-migration-services" },
   migrationPlatforms: { url: "/services/salesforce-migration-services" },
   expertise: { url: DEFAULT_URL },
   industries: { url: DEFAULT_URL },
