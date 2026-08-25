@@ -1,6 +1,14 @@
-import { useCallback } from "react";
+import { useCallback, useRef, useState } from "react";
 import { type StringInputProps, set } from "sanity";
-import { Button, Flex, Menu, MenuButton, MenuItem, Text } from "@sanity/ui";
+import {
+  Button,
+  Card,
+  Flex,
+  Grid,
+  Popover,
+  Text,
+  useClickOutsideEvent,
+} from "@sanity/ui";
 
 interface SectionOption {
   title: string;
@@ -8,55 +16,89 @@ interface SectionOption {
   thumbnail?: string;
 }
 
-const thumbStyle = {
-  width: 64,
-  height: "auto",
-  border: "1px solid var(--card-border-color)",
-  borderRadius: 4,
-} as const;
-
-function Thumb({ src }: { src?: string }) {
+function Thumb({ src, width = 64 }: { src?: string; width?: number }) {
   if (!src) return null;
-  return <img src={src} alt="" style={thumbStyle} />;
+  return (
+    <img
+      src={src}
+      alt=""
+      style={{
+        width,
+        maxWidth: "100%",
+        height: "auto",
+        display: "block",
+        border: "1px solid var(--card-border-color)",
+        borderRadius: 4,
+      }}
+    />
+  );
 }
 
 export function SectionPicker(props: StringInputProps) {
-  const options = (props.schemaType.options?.list ?? []) as SectionOption[];
-  const selected = options.find((option) => option.value === props.value);
-  const { onChange } = props;
+  const { onChange, readOnly, value, schemaType } = props;
+  const options = (schemaType.options?.list ?? []) as SectionOption[];
+  const selected = options.find((option) => option.value === value);
+  const [open, setOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const handleSelect = useCallback(
-    (value: string) => onChange(set(value)),
+    (next: string) => {
+      onChange(set(next));
+      setOpen(false);
+    },
     [onChange],
   );
 
+  useClickOutsideEvent(
+    open ? () => setOpen(false) : false,
+    () => [buttonRef.current, contentRef.current],
+  );
+
   return (
-    <MenuButton
-      id={props.id}
-      button={
-        <Button mode="ghost" padding={2} disabled={props.readOnly}>
-          <Flex align="center" gap={3}>
-            <Thumb src={selected?.thumbnail} />
-            <Text size={1}>{selected?.title ?? "Select a section"}</Text>
-          </Flex>
-        </Button>
+    <Popover
+      open={open}
+      placement="bottom-start"
+      portal
+      content={
+        <Card padding={2} radius={2} ref={contentRef} style={{ width: 520 }}>
+          <Grid columns={[2, 3]} gap={2}>
+            {options.map((option) => {
+              const isSelected = option.value === value;
+              return (
+                <Card
+                  key={option.value}
+                  as="button"
+                  padding={2}
+                  radius={2}
+                  tone={isSelected ? "default" : "transparent"}
+                  onClick={() => handleSelect(option.value)}
+                >
+                  <Flex direction="column" align="center" gap={2}>
+                    <Thumb src={option.thumbnail} width={140} />
+                    <Text size={0} align="center">
+                      {option.title}
+                    </Text>
+                  </Flex>
+                </Card>
+              );
+            })}
+          </Grid>
+        </Card>
       }
-      menu={
-        <Menu>
-          {options.map((option) => (
-            <MenuItem
-              key={option.value}
-              onClick={() => handleSelect(option.value)}
-              padding={2}
-            >
-              <Flex align="center" gap={3}>
-                <Thumb src={option.thumbnail} />
-                <Text size={1}>{option.title}</Text>
-              </Flex>
-            </MenuItem>
-          ))}
-        </Menu>
-      }
-    />
+    >
+      <Button
+        ref={buttonRef}
+        mode="ghost"
+        padding={2}
+        disabled={readOnly}
+        onClick={() => setOpen((current) => !current)}
+      >
+        <Flex align="center" gap={3}>
+          <Thumb src={selected?.thumbnail} />
+          <Text size={1}>{selected?.title ?? "Select a section"}</Text>
+        </Flex>
+      </Button>
+    </Popover>
   );
 }
