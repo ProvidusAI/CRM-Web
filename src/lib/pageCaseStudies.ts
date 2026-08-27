@@ -6,6 +6,12 @@ import { PAGE_CASE_STUDIES_QUERY } from "@/sanity/lib/queries";
 import type { PageCaseStudies, SanityImage } from "@/sanity/lib/types";
 
 export type PageCaseStudyKey =
+  | "home"
+  | "about"
+  | "services"
+  | "platform-expertise"
+  | "industries"
+  | "partnership"
   | "salesforce-sales-cloud-consulting"
   | "salesforce-service-cloud-consulting"
   | "salesforce-marketing-cloud-consulting"
@@ -13,7 +19,6 @@ export type PageCaseStudyKey =
   | "salesforce-data-cloud-consulting"
   | "salesforce-agentforce-consulting"
   | "salesforce-commerce-cloud-consulting"
-  | "industries"
   | "salesforce-health-cloud-consulting"
   | "salesforce-nonprofit-consulting"
   | "salesforce-financial-services-cloud-consulting";

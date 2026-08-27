@@ -1,6 +1,11 @@
 import { defineField, defineType } from "sanity";
 
 const pageOptions = [
+  { title: "Home", value: "home" },
+  { title: "About", value: "about" },
+  { title: "Services", value: "services" },
+  { title: "Platform Expertise", value: "platform-expertise" },
+  { title: "Partnership", value: "partnership" },
   {
     title: "Platform Expertise — Sales Cloud",
     value: "salesforce-sales-cloud-consulting",
