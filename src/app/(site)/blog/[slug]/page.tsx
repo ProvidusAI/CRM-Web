@@ -14,7 +14,7 @@ import { SanityImage } from "@/components/sanity/SanityImage";
 import { PortableContent } from "@/components/sanity/PortableContent";
 import { CtaSection } from "@/components/sections";
 import { formatDate } from "@/lib/format";
-import { resolveJsonLd } from "@/lib/jsonLd";
+import { blogPostingJsonLd, resolveJsonLd } from "@/lib/jsonLd";
 import { getArticleHeadings } from "@/lib/portableText";
 import { getSanityImageAspectRatio } from "@/lib/sanityImage";
 import { buildPageMetadata } from "@/lib/seo";
@@ -91,7 +91,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
   ).replace(/\/$/, "");
   const shareUrl = `${siteUrl}/blog/${post.slug.current}`;
-  const jsonLd = resolveJsonLd(post.jsonLd);
+  const jsonLd = resolveJsonLd(post.jsonLd, blogPostingJsonLd(post, siteUrl));
 
   return (
     <>
