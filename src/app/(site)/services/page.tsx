@@ -6,11 +6,13 @@ import {
   CtaSection,
   CategoriesSection,
   reasons,
+  ServiceCaseStudiesSection,
   PageBlogsSection
 } from "@/components/sections";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { getPageBlogs } from "@/lib/pageBlogs";
+import { getPageCaseStudies } from "@/lib/pageCaseStudies";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
 
@@ -34,6 +36,7 @@ export default async function ServicesPage() {
   };
   const jsonLd = await getSitePageJsonLd("services", schema);
   const blogs = await getPageBlogs("services");
+  const caseStudies = await getPageCaseStudies("services");
 
   const servicesHeroTitle = (
     <>
@@ -72,6 +75,12 @@ export default async function ServicesPage() {
         title="Why Choose ProvidusCRM As Your Salesforce Services Partner"
         customReasons={servicesReasons}
       />
+      {caseStudies.cards.length > 0 && (
+        <ServiceCaseStudiesSection
+          title={caseStudies.title}
+          caseStudies={caseStudies.cards}
+        />
+      )}
       <CertifiedSection
         title="Certified Salesforce Expertise Behind Every Solution We Deliver"
         description="Our consultants, developers, and architects are certified across platform administration, app building, data architecture, and every major Salesforce cloud. Every engagement is backed by certified expertise."

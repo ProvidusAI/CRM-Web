@@ -6,12 +6,14 @@ import {
   TeamThoughtsSection,
   PlatformsSection,
   ExploreSection,
+  ServiceCaseStudiesSection,
   CtaSection,
   PageBlogsSection
 } from "@/components/sections";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { getPageBlogs } from "@/lib/pageBlogs";
+import { getPageCaseStudies } from "@/lib/pageCaseStudies";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
 
@@ -42,6 +44,7 @@ export default async function AboutPage() {
   };
   const jsonLd = await getSitePageJsonLd("about", schema);
   const blogs = await getPageBlogs("about");
+  const caseStudies = await getPageCaseStudies("about");
 
   const heroTitle = (
     <>
@@ -71,6 +74,12 @@ export default async function AboutPage() {
         limit={4}
       />
       <TeamThoughtsSection />
+      {caseStudies.cards.length > 0 && (
+        <ServiceCaseStudiesSection
+          title={caseStudies.title}
+          caseStudies={caseStudies.cards}
+        />
+      )}
       <ExploreSection />
       {blogs.posts.length > 0 && (
         <PageBlogsSection title={blogs.title} posts={blogs.posts} />

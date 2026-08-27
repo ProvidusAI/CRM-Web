@@ -6,6 +6,7 @@ import {
   ExpertiseSection,
   IndustriesSection,
   WhyChooseSection,
+  ServiceCaseStudiesSection,
   PageBlogsSection,
 } from "@/components/sections";
 import NextDynamic from "next/dynamic";
@@ -16,6 +17,7 @@ const TeamSection = NextDynamic(() => import("@/components/sections/TeamSection"
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { getPageBlogs } from "@/lib/pageBlogs";
+import { getPageCaseStudies } from "@/lib/pageCaseStudies";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
 
 export const dynamic = "force-static";
@@ -72,6 +74,7 @@ export default async function HomePage() {
   };
   const jsonLd = await getSitePageJsonLd("home", schema);
   const blogs = await getPageBlogs("home");
+  const caseStudies = await getPageCaseStudies("home");
 
   return (
     <>
@@ -83,6 +86,12 @@ export default async function HomePage() {
       <ExpertiseSection />
       <IndustriesSection />
       <WhyChooseSection />
+      {caseStudies.cards.length > 0 && (
+        <ServiceCaseStudiesSection
+          title={caseStudies.title}
+          caseStudies={caseStudies.cards}
+        />
+      )}
       <TeamSection />
       {blogs.posts.length > 0 && (
         <PageBlogsSection title={blogs.title} posts={blogs.posts} />

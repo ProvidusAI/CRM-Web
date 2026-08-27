@@ -2,12 +2,14 @@ import {
   HeroSection,
   PartnersSection,
   ExpertiseStackSection,
+  ServiceCaseStudiesSection,
   CtaSection,
   PageBlogsSection
 } from "@/components/sections";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { getPageBlogs } from "@/lib/pageBlogs";
+import { getPageCaseStudies } from "@/lib/pageCaseStudies";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
 
@@ -68,6 +70,7 @@ export default async function PlatformExpertisePage() {
   };
   const jsonLd = await getSitePageJsonLd("platform-expertise", schema);
   const blogs = await getPageBlogs("platform-expertise");
+  const caseStudies = await getPageCaseStudies("platform-expertise");
 
   const heroTitle = (
     <>
@@ -86,6 +89,12 @@ export default async function PlatformExpertisePage() {
         imageClassName="object-contain"
       />
       <PartnersSection />
+      {caseStudies.cards.length > 0 && (
+        <ServiceCaseStudiesSection
+          title={caseStudies.title}
+          caseStudies={caseStudies.cards}
+        />
+      )}
       <ExpertiseStackSection />
       {blogs.posts.length > 0 && (
         <PageBlogsSection title={blogs.title} posts={blogs.posts} />

@@ -86,7 +86,6 @@ export default async function IndustriesPage() {
         imageClassName="object-contain"
       />
       <IndustryDetailSection />
-      <PlatformsSection />
       {/* Case Studies — selected in Sanity ("Page case studies" → Industries) */}
       {caseStudies.cards.length > 0 && (
         <ServiceCaseStudiesSection
@@ -94,6 +93,7 @@ export default async function IndustriesPage() {
           caseStudies={caseStudies.cards}
         />
       )}
+      <PlatformsSection />
       {blogs.posts.length > 0 && (
         <PageBlogsSection title={blogs.title} posts={blogs.posts} />
       )}

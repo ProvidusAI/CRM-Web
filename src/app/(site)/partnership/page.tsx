@@ -4,12 +4,14 @@ import {
   CertifiedSection,
   BelieveSection,
   PlatformsSection,
+  ServiceCaseStudiesSection,
   CtaSection,
   PageBlogsSection,
 } from "@/components/sections";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { getPageBlogs } from "@/lib/pageBlogs";
+import { getPageCaseStudies } from "@/lib/pageCaseStudies";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
 
@@ -88,6 +90,7 @@ export default async function PartnershipPage() {
   };
   const jsonLd = await getSitePageJsonLd("partnership", schema);
   const blogs = await getPageBlogs("partnership");
+  const caseStudies = await getPageCaseStudies("partnership");
 
   const heroTitle = (
     <>
@@ -113,6 +116,12 @@ export default async function PartnershipPage() {
         description="Every Salesforce expert you'll come across when working with ProvidusCRM boasts several years of industry-wide experience and multiple certifications across Salesforce and our partner platforms."
       />
       <BelieveSection title="Our Partnerships" cards={partnershipCards} />
+      {caseStudies.cards.length > 0 && (
+        <ServiceCaseStudiesSection
+          title={caseStudies.title}
+          caseStudies={caseStudies.cards}
+        />
+      )}
       <PlatformsSection
         title="Platforms We Work With"
         logos={partnershipPlatformLogos}
