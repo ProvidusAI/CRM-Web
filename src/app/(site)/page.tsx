@@ -8,6 +8,7 @@ import {
   WhyChooseSection,
   ServiceCaseStudiesSection,
   PageBlogsSection,
+  FaqSection,
 } from "@/components/sections";
 import NextDynamic from "next/dynamic";
 
@@ -19,6 +20,29 @@ import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { getPageBlogs } from "@/lib/pageBlogs";
 import { getPageCaseStudies } from "@/lib/pageCaseStudies";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
+
+const faqs = [
+  {
+    question: "What is ProvidusCRM?",
+    answer:
+      "ProvidusCRM is a certified UK-based Salesforce consultancy specializing in enterprise CRM strategy, custom platform development, and business process automation. We help organizations streamline sales workflows, unify customer data, and maximize ROI on the Salesforce ecosystem.",
+  },
+  {
+    question: "Is ProvidusCRM a Salesforce consulting partner based in the UK?",
+    answer:
+      "Yes, ProvidusCRM is a London-headquartered Salesforce partner operating on UK time zones (GMT/BST). Our team delivers custom Salesforce implementation, custom Apex/LWC development, Agentforce and custom AI integrations, and platform/industry cloud optimizations for UK businesses.",
+  },
+  {
+    question: "What core services does ProvidusCRM provide?",
+    answer:
+      "ProvidusCRM provides end-to-end CRM solutions, including Salesforce consulting, development, implementation, migration, integrations, support, and managed services.",
+  },
+  {
+    question: "Why choose ProvidusCRM for Salesforce consulting?",
+    answer:
+      "ProvidusCRM offers dedicated, UK-based certified specialists who design scalable CRM architectures tailored to local regulations, compliance standards, and operational workflows, ensuring high adoption and zero technical debt or bloat.",
+  },
+];
 
 export const dynamic = "force-static";
 
@@ -96,6 +120,7 @@ export default async function HomePage() {
       {blogs.posts.length > 0 && (
         <PageBlogsSection title={blogs.title} posts={blogs.posts} />
       )}
+      <FaqSection title="Frequently Asked Questions" faqs={faqs} />
       <CtaSection />
     </>
   );
