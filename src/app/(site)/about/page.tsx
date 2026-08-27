@@ -66,7 +66,7 @@ export default async function AboutPage() {
       <PartnersSection />
       <CertifiedSection
         title="Who We Are"
-        description="We're not a generic Salesforce consultancy providing run-of-the-mill implementations. We align your CRM org with your challenges, building solutions that drive impact. ProvidusCRM, a subsidiary of Providus, is a certified Salesforce partner based in the UK, working with organisations across nonprofit, financial services, healthcare, and more to implement Salesforce effectively across their workflows, challenges, and goals."
+        description="We're not a generic Salesforce consultancy delivering run-of-the-mill implementations. At ProvidusCRM, we align your CRM with your unique challenges, building tailored Salesforce solutions that drive measurable impact. As a certified Salesforce partner based in the UK, ProvidusCRM works with organisations across nonprofit, financial services, healthcare, and other industries to implement Salesforce around their workflows, challenges, and goals."
       />
       <BelieveSection />
       <PlatformsSection
