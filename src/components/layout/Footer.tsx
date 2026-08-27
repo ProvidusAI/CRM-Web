@@ -21,9 +21,6 @@ const quickLinks = [
 ];
 
 const socialLinks = [
-  { icon: "facebook", href: "https://www.facebook.com/share/1ASdLhT26p/" },
-  { icon: "twitter", href: "https://x.com/Providustechllc" },
-  { icon: "instagram", href: "https://www.instagram.com/lifeatprovidus" },
   { icon: "linkedin", href: "https://www.linkedin.com/company/providus-technologies" },
 ];
 
