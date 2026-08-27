@@ -21,7 +21,7 @@ const quickLinks = [
 ];
 
 const socialLinks = [
-  { icon: "linkedin", href: "https://www.linkedin.com/company/providus-technologies" },
+  { icon: "linkedin", href: "https://www.linkedin.com/showcase/providuscrmuk/" },
 ];
 
 export function Footer() {
