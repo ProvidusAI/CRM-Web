@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { slugField } from "./slugField";
 
 export const post = defineType({
   name: "post",
@@ -11,13 +12,7 @@ export const post = defineType({
       type: "string",
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: "slug",
-      title: "Slug",
-      type: "slug",
-      options: { source: "title", maxLength: 96 },
-      validation: (rule) => rule.required(),
-    }),
+    slugField("title"),
     defineField({
       name: "excerpt",
       title: "Excerpt",
