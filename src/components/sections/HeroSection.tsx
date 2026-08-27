@@ -12,7 +12,7 @@ interface HeroSectionProps {
   image?: string;
   imageClassName?: string;
   hideImage?: boolean;
-  /** Without `ctaHref` the button stays unlinked, as on the older pages. */
+  /** Defaults to `/contact`; pass `ctaHref` to override the target. */
   ctaLabel?: string;
   ctaHref?: string;
   ctaVariant?: "white" | "filled";
@@ -139,7 +139,7 @@ export function HeroSection({
   imageClassName = "object-cover object-center",
   hideImage = false,
   ctaLabel = "Book a Call",
-  ctaHref,
+  ctaHref = "/contact",
   ctaVariant = "white",
   ctaSize = "md",
   secondaryCta,
@@ -262,17 +262,11 @@ export function HeroSection({
                 {/* CTA */}
                 {!hideCta && (
                   <div className="flex flex-wrap items-center gap-4">
-                    {ctaHref ? (
-                      <Link href={ctaHref}>
-                        <CtaButton variant={ctaVariant} size={ctaSize}>
-                          {ctaLabel}
-                        </CtaButton>
-                      </Link>
-                    ) : (
+                    <Link href={ctaHref}>
                       <CtaButton variant={ctaVariant} size={ctaSize}>
                         {ctaLabel}
                       </CtaButton>
-                    )}
+                    </Link>
 
                     {secondaryCta && (
                       <Link
