@@ -60,8 +60,17 @@ export function SectionPicker(props: StringInputProps) {
       open={open}
       placement="bottom-start"
       portal
+      // 13 sections in a 3-column grid stand taller than the viewport, so the
+      // popover has to cap its own height and scroll rather than overflow.
+      constrainSize
       content={
-        <Card padding={2} radius={2} ref={contentRef} style={{ width: 520 }}>
+        <Card
+          padding={2}
+          radius={2}
+          ref={contentRef}
+          overflow="auto"
+          style={{ width: 520, maxHeight: "60vh" }}
+        >
           <Grid columns={[2, 3]} gap={2}>
             {options.map((option) => {
               const isSelected = option.value === value;
