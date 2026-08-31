@@ -43,6 +43,8 @@ const sectionOrderOptions = [
   { title: "Industries grid", value: "industries", thumbnail: "/studio-thumbnails/industries.webp" },
   { title: "Why choose", value: "whyChoose", thumbnail: "/studio-thumbnails/whyChoose.webp" },
   { title: "FAQs", value: "faqs", thumbnail: "/studio-thumbnails/faqs.webp" },
+  // No thumbnail yet: no service page has blog posts to screenshot.
+  { title: "Blog posts", value: "blogs" },
   { title: "Footer CTA", value: "cta", thumbnail: "/studio-thumbnails/cta.webp" },
 ];
 
@@ -241,6 +243,15 @@ export const servicePage = defineType({
       type: "array",
       components: prominentSectionComponents,
       of: [{ type: "reference", to: [{ type: "caseStudy" }] }],
+    }),
+    defineField({
+      name: "blogs",
+      title: "Related blog posts",
+      description: "Select and order the blog posts shown on this service page.",
+      type: "array",
+      components: prominentSectionComponents,
+      of: [{ type: "reference", to: [{ type: "post" }] }],
+      validation: (rule) => rule.max(4),
     }),
     defineField({
       name: "tabsSection",

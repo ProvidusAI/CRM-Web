@@ -144,6 +144,7 @@ export type ServicePageSectionKey =
   | "industries"
   | "whyChoose"
   | "faqs"
+  | "blogs"
   | "cta";
 
 export type ServiceBenefitIconKey =
@@ -309,6 +310,7 @@ export interface ServicePage {
   hero?: ServiceHeroContent;
   certified?: ServiceCertifiedContent;
   caseStudies?: CaseStudyListItem[];
+  blogs?: PageBlogPost[];
   tabsSection?: ServiceTabsContent;
   benefitsSection?: ServiceBenefitsContent;
   consultantCta?: ServiceConsultantCtaContent;

@@ -293,6 +293,16 @@ export const SERVICE_PAGE_QUERY = defineQuery(`
       }
     },
     certified,
+    blogs[]->{
+      _id,
+      title,
+      slug,
+      publishedAt,
+      "categories": categories[]->title,
+      heroImage {
+        ${imageProjection}
+      }
+    },
     caseStudies[]->{
       _id,
       title,

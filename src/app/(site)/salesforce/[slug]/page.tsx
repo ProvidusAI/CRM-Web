@@ -11,6 +11,7 @@ import {
   SalesforceProcessSection,
   SalesforceServiceHero,
   ServiceBenefitsSection,
+  PageBlogsSection,
   ServiceCaseStudiesSection,
   WhatWeDoSection,
   WhyChooseSection,
@@ -38,6 +39,7 @@ import {
   salesforceConsultingServicesFallback,
 } from "@/data/salesforceServicePage";
 import { resolveJsonLd } from "@/lib/jsonLd";
+import { toBlogTeaserCards } from "@/lib/blogTeaserCards";
 import { buildPageMetadata } from "@/lib/seo";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import {
@@ -76,6 +78,7 @@ const DEFAULT_SERVICE_SECTION_ORDER: ServicePageSectionKey[] = [
   "industries",
   "whyChoose",
   "faqs",
+  "blogs",
   "cta",
 ];
 
@@ -171,6 +174,7 @@ export default async function SalesforceServicePage({
       />
     ),
     caseStudies: <ServiceCaseStudiesSection caseStudies={serviceCaseStudies} />,
+    blogs: <PageBlogsSection posts={toBlogTeaserCards(page.blogs)} />,
     tabs: (
       <WhatWeDoSection
         title={page.tabsSection?.title}
