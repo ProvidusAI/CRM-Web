@@ -94,6 +94,7 @@ export default async function SalesforceNonprofitConsultingPage() {
             text: "Power of Us covers ten free Salesforce licences and discounted pricing for eligible nonprofits.\n\nThe true cost of setting up Nonprofit Cloud successfully involves specialised consulting, implementation, customisation, configuration, data migration, integrations, and ongoing support.",
             background: "var(--color-cost-card-green)",
             iconColor: "var(--color-brand-green)",
+            icon: "/images/salesforce-power.svg",
           },
           {
             title: "Types of Salesforce Nonprofit Implementations",
@@ -105,6 +106,7 @@ export default async function SalesforceNonprofitConsultingPage() {
             ],
             background: "var(--color-cost-card-blue)",
             iconColor: "var(--color-cost-icon-blue)",
+            icon: "/images/non-profit-imp.svg",
           },
         ]}
         panelTitle="Simplifying Salesforce for Nonprofits"

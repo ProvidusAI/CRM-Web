@@ -28,12 +28,14 @@ const industries: Industry[] = [
   {
     title: "Education",
     image: "/images/industries/education.webp",
-    description: "We help universities, colleges, and training providers connect recruitment, admissions, student success, and alumni engagement in one platform. No student record falls through the gaps, and no department works in isolation."
+    description: "We help universities, colleges, and training providers connect recruitment, admissions, student success, and alumni engagement in one platform. No student record falls through the gaps, and no department works in isolation.",
+    href: "/industries/salesforce-education-cloud-consulting"
   },
   {
     title: "Commerce",
     image: "/images/industries/commerce.webp",
-    description: "We help retail and eCommerce businesses launch B2B and B2C storefronts connected directly to CRM data, order management, and marketing automation. One platform powers the full buying experience."
+    description: "We help retail and eCommerce businesses launch B2B and B2C storefronts connected directly to CRM data, order management, and marketing automation. One platform powers the full buying experience.",
+    href: "/industries/salesforce-commerce-cloud-consulting"
   },
   {
     title: "Healthcare",
