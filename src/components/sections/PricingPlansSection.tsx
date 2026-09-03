@@ -48,19 +48,17 @@ export function PricingPlansSection({
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {plans.map((plan, index) => (
-            <Reveal key={`${plan.name}-${index}`} delay={index * 0.08}>
+            <Reveal key={`${plan.name}-${index}`} delay={index * 0.08} height="100%">
               <div
                 className={cn(
                   "flex h-full flex-col rounded-[20px] bg-white p-10 shadow-[1px_7px_15px_rgba(115,115,115,0.1),4px_27px_27px_rgba(115,115,115,0.09),9px_60px_37px_rgba(115,115,115,0.05)]",
                   plan.featured && "border-2 border-[#92ff77]"
                 )}
               >
-                <div>
-                  <Heading as="h3" level="h3" className="text-black">
-                    {plan.name}
-                  </Heading>
-                  <GreenLineMark className="-mt-2 ml-14 block h-5 w-auto" />
-                </div>
+                <Heading as="h3" level="h3" className="text-black">
+                  {plan.name}{" "}
+                  <GreenLineMark className="ml-1 inline-block h-5 w-auto align-baseline" />
+                </Heading>
                 <Text variant="p4" className="mt-6 text-text-body">
                   {plan.description}
                 </Text>
@@ -93,7 +91,9 @@ export function PricingPlansSection({
                   ))}
                 </ul>
 
-                <div className="mt-auto border-t border-dashed border-card-border pt-0" />
+                <div className="mt-auto pt-10">
+                  <div className="border-t border-dashed border-card-border" />
+                </div>
               </div>
             </Reveal>
           ))}
