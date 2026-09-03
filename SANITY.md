@@ -108,8 +108,8 @@ The endpoint revalidates:
 The last four are keyed by `pageKey`, not `slug`, so a publish revalidates
 every page that reads that document — the webhook doesn't need per-page
 routing. If your webhook has a document-type filter configured in Sanity
-(rather than sending every mutation), make sure `pageCaseStudies`, `pageBlogs`,
-`staticPageSeo`, and `sitePageJsonLd` are included in it, or their edits will
+(rather than sending every mutation), make sure `servicePage`, `pageCaseStudies`,
+`pageBlogs`, `staticPageSeo`, and `sitePageJsonLd` are included in it, or their edits will
 only appear once each fetch's own 300s revalidate window elapses instead of
 immediately.
 

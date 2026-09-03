@@ -42,6 +42,15 @@ export async function POST(request: NextRequest) {
     revalidatePath("/blog");
   }
 
+  if (body._type === "servicePage") {
+    revalidateTag("service-pages");
+    revalidatePath("/services");
+
+    if (slug) {
+      revalidatePath(`/services/${slug}`);
+    }
+  }
+
   // Keyed by pageKey rather than slug, so refresh every page that renders a
   // selection. Editing a caseStudy is already covered by the "case-studies" tag.
   if (body._type === "pageCaseStudies") {
