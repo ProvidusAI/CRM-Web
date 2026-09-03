@@ -17,11 +17,16 @@ export interface ServiceCaseStudyCard {
 interface ServiceCaseStudiesSectionProps {
   title?: string;
   caseStudies: ServiceCaseStudyCard[];
+  /** Optional "view all" link shown top-right of the heading (e.g. to /case-studies). */
+  viewAllHref?: string;
+  viewAllLabel?: string;
 }
 
 export function ServiceCaseStudiesSection({
   title = "More projects that made a mark.",
   caseStudies,
+  viewAllHref,
+  viewAllLabel = "View More",
 }: ServiceCaseStudiesSectionProps) {
   if (caseStudies.length === 0) {
     return null;
@@ -30,7 +35,7 @@ export function ServiceCaseStudiesSection({
   return (
     <Section className="bg-white py-16 md:py-24">
       <Container size="xl">
-        <div className="text-center">
+        <div className="relative text-center">
           <Image
             src="/images/green-line.svg"
             alt=""
@@ -41,6 +46,17 @@ export function ServiceCaseStudiesSection({
           <Heading as="h2" className="mt-5 text-black">
             {title}
           </Heading>
+          {viewAllHref && (
+            <Link
+              href={viewAllHref}
+              className="absolute right-0 top-1/2 hidden -translate-y-1/2 items-center gap-2 rounded-full bg-brand-green py-2 pl-5 pr-2 font-body text-[14px] font-medium text-white transition-transform hover:scale-105 md:inline-flex"
+            >
+              {viewAllLabel}
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white">
+                <ArrowRight aria-hidden="true" size={16} className="text-brand-green" />
+              </span>
+            </Link>
+          )}
         </div>
 
         <div className="mt-12 grid gap-x-12 gap-y-14 md:grid-cols-2">
