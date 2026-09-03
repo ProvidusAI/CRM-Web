@@ -80,15 +80,15 @@ export function SplitChecklistSection({
 
           <Reveal delay={0.1}>
             <div
-              className="rounded-[29px] p-6"
+              className="rounded-[29px] p-[25px]"
               style={{
                 background: "linear-gradient(132deg, #1C95DA 7%, #236FAB 88%)",
               }}
             >
               <ul className="flex flex-col gap-3">
-                {items.map((row) => (
+                {items.map((row, index) => (
                   <li
-                    key={row}
+                    key={`${row}-${index}`}
                     className="flex min-h-[56px] items-center gap-3 rounded-[16px] bg-gradient-to-r from-[rgba(255,255,255,0.12)] to-transparent px-4 py-3"
                   >
                     <span
@@ -105,7 +105,7 @@ export function SplitChecklistSection({
                         WebkitMaskPosition: "center",
                       }}
                     />
-                    <span className="typography-p4 font-medium text-white">
+                    <span className="text-[16px] leading-[20px] font-medium text-white">
                       {row}
                     </span>
                   </li>
