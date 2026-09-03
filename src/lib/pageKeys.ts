@@ -54,6 +54,8 @@ export const STATIC_PAGE_OPTIONS = [
     value: "salesforce-agentforce-consulting",
   },
 
+  { title: "Salesforce Staff Augmentation", value: "salesforce-staff-augmentation" },
+
   // Industries — internal pages
   {
     title: "Industries — Health Cloud",
