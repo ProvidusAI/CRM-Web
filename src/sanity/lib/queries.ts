@@ -399,6 +399,46 @@ export const SERVICE_PAGE_QUERY = defineQuery(`
         answer
       }
     },
+    painPointsSection {
+      title,
+      items[] {
+        title,
+        text,
+        icon {
+          ${imageProjection}
+        }
+      }
+    },
+    splitChecklistSection {
+      title,
+      text,
+      ctaLabel,
+      ctaHref,
+      images[] {
+        ${imageProjection}
+      },
+      items
+    },
+    offerCarouselSection {
+      title,
+      items[] {
+        title,
+        text,
+        icon {
+          ${imageProjection}
+        }
+      }
+    },
+    pricingSection {
+      title,
+      subtitle,
+      plans[] {
+        name,
+        description,
+        includes,
+        featured
+      }
+    },
     cta {
       title,
       buttonLabel,

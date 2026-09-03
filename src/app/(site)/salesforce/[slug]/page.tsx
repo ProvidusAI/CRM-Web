@@ -6,13 +6,17 @@ import {
   ExpertiseSection,
   IndustriesSection,
   MigrationPlatformsSection,
+  OfferCarouselSection,
+  PainPointsSection,
   PartnersSection,
+  PricingPlansSection,
   SalesforceConsultCtaSection,
   SalesforceProcessSection,
   SalesforceServiceHero,
   ServiceBenefitsSection,
   PageBlogsSection,
   ServiceCaseStudiesSection,
+  SplitChecklistSection,
   WhatWeDoSection,
   WhyChooseSection,
   FaqSection,
@@ -79,6 +83,10 @@ const DEFAULT_SERVICE_SECTION_ORDER: ServicePageSectionKey[] = [
   "whyChoose",
   "faqs",
   "blogs",
+  "painPoints",
+  "splitChecklist",
+  "offerCarousel",
+  "pricing",
   "cta",
 ];
 
@@ -239,6 +247,53 @@ export default async function SalesforceServicePage({
         faqs={page.faqSection.faqs}
       />
     ) : null,
+    painPoints: (
+      <PainPointsSection
+        title={page.painPointsSection?.title}
+        items={(page.painPointsSection?.items ?? []).map((item) => ({
+          title: item.title,
+          text: item.text ?? "",
+          icon: imageUrl(item.icon),
+          iconAlt: item.icon?.alt,
+        }))}
+      />
+    ),
+    splitChecklist: (
+      <SplitChecklistSection
+        title={page.splitChecklistSection?.title}
+        text={page.splitChecklistSection?.text}
+        ctaLabel={page.splitChecklistSection?.ctaLabel}
+        ctaHref={page.splitChecklistSection?.ctaHref}
+        images={(page.splitChecklistSection?.images ?? []).flatMap((image) => {
+          const src = imageUrl(image);
+          return src ? [{ src, alt: image.alt ?? "" }] : [];
+        })}
+        items={page.splitChecklistSection?.items ?? []}
+      />
+    ),
+    offerCarousel: (
+      <OfferCarouselSection
+        title={page.offerCarouselSection?.title}
+        items={(page.offerCarouselSection?.items ?? []).map((item) => ({
+          title: item.title,
+          text: item.text ?? "",
+          icon: imageUrl(item.icon),
+          iconAlt: item.icon?.alt,
+        }))}
+      />
+    ),
+    pricing: (
+      <PricingPlansSection
+        title={page.pricingSection?.title}
+        subtitle={page.pricingSection?.subtitle}
+        plans={(page.pricingSection?.plans ?? []).map((plan) => ({
+          name: plan.name,
+          description: plan.description ?? "",
+          includes: plan.includes ?? [],
+          featured: plan.featured,
+        }))}
+      />
+    ),
     cta: (
       <CtaSection
         title={legacyCta?.title}

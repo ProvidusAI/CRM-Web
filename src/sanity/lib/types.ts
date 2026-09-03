@@ -145,6 +145,10 @@ export type ServicePageSectionKey =
   | "whyChoose"
   | "faqs"
   | "blogs"
+  | "painPoints"
+  | "splitChecklist"
+  | "offerCarousel"
+  | "pricing"
   | "cta";
 
 export type ServiceBenefitIconKey =
@@ -299,6 +303,50 @@ export interface ServiceFaqContent {
   faqs?: ServiceFaqItem[];
 }
 
+export interface ServicePainPointItem {
+  title: string;
+  text?: string;
+  icon?: SanityImage;
+}
+
+export interface ServicePainPointsContent {
+  title?: string;
+  items?: ServicePainPointItem[];
+}
+
+export interface ServiceSplitChecklistContent {
+  title?: string;
+  text?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  images?: SanityImage[];
+  items?: string[];
+}
+
+export interface ServiceOfferCarouselItem {
+  title: string;
+  text?: string;
+  icon?: SanityImage;
+}
+
+export interface ServiceOfferCarouselContent {
+  title?: string;
+  items?: ServiceOfferCarouselItem[];
+}
+
+export interface ServicePricingPlan {
+  name: string;
+  description?: string;
+  includes?: string[];
+  featured?: boolean;
+}
+
+export interface ServicePricingContent {
+  title?: string;
+  subtitle?: string;
+  plans?: ServicePricingPlan[];
+}
+
 export interface ServicePage {
   _id: string;
   title: string;
@@ -320,5 +368,9 @@ export interface ServicePage {
   industriesSection?: ServiceIndustriesContent;
   whyChooseSection?: ServiceWhyChooseContent;
   faqSection?: ServiceFaqContent;
+  painPointsSection?: ServicePainPointsContent;
+  splitChecklistSection?: ServiceSplitChecklistContent;
+  offerCarouselSection?: ServiceOfferCarouselContent;
+  pricingSection?: ServicePricingContent;
   cta?: ServiceCtaContent;
 }
