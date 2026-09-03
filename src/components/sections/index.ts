@@ -47,3 +47,4 @@ export { EcosystemSection } from "./EcosystemSection";
 export { PageBlogsSection } from "./PageBlogsSection";
 export { PainPointsSection } from "./PainPointsSection";
 export { SplitChecklistSection } from "./SplitChecklistSection";
+export { OfferCarouselSection } from "./OfferCarouselSection";
