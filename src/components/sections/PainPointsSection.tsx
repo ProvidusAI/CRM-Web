@@ -35,8 +35,8 @@ export function PainPointsSection({ title, items }: PainPointsSectionProps) {
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {items.map((item, index) => (
-            <Reveal key={`${item.title}-${index}`} delay={index * 0.08}>
-              <div className="rounded-[16px] border-[6px] border-[#F8F8F8] bg-[#f6faff] p-8 shadow-[0px_2px_2px_rgba(108,113,128,0.08),0px_7px_3.5px_rgba(108,113,128,0.07),0px_17px_5px_rgba(108,113,128,0.04)] md:min-h-[241px]">
+            <Reveal key={`${item.title}-${index}`} delay={index * 0.08} height="100%">
+              <div className="flex h-full flex-col rounded-[16px] border-[6px] border-gray-100-bg bg-[#f6faff] p-8 shadow-[0px_2px_2px_rgba(108,113,128,0.08),0px_7px_3.5px_rgba(108,113,128,0.07),0px_17px_5px_rgba(108,113,128,0.04)] md:min-h-[241px]">
                 <div className="flex items-start justify-between gap-4">
                   <Heading as="h3" level="h4" className="text-[#19689f]">
                     {item.title}

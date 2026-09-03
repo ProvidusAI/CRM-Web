@@ -46,7 +46,7 @@ export function SplitChecklistSection({
                 </Heading>
               ) : null}
               {text ? (
-                <Text variant="p2" className="mt-6 text-[#3e3e3e]">
+                <Text variant="p2" className="mt-6 text-text-body">
                   {text}
                 </Text>
               ) : null}
@@ -59,9 +59,9 @@ export function SplitChecklistSection({
               ) : null}
               {images && images.length > 0 ? (
                 <div className="mt-10 flex gap-4">
-                  {images.map((image) => (
+                  {images.map((image, index) => (
                     <div
-                      key={image.src}
+                      key={`${image.src}-${index}`}
                       className="relative aspect-[4/3] w-1/2 overflow-hidden rounded-[12px]"
                     >
                       <Image

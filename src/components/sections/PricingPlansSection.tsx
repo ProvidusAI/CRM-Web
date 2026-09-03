@@ -32,19 +32,21 @@ export function PricingPlansSection({
   return (
     <Section background="white">
       <Container>
-        <div className="mx-auto mb-12 flex max-w-[1010px] flex-col items-center text-center md:mb-16">
-          <GreenLineMark className="mb-4 h-7 w-auto" />
-          {title ? (
-            <Heading as="h2" className="text-black">
-              {title}
-            </Heading>
-          ) : null}
-          {subtitle ? (
-            <Text variant="p2" className="mt-5 text-text-body">
-              {subtitle}
-            </Text>
-          ) : null}
-        </div>
+        {title || subtitle ? (
+          <div className="mx-auto mb-12 flex max-w-[1010px] flex-col items-center text-center md:mb-16">
+            <GreenLineMark className="mb-4 h-7 w-auto" />
+            {title ? (
+              <Heading as="h2" className="text-black">
+                {title}
+              </Heading>
+            ) : null}
+            {subtitle ? (
+              <Text variant="p2" className="mt-5 text-text-body">
+                {subtitle}
+              </Text>
+            ) : null}
+          </div>
+        ) : null}
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {plans.map((plan, index) => (
