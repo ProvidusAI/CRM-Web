@@ -45,6 +45,11 @@ const sectionOrderOptions = [
   { title: "FAQs", value: "faqs", thumbnail: "/studio-thumbnails/faqs.webp" },
   // No thumbnail yet: no service page has blog posts to screenshot.
   { title: "Blog posts", value: "blogs" },
+  // No thumbnails yet: no page renders these sections to screenshot.
+  { title: "Pain points grid", value: "painPoints" },
+  { title: "Checklist with CTA", value: "splitChecklist" },
+  { title: "Offer carousel", value: "offerCarousel" },
+  { title: "Pricing plans", value: "pricing" },
   { title: "Footer CTA", value: "cta", thumbnail: "/studio-thumbnails/cta.webp" },
 ];
 
@@ -252,6 +257,159 @@ export const servicePage = defineType({
       components: prominentSectionComponents,
       of: [{ type: "reference", to: [{ type: "post" }] }],
       validation: (rule) => rule.max(4),
+    }),
+    defineField({
+      name: "painPointsSection",
+      title: "Pain points grid",
+      type: "object",
+      components: prominentSectionComponents,
+      fields: [
+        defineField({ name: "title", title: "Title", type: "string" }),
+        defineField({
+          name: "items",
+          title: "Pain points",
+          type: "array",
+          validation: (rule) => rule.max(8),
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({
+                  name: "title",
+                  title: "Title",
+                  type: "string",
+                  validation: (rule) => rule.required(),
+                }),
+                defineField({
+                  name: "text",
+                  title: "Text",
+                  type: "text",
+                  rows: 4,
+                  validation: (rule) => rule.required(),
+                }),
+                serviceImageField("icon", "Icon image"),
+              ],
+            },
+          ],
+        }),
+      ],
+    }),
+    defineField({
+      name: "splitChecklistSection",
+      title: "Checklist with CTA",
+      type: "object",
+      components: prominentSectionComponents,
+      fields: [
+        defineField({ name: "title", title: "Title", type: "string" }),
+        defineField({ name: "text", title: "Intro text", type: "text", rows: 4 }),
+        defineField({ name: "ctaLabel", title: "CTA label", type: "string" }),
+        defineField({ name: "ctaHref", title: "CTA link", type: "string" }),
+        defineField({
+          name: "images",
+          title: "Images",
+          type: "array",
+          validation: (rule) => rule.max(2),
+          of: [
+            {
+              type: "image",
+              options: { hotspot: true },
+              fields: [
+                defineField({ name: "alt", title: "Alt text", type: "string" }),
+              ],
+            },
+          ],
+        }),
+        defineField({
+          name: "items",
+          title: "Checklist rows",
+          type: "array",
+          validation: (rule) => rule.max(10),
+          of: [{ type: "string" }],
+        }),
+      ],
+    }),
+    defineField({
+      name: "offerCarouselSection",
+      title: "Offer carousel",
+      type: "object",
+      components: prominentSectionComponents,
+      fields: [
+        defineField({ name: "title", title: "Title", type: "string" }),
+        defineField({
+          name: "items",
+          title: "Offer cards",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({
+                  name: "title",
+                  title: "Title",
+                  type: "string",
+                  validation: (rule) => rule.required(),
+                }),
+                defineField({
+                  name: "text",
+                  title: "Text",
+                  type: "text",
+                  rows: 4,
+                  validation: (rule) => rule.required(),
+                }),
+                serviceImageField("icon", "Icon image"),
+              ],
+            },
+          ],
+        }),
+      ],
+    }),
+    defineField({
+      name: "pricingSection",
+      title: "Pricing plans",
+      type: "object",
+      components: prominentSectionComponents,
+      fields: [
+        defineField({ name: "title", title: "Title", type: "string" }),
+        defineField({ name: "subtitle", title: "Subtitle", type: "text", rows: 3 }),
+        defineField({
+          name: "plans",
+          title: "Plans",
+          type: "array",
+          validation: (rule) => rule.max(4),
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({
+                  name: "name",
+                  title: "Plan name",
+                  type: "string",
+                  validation: (rule) => rule.required(),
+                }),
+                defineField({
+                  name: "description",
+                  title: "Description",
+                  type: "text",
+                  rows: 4,
+                  validation: (rule) => rule.required(),
+                }),
+                defineField({
+                  name: "includes",
+                  title: "Includes",
+                  type: "array",
+                  of: [{ type: "string" }],
+                }),
+                defineField({
+                  name: "featured",
+                  title: "Featured (green border)",
+                  type: "boolean",
+                  initialValue: false,
+                }),
+              ],
+            },
+          ],
+        }),
+      ],
     }),
     defineField({
       name: "tabsSection",
