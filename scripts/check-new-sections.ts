@@ -2,6 +2,7 @@
 // empty" — this asserts it without a DOM, same pattern as check-page-blogs.
 // No React import: the script calls components as plain functions, no JSX.
 import { PainPointsSection } from "../src/components/sections/PainPointsSection";
+import { SplitChecklistSection } from "../src/components/sections/SplitChecklistSection";
 
 const failures: string[] = [];
 
@@ -20,6 +21,24 @@ check(
     items: [{ title: "T", text: "B", icon: "/images/logo.svg" }],
   }) !== null,
   "expected an element for one item"
+);
+
+check(
+  "SplitChecklistSection hides when empty",
+  SplitChecklistSection({ items: [] }) === null,
+  "expected null for items: []"
+);
+check(
+  "SplitChecklistSection renders when populated",
+  SplitChecklistSection({
+    title: "Is This You?",
+    text: "Intro",
+    ctaLabel: "Schedule",
+    ctaHref: "/contact",
+    images: [{ src: "/images/logo.svg", alt: "x" }],
+    items: ["Row one"],
+  }) !== null,
+  "expected an element for one row"
 );
 
 if (failures.length > 0) {
