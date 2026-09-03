@@ -48,7 +48,7 @@ export function PricingPlansSection({
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {plans.map((plan, index) => (
-            <Reveal key={plan.name} delay={index * 0.08}>
+            <Reveal key={`${plan.name}-${index}`} delay={index * 0.08}>
               <div
                 className={cn(
                   "flex h-full flex-col rounded-[20px] bg-white p-10 shadow-[1px_7px_15px_rgba(115,115,115,0.1),4px_27px_27px_rgba(115,115,115,0.09),9px_60px_37px_rgba(115,115,115,0.05)]",
@@ -73,8 +73,11 @@ export function PricingPlansSection({
                   Includes:
                 </Text>
                 <ul className="mt-5 flex flex-col gap-5">
-                  {plan.includes.map((row) => (
-                    <li key={row} className="flex items-start gap-2">
+                  {plan.includes.map((row, rowIndex) => (
+                    <li
+                      key={`${row}-${rowIndex}`}
+                      className="flex items-start gap-2"
+                    >
                       <Image
                         src="/images/check-circle-dark.svg"
                         alt=""
