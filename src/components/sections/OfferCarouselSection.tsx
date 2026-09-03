@@ -95,7 +95,7 @@ export function OfferCarouselSection({
                     </div>
                   )}
 
-                  <div className="mt-auto w-full">
+                  <div className="mt-auto w-full pt-24">
                     <h4 className="typography-p1 font-semibold text-type-title mb-4">
                       {item.title}
                     </h4>
