@@ -3,6 +3,7 @@
 // No React import: the script calls components as plain functions, no JSX.
 import { PainPointsSection } from "../src/components/sections/PainPointsSection";
 import { SplitChecklistSection } from "../src/components/sections/SplitChecklistSection";
+import { PricingPlansSection } from "../src/components/sections/PricingPlansSection";
 
 const failures: string[] = [];
 
@@ -39,6 +40,22 @@ check(
     items: ["Row one"],
   }) !== null,
   "expected an element for one row"
+);
+
+check(
+  "PricingPlansSection hides when empty",
+  PricingPlansSection({ plans: [] }) === null,
+  "expected null for plans: []"
+);
+check(
+  "PricingPlansSection renders when populated",
+  PricingPlansSection({
+    title: "Plans",
+    plans: [
+      { name: "Hourly", description: "D", includes: ["A"], featured: true },
+    ],
+  }) !== null,
+  "expected an element for one plan"
 );
 
 if (failures.length > 0) {

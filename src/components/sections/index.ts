@@ -48,3 +48,4 @@ export { PageBlogsSection } from "./PageBlogsSection";
 export { PainPointsSection } from "./PainPointsSection";
 export { SplitChecklistSection } from "./SplitChecklistSection";
 export { OfferCarouselSection } from "./OfferCarouselSection";
+export { PricingPlansSection } from "./PricingPlansSection";
