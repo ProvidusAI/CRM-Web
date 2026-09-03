@@ -4,16 +4,24 @@ import {
   PartnersSection,
   ServiceCaseStudiesSection,
   SalesforceConsultCtaSection,
+  IndustriesSection,
+  ExpertisePlatformsSection,
+  SplitChecklistSection,
+  FaqSection,
+  PageBlogsSection,
   CtaSection,
 } from "@/components/sections";
 import { FeaturedRolesCarousel } from "./FeaturedRolesCarousel";
 import type { ServiceCaseStudyCard } from "@/components/sections/ServiceCaseStudiesSection";
+import type { IndustrySectionItem } from "@/components/sections/IndustriesSection";
+import type { ExpertisePlatformItem } from "@/components/sections/ExpertisePlatformsSection";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { Reveal } from "@/components/ui/Reveal";
 import { Heading, Text } from "@/components/ui/Typography";
+import { getPageBlogs } from "@/lib/pageBlogs";
 import { getPageCaseStudies } from "@/lib/pageCaseStudies";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
 import { generateStaticPageMetadata } from "@/lib/staticPageSeo";
@@ -81,6 +89,105 @@ interface HiringModelCard {
 // Figma 457:412 — card recipe (16px radius, 1px colored border, tinted
 // drop shadow) matches SplitComparisonCard's, but the stacked-cards-beside-
 // a-photo layout doesn't, so this stays a local, one-off block.
+// Figma 462:554 — same gradient-card recipe as IndustriesSection's own
+// default items, with the body copy matching word for word. Local (rather
+// than the shared default) so the shorter Figma titles ("Non-Profit" not
+// "Non-Profit Cloud") don't fork the array the homepage and /salesforce/[slug]
+// render via <IndustriesSection /> with no props.
+const INDUSTRIES: IndustrySectionItem[] = [
+  {
+    title: "Non-Profit",
+    image: "/images/non-profit.webp",
+    description:
+      "Charities and nonprofit organisations run on relationships, but most CRM systems were never built for how nonprofits actually work. Our Nonprofit Cloud consultants configure donor lifecycles, track programme outcomes, automate gift processing, and consolidate fundraising data in one place. From donation pages and recurring giving to grant tracking and volunteer management, every setup reflects how nonprofit teams operate day to day.",
+    href: "/industries/salesforce-nonprofit-consulting",
+  },
+  {
+    title: "Education",
+    image: "/images/education-cloud.webp",
+    description:
+      "Universities, colleges, and training providers manage thousands of relationships across recruitment, admissions, student success, and alumni engagement. Our Education Cloud specialists connect every stage of the student lifecycle in one platform. Recruitment pipelines, application tracking, student case management, and alumni fundraising all run from the same data, so no department works in isolation, and no student record falls through the gaps.",
+    href: "/industries/salesforce-education-cloud-consulting",
+  },
+  {
+    title: "Commerce",
+    image: "/images/commerce-cloud.webp",
+    description:
+      "Selling online gets complicated fast. Product catalogues grow, pricing rules multiply, and customers expect the same experience across every channel. Our Commerce Cloud consultants build B2B and B2C storefronts connected directly to CRM data, order management, and marketing automation. Inventory visibility, pricing logic, checkout flows, and post-purchase journeys all live inside one platform, so the commerce experience matches what the rest of the business already knows about the customer.",
+    href: "/industries/salesforce-commerce-cloud-consulting",
+  },
+  {
+    title: "Health",
+    image: "/images/health-cloud.webp",
+    description:
+      "Patient data is sensitive, care coordination is complex, and compliance is not optional. Our Health Cloud implementation experts give healthcare providers a complete view of every patient across referrals, appointments, care plans, and follow-ups. Clinical and non-clinical teams work from the same record, consent tracking is built into every workflow, and reporting meets regulatory standards. Better care coordination with less administrative overhead.",
+    href: "/industries/salesforce-health-cloud-consulting",
+  },
+  {
+    title: "Financial Services",
+    image: "/images/finance-services-cloud.webp",
+    description:
+      "Banks, lenders, wealth managers, and fintechs need CRM that understands financial relationships, not just contacts and opportunities. Our Financial Services Cloud consultants set up client household management, financial account tracking, compliance workflow automation, and full advisor dashboards. KYC processes, referral tracking, and pipeline management all operate within a platform built specifically for how financial services teams work and what regulators expect.",
+    href: "/industries/salesforce-financial-services-cloud-consulting",
+  },
+  {
+    title: "Manufacturing",
+    image: "/images/manufacturing-cloud.webp",
+    description:
+      "Manufacturers deal with long sales cycles, complex account hierarchies, and forecasting that depends on both sales agreements and actual production capacity. Our Manufacturing Cloud specialists connect sales forecasts with operations data, manage account-based agreements, and give commercial teams accurate visibility into run-rate business and new opportunities. Rebate management, partner collaboration, and demand planning all run from one system instead of five disconnected spreadsheets.",
+  },
+];
+
+// Figma 462:555 — five platform cards (no sixth/Marketing Cloud card exists
+// in this carousel node). Copy and gradients match verbatim; icons reuse the
+// site-wide cloud icons already used by ExpertisePlatformsSection elsewhere.
+const PLATFORM_EXPERTISE: ExpertisePlatformItem[] = [
+  {
+    title: "Service Cloud",
+    text: "Resolve cases faster with structured queues, automated escalations, and full customer history on every ticket. We build Service Cloud orgs around actual support processes, reducing response times and giving agents the context they need before picking up the phone.",
+    icon: "/images/service-cloud.webp",
+    bgGradient: "linear-gradient(59.61deg, #F4F4F4 45%, #FFDBED 119.24%)",
+  },
+  {
+    title: "Experience Cloud",
+    text: "Build branded portals, partner communities, and self-service hubs directly connected to Salesforce data. Our Experience Cloud configurations include proper access controls, record visibility, and CRM integration, so external users see exactly what they should and nothing more.",
+    icon: "/images/experience-cloud.webp",
+    bgGradient: "linear-gradient(59.61deg, #F4F4F4 45%, #CAEFFF 119.24%)",
+  },
+  {
+    title: "Data Cloud",
+    text: "Bring customer data from every source into one unified profile inside Salesforce. At ProvidusCRM, we implement Data Cloud to connect website activity, transaction records, and third-party data into a single view that powers smarter segmentation, personalisation, and reporting across every cloud.",
+    icon: "/images/data-cloud.webp",
+    bgGradient: "linear-gradient(59.61deg, #F4F4F4 45%, #E8EAFF 119.24%)",
+  },
+  {
+    title: "Agentforce",
+    text: "Deploy autonomous AI agents that handle routine customer queries, qualify leads, and trigger follow-ups without human input. At ProvidusCRM, we configure Agentforce to work within existing Salesforce workflows so automation runs on real business rules.",
+    icon: "/images/agent-force.webp",
+    bgGradient: "linear-gradient(59.61deg, #F4F4F4 45%, #D8E9FF 119.24%)",
+  },
+  {
+    title: "Sales Cloud",
+    text: "Give sales teams full visibility into every deal, from first touch to closed-won. Our team configures Sales Cloud around actual pipeline stages, forecast categories, and reporting needs so reps spend less time on admin and more time selling.",
+    icon: "/images/sales-cloud.webp",
+    bgGradient: "linear-gradient(59.61deg, #F4F4F4 45%, #DBFFFB 119.24%)",
+  },
+];
+
+// Figma 463:708/709/710 — a blue full-bleed "why choose us" band: four
+// colour-coded reason cards beside a photo, over a dark blue backdrop.
+// SplitChecklistSection's fixed shape (white section, text column + a blue
+// checklist panel) can't reproduce the blue full-bleed/white-card colour
+// inversion or the per-row colours and descriptions, so the four reason
+// headlines become the checklist rows and the one clear photo (of the
+// otherwise-masked collage) becomes the supporting image.
+const CHECKLIST_ITEMS = [
+  "Certified Salesforce Expertise",
+  "Global Talent Pool",
+  "Flexible Hiring",
+  "Salesforce Implementation Experience",
+];
+
 const HIRING_MODELS: HiringModelCard[] = [
   {
     title: "Hourly",
@@ -149,6 +256,41 @@ const PROCESS_STEP_GRADIENTS = [
   "to-[#ffdcf8]",
   "to-[#e5dcff]",
 ] as const;
+
+// Figma 463:910 — five questions. Only the first accordion is expanded in
+// the design file, so only its answer is authored content pulled verbatim;
+// the other four accordions carry no answer layer in Figma (collapsed with
+// nothing behind them), so those answers are written here to match the
+// voice and hiring-process detail established earlier on this page.
+const FAQS = [
+  {
+    question: "How do I know what Salesforce role to hire?",
+    answer:
+      "Determine whether the requirement calls for a Salesforce developer, administrator, consultant, architect, project manager, product manager, delivery manager, or specialist in a particular Salesforce cloud.",
+  },
+  {
+    question: "What to look out for during Salesforce hiring in the UK?",
+    answer:
+      "Look past certifications alone. Confirm hands-on implementation experience in the specific Salesforce cloud you're hiring for, references from comparable projects, and availability that matches your timeline, not just a badge on a profile.",
+  },
+  {
+    question: "What if I want to build a dedicated Salesforce team?",
+    answer:
+      "Choose the full-time hiring model. We help you build a dedicated team of Salesforce developers, administrators, architects, and specialists who integrate with your internal team and work to your long-term CRM roadmap, rather than a single contractor covering everything.",
+  },
+  {
+    question:
+      "Can ProvidusCRM support both contract and permanent Salesforce staffing needs?",
+    answer:
+      "Yes. We offer hourly hiring for project-based, contract, and support work, and full-time hiring for long-term, permanent-style engagements, so the model matches how the role is actually needed rather than forcing one contract type.",
+  },
+  {
+    question:
+      "How quickly can ProvidusCRM deliver Salesforce recruitment solutions?",
+    answer:
+      "Most engagements start with a kickoff call to scope the role, followed by candidate profiles from our existing talent pool within days. Exact timelines depend on the seniority and certifications required, but we don't run a lengthy sourcing cycle before you see candidates.",
+  },
+];
 
 const PILL_VARIANTS = {
   blue: {
@@ -230,6 +372,7 @@ export default async function SalesforceStaffAugmentationPage() {
   const caseStudies = await getPageCaseStudies("salesforce-staff-augmentation");
   const caseStudyCards =
     caseStudies.cards.length > 0 ? caseStudies.cards : FALLBACK_CASE_STUDIES;
+  const blogs = await getPageBlogs("salesforce-staff-augmentation");
 
   const schema = {
     "@context": "https://schema.org",
@@ -462,7 +605,38 @@ export default async function SalesforceStaffAugmentationPage() {
       {/* 9. Featured roles */}
       <FeaturedRolesCarousel />
 
-      {/* 10. CTA */}
+      {/* 10. Industries we serve */}
+      <IndustriesSection
+        title="How We Implement Salesforce Across Industries"
+        items={INDUSTRIES}
+      />
+
+      {/* 11. Platform expertise */}
+      <ExpertisePlatformsSection
+        title="Our End-to-End Salesforce Platform Expertise"
+        items={PLATFORM_EXPERTISE}
+      />
+
+      {/* 12. Why ProvidusCRM (checklist) */}
+      <SplitChecklistSection
+        title="What Makes ProvidusCRM A Leading Salesforce Recruitment Company In The UK"
+        items={CHECKLIST_ITEMS}
+        images={[
+          {
+            src: "/images/staff-augmentation/checklist-handshake.webp",
+            alt: "A recruiter and hiring manager shaking hands after a successful Salesforce placement",
+          },
+        ]}
+      />
+
+      {/* 13. FAQs */}
+      <FaqSection title="Frequently Asked Questions" faqs={FAQS} />
+
+      {blogs.posts.length > 0 && (
+        <PageBlogsSection title={blogs.title} posts={blogs.posts} />
+      )}
+
+      {/* 14. CTA */}
       <CtaSection
         title="Ready To Scale Your Salesforce Team?"
         backgroundImage="/images/cta-bg.webp"
