@@ -26,7 +26,11 @@ export function SalesforceConsultCtaSection({
       <Container>
         <div
           className="relative overflow-visible rounded-[8px] px-6 py-10 md:px-14 md:py-16 lg:min-h-[320px]"
-          style={{ backgroundColor }}
+          // `background` (not `backgroundColor`) so callers can pass a
+          // gradient string, not just a flat color — a plain color value
+          // still works fine in this shorthand, so existing callers are
+          // unaffected.
+          style={{ background: backgroundColor }}
         >
           <div className="relative z-10 max-w-[500px]">
             <Heading

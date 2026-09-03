@@ -3,8 +3,10 @@ import {
   HeroSection,
   PartnersSection,
   ServiceCaseStudiesSection,
+  SalesforceConsultCtaSection,
   CtaSection,
 } from "@/components/sections";
+import { FeaturedRolesCarousel } from "./FeaturedRolesCarousel";
 import type { ServiceCaseStudyCard } from "@/components/sections/ServiceCaseStudiesSection";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { Container } from "@/components/layout/Container";
@@ -447,7 +449,20 @@ export default async function SalesforceStaffAugmentationPage() {
         </Container>
       </Section>
 
-      {/* 8. CTA */}
+      {/* 8. Recruitment experts CTA */}
+      <SalesforceConsultCtaSection
+        title="Reach Out To Our Salesforce Recruitment Experts To Hire Top CRM Talent!"
+        buttonLabel="Let's Connect"
+        buttonHref="/contact"
+        backgroundColor="linear-gradient(60deg, #38a81b 37.293%, #a0ff88 91.441%)"
+        image="/images/staff-augmentation/recruitment-experts.webp"
+        imageAlt="A ProvidusCRM recruiter, with a list of the Salesforce roles she places"
+      />
+
+      {/* 9. Featured roles */}
+      <FeaturedRolesCarousel />
+
+      {/* 10. CTA */}
       <CtaSection
         title="Ready To Scale Your Salesforce Team?"
         backgroundImage="/images/cta-bg.webp"
