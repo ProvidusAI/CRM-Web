@@ -149,6 +149,7 @@ export type ServicePageSectionKey =
   | "splitChecklist"
   | "offerCarousel"
   | "pricing"
+  | "description"
   | "cta";
 
 export type ServiceBenefitIconKey =
@@ -341,6 +342,14 @@ export interface ServicePricingPlan {
   featured?: boolean;
 }
 
+export interface ServiceDescriptionContent {
+  title?: string;
+  paragraphs?: string[];
+  ctaLabel?: string;
+  ctaHref?: string;
+  hideCta?: boolean;
+}
+
 export interface ServicePricingContent {
   title?: string;
   subtitle?: string;
@@ -372,5 +381,6 @@ export interface ServicePage {
   splitChecklistSection?: ServiceSplitChecklistContent;
   offerCarouselSection?: ServiceOfferCarouselContent;
   pricingSection?: ServicePricingContent;
+  descriptionSection?: ServiceDescriptionContent;
   cta?: ServiceCtaContent;
 }

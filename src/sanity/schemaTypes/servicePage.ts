@@ -50,6 +50,7 @@ const sectionOrderOptions = [
   { title: "Checklist with CTA", value: "splitChecklist" },
   { title: "Offer carousel", value: "offerCarousel" },
   { title: "Pricing plans", value: "pricing" },
+  { title: "Description with CTA", value: "description" },
   { title: "Footer CTA", value: "cta", thumbnail: "/studio-thumbnails/cta.webp" },
 ];
 
@@ -360,6 +361,30 @@ export const servicePage = defineType({
               ],
             },
           ],
+        }),
+      ],
+    }),
+    defineField({
+      name: "descriptionSection",
+      title: "Description with CTA",
+      type: "object",
+      components: prominentSectionComponents,
+      fields: [
+        defineField({ name: "title", title: "Heading", type: "string" }),
+        defineField({
+          name: "paragraphs",
+          title: "Paragraphs",
+          type: "array",
+          validation: (rule) => rule.max(6),
+          of: [{ type: "text", rows: 4 }],
+        }),
+        defineField({ name: "ctaLabel", title: "CTA label", type: "string" }),
+        defineField({ name: "ctaHref", title: "CTA link", type: "string" }),
+        defineField({
+          name: "hideCta",
+          title: "Hide CTA button",
+          type: "boolean",
+          initialValue: false,
         }),
       ],
     }),

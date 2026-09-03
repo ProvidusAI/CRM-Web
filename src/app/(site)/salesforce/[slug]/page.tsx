@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { type ReactNode } from "react";
 import {
   CertifiedSection,
+  ExpertiseDescriptionSection,
   ExpertiseSection,
   IndustriesSection,
   MigrationPlatformsSection,
@@ -87,6 +88,7 @@ const DEFAULT_SERVICE_SECTION_ORDER: ServicePageSectionKey[] = [
   "splitChecklist",
   "offerCarousel",
   "pricing",
+  "description",
   "cta",
 ];
 
@@ -294,6 +296,16 @@ export default async function SalesforceServicePage({
         }))}
       />
     ),
+    // No internal empty-guard on this component, so gate it here.
+    description: page.descriptionSection?.paragraphs?.length ? (
+      <ExpertiseDescriptionSection
+        heading={page.descriptionSection.title}
+        paragraphs={page.descriptionSection.paragraphs}
+        ctaText={page.descriptionSection.ctaLabel || undefined}
+        ctaHref={page.descriptionSection.ctaHref || undefined}
+        hideCta={page.descriptionSection.hideCta}
+      />
+    ) : null,
     cta: (
       <CtaSection
         title={legacyCta?.title}

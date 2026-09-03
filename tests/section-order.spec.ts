@@ -18,6 +18,7 @@ const EXPECTED_KEYS = [
   "splitChecklist",
   "offerCarousel",
   "pricing",
+  "description",
   "cta",
 ];
 
@@ -30,6 +31,6 @@ test("service page wraps every section in a data-section-key marker", async ({
     .locator("[data-section-key]")
     .evaluateAll((els) => els.map((el) => el.getAttribute("data-section-key")));
 
-  expect(keys).toHaveLength(18);
+  expect(keys).toHaveLength(19);
   expect([...new Set(keys)].sort()).toEqual([...EXPECTED_KEYS].sort());
 });

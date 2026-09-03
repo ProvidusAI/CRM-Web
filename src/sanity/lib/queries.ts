@@ -439,6 +439,13 @@ export const SERVICE_PAGE_QUERY = defineQuery(`
         featured
       }
     },
+    descriptionSection {
+      title,
+      paragraphs,
+      ctaLabel,
+      ctaHref,
+      hideCta
+    },
     cta {
       title,
       buttonLabel,
