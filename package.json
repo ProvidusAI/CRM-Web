@@ -17,6 +17,7 @@
     "perf:guard": "tsx scripts/perf-guard.ts",
     "perf:vitals": "tsx scripts/core-web-vitals-probe.ts",
     "check:page-blogs": "tsx scripts/check-page-blogs.ts",
+    "check:new-sections": "tsx scripts/check-new-sections.ts",
     "check:slugs": "tsx scripts/check-slugs.ts",
     "import:migration": "tsx scripts/import-migration-page.ts",
     "thumbs:sections": "tsx scripts/capture-section-thumbnails.ts",

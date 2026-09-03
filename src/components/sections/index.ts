@@ -45,3 +45,4 @@ export { OutcomeCardsSection } from "./OutcomeCardsSection";
 export { ExplainerCardsSection } from "./ExplainerCardsSection";
 export { EcosystemSection } from "./EcosystemSection";
 export { PageBlogsSection } from "./PageBlogsSection";
+export { PainPointsSection } from "./PainPointsSection";
