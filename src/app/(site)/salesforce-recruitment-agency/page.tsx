@@ -379,7 +379,7 @@ export async function generateMetadata() {
   return generateStaticPageMetadata("staff-augmentation", {
     title: "Staff Augmentation Services",
     description: DESCRIPTION,
-    canonicalPath: "/staff-augmentation",
+    canonicalPath: "/salesforce-recruitment-agency",
     image: "/images/staff-augmentation/hero.webp",
   });
 }
@@ -395,7 +395,7 @@ export default async function SalesforceStaffAugmentationPage() {
     "@type": "Service",
     name: "Staff Augmentation Services",
     description: DESCRIPTION,
-    url: "https://providuscrm.co.uk/staff-augmentation",
+    url: "https://providuscrm.co.uk/salesforce-recruitment-agency",
     serviceType: "Staff Augmentation",
     areaServed: "GB",
     provider: {
@@ -431,6 +431,9 @@ export default async function SalesforceStaffAugmentationPage() {
         description={DESCRIPTION}
         hideCta
         image="/images/staff-augmentation/hero.webp"
+        // Landscape artwork with a transparent background: contain, not the
+        // default cover, which crops the panel off both edges.
+        imageClassName="object-contain object-center"
       />
 
       {/* 2. Trusted by */}

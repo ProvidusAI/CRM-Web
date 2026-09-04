@@ -47,8 +47,16 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/salesforce-:slug",
+        // Negative lookahead: /salesforce-recruitment-agency is a real page,
+        // not a legacy service URL — without it this rule would hijack it.
+        source: "/salesforce-:slug((?!recruitment-agency$).+)",
         destination: "/services/salesforce-:slug",
+        permanent: true,
+      },
+      // The staff augmentation page shipped briefly at this path.
+      {
+        source: "/staff-augmentation",
+        destination: "/salesforce-recruitment-agency",
         permanent: true,
       },
       {
