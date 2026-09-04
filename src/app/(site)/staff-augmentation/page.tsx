@@ -376,8 +376,8 @@ function TalentPillsRow({
 }
 
 export async function generateMetadata() {
-  return generateStaticPageMetadata("salesforce-staff-augmentation", {
-    title: "Salesforce Staff Augmentation Services",
+  return generateStaticPageMetadata("staff-augmentation", {
+    title: "Staff Augmentation Services",
     description: DESCRIPTION,
     canonicalPath: "/staff-augmentation",
     image: "/images/staff-augmentation/hero.webp",
@@ -385,18 +385,18 @@ export async function generateMetadata() {
 }
 
 export default async function SalesforceStaffAugmentationPage() {
-  const caseStudies = await getPageCaseStudies("salesforce-staff-augmentation");
+  const caseStudies = await getPageCaseStudies("staff-augmentation");
   const caseStudyCards =
     caseStudies.cards.length > 0 ? caseStudies.cards : FALLBACK_CASE_STUDIES;
-  const blogs = await getPageBlogs("salesforce-staff-augmentation");
+  const blogs = await getPageBlogs("staff-augmentation");
 
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "Salesforce Staff Augmentation Services",
+    name: "Staff Augmentation Services",
     description: DESCRIPTION,
     url: "https://providuscrm.co.uk/staff-augmentation",
-    serviceType: "Salesforce Staff Augmentation",
+    serviceType: "Staff Augmentation",
     areaServed: "GB",
     provider: {
       "@type": "Organization",
@@ -406,7 +406,7 @@ export default async function SalesforceStaffAugmentationPage() {
     },
   };
   const jsonLd = await getSitePageJsonLd(
-    "salesforce-staff-augmentation",
+    "staff-augmentation",
     schema
   );
 
