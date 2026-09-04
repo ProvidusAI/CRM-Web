@@ -30,6 +30,11 @@ const SOURCES: Record<string, Source> = {
   whyChoose: { url: DEFAULT_URL },
   faqs: { url: DEFAULT_URL },
   cta: { url: DEFAULT_URL },
+  painPoints: { url: "/section-thumbs-preview" },
+  splitChecklist: { url: "/section-thumbs-preview" },
+  offerCarousel: { url: "/section-thumbs-preview" },
+  pricing: { url: "/section-thumbs-preview" },
+  description: { url: "/section-thumbs-preview" },
 };
 
 const captured: string[] = [];

@@ -45,12 +45,11 @@ const sectionOrderOptions = [
   { title: "FAQs", value: "faqs", thumbnail: "/studio-thumbnails/faqs.webp" },
   // No thumbnail yet: no service page has blog posts to screenshot.
   { title: "Blog posts", value: "blogs" },
-  // No thumbnails yet: no page renders these sections to screenshot.
-  { title: "Pain points grid", value: "painPoints" },
-  { title: "Checklist with CTA", value: "splitChecklist" },
-  { title: "Offer carousel", value: "offerCarousel" },
-  { title: "Pricing plans", value: "pricing" },
-  { title: "Description with CTA", value: "description" },
+  { title: "Pain points grid", value: "painPoints", thumbnail: "/studio-thumbnails/painPoints.webp" },
+  { title: "Checklist with CTA", value: "splitChecklist", thumbnail: "/studio-thumbnails/splitChecklist.webp" },
+  { title: "Offer carousel", value: "offerCarousel", thumbnail: "/studio-thumbnails/offerCarousel.webp" },
+  { title: "Pricing plans", value: "pricing", thumbnail: "/studio-thumbnails/pricing.webp" },
+  { title: "Description with CTA", value: "description", thumbnail: "/studio-thumbnails/description.webp" },
   { title: "Footer CTA", value: "cta", thumbnail: "/studio-thumbnails/cta.webp" },
 ];
 
