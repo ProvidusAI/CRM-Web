@@ -281,13 +281,7 @@ function getNavItems(salesforceServices: NavItem[]): DropdownNavItem[] {
     {
       label: "Services",
       href: "/services",
-      children: [
-        ...salesforceServices,
-        {
-          label: "Salesforce Staff Augmentation",
-          href: "/services/salesforce-staff-augmentation",
-        },
-      ],
+      children: salesforceServices,
     },
     {
       label: "Industry",
@@ -304,6 +298,7 @@ function getNavItems(salesforceServices: NavItem[]): DropdownNavItem[] {
       href: "/partnership",
       children: partnerPages,
     },
+    { label: "Staff Augmentation", href: "/staff-augmentation" },
     { label: "Case Studies", href: "/case-studies" },
     { label: "Blog", href: "/blog" },
   ];

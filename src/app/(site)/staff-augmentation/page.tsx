@@ -69,13 +69,17 @@ const DEVELOPER_ROLES = [
   "Salesforce Solution Architects",
   "Salesforce Technical Architects",
   "Salesforce Business Analysts",
+  "Salesforce Project Managers",
+  "Agentforce Specialists",
 ];
 
 const SPECIALIST_ROLES = [
-  "Salesforce Delivery Managers",
   "Salesforce Product Managers",
+  "Salesforce Delivery Managers",
   "Salesforce CPQ & Revenue Cloud Specialists",
   "Salesforce Marketing Cloud Specialists",
+  "Salesforce Service Cloud Specialists",
+  "Salesforce Data Cloud Specialists",
 ];
 
 interface HiringModelCard {
@@ -278,38 +282,29 @@ const PROCESS_STEPS: ProcessStep[] = [
   },
 ];
 
-// Figma 463:910 — five questions. Only the first accordion is expanded in
-// the design file, so only its answer is authored content pulled verbatim;
-// the other four accordions carry no answer layer in Figma (collapsed with
-// nothing behind them), so those answers are written here to match the
-// voice and hiring-process detail established earlier on this page.
+// Figma 463:910 — four Q&As, questions and answers verbatim from the design.
 const FAQS = [
-  {
-    question: "How do I know what Salesforce role to hire?",
-    answer:
-      "Determine whether the requirement calls for a Salesforce developer, administrator, consultant, architect, project manager, product manager, delivery manager, or specialist in a particular Salesforce cloud.",
-  },
   {
     question: "What to look out for during Salesforce hiring in the UK?",
     answer:
-      "Look past certifications alone. Confirm hands-on implementation experience in the specific Salesforce cloud you're hiring for, references from comparable projects, and availability that matches your timeline, not just a badge on a profile.",
+      "Assess the candidate's Salesforce experience, relevant cloud expertise, implementation background, technical capability, communication skills, problem-solving ability, and experience working within teams like yours.",
   },
   {
     question: "What if I want to build a dedicated Salesforce team?",
     answer:
-      "Choose the full-time hiring model. We help you build a dedicated team of Salesforce developers, administrators, architects, and specialists who integrate with your internal team and work to your long-term CRM roadmap, rather than a single contractor covering everything.",
+      "We can build a team around the capabilities your roadmap requires. Start with a Salesforce developer and administrator, then add consultants, architects, project managers, Revenue Cloud specialists, Data Cloud specialists, or other Salesforce professionals (based on your requirements).",
   },
   {
     question:
       "Can ProvidusCRM support both contract and permanent Salesforce staffing needs?",
     answer:
-      "Yes. We offer hourly hiring for project-based, contract, and support work, and full-time hiring for long-term, permanent-style engagements, so the model matches how the role is actually needed rather than forcing one contract type.",
+      "Choose hourly Salesforce talent for flexible requirements or full-time Salesforce professionals for ongoing delivery. You can also scale the engagement when your Salesforce workload changes.",
   },
   {
     question:
       "How quickly can ProvidusCRM deliver Salesforce recruitment solutions?",
     answer:
-      "Most engagements start with a kickoff call to scope the role, followed by candidate profiles from our existing talent pool within days. Exact timelines depend on the seniority and certifications required, but we don't run a lengthy sourcing cycle before you see candidates.",
+      "Get on a discovery call with our Salesforce consultants and business analysts. We review the profiles and capabilities you require and pick out the best-matched candidates from our global talent pool. You get a faster route to relevant Salesforce candidates because the search starts with your technical requirements.",
   },
 ];
 
@@ -384,7 +379,7 @@ export async function generateMetadata() {
   return generateStaticPageMetadata("salesforce-staff-augmentation", {
     title: "Salesforce Staff Augmentation Services",
     description: DESCRIPTION,
-    canonicalPath: "/services/salesforce-staff-augmentation",
+    canonicalPath: "/staff-augmentation",
     image: "/images/staff-augmentation/hero.webp",
   });
 }
@@ -400,7 +395,7 @@ export default async function SalesforceStaffAugmentationPage() {
     "@type": "Service",
     name: "Salesforce Staff Augmentation Services",
     description: DESCRIPTION,
-    url: "https://providuscrm.co.uk/services/salesforce-staff-augmentation",
+    url: "https://providuscrm.co.uk/staff-augmentation",
     serviceType: "Salesforce Staff Augmentation",
     areaServed: "GB",
     provider: {

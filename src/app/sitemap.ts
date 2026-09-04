@@ -28,7 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: 'https://providuscrm.co.uk/partnership/fundraise-up', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: 'https://providuscrm.co.uk/partnership/dotdigital', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: 'https://providuscrm.co.uk/services', lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
-    { url: 'https://providuscrm.co.uk/services/salesforce-staff-augmentation', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    { url: 'https://providuscrm.co.uk/staff-augmentation', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: 'https://providuscrm.co.uk/industries', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: 'https://providuscrm.co.uk/industries/salesforce-health-cloud-consulting', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: 'https://providuscrm.co.uk/industries/salesforce-nonprofit-consulting', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
