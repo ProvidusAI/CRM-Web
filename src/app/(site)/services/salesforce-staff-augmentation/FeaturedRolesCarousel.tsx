@@ -101,7 +101,7 @@ export function FeaturedRolesCarousel() {
                   className="basis-[85%] sm:basis-1/2 lg:basis-1/3"
                 >
                   <article className="flex h-full min-h-[449px] flex-col rounded-[18px] bg-linear-to-b from-[#fafdff] to-[#eaf7ff] p-6 shadow-[0px_4px_0px_0px_#3276ba]">
-                    <Heading as="h4" className="text-type-title">
+                    <Heading as="h3" level="h4" className="text-type-title">
                       {role.title}
                     </Heading>
 

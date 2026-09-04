@@ -230,55 +230,53 @@ interface ProcessStep {
   title: string;
   text: string;
   icon: string;
+  gradient: string;
 }
 
 // Figma 460:26–460:164 — same dashed-connector/icon-card recipe as
 // ServiceBenefitsSection, but the six icons are custom raster images rather
 // than Lucide glyphs, so this stays a local block reusing its gradient values.
+// Each step's `gradient` is a Figma gradient fill (top-transparent to
+// bottom-solid); none land on an exact @theme token, so they're copied
+// verbatim from Figma rather than forced onto a near-miss token.
 const PROCESS_STEPS: ProcessStep[] = [
   {
     title: "Kickoff call",
     text: "We analyse your requirements and define the Salesforce role, required certifications, technical stack, project scope, seniority, availability, and timeline.",
     icon: "/images/staff-augmentation/process-icon-kickoff-call.png",
+    gradient: "to-[#dcf1ff]",
   },
   {
     title: "Choose from our talent pool",
     text: "Browse through our network of Salesforce developers, administrators, consultants, architects, and project managers. We match candidates against your technical and business requirements.",
     icon: "/images/staff-augmentation/process-icon-choose-talent.png",
+    gradient: "to-[#dcffee]",
   },
   {
     title: "Review talent profiles",
     text: "We provide detailed candidate profiles with relevant experience, Salesforce expertise, certifications, technical capabilities, and per-hour rates.",
     icon: "/images/staff-augmentation/process-icon-review-profiles.png",
+    gradient: "to-[#fffbdc]",
   },
   {
     title: "Agreement and onboarding",
     text: "Once you choose to hire a Salesforce professional, ProvidusCRM handles the agreement, invoicing, payment, compliance, and onboarding process.",
     icon: "/images/staff-augmentation/process-icon-agreement-onboarding.png",
+    gradient: "to-[#ffebdc]",
   },
   {
     title: "Scale on demand",
     text: "Add specialists when project demand increases. Reduce capacity when it decreases. Build a larger delivery team when your Salesforce roadmap expands.",
     icon: "/images/staff-augmentation/process-icon-scale-on-demand.png",
+    gradient: "to-[#ffdcf8]",
   },
   {
     title: "Continuous support",
     text: "ProvidusCRM stays involved even after equipping you with the Salesforce talent of your choice. We support communication, collaboration, performance, and resource requirements.",
     icon: "/images/staff-augmentation/process-icon-continuous-support.png",
+    gradient: "to-[#e5dcff]",
   },
 ];
-
-// Figma gradient fills (top-transparent to bottom-solid), one per step, in
-// source order. None land on an exact @theme token, so they're copied
-// verbatim from Figma rather than forced onto a near-miss token.
-const PROCESS_STEP_GRADIENTS = [
-  "to-[#dcf1ff]",
-  "to-[#dcffee]",
-  "to-[#fffbdc]",
-  "to-[#ffebdc]",
-  "to-[#ffdcf8]",
-  "to-[#e5dcff]",
-] as const;
 
 // Figma 463:910 — five questions. Only the first accordion is expanded in
 // the design file, so only its answer is authored content pulled verbatim;
@@ -486,6 +484,7 @@ export default async function SalesforceStaffAugmentationPage() {
             <Image
               src="/images/green-line.svg"
               alt=""
+              aria-hidden="true"
               width={64}
               height={24}
               className="mx-auto h-auto w-16"
@@ -530,7 +529,7 @@ export default async function SalesforceStaffAugmentationPage() {
                       model.shadowClass
                     )}
                   >
-                    <Heading as="h4" className="text-black">
+                    <Heading as="h3" level="h4" className="text-black">
                       {model.title}
                     </Heading>
                     <Text
@@ -581,7 +580,7 @@ export default async function SalesforceStaffAugmentationPage() {
                 <article
                   className={cn(
                     "relative rounded-[22px] bg-linear-to-b from-white p-6 shadow-sm md:p-8",
-                    PROCESS_STEP_GRADIENTS[index]
+                    step.gradient
                   )}
                 >
                   {index !== PROCESS_STEPS.length - 1 && (
@@ -620,7 +619,7 @@ export default async function SalesforceStaffAugmentationPage() {
         title="Reach Out To Our Salesforce Recruitment Experts To Hire Top CRM Talent!"
         buttonLabel="Let's Connect"
         buttonHref="/contact"
-        backgroundColor="linear-gradient(60deg, #38a81b 37.293%, #a0ff88 91.441%)"
+        backgroundColor="linear-gradient(60deg, var(--color-brand-green) 37.293%, var(--color-brand-green-light) 91.441%)"
         image="/images/staff-augmentation/recruitment-experts.webp"
         imageAlt="A ProvidusCRM recruiter, with a list of the Salesforce roles she places"
       />
