@@ -365,13 +365,14 @@ function getOrderedServiceSectionKeys(sectionOrder?: readonly string[]) {
     }
   }
 
-  for (const sectionKey of DEFAULT_SERVICE_SECTION_ORDER) {
-    if (!seenKeys.has(sectionKey)) {
-      orderedKeys.push(sectionKey);
-    }
+  // An editor's explicit list is authoritative: a section left out of the
+  // picker must not render. Only a document with no order at all (legacy,
+  // or the hardcoded fallback page) gets the full default order.
+  if (orderedKeys.length > 0) {
+    return orderedKeys;
   }
 
-  return orderedKeys;
+  return [...DEFAULT_SERVICE_SECTION_ORDER];
 }
 
 function isServicePageSectionKey(value: string): value is ServicePageSectionKey {

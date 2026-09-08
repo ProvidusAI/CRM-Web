@@ -83,6 +83,19 @@ const serviceImageField = (name: string, title: string) =>
     ],
   });
 
+
+// A section group is only relevant when its key is in the page's section
+// order; hiding the others keeps the form in step with the picker. A document
+// with no order yet (legacy) shows everything.
+const hiddenUnlessSection =
+  (sectionKey: string) =>
+  ({ document }: { document?: Record<string, unknown> }) => {
+    const order = document?.sectionOrder;
+    return (
+      Array.isArray(order) && order.length > 0 && !order.includes(sectionKey)
+    );
+  };
+
 const sectionFieldWrapperStyle: CSSProperties = {
   margin: "20px 0",
 };
@@ -224,6 +237,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "certified",
+      hidden: hiddenUnlessSection("certified"),
       title: "Certified section",
       type: "object",
       components: prominentSectionComponents,
@@ -243,6 +257,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "caseStudies",
+      hidden: hiddenUnlessSection("caseStudies"),
       title: "Related case studies",
       description: "Select and order the case studies shown on this service page.",
       type: "array",
@@ -251,6 +266,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "blogs",
+      hidden: hiddenUnlessSection("blogs"),
       title: "Related blog posts",
       description: "Select and order the blog posts shown on this service page.",
       type: "array",
@@ -260,6 +276,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "painPointsSection",
+      hidden: hiddenUnlessSection("painPoints"),
       title: "Pain points grid",
       type: "object",
       components: prominentSectionComponents,
@@ -296,6 +313,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "splitChecklistSection",
+      hidden: hiddenUnlessSection("splitChecklist"),
       title: "Checklist with CTA",
       type: "object",
       components: prominentSectionComponents,
@@ -330,6 +348,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "offerCarouselSection",
+      hidden: hiddenUnlessSection("offerCarousel"),
       title: "Offer carousel",
       type: "object",
       components: prominentSectionComponents,
@@ -365,6 +384,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "descriptionSection",
+      hidden: hiddenUnlessSection("description"),
       title: "Description with CTA",
       type: "object",
       components: prominentSectionComponents,
@@ -389,6 +409,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "pricingSection",
+      hidden: hiddenUnlessSection("pricing"),
       title: "Pricing plans",
       type: "object",
       components: prominentSectionComponents,
@@ -437,6 +458,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "tabsSection",
+      hidden: hiddenUnlessSection("tabs"),
       title: "Tabs section",
       type: "object",
       components: prominentSectionComponents,
@@ -521,6 +543,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "benefitsSection",
+      hidden: hiddenUnlessSection("benefits"),
       title: "Benefits timeline",
       type: "object",
       components: prominentSectionComponents,
@@ -570,6 +593,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "consultantCta",
+      hidden: hiddenUnlessSection("consultantCta"),
       title: "Consultant CTA section",
       description:
         "Blue CTA section with consultant image, shown after the tabs section on Salesforce service pages.",
@@ -604,6 +628,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "processSection",
+      hidden: hiddenUnlessSection("process"),
       title: "Salesforce process section",
       type: "object",
       components: prominentSectionComponents,
@@ -660,6 +685,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "migrationPlatformsSection",
+      hidden: hiddenUnlessSection("migrationPlatforms"),
       title: "Migration platforms section",
       description:
         "Optional carousel for CRM platforms this Salesforce service migrates from.",
@@ -714,6 +740,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "expertiseSection",
+      hidden: hiddenUnlessSection("expertise"),
       title: "Expertise carousel",
       type: "object",
       components: prominentSectionComponents,
@@ -759,6 +786,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "industriesSection",
+      hidden: hiddenUnlessSection("industries"),
       title: "Industries grid",
       type: "object",
       components: prominentSectionComponents,
@@ -809,6 +837,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "whyChooseSection",
+      hidden: hiddenUnlessSection("whyChoose"),
       title: "Why choose section",
       type: "object",
       components: prominentSectionComponents,
@@ -855,6 +884,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "faqSection",
+      hidden: hiddenUnlessSection("faqs"),
       title: "FAQ section",
       type: "object",
       components: prominentSectionComponents,
@@ -894,6 +924,7 @@ export const servicePage = defineType({
     }),
     defineField({
       name: "cta",
+      hidden: hiddenUnlessSection("cta"),
       title: "CTA section",
       type: "object",
       components: prominentSectionComponents,
