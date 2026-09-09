@@ -5,6 +5,7 @@ import {
   GoogleTagManagerScript,
 } from "@/components/analytics/GoogleTagManager";
 import { MicrosoftClarityScript } from "@/components/analytics/MicrosoftClarity";
+import { ContentsquareScript } from "@/components/analytics/Contentsquare";
 import { HubSpotScript } from "@/components/analytics/HubSpot";
 import "@/styles/globals.css";
 
@@ -49,6 +50,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
         <GoogleTagManagerScript />
         <MicrosoftClarityScript />
+        <ContentsquareScript />
       </head>
       <body>
         <GoogleTagManagerNoScript />
