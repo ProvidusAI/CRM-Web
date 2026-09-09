@@ -128,14 +128,14 @@ export function ExpertisePlatformsSection({
                         className="inline-block hover:underline"
                         aria-label={`Explore ${item.title} consulting`}
                       >
-                        <h4 className="typography-p1 text-black font-semibold mb-4">
+                        <h3 className="typography-p1 text-black font-semibold mb-4">
                           {item.title}
-                        </h4>
+                        </h3>
                       </Link>
                     ) : (
-                      <h4 className="typography-p1 text-black font-semibold mb-4">
+                      <h3 className="typography-p1 text-black font-semibold mb-4">
                         {item.title}
-                      </h4>
+                      </h3>
                     )}
 
                     <Text variant="p4" className="text-gray-800 leading-relaxed">

@@ -88,9 +88,9 @@ export function ExpertiseImplementationSection({
               <div 
                 className="lg:w-[65%] rounded-[18px] p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-[#EBF4FF]"
               >
-                <h4 className="typography-h4 text-black font-semibold mb-4">
+                <h3 className="typography-h4 text-black font-semibold mb-4">
                   {item.title}
-                </h4>
+                </h3>
                 <Text variant="p4" className="text-slate-600 leading-relaxed whitespace-pre-wrap">
                   {item.text}
                 </Text>
