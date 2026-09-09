@@ -72,9 +72,10 @@ const defaultPlatforms: MigrationPlatformItem[] = [
 ];
 
 export function MigrationPlatformsSection({
-  title = "Platforms We Migrate\nYour CRM Org From",
+  title,
   items = defaultPlatforms,
 }: MigrationPlatformsSectionProps) {
+  const displayTitle = title || "Platforms We Migrate\nYour CRM Org From";
   const [emblaApi, setEmblaApi] = useState<CarouselApi>(undefined);
   const [isPaused, setIsPaused] = useState(false);
   const platforms = items.filter((item) => item.name?.trim());
@@ -127,7 +128,7 @@ export function MigrationPlatformsSection({
             </svg>
           </div>
           <Heading as="h2" className="text-slate-900 font-bold">
-            {title.split("\n").map((line, index) => (
+            {displayTitle.split("\n").map((line, index) => (
               <span key={`${line}-${index}`}>
                 {index > 0 && <br />}
                 {line}

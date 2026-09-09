@@ -23,11 +23,13 @@ interface ServiceCaseStudiesSectionProps {
 }
 
 export function ServiceCaseStudiesSection({
-  title = "More projects that made a mark.",
+  title,
   caseStudies,
   viewAllHref,
   viewAllLabel = "View More",
 }: ServiceCaseStudiesSectionProps) {
+  const displayTitle = title || "More projects that made a mark.";
+
   if (caseStudies.length === 0) {
     return null;
   }
@@ -44,7 +46,7 @@ export function ServiceCaseStudiesSection({
             className="mx-auto h-auto w-16"
           />
           <Heading as="h2" className="mt-5 text-black">
-            {title}
+            {displayTitle}
           </Heading>
           {viewAllHref && (
             <Link

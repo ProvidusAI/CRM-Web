@@ -26,15 +26,19 @@ const emptyForm = {
 };
 
 export function SalesforceServiceHero({
-  badgeTitle = "Certified",
-  badgeSubtitle = "Salesforce Partner in the UK",
+  badgeTitle,
+  badgeSubtitle,
   title,
   description,
   bullets = [],
-  formTitle = "Fill a form today",
-  formButtonLabel = "Let's Connect",
+  formTitle,
+  formButtonLabel,
   backgroundImage = "/images/hero-bg.webp",
 }: SalesforceServiceHeroProps) {
+  const displayBadgeTitle = badgeTitle || "Certified";
+  const displayBadgeSubtitle = badgeSubtitle || "Salesforce Partner in the UK";
+  const displayFormTitle = formTitle || "Fill a form today";
+  const displayFormButtonLabel = formButtonLabel || "Let's Connect";
   const [formState, setFormState] = useState(emptyForm);
   const [status, setStatus] = useState<
     "idle" | "submitting" | "success" | "error"
@@ -100,8 +104,8 @@ export function SalesforceServiceHero({
                   />
                 </div>
                 <Text variant="p3" className="max-w-[170px] text-white">
-                  <span className="block font-semibold">{badgeTitle}</span>
-                  <span className="block">{badgeSubtitle}</span>
+                  <span className="block font-semibold">{displayBadgeTitle}</span>
+                  <span className="block">{displayBadgeSubtitle}</span>
                 </Text>
               </div>
 
@@ -165,7 +169,7 @@ export function SalesforceServiceHero({
                     level="h4"
                     className="text-center text-white"
                   >
-                    {formTitle}
+                    {displayFormTitle}
                   </Heading>
 
                   {status === "error" && (
@@ -241,7 +245,7 @@ export function SalesforceServiceHero({
                     disabled={status === "submitting"}
                     className="w-full rounded-[6px] bg-brand-green px-6 py-3 font-body text-[14px] font-semibold text-white shadow-md transition-colors hover:bg-[#2d8c14] disabled:cursor-not-allowed disabled:opacity-70"
                   >
-                    {status === "submitting" ? "Sending..." : formButtonLabel}
+                    {status === "submitting" ? "Sending..." : displayFormButtonLabel}
                   </button>
                 </form>
               )}

@@ -135,11 +135,11 @@ export function BlurScaleHeading({ children, className }: BlurScaleHeadingProps)
 export function HeroSection({
   title,
   description,
-  image = "/images/hero-img.webp",
+  image,
   imageClassName = "object-cover object-center",
   hideImage = false,
-  ctaLabel = "Book a Call",
-  ctaHref = "/contact",
+  ctaLabel,
+  ctaHref,
   ctaVariant = "white",
   ctaSize = "md",
   secondaryCta,
@@ -148,6 +148,9 @@ export function HeroSection({
   bullets,
   hideCta = false,
 }: HeroSectionProps) {
+  const displayImage = image || "/images/hero-img.webp";
+  const displayCtaLabel = ctaLabel || "Book a Call";
+  const displayCtaHref = ctaHref || "/contact";
   const defaultTitle = (
     <>
       Custom Salesforce Solutions For Your CRM Innovation Goals{" "}
@@ -263,9 +266,9 @@ export function HeroSection({
                 {/* CTA */}
                 {!hideCta && (
                   <div className="flex flex-wrap items-center gap-4">
-                    <Link href={ctaHref}>
+                    <Link href={displayCtaHref}>
                       <CtaButton variant={ctaVariant} size={ctaSize}>
-                        {ctaLabel}
+                        {displayCtaLabel}
                       </CtaButton>
                     </Link>
 
@@ -298,7 +301,7 @@ export function HeroSection({
               <div className="relative hidden lg:block p-4 pl-0 py-4 pr-4 h-full">
                 <div className="relative w-full h-full rounded-[32px] overflow-hidden">
                   <Image
-                    src={image}
+                    src={displayImage}
                     alt="Business meeting"
                     fill
                     sizes="(min-width: 1800px) 824px, (min-width: 1280px) 46vw, (min-width: 1024px) 50vw, 0px"

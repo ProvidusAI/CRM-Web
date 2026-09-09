@@ -36,9 +36,10 @@ const iconMap = {
 };
 
 export function SalesforceProcessSection({
-  title = "Our Salesforce\nDevelopment Process",
+  title,
   steps,
 }: SalesforceProcessSectionProps) {
+  const displayTitle = title || "Our Salesforce\nDevelopment Process";
   const displaySteps = (steps ?? []).filter((step) => step.title?.trim());
 
   if (displaySteps.length === 0) {
@@ -52,7 +53,7 @@ export function SalesforceProcessSection({
           {/* Green logo icon to match the image header */}
           <GreenLineMark className="inline-block h-10 w-auto align-baseline ml-1" />
           <Heading as="h2" className="text-slate-900 mb-6 font-bold">
-            {title.split("\n").map((line, index) => (
+            {displayTitle.split("\n").map((line, index) => (
               <span key={`${line}-${index}`}>
                 {index > 0 && <br />}
                 {line}

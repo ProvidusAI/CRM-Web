@@ -24,9 +24,11 @@ interface PageBlogsSectionProps {
 }
 
 export function PageBlogsSection({
-  title = "Latest from our blog",
+  title,
   posts,
 }: PageBlogsSectionProps) {
+  const displayTitle = title || "Latest from our blog";
+
   if (posts.length === 0) {
     return null;
   }
@@ -43,7 +45,7 @@ export function PageBlogsSection({
             className="mx-auto h-auto w-16"
           />
           <Heading as="h2" className="mt-5 text-black">
-            {title}
+            {displayTitle}
           </Heading>
         </div>
 

@@ -17,10 +17,12 @@ interface ExpertiseDescriptionSectionProps {
 export function ExpertiseDescriptionSection({
   heading,
   paragraphs,
-  ctaText = "Let's Connect",
+  ctaText,
   ctaHref = "/contact",
   hideCta = false,
 }: ExpertiseDescriptionSectionProps) {
+  const displayCtaText = ctaText || "Let's Connect";
+
   return (
     <Section className="py-16 md:py-24 bg-white">
       <Container>
@@ -39,7 +41,7 @@ export function ExpertiseDescriptionSection({
                 <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shrink-0">
                   <ArrowRight className="w-4 h-4 text-brand-green" />
                 </div>
-                <span className="font-medium text-[16px] font-body">{ctaText}</span>
+                <span className="font-medium text-[16px] font-body">{displayCtaText}</span>
               </Link>
             )}
           </div>

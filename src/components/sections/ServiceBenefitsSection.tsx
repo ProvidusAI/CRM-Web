@@ -49,9 +49,11 @@ const themeClasses: Record<ServiceBenefitColorTheme, string> = {
 };
 
 export function ServiceBenefitsSection({
-  title = "How Our Salesforce Consulting Services Help You",
+  title,
   items,
 }: ServiceBenefitsSectionProps) {
+  const displayTitle = title || "How Our Salesforce Consulting Services Help You";
+
   if (items.length === 0) {
     return null;
   }
@@ -69,7 +71,7 @@ export function ServiceBenefitsSection({
             className="mx-auto h-auto w-16"
           />
           <Heading as="h2" className="mx-auto mt-5 max-w-2xl text-black">
-            {title}
+            {displayTitle}
           </Heading>
         </div>
 
