@@ -192,6 +192,7 @@ export function WhatWeDoSection({
           src="/images/what-we-do-bg.webp"
           alt=""
           fill
+          sizes="100vw"
           className="object-cover"
         />
         <div
