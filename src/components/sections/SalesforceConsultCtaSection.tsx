@@ -14,13 +14,23 @@ interface SalesforceConsultCtaSectionProps {
 }
 
 export function SalesforceConsultCtaSection({
-  title = "Connect With Our Salesforce Consultants To Discuss Your CRM Needs And Business Goals.",
-  buttonLabel = "Let's Connect",
-  buttonHref = "/contact",
-  backgroundColor = "var(--color-consult-blue)",
-  image = "/images/consult.webp",
+  title,
+  buttonLabel,
+  buttonHref,
+  backgroundColor,
+  image,
   imageAlt = "",
 }: SalesforceConsultCtaSectionProps) {
+  // Sanity sends "" for a blank field, and a default parameter only fires on
+  // undefined — which rendered an empty heading and a labelless button.
+  const displayTitle =
+    title ||
+    "Connect With Our Salesforce Consultants To Discuss Your CRM Needs And Business Goals.";
+  const displayButtonLabel = buttonLabel || "Let's Connect";
+  const displayButtonHref = buttonHref || "/contact";
+  const displayBackgroundColor = backgroundColor || "var(--color-consult-blue)";
+  const displayImage = image || "/images/consult.webp";
+
   return (
     <section className="bg-white py-16 md:py-24 mt-24">
       <Container>
@@ -30,26 +40,26 @@ export function SalesforceConsultCtaSection({
           // gradient string, not just a flat color — a plain color value
           // still works fine in this shorthand, so existing callers are
           // unaffected.
-          style={{ background: backgroundColor }}
+          style={{ background: displayBackgroundColor }}
         >
           <div className="relative z-10 max-w-[500px]">
             <Heading
               as="h3"
               className="max-w-[500px] text-white [&&]:!leading-[36px] md:[&&]:!leading-[43px]"
             >
-              {title}
+              {displayTitle}
             </Heading>
 
-            <Link href={buttonHref} className="mt-8 inline-block">
+            <Link href={displayButtonHref} className="mt-8 inline-block">
               <CtaButton variant="filled" size="sm">
-                {buttonLabel}
+                {displayButtonLabel}
               </CtaButton>
             </Link>
           </div>
 
           <div className="pointer-events-none mt-8 flex justify-center lg:absolute lg:bottom-0 lg:right-8 lg:mt-0 lg:w-[58%] lg:justify-end max-h-[450px]">
             <Image
-              src={image}
+              src={displayImage}
               alt={imageAlt}
               width={647}
               height={446}

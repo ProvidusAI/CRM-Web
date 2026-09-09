@@ -13,18 +13,24 @@ interface CtaSectionProps {
 
 export function CtaSection({
   title,
-  buttonLabel = "Let's Connect",
-  buttonHref = "/contact",
-  backgroundImage = "/images/cta-bg.webp",
+  buttonLabel,
+  buttonHref,
+  backgroundImage,
 }: CtaSectionProps) {
+  // Sanity sends "" for a field an editor left blank or cleared, and a default
+  // parameter only fires on undefined — which rendered a labelless button.
+  // Fall back with `||` so empty strings resolve too, as `title` already does.
   const displayTitle = title || "Explore How We Align Your CRM Systems With Your Business Initiatives.";
+  const displayButtonLabel = buttonLabel || "Let's Connect";
+  const displayButtonHref = buttonHref || "/contact";
+  const displayBackgroundImage = backgroundImage || "/images/cta-bg.webp";
 
   return (
     <section className="relative h-[386px] flex items-center overflow-hidden mt-24 md:mt-40">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src={backgroundImage}
+          src={displayBackgroundImage}
           alt=""
           fill
           sizes="100vw"
@@ -59,13 +65,13 @@ export function CtaSection({
           </Heading>
 
           <Link
-            href={buttonHref}
+            href={displayButtonHref}
             className="inline-flex items-center gap-3 bg-brand-green text-white rounded-full py-2 pr-6 pl-2 hover:bg-[#2d8716] transition-colors mt-2"
           >
             <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shrink-0">
               <ArrowRight className="w-4 h-4 text-brand-green" />
             </div>
-            <span className="font-medium text-[16px] font-body">{buttonLabel}</span>
+            <span className="font-medium text-[16px] font-body">{displayButtonLabel}</span>
           </Link>
         </div>
       </Container>
