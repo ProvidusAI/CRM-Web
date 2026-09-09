@@ -213,6 +213,7 @@
 
 .hero-heading-letter {
   opacity: 0;
+  will-change: transform, filter;
   animation: hero-heading-letter-in 0.48s cubic-bezier(0.2, 0.65, 0.3, 1) forwards;
 }
 
