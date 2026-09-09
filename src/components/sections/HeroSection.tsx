@@ -176,6 +176,7 @@ export function HeroSection({
             alt=""
             fill
             priority
+            fetchPriority="high"
             sizes="(min-width: 1800px) 1696px, calc(100vw - 48px)"
             className="absolute inset-0 z-0 object-cover object-center"
             quality={78}
