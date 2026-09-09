@@ -22,7 +22,7 @@ export function PartnersSection() {
     <section className="py-12 bg-white">
       <Container>
         <div className="bg-brand-green-pale shadow-partner rounded-3xl py-6 px-8 md:px-16 flex flex-col md:flex-row items-center gap-8 md:gap-16 overflow-hidden">
-          <Heading as="h4" className="shrink-0 text-[#2D2D2D] whitespace-nowrap text-[22px] md:text-[24px]">
+          <Heading as="h2" level="h4" className="shrink-0 text-[#2D2D2D] whitespace-nowrap text-[22px] md:text-[24px]">
             Trusted by.
           </Heading>
 
