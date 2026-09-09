@@ -33,8 +33,9 @@ export function SalesforceServiceHero({
   bullets = [],
   formTitle,
   formButtonLabel,
-  backgroundImage = "/images/hero-bg.webp",
+  backgroundImage,
 }: SalesforceServiceHeroProps) {
+  const displayBackgroundImage = backgroundImage || "/images/hero-bg.webp";
   const displayBadgeTitle = badgeTitle || "Certified";
   const displayBadgeSubtitle = badgeSubtitle || "Salesforce Partner in the UK";
   const displayFormTitle = formTitle || "Fill a form today";
@@ -83,7 +84,7 @@ export function SalesforceServiceHero({
           className="relative overflow-hidden rounded-[20px] bg-brand-blue px-6 py-10 text-white shadow-xl md:px-10 md:py-14 lg:px-14 lg:py-16"
         >
           <Image
-            src={backgroundImage}
+            src={displayBackgroundImage}
             alt=""
             fill
             priority

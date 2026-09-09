@@ -18,9 +18,10 @@ export function ExpertiseDescriptionSection({
   heading,
   paragraphs,
   ctaText,
-  ctaHref = "/contact",
+  ctaHref,
   hideCta = false,
 }: ExpertiseDescriptionSectionProps) {
+  const displayCtaHref = ctaHref || "/contact";
   const displayCtaText = ctaText || "Let's Connect";
 
   return (
@@ -35,7 +36,7 @@ export function ExpertiseDescriptionSection({
 
             {!hideCta && (
               <Link
-                href={ctaHref}
+                href={displayCtaHref}
                 className="inline-flex items-center gap-3 bg-brand-green text-white rounded-full py-2 pr-6 pl-2 hover:bg-[#2d8716] transition-colors"
               >
                 <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shrink-0">
