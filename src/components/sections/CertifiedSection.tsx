@@ -25,7 +25,6 @@ export function CertifiedSection({ title, description }: CertifiedSectionProps) 
             alt=""
             width={1236}
             height={1385}
-            sizes="(min-width: 1800px) 721px, 42.5vw"
             className="absolute bottom-0 left-[7%] h-auto w-[42.5%]"
           />
           <Image
@@ -33,7 +32,6 @@ export function CertifiedSection({ title, description }: CertifiedSectionProps) 
             alt=""
             width={1236}
             height={1385}
-            sizes="(min-width: 1800px) 721px, 42.5vw"
             className="absolute bottom-0 right-[7%] h-auto w-[42.5%]"
           />
         </div>
