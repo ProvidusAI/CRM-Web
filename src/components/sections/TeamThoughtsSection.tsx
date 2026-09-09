@@ -134,7 +134,7 @@ export function TeamThoughtsSection() {
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Heading as="h4" className="text-black font-medium leading-relaxed font-heading pr-4">
+                    <Heading as="h3" level="h4" className="text-black font-medium leading-relaxed font-heading pr-4">
                       “{activeMember.quote}”
                     </Heading>
                   </motion.div>

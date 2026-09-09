@@ -178,7 +178,7 @@ export function MigrationPlatformsSection({
                         className="object-contain object-center"
                       />
                     ) : (
-                      <Heading as="h4" className="text-center text-slate-800">
+                      <Heading as="h3" level="h4" className="text-center text-slate-800">
                         {item.name}
                       </Heading>
                     )}

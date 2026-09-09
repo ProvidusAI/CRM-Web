@@ -95,7 +95,7 @@ export function SalesforceProcessSection({
                     >
                       <Icon className="w-7 h-7" />
                     </div>
-                    <Heading as="h4" className="text-slate-900 m-0">
+                    <Heading as="h3" level="h4" className="text-slate-900 m-0">
                       0{index + 1} - {step.title}
                     </Heading>
                   </div>

@@ -81,7 +81,7 @@ export function IdentityResolutionSection() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="md:pr-12 md:border-r border-gray-300"
           >
-            <Heading as="h4" className="text-black font-bold mb-6">
+            <Heading as="h3" level="h4" className="text-black font-bold mb-6">
               The Two Failure modes
             </Heading>
             <Text variant="p4" className="text-gray-600 leading-relaxed mb-6">
@@ -100,7 +100,7 @@ export function IdentityResolutionSection() {
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             className="md:px-12 md:border-r border-gray-300"
           >
-            <Heading as="h4" className="text-black font-bold mb-6">
+            <Heading as="h3" level="h4" className="text-black font-bold mb-6">
               Here&apos;s An Example
             </Heading>
             <Text variant="p4" className="text-gray-600 leading-relaxed mb-6">
@@ -119,7 +119,7 @@ export function IdentityResolutionSection() {
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             className="md:pl-12"
           >
-            <Heading as="h4" className="text-black font-bold mb-6">
+            <Heading as="h3" level="h4" className="text-black font-bold mb-6">
               Survivorship Rules
             </Heading>
             <Text variant="p4" className="text-gray-600 leading-relaxed mb-6">

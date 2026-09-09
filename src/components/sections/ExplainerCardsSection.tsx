@@ -94,7 +94,7 @@ export function ExplainerCardsSection({
                   />
                 </div>
               )}
-              <Heading as="h4" className="mt-6 text-[#19689F]">
+              <Heading as="h3" level="h4" className="mt-6 text-[#19689F]">
                 {card.title}
               </Heading>
               <Text variant="p3" className="mt-4 text-black">

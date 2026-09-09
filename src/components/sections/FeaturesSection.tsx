@@ -71,7 +71,7 @@ function FeatureCard({ feature }: { feature: Feature }) {
     <Card variant={feature.cardVariant} className="flex flex-col gap-4">
       <span className="text-4xl">{feature.icon}</span>
       <div className="flex flex-col gap-2">
-        <Heading as="h4">{feature.title}</Heading>
+        <Heading as="h3" level="h4">{feature.title}</Heading>
         <Text variant="p3" className="text-gray-700">
           {feature.description}
         </Text>

@@ -102,7 +102,7 @@ export function WhyChooseSection({
                     />
                   </div>
                   <div className="flex flex-col justify-center">
-                    <Heading as="h4" style={{ color: reason.color }} className="mb-2">
+                    <Heading as="h3" level="h4" style={{ color: reason.color }} className="mb-2">
                       {reason.title}
                     </Heading>
                     <Text variant="p4" className="text-gray-600 leading-relaxed">

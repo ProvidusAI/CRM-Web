@@ -98,7 +98,7 @@ export function SplitComparisonSection({
                     }}
                     className="p-8 md:p-10 flex flex-col w-full h-full"
                   >
-                    <Heading as="h4" className="text-black font-bold mb-4">
+                    <Heading as="h3" level="h4" className="text-black font-bold mb-4">
                       {card.title}
                     </Heading>
                     <Text variant="p4" className="text-gray-600 leading-relaxed">

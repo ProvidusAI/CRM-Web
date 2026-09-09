@@ -69,7 +69,7 @@ export function ExpertiseChallengesSection({
               </div>
 
               {/* Text Content */}
-              <Heading as="h4" className="text-brand-blue mb-3 whitespace-pre-line">
+              <Heading as="h3" level="h4" className="text-brand-blue mb-3 whitespace-pre-line">
                 {item.title}
               </Heading>
 
