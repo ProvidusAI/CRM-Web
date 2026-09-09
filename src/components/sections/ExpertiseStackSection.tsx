@@ -178,7 +178,7 @@ function Card({ index, title, subtitle, text, color, icon, image, href }: CardPr
                   className="object-contain"
                 />
               </div>
-              <Heading as="h4" className="text-black">
+              <Heading as="h3" level="h4" className="text-black">
                 {title}
               </Heading>
             </div>

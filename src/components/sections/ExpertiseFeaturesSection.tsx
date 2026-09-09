@@ -49,7 +49,7 @@ export function ExpertiseFeaturesSection({ features }: ExpertiseFeaturesSectionP
               </div>
 
               {/* Text Content */}
-              <Heading as="h4" className="text-[#19689F] mb-4 whitespace-pre-line">
+              <Heading as="h3" level="h4" className="text-[#19689F] mb-4 whitespace-pre-line">
                 {feature.title}
               </Heading>
               

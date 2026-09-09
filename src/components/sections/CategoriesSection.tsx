@@ -134,12 +134,12 @@ export function CategoriesSection() {
 
                       {category.href ? (
                         <a href={category.href} className="inline-block hover:opacity-80 transition-opacity">
-                          <Heading as="h4" className="text-black mb-6">
+                          <Heading as="h3" level="h4" className="text-black mb-6">
                             {category.title}
                           </Heading>
                         </a>
                       ) : (
-                        <Heading as="h4" className="text-black mb-6">
+                        <Heading as="h3" level="h4" className="text-black mb-6">
                           {category.title}
                         </Heading>
                       )}
