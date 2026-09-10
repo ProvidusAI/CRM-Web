@@ -10,6 +10,12 @@ import { Heading, Text } from "@/components/ui/Typography";
 interface SalesforceServiceHeroProps {
   badgeTitle?: string;
   badgeSubtitle?: string;
+  /**
+   * Optional small heading above the title. When set it becomes the page <h1>
+   * and the title drops to <h2>, both keeping their look — the same swap
+   * HeroSection's `subtitleAsH1` does on the platform-expertise pages.
+   */
+  kicker?: string;
   title: string;
   description?: string;
   bullets?: string[];
@@ -28,6 +34,7 @@ const emptyForm = {
 export function SalesforceServiceHero({
   badgeTitle,
   badgeSubtitle,
+  kicker,
   title,
   description,
   bullets = [],
@@ -35,6 +42,8 @@ export function SalesforceServiceHero({
   formButtonLabel,
   backgroundImage,
 }: SalesforceServiceHeroProps) {
+  // trim: a whitespace-only CMS value would otherwise become an empty h1.
+  const displayKicker = kicker?.trim();
   const displayBackgroundImage = backgroundImage || "/images/hero-bg.webp";
   const displayBadgeTitle = badgeTitle || "Certified";
   const displayBadgeSubtitle = badgeSubtitle || "Salesforce Partner in the UK";
@@ -110,8 +119,15 @@ export function SalesforceServiceHero({
                 </Text>
               </div>
 
+              {displayKicker && (
+                <Text as="h1" variant="p3" className="mb-6 text-white">
+                  {displayKicker}
+                </Text>
+              )}
+
               <Heading
-                as="h1"
+                as={displayKicker ? "h2" : "h1"}
+                level="h1"
                 className="max-w-[560px] text-white !text-[34px] !leading-[1.05] md:!text-[60px] md:!leading-[0.98]"
               >
                 {title}

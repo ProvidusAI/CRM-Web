@@ -205,6 +205,13 @@ export const servicePage = defineType({
           type: "string",
         }),
         defineField({
+          name: "kicker",
+          title: "Small heading (optional)",
+          description:
+            "Shown above the main heading. When filled, this becomes the page H1 (put the target keyword here) and the main heading becomes an H2 — both keep their look. Leave empty to keep the main heading as the H1.",
+          type: "string",
+        }),
+        defineField({
           name: "heading",
           title: "Heading",
           type: "string",

@@ -283,6 +283,7 @@ export const SERVICE_PAGE_QUERY = defineQuery(`
     hero {
       badgeTitle,
       badgeSubtitle,
+      kicker,
       heading,
       description,
       bullets,

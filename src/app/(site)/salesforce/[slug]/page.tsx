@@ -322,6 +322,7 @@ export default async function SalesforceServicePage({
       <SalesforceServiceHero
         badgeTitle={page.hero?.badgeTitle}
         badgeSubtitle={page.hero?.badgeSubtitle}
+        kicker={page.hero?.kicker}
         title={page.hero?.heading || page.title}
         description={page.hero?.description}
         bullets={page.hero?.bullets}

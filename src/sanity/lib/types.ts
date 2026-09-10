@@ -171,6 +171,7 @@ export type ServiceBenefitColorTheme =
 export interface ServiceHeroContent {
   badgeTitle?: string;
   badgeSubtitle?: string;
+  kicker?: string;
   heading: string;
   description?: string;
   bullets?: string[];

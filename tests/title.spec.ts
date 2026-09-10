@@ -73,4 +73,11 @@ test.describe("Heading hierarchy", () => {
       await expect(page.locator("h1")).toHaveText(kicker);
     });
   }
+
+  // Service pages take their hero from the CMS: an optional small heading
+  // (kicker) claims the h1 when filled, otherwise the title keeps it.
+  test("/services/salesforce-consulting-services has exactly one h1", async ({ page }) => {
+    await page.goto("/services/salesforce-consulting-services");
+    await expect(page.locator("h1")).toHaveCount(1);
+  });
 });
