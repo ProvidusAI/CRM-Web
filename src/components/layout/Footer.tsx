@@ -26,7 +26,7 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#124F87] text-white pt-20 pb-10">
+    <footer className="bg-footer-blue text-white pt-20 pb-10">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16">
           {/* Column 1: Logo, Description, Socials */}

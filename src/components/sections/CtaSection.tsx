@@ -26,9 +26,11 @@ export function CtaSection({
   const displayBackgroundImage = backgroundImage || "/images/cta-bg.webp";
 
   return (
-    <section className="relative h-[386px] flex items-center overflow-hidden mt-24 md:mt-40">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
+    <section className="relative h-[386px] flex items-center overflow-hidden mt-24 md:mt-40 bg-footer-blue md:bg-transparent">
+      {/* Photo + white fade from md up. On phones the photo sat right behind
+          the text, so mobile gets the solid footer blue instead (and skips the
+          download: a lazy image under display:none is never fetched). */}
+      <div className="absolute inset-0 z-0 hidden md:block">
         <Image
           src={displayBackgroundImage}
           alt=""
@@ -53,9 +55,9 @@ export function CtaSection({
             alt=""
             width={60}
             height={20}
-            className="w-16 h-auto mb-6"
+            className="w-12 md:w-16 h-auto mb-10 md:mb-6"
           />
-          <Heading as="h2" className="text-black mb-8 !text-[34px] !leading-[38px] md:!text-[50px] md:!leading-[50px]">
+          <Heading as="h2" className="text-white md:text-black mb-8 !text-[34px] !leading-[38px] md:!text-[50px] md:!leading-[50px]">
             {displayTitle.split("\n").map((line, index) => (
               <span key={`${line}-${index}`}>
                 {index > 0 && <br />}
