@@ -60,11 +60,15 @@ export function PlatformsSection({
               direction="up" 
               delay={0.1 + (index % 4) * 0.1}
             >
+              {/* Shrinks to its column on phones (a fixed 258px pair made every
+                  page ~480px wide, which also stretched the fixed mobile menu
+                  past the screen); still exactly 258x138 once the column fits. */}
               <div
-                className="bg-white flex items-center justify-center p-6 transition-all hover:scale-105"
+                className="bg-white flex items-center justify-center p-4 md:p-6 transition-all hover:scale-105"
                 style={{
-                  width: "258px",
-                  height: "138px",
+                  width: "100%",
+                  maxWidth: "258px",
+                  aspectRatio: "258 / 138",
                   borderRadius: "20px",
                   boxShadow: "16.77px 25.15px 25.15px 0px #38A81B0D, -16.77px 25.15px 25.15px 0px #38A81B0D"
                 }}

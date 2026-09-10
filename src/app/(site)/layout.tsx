@@ -14,7 +14,13 @@ export default function SiteLayout({
         Skip to main content
       </a>
       <Navbar />
-      <main id="main-content" aria-label="Main content">{children}</main>
+      {/* overflow-x-clip: slide-in animations start offset past the screen
+          edge; unclipped, they widen the page (and the fixed mobile menu,
+          which sizes to it) until they animate in. clip, unlike hidden,
+          keeps sticky elements inside main working. */}
+      <main id="main-content" aria-label="Main content" className="overflow-x-clip">
+        {children}
+      </main>
       <Footer />
     </>
   );
