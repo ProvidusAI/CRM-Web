@@ -9,6 +9,8 @@ import {
   ServiceCaseStudiesSection,
   PageBlogsSection,
   FaqSection,
+  PlatformsSection,
+  TeamGallerySection,
 } from "@/components/sections";
 import NextDynamic from "next/dynamic";
 
@@ -120,7 +122,9 @@ export default async function HomePage() {
       {blogs.posts.length > 0 && (
         <PageBlogsSection title={blogs.title} posts={blogs.posts} />
       )}
+      <PlatformsSection />
       <FaqSection title="Frequently Asked Questions" faqs={faqs} />
+      <TeamGallerySection />
       <CtaSection />
     </>
   );
