@@ -1,6 +1,7 @@
 import { post } from "../src/sanity/schemaTypes/post";
 import { blockContent } from "../src/sanity/schemaTypes/blockContent";
 import type { BlogPost, CtaBannerBlock } from "../src/sanity/lib/types";
+import { BlogSummaryCard, splitParagraphs } from "../src/components/sanity/BlogSummaryCard";
 
 const failures: string[] = [];
 
@@ -24,6 +25,15 @@ check("ctaBanner has heading + image", bannerFields.includes("heading") && banne
 const typedPost: Pick<BlogPost, "summaryHeading" | "summaryText"> = { summaryHeading: "Summary", summaryText: "One\n\nTwo" };
 const typedBanner: CtaBannerBlock = { _type: "ctaBanner", heading: "Hi" };
 check("types compile", Boolean(typedPost) && Boolean(typedBanner), "unreachable");
+
+// ── Summary card ────────────────────────────────────────────────
+check("splits on blank lines", JSON.stringify(splitParagraphs("One.\n\nTwo.\n\n\nThree.")) === JSON.stringify(["One.", "Two.", "Three."]), "wrong split");
+check("keeps single line breaks inside a paragraph", splitParagraphs("a\nb").length === 1, "single newline split a paragraph");
+check("drops whitespace-only paragraphs", splitParagraphs("  \n\nOnly").length === 1, "kept an empty paragraph");
+check("summary hidden when heading blank", BlogSummaryCard({ heading: "  ", text: "Body" }) === null, "rendered with blank heading");
+check("summary hidden when text blank", BlogSummaryCard({ heading: "Summary", text: "" }) === null, "rendered with blank text");
+check("summary hidden when both undefined", BlogSummaryCard({}) === null, "rendered with nothing");
+check("summary renders when both filled", BlogSummaryCard({ heading: "Summary", text: "Body" }) !== null, "expected an element");
 
 if (failures.length > 0) {
   console.error("FAIL\n" + failures.map((f) => `  - ${f}`).join("\n"));

@@ -5,6 +5,7 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Heading, Text } from "@/components/ui/Typography";
 import { BlogAuthorCard } from "@/components/sanity/BlogAuthorCard";
+import { BlogSummaryCard } from "@/components/sanity/BlogSummaryCard";
 import {
   BlogArticleLeftSidebar,
   BlogArticleRightSidebar,
@@ -146,6 +147,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               shareUrl={shareUrl}
             />
             <article>
+              <BlogSummaryCard
+                heading={post.summaryHeading}
+                text={post.summaryText}
+              />
               <PortableContent value={post.body} contained={false} />
             </article>
             <BlogArticleRightSidebar categories={post.categories} />
