@@ -1,5 +1,6 @@
 import { post } from "../src/sanity/schemaTypes/post";
 import { blockContent } from "../src/sanity/schemaTypes/blockContent";
+import type { BlogPost, CtaBannerBlock } from "../src/sanity/lib/types";
 
 const failures: string[] = [];
 
@@ -17,6 +18,12 @@ const banner = members.find((member) => member.name === "ctaBanner");
 check("blockContent has ctaBanner", Boolean(banner), `members: ${members.map((m) => m.name).join(", ")}`);
 const bannerFields = (banner?.fields ?? []).map((field) => field.name);
 check("ctaBanner has heading + image", bannerFields.includes("heading") && bannerFields.includes("image"), `fields: ${bannerFields.join(", ")}`);
+
+// ── Types ───────────────────────────────────────────────────────
+// Compile-time: these assignments fail `tsx` if the types are missing.
+const typedPost: Pick<BlogPost, "summaryHeading" | "summaryText"> = { summaryHeading: "Summary", summaryText: "One\n\nTwo" };
+const typedBanner: CtaBannerBlock = { _type: "ctaBanner", heading: "Hi" };
+check("types compile", Boolean(typedPost) && Boolean(typedBanner), "unreachable");
 
 if (failures.length > 0) {
   console.error("FAIL\n" + failures.map((f) => `  - ${f}`).join("\n"));

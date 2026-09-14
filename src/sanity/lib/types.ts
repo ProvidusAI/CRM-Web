@@ -81,8 +81,17 @@ export interface BlogPostListItem {
 
 export interface BlogPost extends BlogPostListItem {
   body?: PortableTextBlock[];
+  summaryHeading?: string;
+  summaryText?: string;
   seo?: SeoFields;
   jsonLd?: JsonLdField;
+}
+
+/** The `ctaBanner` block editors insert into `blockContent`. */
+export interface CtaBannerBlock {
+  _type: "ctaBanner";
+  heading?: string;
+  image?: SanityImage;
 }
 
 export interface CaseStudyListItem {

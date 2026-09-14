@@ -98,6 +98,11 @@
   --color-gray-text: #5f5f5f;
   --color-migration-blue: #308fff;
   --color-footer-blue: #124f87;
+  /* Blog summary card and CTA banner gradients (Figma 602:856, 605:920) */
+  --color-summary-blue-start: #267de4;
+  --color-summary-blue-end: #154278;
+  --color-banner-grey-start: #616161;
+  --color-banner-grey-end: #0a0a0a;
 }
 
 /* ─── Base Styles ────────────────────────────────────────────── */

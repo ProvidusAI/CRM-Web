@@ -169,8 +169,16 @@ export const BLOG_POST_QUERY = defineQuery(`
       _type == "image" => {
         ${imageProjection},
         caption
+      },
+      _type == "ctaBanner" => {
+        heading,
+        image {
+          ${imageProjection}
+        }
       }
     },
+    summaryHeading,
+    summaryText,
     seo {
       ${seoProjection}
     },
