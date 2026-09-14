@@ -102,3 +102,13 @@ entirely, and so do pnpm majors older than 10, in both cases **without failing
 the build**. When that happens the `@sanity/table` patch silently stops applying
 in production. `packageManager` in `package.json` pins the version to guard it;
 if an install ever looks wrong, check the pnpm version in the build log first.
+
+As of 2026-09-14 the live build is **not** honouring the lockfile: the served
+Studio bundle carried `sanity` 4.22.1 (lockfile: 4.18.0) and lacked the
+`@sanity/table` patch. That fresh resolution pulled `xstate` 5.33, which makes
+every Studio edit dialog close on the first keystroke. `xstate` is therefore
+pinned to 5.31.1 twice — in `pnpm-workspace.yaml` `overrides` (pnpm) and in
+`package.json` `"overrides"` (npm) — so either installer produces a working
+Studio. Keep the two in sync. To confirm what production actually shipped,
+fetch the Studio's JS chunks and grep for the version string Sanity embeds
+(`PKG_BUILD_VERSION`).

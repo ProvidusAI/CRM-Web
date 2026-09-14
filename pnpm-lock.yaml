@@ -6,6 +6,7 @@ settings:
 
 overrides:
   '@portabletext/sanity-bridge': 1.2.14
+  xstate: 5.31.1
 
 patchedDependencies:
   '@sanity/table@2.0.1': b501d4a25fafaf6d0db906d63a4fca9852c4452b76dad84fefa4dd5a3fd8ef32
@@ -2450,7 +2451,7 @@ packages:
     resolution: {integrity: sha512-82jU3PvxQepY+jVJU1WaXQOf2Q9Q/fOCE2ksJZ4cnH3/WFOsg7RceYoOWb1XKthchTCD9zSBS9DRmb7FQ0Jlsg==}
     engines: {node: '>=18'}
     peerDependencies:
-      xstate: ^5.19.0
+      xstate: 5.31.1
     peerDependenciesMeta:
       xstate:
         optional: true
@@ -3063,7 +3064,7 @@ packages:
     resolution: {integrity: sha512-ep9F0jGTI63B/jE8GHdMpUqtuz7yRebNaKv8EMUaiSi29NOglywc2X2YSOV/ygbIK+LtmgZ0q9anoEA2iBSEOw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      xstate: ^5.28.0
+      xstate: 5.31.1
     peerDependenciesMeta:
       xstate:
         optional: true
