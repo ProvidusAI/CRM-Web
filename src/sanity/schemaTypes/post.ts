@@ -5,6 +5,7 @@ export const post = defineType({
   name: "post",
   title: "Blog post",
   type: "document",
+  groups: [{ name: "summary", title: "Summary card" }],
   fields: [
     defineField({
       name: "title",
@@ -59,6 +60,22 @@ export const post = defineType({
       title: "Body",
       type: "blockContent",
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "summaryHeading",
+      title: "Summary heading",
+      description:
+        "Shown in the blue card at the top of the article. The card only appears when both this and the text are filled.",
+      type: "string",
+      group: "summary",
+    }),
+    defineField({
+      name: "summaryText",
+      title: "Summary text",
+      description: "Leave a blank line between paragraphs.",
+      type: "text",
+      rows: 6,
+      group: "summary",
     }),
     defineField({
       name: "seo",

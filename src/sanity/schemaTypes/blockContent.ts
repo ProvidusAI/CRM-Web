@@ -67,5 +67,38 @@ export const blockContent = defineType({
       ],
     }),
     defineArrayMember({ type: "table" }),
+    defineArrayMember({
+      name: "ctaBanner",
+      title: "CTA banner",
+      type: "object",
+      fields: [
+        defineField({
+          name: "heading",
+          title: "Heading",
+          type: "string",
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: "image",
+          title: "Image",
+          description: "Sits in the bottom-right corner of the banner.",
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alt text",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+          ],
+          validation: (rule) => rule.required().assetRequired(),
+        }),
+      ],
+      preview: {
+        select: { title: "heading", media: "image" },
+        prepare: ({ title, media }) => ({ title: title || "CTA banner", subtitle: "CTA banner", media }),
+      },
+    }),
   ],
 });

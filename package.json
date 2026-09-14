@@ -19,6 +19,7 @@
     "check:page-blogs": "tsx scripts/check-page-blogs.ts",
     "check:new-sections": "tsx scripts/check-new-sections.ts",
     "check:slugs": "tsx scripts/check-slugs.ts",
+    "check:blog-blocks": "tsx scripts/check-blog-blocks.ts",
     "import:migration": "tsx scripts/import-migration-page.ts",
     "thumbs:sections": "tsx scripts/capture-section-thumbnails.ts",
     "sanity:deploy": "sanity deploy",
