@@ -23,11 +23,6 @@ export function BlogCtaBanner({ value }: BlogCtaBannerProps) {
       data-testid="blog-cta-banner"
       className="relative my-4 overflow-hidden rounded-[10px] bg-linear-[100deg] from-banner-grey-start from-[6%] to-banner-grey-end to-[97%] md:min-h-[260px]"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-[18%] top-[10%] h-[260px] w-[260px] rounded-full bg-brand-green-light opacity-60 blur-2xl"
-      />
-
       <div className="relative z-10 max-w-[420px] p-7 md:p-8">
         <Heading as="h3" level="h4" className="text-white">
           {heading}
@@ -39,8 +34,12 @@ export function BlogCtaBanner({ value }: BlogCtaBannerProps) {
         </Link>
       </div>
 
-      {/* Static and right-aligned on phones; pinned to the corner from md up. */}
+      {/* Static and right-aligned on phones; pinned to the corner from md up. Glow positioned inside wrapper to track image at all breakpoints. */}
       <div className="relative ml-auto mt-4 aspect-[4/3] w-[70%] md:absolute md:bottom-0 md:right-0 md:mt-0 md:w-[min(52%,340px)]">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -inset-[12%] rounded-full bg-brand-green-light opacity-60 blur-2xl"
+        />
         <SanityImage
           image={value.image}
           altFallback={heading}
