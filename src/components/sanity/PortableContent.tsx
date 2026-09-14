@@ -7,6 +7,8 @@ import { SanityImage } from "./SanityImage";
 import type { SanityImage as SanityImageType } from "@/sanity/lib/types";
 import { getArticleHeadingId } from "@/lib/portableText";
 import { getSanityImageAspectRatio } from "@/lib/sanityImage";
+import { BlogCtaBanner } from "./BlogCtaBanner";
+import type { CtaBannerBlock } from "@/sanity/lib/types";
 
 interface PortableContentProps {
   value?: PortableTextBlock[];
@@ -186,6 +188,7 @@ const components: PortableTextComponents = {
         </figure>
       );
     },
+    ctaBanner: ({ value }) => <BlogCtaBanner value={value as CtaBannerBlock} />,
   },
 };
 

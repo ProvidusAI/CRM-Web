@@ -2,6 +2,7 @@ import { post } from "../src/sanity/schemaTypes/post";
 import { blockContent } from "../src/sanity/schemaTypes/blockContent";
 import type { BlogPost, CtaBannerBlock } from "../src/sanity/lib/types";
 import { BlogSummaryCard, splitParagraphs } from "../src/components/sanity/BlogSummaryCard";
+import { BlogCtaBanner } from "../src/components/sanity/BlogCtaBanner";
 
 const failures: string[] = [];
 
@@ -34,6 +35,12 @@ check("summary hidden when heading blank", BlogSummaryCard({ heading: "  ", text
 check("summary hidden when text blank", BlogSummaryCard({ heading: "Summary", text: "" }) === null, "rendered with blank text");
 check("summary hidden when both undefined", BlogSummaryCard({}) === null, "rendered with nothing");
 check("summary renders when both filled", BlogSummaryCard({ heading: "Summary", text: "Body" }) !== null, "expected an element");
+
+// ── CTA banner ──────────────────────────────────────────────────
+const bannerImage = { alt: "Dashboard", asset: { _id: "img", url: "https://cdn.example/dash.webp" } };
+check("banner hidden without an image asset", BlogCtaBanner({ value: { _type: "ctaBanner", heading: "Go" } }) === null, "rendered without image");
+check("banner hidden without a heading", BlogCtaBanner({ value: { _type: "ctaBanner", heading: " ", image: bannerImage } }) === null, "rendered without heading");
+check("banner renders with heading + image", BlogCtaBanner({ value: { _type: "ctaBanner", heading: "Go", image: bannerImage } }) !== null, "expected an element");
 
 if (failures.length > 0) {
   console.error("FAIL\n" + failures.map((f) => `  - ${f}`).join("\n"));
