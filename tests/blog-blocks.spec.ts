@@ -3,24 +3,31 @@ import { test, expect, type Page } from "@playwright/test";
 // Both blocks are editor-driven, so the test looks for a post that has them
 // and skips (rather than fails) when the dataset has none yet. Direct-render
 // cases live in scripts/check-blog-blocks.ts.
+//
+// This crawls via page.request (plain HTTP fetches of the server-rendered
+// HTML) rather than page.goto for each candidate post: against the dev
+// server a single post page can take longer than the test timeout to reach
+// "load" (route compile + Sanity fetch + third-party scripts), so a
+// browser-driven crawl over several posts can exceed the timeout and fail
+// the test instead of skipping it. Both blocks are server-rendered, so the
+// marker is present in the HTML without a browser; only the matching post
+// (if any) is then loaded with page.goto for the real assertions.
 async function findPostWith(page: Page, testId: string): Promise<string | null> {
-  await page.goto("/blog");
-  const hrefs = await page
-    .locator('main a[href^="/blog/"]')
-    .evaluateAll((links) =>
-      Array.from(new Set(links.map((a) => a.getAttribute("href") ?? "")))
-        .filter((href) => href.split("/").length === 3)
-        .slice(0, 8)
-    );
+  const index = await page.request.get("/blog");
+  const hrefs = Array.from(
+    new Set((await index.text()).match(/href="(\/blog\/[^"/]+)"/g) ?? [])
+  ).map((m) => m.slice(6, -1));
 
-  for (const href of hrefs) {
-    await page.goto(href);
-    if ((await page.getByTestId(testId).count()) > 0) return href;
+  for (const href of hrefs.slice(0, 12)) {
+    const html = await (await page.request.get(href)).text();
+    if (html.includes(`data-testid="${testId}"`)) return href;
   }
   return null;
 }
 
 test.describe("Blog summary card and CTA banner", () => {
+  test.setTimeout(120_000);
+
   test("summary card sits inside the article above the body", async ({ page }) => {
     const href = await findPostWith(page, "blog-summary-card");
     test.skip(href === null, "no post has a summary card yet");
