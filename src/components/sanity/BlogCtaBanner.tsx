@@ -22,9 +22,9 @@ export function BlogCtaBanner({ value }: BlogCtaBannerProps) {
   return (
     <div
       data-testid="blog-cta-banner"
-      className="@container relative my-4 overflow-hidden rounded-[10px] bg-linear-[100deg] from-banner-grey-start from-[6%] to-banner-grey-end to-[97%] @xl:min-h-[260px]"
+      className="@container relative my-4 overflow-hidden rounded-[10px] bg-linear-[100deg] from-banner-grey-start from-[6%] to-banner-grey-end to-[97%]"
     >
-      <div className="relative z-10 p-7 @xl:w-[calc(100%-min(52%,340px))] @xl:p-8">
+      <div className="relative z-10 p-7 @xl:min-h-[260px] @xl:w-[calc(100%-min(52%,340px))] @xl:p-8">
         <Heading as="h3" level="h4" className="text-white">
           {heading}
         </Heading>
