@@ -15,6 +15,22 @@ const imageProjection = `
   alt
 `;
 
+// Shared by every blockContent field: expands image assets and the CTA
+// banner's image so BlogCtaBanner can render wherever an editor inserts it.
+const portableBodyProjection = `
+  ...,
+  _type == "image" => {
+    ${imageProjection},
+    caption
+  },
+  _type == "ctaBanner" => {
+    heading,
+    image {
+      ${imageProjection}
+    }
+  }
+`;
+
 const seoProjection = `
   metaTitle,
   metaDescription,
@@ -165,17 +181,7 @@ export const BLOG_POST_QUERY = defineQuery(`
       }
     },
     body[] {
-      ...,
-      _type == "image" => {
-        ${imageProjection},
-        caption
-      },
-      _type == "ctaBanner" => {
-        heading,
-        image {
-          ${imageProjection}
-        }
-      }
+      ${portableBodyProjection}
     },
     summaryHeading,
     summaryText,
@@ -226,32 +232,16 @@ export const CASE_STUDY_QUERY = defineQuery(`
       ${imageProjection}
     },
     challenge[] {
-      ...,
-      _type == "image" => {
-        ${imageProjection},
-        caption
-      }
+      ${portableBodyProjection}
     },
     solution[] {
-      ...,
-      _type == "image" => {
-        ${imageProjection},
-        caption
-      }
+      ${portableBodyProjection}
     },
     results[] {
-      ...,
-      _type == "image" => {
-        ${imageProjection},
-        caption
-      }
+      ${portableBodyProjection}
     },
     body[] {
-      ...,
-      _type == "image" => {
-        ${imageProjection},
-        caption
-      }
+      ${portableBodyProjection}
     },
     seo {
       ${seoProjection}

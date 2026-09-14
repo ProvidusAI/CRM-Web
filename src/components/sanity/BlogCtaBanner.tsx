@@ -1,3 +1,4 @@
+// Load-bearing for `pnpm check:blog-blocks`: tsx uses the classic JSX transform here.
 import React from "react";
 import Link from "next/link";
 import { CtaButton } from "@/components/ui/CtaButton";

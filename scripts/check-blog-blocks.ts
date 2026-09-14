@@ -22,7 +22,9 @@ const bannerFields = (banner?.fields ?? []).map((field) => field.name);
 check("ctaBanner has heading + image", bannerFields.includes("heading") && bannerFields.includes("image"), `fields: ${bannerFields.join(", ")}`);
 
 // ── Types ───────────────────────────────────────────────────────
-// Compile-time: these assignments fail `tsx` if the types are missing.
+// Compile-time: `tsx` strips types without checking them, so these assignments
+// don't fail here. The real gate is `pnpm type-check`, which fails if the
+// exported types or fields these rely on go missing.
 const typedPost: Pick<BlogPost, "summaryHeading" | "summaryText"> = { summaryHeading: "Summary", summaryText: "One\n\nTwo" };
 const typedBanner: CtaBannerBlock = { _type: "ctaBanner", heading: "Hi" };
 check("types compile", Boolean(typedPost) && Boolean(typedBanner), "unreachable");

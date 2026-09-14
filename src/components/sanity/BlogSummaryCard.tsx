@@ -1,3 +1,4 @@
+// Load-bearing for `pnpm check:blog-blocks`: tsx uses the classic JSX transform here.
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,7 +32,7 @@ export function BlogSummaryCard({ heading, text }: BlogSummaryCardProps) {
   return (
     <aside
       data-testid="blog-summary-card"
-      aria-label={displayHeading}
+      aria-labelledby="blog-summary-heading"
       className="mb-10 grid gap-8 rounded-[10px] bg-linear-[192deg] from-summary-blue-start from-[7%] to-summary-blue-end to-[108%] p-7 text-white md:grid-cols-[152px_minmax(0,1fr)]"
     >
       <div className="flex flex-col gap-4">
@@ -54,7 +55,7 @@ export function BlogSummaryCard({ heading, text }: BlogSummaryCardProps) {
       </div>
 
       <div>
-        <Heading as="h2" level="h3" className="text-white">
+        <Heading as="h2" level="h3" id="blog-summary-heading" className="text-white">
           {displayHeading}
         </Heading>
         <div className="mt-5 space-y-4">
