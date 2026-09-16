@@ -59,6 +59,7 @@ const categories = [
     icon: "/images/salesforce-managed-services.svg",
     boxGradient: "linear-gradient(185.05deg, rgba(220, 255, 229, 0) 8.14%, #DCFFE5 99.18%)",
     iconGradient: "linear-gradient(180deg, #9EFFB8 0%, #F8FBFF 136.56%)",
+    href: "/services/salesforce-managed-services",
   },
   {
     title: "Salesforce Support and Maintenance",

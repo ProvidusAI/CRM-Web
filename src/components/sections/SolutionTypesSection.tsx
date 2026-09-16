@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
+import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { Heading, Text } from "@/components/ui/Typography";
 
 export interface SolutionTypeCard {
@@ -44,6 +45,7 @@ export function SolutionTypesSection({
       <Container>
         {/* Heading block */}
         <div className="flex flex-col items-center text-center">
+          <GreenLineMark className="mb-6 h-auto w-16" />
           <Heading as="h2" className="max-w-[604px] text-black">
             {heading}
           </Heading>

@@ -12,6 +12,7 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "@/components/ui/Carousel";
+import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { Heading, Text } from "@/components/ui/Typography";
 import { PLATFORM_HREFS } from "@/lib/platformPages";
 import { useEffect, useState } from "react";
@@ -61,31 +62,7 @@ export function ExpertisePlatformsSection({
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center max-w-3xl mx-auto mb-16 md:mb-24 flex flex-col items-center"
         >
-          <div className="text-[#A0FF88] mb-4">
-            <svg
-              width="64"
-              height="32"
-              viewBox="0 0 64 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M4 28L20 8L32 20L48 4L56 12"
-                stroke="currentColor"
-                strokeWidth="6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M24 28L36 12L44 20L60 4"
-                stroke="currentColor"
-                strokeWidth="6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="opacity-50"
-              />
-            </svg>
-          </div>
+          <GreenLineMark className="mb-6 h-auto w-16" />
           <Heading as="h2" className="text-slate-900 font-bold leading-tight">
             {title}
           </Heading>

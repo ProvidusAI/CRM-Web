@@ -63,8 +63,9 @@ export function TrueCostSection({
             )}
           </div>
 
-          {/* Two columns: 543px cards / 647px panel, 50px gap (Figma) */}
-          <div className="mt-12 flex flex-col gap-[50px] lg:mt-16 lg:flex-row lg:items-start">
+          {/* Two columns: 543px cards / 647px panel, 50px gap (Figma). The columns
+              stretch so the panel ends level with the last card. */}
+          <div className="mt-12 flex flex-col gap-[50px] lg:mt-16 lg:flex-row">
             {/* Left column */}
             <div className="w-full lg:max-w-[543px]">
               {intro.map((paragraph, index) => (

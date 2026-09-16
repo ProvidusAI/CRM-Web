@@ -38,6 +38,7 @@ const partnershipCards = [
     description:
       "As a FinDock partner, we configure payment architecture inside Salesforce for nonprofits and subscription-based businesses. FinDock connects Salesforce to payment processors, direct debit systems, and recurring giving platforms, keeping payment data inside your CRM rather than in disconnected finance systems.",
     icon: "/images/partnership-logos/findock.png",
+    href: "/partnership/findock",
     bgImage: "/images/get-it-right-bg.webp",
   },
   {
@@ -45,6 +46,7 @@ const partnershipCards = [
     description:
       "We are a certified FundraiseUp partner, implementing conversion-optimised donation experiences for nonprofits, connected directly to Salesforce Nonprofit Cloud and NPSP. Donation forms, recurring giving, and donor facing checkout flows sit within FundraiseUp while donor data lands cleanly in Salesforce.",
     icon: "/images/partnership-logos/fundraiseup.png",
+    href: "/partnership/fundraise-up",
     bgImage: "/images/outcome-bg.webp",
   },
   {
@@ -52,6 +54,7 @@ const partnershipCards = [
     description:
       "As a Dotdigital partner, we deliver marketing automation for organisations that need something between Marketing Cloud and lightweight email tools. Dotdigital integrates with Salesforce for segmentation, journeys, and reporting, particularly well-suited to nonprofits, higher education, and mid-market businesses.",
     icon: "/images/partnership-logos/dotdigital.png",
+    href: "/partnership/dotdigital",
     bgImage: "/images/drive-self-bg.webp",
   },
 ];

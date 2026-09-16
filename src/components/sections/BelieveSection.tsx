@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/layout/Container";
@@ -94,6 +95,8 @@ interface CardItem {
   icon: string;
   bgImage?: string;
   bgColor?: string;
+  /** Links the card title (e.g. a partner card to its partner page). */
+  href?: string;
 }
 
 function BelieveCard({ card }: { card: CardItem }) {
@@ -164,7 +167,13 @@ function BelieveCard({ card }: { card: CardItem }) {
           className="flex flex-col items-center text-center px-6 pb-12 pt-[240px] flex-1"
         >
           <Text variant="p1" className="text-black font-semibold mb-3">
-            {card.title}
+            {card.href ? (
+              <Link href={card.href} className="transition-opacity hover:opacity-80">
+                {card.title}
+              </Link>
+            ) : (
+              card.title
+            )}
           </Text>
           <Text variant="p4" className="text-[#4F4D4B] leading-relaxed flex-1 flex items-center justify-center">
             {card.description}

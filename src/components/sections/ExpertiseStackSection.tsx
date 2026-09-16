@@ -16,6 +16,8 @@ interface ExpertiseItem {
   icon: string;
   image: string;
   href?: string;
+  /** Kept out of the stack until the cloud has its own page. */
+  hidden?: boolean;
 }
 
 const expertiseData: ExpertiseItem[] = [
@@ -71,6 +73,8 @@ const expertiseData: ExpertiseItem[] = [
     color: "var(--color-explore-violet)",
     icon: "/images/revenue-cloud.webp",
     image: "/images/revenue-cloud-expertise.webp",
+    // Hidden until the Revenue Cloud page ships (next phase); add its href then.
+    hidden: true,
   },
   {
     title: "Sales Cloud",
@@ -88,7 +92,7 @@ export function ExpertiseStackSection() {
     <section className="relative bg-white pb-32">
       <Container>
         <div className="flex flex-col relative">
-          {expertiseData.map((item, index) => (
+          {expertiseData.filter((item) => !item.hidden).map((item, index) => (
             <Card 
               key={index} 
               index={index} 
@@ -131,9 +135,11 @@ function Card({ index, title, subtitle, text, color, icon, image, href }: CardPr
   );
   const arrowClasses =
     "w-10 h-10 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center transition-all hover:bg-white shrink-0";
+  // Stacks only from md: a phone-width card is taller than the screen, so the
+  // next one slid over it before its text was reachable. Below md they scroll.
   return (
     <div 
-      className="h-[80vh] md:h-[90vh] flex items-start justify-center sticky pt-8"
+      className="flex items-start justify-center pt-8 md:sticky md:h-[90vh]"
       style={{ 
         zIndex: index,
         top: `7rem`

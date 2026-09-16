@@ -68,8 +68,9 @@ export function ServiceCaseStudiesSection({
               direction="up"
               delay={index * 0.08}
               width="100%"
+              height="100%"
             >
-              <article className="group">
+              <article className="group h-full">
                 <Link
                   href={`/case-studies/${caseStudy.slug}`}
                   className="relative block aspect-[1.95/1] overflow-hidden rounded-[10px] bg-brand-blue-light"
@@ -88,7 +89,10 @@ export function ServiceCaseStudiesSection({
                   )}
                 </Link>
 
-                <div className="mt-6 grid gap-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+                {/* items-start pins the button to the top of the text block, so
+                    it sits at the same height in every card whatever the title
+                    length (items-end pushed it down with each extra line). */}
+                <div className="mt-6 grid gap-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start">
                   <div>
                     {caseStudy.label && (
                       <Text variant="p4" className="text-brand-blue">

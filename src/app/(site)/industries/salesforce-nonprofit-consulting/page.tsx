@@ -322,12 +322,7 @@ export default async function SalesforceNonprofitConsultingPage() {
 
       {/* 11. Solutions by nonprofit type (Figma 54:394) */}
       <SolutionTypesSection
-        heading={
-          <>
-            Solutions We&rsquo;ve Delivered For Different Types of Nonprofits{" "}
-            <GreenLineMark className="inline-block -mb-2 ml-1" />
-          </>
-        }
+        heading="Solutions We’ve Delivered For Different Types of Nonprofits"
         subtitle="Every nonprofit runs differently. Configuration reflects what your specific type of organisation needs."
         cards={[
           {
