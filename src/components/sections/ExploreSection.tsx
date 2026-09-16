@@ -117,9 +117,9 @@ export function ExploreSection() {
                   </div>
 
                   {/* Graphic/Illustration */}
-                  <div className="absolute right-0 bottom-0 h-full w-[50%] pointer-events-none overflow-hidden rounded-r-[16px]">
-                    {/* Glowing background */}
-                    <div className="absolute bottom-[-10%] right-[-10%] w-[200px] h-[200px] bg-[#267DE4]/30 blur-3xl rounded-full" />
+                  <div className="absolute right-0 bottom-0 h-full w-[65%] md:w-[50%] pointer-events-none overflow-hidden rounded-r-[16px]">
+                    {/* Glowing background. On phones it is wider than this box, which clips its blur into a hard vertical line. */}
+                    <div className="absolute bottom-[-10%] right-[-10%] hidden md:block w-[200px] h-[200px] bg-[#267DE4]/30 blur-3xl rounded-full" />
 
                     {/* Dashboard Image */}
                     <motion.div
@@ -168,9 +168,9 @@ export function ExploreSection() {
                   </div>
 
                   {/* Graphic/Illustration */}
-                  <div className="absolute right-0 bottom-0 h-full w-[50%] pointer-events-none overflow-hidden rounded-r-[16px]">
-                    {/* Glowing background */}
-                    <div className="absolute bottom-[-10%] right-[-10%] w-[200px] h-[200px] bg-[#686868]/30 blur-3xl rounded-full" />
+                  <div className="absolute right-0 bottom-0 h-full w-[65%] md:w-[50%] pointer-events-none overflow-hidden rounded-r-[16px]">
+                    {/* Glowing background. On phones it is wider than this box, which clips its blur into a hard vertical line. */}
+                    <div className="absolute bottom-[-10%] right-[-10%] hidden md:block w-[200px] h-[200px] bg-[#686868]/30 blur-3xl rounded-full" />
 
                     {/* Platform Image */}
                     <motion.div

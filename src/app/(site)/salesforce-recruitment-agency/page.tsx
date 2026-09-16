@@ -620,6 +620,7 @@ export default async function SalesforceStaffAugmentationPage() {
         backgroundColor="linear-gradient(60deg, var(--color-brand-green) 37.293%, var(--color-brand-green-light) 91.441%)"
         image="/images/staff-augmentation/recruitment-experts.webp"
         imageAlt="A ProvidusCRM recruiter, with a list of the Salesforce roles she places"
+        buttonVariant="white"
       />
 
       {/* 9. Featured roles */}

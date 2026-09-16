@@ -1,11 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Reveal } from "@/components/ui/Reveal";
+import {
+  Carousel,
+  type CarouselApi,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/Carousel";
+import { cn } from "@/lib/utils";
 
 const teamThoughts = [
   {
@@ -46,6 +53,113 @@ const teamThoughts = [
   }
 ];
 
+type TeamMember = (typeof teamThoughts)[number];
+
+function QuoteIcon() {
+  return (
+    <svg width="60" height="44" viewBox="0 0 60 44" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15.4286 0C6.90738 0 0 6.90738 0 15.4286V43.2857H25.7143V15.4286H8.57143C8.57143 11.6429 11.6429 8.57143 15.4286 8.57143V0ZM49.7143 0C41.1931 0 34.2857 6.90738 34.2857 15.4286V43.2857H60V15.4286H42.8571C42.8571 11.6429 45.9286 8.57143 49.7143 8.57143V0Z" />
+    </svg>
+  );
+}
+
+const AUTOPLAY_MS = 6000;
+
+// Below md the member cards are dropped: each quote card is a slide instead.
+// It advances on a timer until the visitor swipes or taps a dot, then stays
+// under their control (and never autoplays with reduced motion).
+function MobileTeamCarousel({ members }: { members: TeamMember[] }) {
+  const [api, setApi] = useState<CarouselApi>(undefined);
+  const [selected, setSelected] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) setIsPaused(true);
+  }, []);
+
+  useEffect(() => {
+    if (!api) return;
+    const onSelect = () => setSelected(api.selectedScrollSnap());
+    const onPointerDown = () => setIsPaused(true);
+    onSelect();
+    api.on("select", onSelect);
+    api.on("pointerDown", onPointerDown);
+    return () => {
+      api.off("select", onSelect);
+      api.off("pointerDown", onPointerDown);
+    };
+  }, [api]);
+
+  // `selected` restarts the timer, so every slide gets the full interval.
+  useEffect(() => {
+    if (!api || isPaused) return;
+    const timer = setTimeout(() => api.scrollNext(), AUTOPLAY_MS);
+    return () => clearTimeout(timer);
+  }, [api, isPaused, selected]);
+
+  return (
+    <Carousel opts={{ loop: true }} setApi={setApi} aria-label="Team quotes">
+      <CarouselContent className="pb-8">
+        {members.map((member, index) => (
+          <CarouselItem key={member.id} aria-label={`${index + 1} of ${members.length}`}>
+            <div className="flex h-full flex-col overflow-hidden rounded-[20px] bg-white shadow-2xl">
+              <div className="relative aspect-square w-full shrink-0">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+              </div>
+              <div className="relative flex flex-1 flex-col p-8">
+                <div className="pointer-events-none absolute right-8 top-8 text-brand-blue-light opacity-80">
+                  <QuoteIcon />
+                </div>
+                <Heading as="h3" level="h4" className="mb-8 pr-12 font-heading font-medium leading-relaxed text-black">
+                  “{member.quote}”
+                </Heading>
+                <div className="mt-auto border-t border-gray-100 pt-6">
+                  <Text variant="p1" className="mb-1 font-bold text-black">
+                    {member.displayName}
+                  </Text>
+                  <Text variant="p3" className="text-gray-500">
+                    {member.fullDesignation}
+                  </Text>
+                </div>
+              </div>
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+
+      <div className="flex justify-center gap-1">
+        {members.map((member, index) => (
+          <button
+            key={member.id}
+            type="button"
+            aria-label={`Show ${member.displayName}'s quote`}
+            aria-current={selected === index}
+            onClick={() => {
+              setIsPaused(true);
+              api?.scrollTo(index);
+            }}
+            className="flex h-6 min-w-6 items-center justify-center"
+          >
+            <span
+              className={cn(
+                "block h-2 rounded-full bg-white transition-all duration-300",
+                selected === index ? "w-6" : "w-2 opacity-40"
+              )}
+            />
+          </button>
+        ))}
+      </div>
+    </Carousel>
+  );
+}
+
 export function TeamThoughtsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeMember = teamThoughts[activeIndex];
@@ -80,146 +194,152 @@ export function TeamThoughtsSection() {
           </div>
         </Reveal>
 
-        {/* Large Message Card */}
-        <Reveal direction="up" delay={0.2}>
-          <div
-            className="bg-white flex flex-col md:flex-row w-full overflow-hidden shadow-2xl mb-12"
-            style={{
-              borderRadius: "20px"
-            }}
-          >
-            {/* Left side Image */}
-            <div className="w-full md:w-[360px] lg:w-[420px] shrink-0 relative aspect-square md:aspect-auto min-h-[350px] md:min-h-[420px]">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeMember.id}
-                  className="absolute inset-0"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Image
-                    src={activeMember.image}
-                    alt={activeMember.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 420px"
-                    className="object-cover"
-                    style={{
-                      borderRadius: "20px 20px 0 0" // default rounded for mobile top
-                    }}
-                  />
-                  {/* Subtle dark gradient overlay to match image style */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-                </motion.div>
-              </AnimatePresence>
-            </div>
+        <Reveal direction="up" delay={0.2} className="md:hidden">
+          <MobileTeamCarousel members={teamThoughts} />
+        </Reveal>
 
-            {/* Right side Quote/Details */}
-            <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-between flex-1 relative min-h-[350px]">
-              {/* Double Quote Icon */}
-              <div className="absolute top-8 right-8 lg:top-12 lg:right-12 text-[#E2F2FF] opacity-80 pointer-events-none">
-                <svg width="60" height="44" viewBox="0 0 60 44" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M15.4286 0C6.90738 0 0 6.90738 0 15.4286V43.2857H25.7143V15.4286H8.57143C8.57143 11.6429 11.6429 8.57143 15.4286 8.57143V0ZM49.7143 0C41.1931 0 34.2857 6.90738 34.2857 15.4286V43.2857H60V15.4286H42.8571C42.8571 11.6429 45.9286 8.57143 49.7143 8.57143V0Z" />
-                </svg>
-              </div>
-
-              {/* Quote Text */}
-              <div className="pr-12 md:pr-16 flex-1 flex items-center">
+        <div className="hidden md:block">
+          {/* Large Message Card */}
+          <Reveal direction="up" delay={0.2}>
+            <div
+              className="bg-white flex flex-col md:flex-row w-full overflow-hidden shadow-2xl mb-12"
+              style={{
+                borderRadius: "20px"
+              }}
+            >
+              {/* Left side Image */}
+              <div className="w-full md:w-[360px] lg:w-[420px] shrink-0 relative aspect-square md:aspect-auto min-h-[350px] md:min-h-[420px]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeMember.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Heading as="h3" level="h4" className="text-black font-medium leading-relaxed font-heading pr-4">
-                      “{activeMember.quote}”
-                    </Heading>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* Author Details */}
-              <div className="mt-8 pt-6 border-t border-gray-100 shrink-0">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeMember.id}
+                    className="absolute inset-0"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <Text variant="p1" className="text-black font-bold mb-1">
-                      {activeMember.displayName}
-                    </Text>
-                    <Text variant="p3" className="text-gray-500">
-                      {activeMember.fullDesignation}
-                    </Text>
+                    <Image
+                      src={activeMember.image}
+                      alt={activeMember.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 420px"
+                      className="object-cover"
+                      style={{
+                        borderRadius: "20px 20px 0 0" // default rounded for mobile top
+                      }}
+                    />
+                    {/* Subtle dark gradient overlay to match image style */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                   </motion.div>
                 </AnimatePresence>
               </div>
-            </div>
-          </div>
-        </Reveal>
 
-        {/* Small Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {teamThoughts.map((member, index) => {
-            const isActive = activeIndex === index;
-            return (
-              <Reveal
-                key={member.id}
-                direction="up"
-                delay={0.3 + index * 0.1}
-              >
-                <div
-                  className={`cursor-pointer transition-all duration-300 flex flex-col items-center select-none w-full max-w-[284px] ${isActive ? "ring-4 ring-white/30 translate-y-[-8px]" : "hover:translate-y-[-4px]"
-                    }`}
-                  tabIndex={0}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  onClick={() => setActiveIndex(index)}
-                  onFocus={() => setActiveIndex(index)}
-                  style={{
-                    borderRadius: "40px",
-                    boxShadow: "0px 16.25px 35.54px 0px rgba(0, 0, 0, 0.04), 0px 63.97px 63.97px 0px rgba(0, 0, 0, 0.04), 0px 144.19px 86.31px 0px rgba(0, 0, 0, 0.02), 0px 255.88px 102.56px 0px rgba(0, 0, 0, 0.01), 0px 399.05px 111.69px 0px rgba(0, 0, 0, 0.0)",
-                    backdropFilter: "blur(32.492881774902344px)",
-                    background: isActive
-                      ? "rgba(255, 255, 255, 0.95)"
-                      : "rgba(255, 255, 255, 0.85)",
-                    padding: "8px"
-                  }}
+              {/* Right side Quote/Details */}
+              <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-between flex-1 relative min-h-[350px]">
+                {/* Double Quote Icon */}
+                <div className="absolute top-8 right-8 lg:top-12 lg:right-12 text-[#E2F2FF] opacity-80 pointer-events-none">
+                  <QuoteIcon />
+                </div>
+
+                {/* Quote Text */}
+                <div className="pr-12 md:pr-16 flex-1 flex items-center">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeMember.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Heading as="h3" level="h4" className="text-black font-medium leading-relaxed font-heading pr-4">
+                        “{activeMember.quote}”
+                      </Heading>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {/* Author Details */}
+                <div className="mt-8 pt-6 border-t border-gray-100 shrink-0">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeMember.id}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Text variant="p1" className="text-black font-bold mb-1">
+                        {activeMember.displayName}
+                      </Text>
+                      <Text variant="p3" className="text-gray-500">
+                        {activeMember.fullDesignation}
+                      </Text>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Small Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {teamThoughts.map((member, index) => {
+              const isActive = activeIndex === index;
+              return (
+                <Reveal
+                  key={member.id}
+                  direction="up"
+                  delay={0.3 + index * 0.1}
+                  height="100%"
                 >
-                  {/* Photo with radius 32px */}
+                  {/* h-full: a two-line designation made one card taller than the rest. */}
                   <div
-                    className="relative w-[268px] h-[284px] overflow-hidden mb-6 shrink-0"
+                    className={`cursor-pointer transition-all duration-300 flex flex-col items-center select-none w-full h-full max-w-[284px] ${isActive ? "ring-4 ring-white/30 translate-y-[-8px]" : "hover:translate-y-[-4px]"
+                      }`}
+                    tabIndex={0}
+                    onMouseEnter={() => setActiveIndex(index)}
+                    onClick={() => setActiveIndex(index)}
+                    onFocus={() => setActiveIndex(index)}
                     style={{
-                      borderRadius: "32px"
+                      borderRadius: "40px",
+                      boxShadow: "0px 16.25px 35.54px 0px rgba(0, 0, 0, 0.04), 0px 63.97px 63.97px 0px rgba(0, 0, 0, 0.04), 0px 144.19px 86.31px 0px rgba(0, 0, 0, 0.02), 0px 255.88px 102.56px 0px rgba(0, 0, 0, 0.01), 0px 399.05px 111.69px 0px rgba(0, 0, 0, 0.0)",
+                      backdropFilter: "blur(32.492881774902344px)",
+                      background: isActive
+                        ? "rgba(255, 255, 255, 0.95)"
+                        : "rgba(255, 255, 255, 0.85)",
+                      padding: "8px"
                     }}
                   >
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      sizes="268px"
-                      className="object-cover"
-                    />
-                  </div>
+                    {/* Photo with radius 32px */}
+                    <div
+                      className="relative w-[268px] h-[284px] overflow-hidden mb-6 shrink-0"
+                      style={{
+                        borderRadius: "32px"
+                      }}
+                    >
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        fill
+                        sizes="268px"
+                        className="object-cover"
+                      />
+                    </div>
 
-                  {/* Name and Designation */}
-                  <div className="text-center px-2 flex flex-col items-center">
-                    <Text variant="p1" className="text-black font-bold mb-2">
-                      {member.name}
-                    </Text>
-                    <Text variant="p3" className="text-gray-500 leading-snug">
-                      {member.designation}
-                    </Text>
+                    {/* Name and Designation */}
+                    <div className="text-center px-2 flex flex-col items-center">
+                      <Text variant="p1" className="text-black font-bold mb-2">
+                        {member.name}
+                      </Text>
+                      <Text variant="p3" className="text-gray-500 leading-snug">
+                        {member.designation}
+                      </Text>
+                    </div>
                   </div>
-                </div>
-              </Reveal>
-            );
-          })}
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
       </Container>
     </section>

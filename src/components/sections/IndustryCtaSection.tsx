@@ -52,8 +52,8 @@ export function IndustryCtaSection({
               </Link>
             </div>
 
-            {/* Right column — image sits in-flow on mobile */}
-            <div className="px-8 pb-10 lg:hidden">
+            {/* Right column — image sits in-flow on mobile, on the card's bottom edge */}
+            <div className="px-8 lg:hidden">
               <Image
                 src={image}
                 alt={imageAlt}

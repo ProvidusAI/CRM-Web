@@ -11,6 +11,8 @@ interface SalesforceConsultCtaSectionProps {
   backgroundColor?: string;
   image?: string;
   imageAlt?: string;
+  /** "white" is the hero's button, for backgrounds the green one disappears into. */
+  buttonVariant?: "filled" | "white";
 }
 
 export function SalesforceConsultCtaSection({
@@ -20,6 +22,7 @@ export function SalesforceConsultCtaSection({
   backgroundColor,
   image,
   imageAlt = "",
+  buttonVariant = "filled",
 }: SalesforceConsultCtaSectionProps) {
   // Sanity sends "" for a blank field, and a default parameter only fires on
   // undefined — which rendered an empty heading and a labelless button.
@@ -35,11 +38,12 @@ export function SalesforceConsultCtaSection({
     <section className="bg-white py-16 md:py-24 mt-24">
       <Container>
         <div
-          className="relative overflow-visible rounded-[8px] px-6 py-10 md:px-14 md:py-16 lg:min-h-[320px]"
+          className="relative overflow-visible rounded-[8px] px-6 pt-10 md:px-14 md:pt-16 lg:min-h-[320px] lg:pb-16"
           // `background` (not `backgroundColor`) so callers can pass a
           // gradient string, not just a flat color — a plain color value
           // still works fine in this shorthand, so existing callers are
-          // unaffected.
+          // unaffected. No bottom padding below lg: the image is in the flow
+          // there and sits on the card's bottom edge.
           style={{ background: displayBackgroundColor }}
         >
           <div className="relative z-10 max-w-[500px]">
@@ -51,7 +55,10 @@ export function SalesforceConsultCtaSection({
             </Heading>
 
             <Link href={displayButtonHref} className="mt-8 inline-block">
-              <CtaButton variant="filled" size="sm">
+              <CtaButton
+                variant={buttonVariant}
+                size={buttonVariant === "white" ? "md" : "sm"}
+              >
                 {displayButtonLabel}
               </CtaButton>
             </Link>
