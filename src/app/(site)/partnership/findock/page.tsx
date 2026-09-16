@@ -210,10 +210,6 @@ export default async function FinDockPartnerPage() {
         ctaHref="/contact"
         ctaVariant="filled"
         ctaSize="sm"
-        secondaryCta={{
-          label: "Check Beyond NPSP Eligibility",
-          href: "https://beyondnpsp.com/partners/providus",
-        }}
       />
 
       {/* 2. Trusted by */}
@@ -292,7 +288,6 @@ export default async function FinDockPartnerPage() {
       <CtaSection
         title="Bring Payment Management Into Salesforce"
         buttonLabel="Book a FinDock Consultation"
-        backgroundImage="/images/partnership/cta-bg.webp"
       />
     </>
   );

@@ -235,7 +235,6 @@ export default async function FundraiseUpPartnerPage() {
       {/* 9. CTA */}
       <CtaSection
         title="Plan Fundraise Up and Salesforce Together"
-        backgroundImage="/images/partnership/cta-bg.webp"
       />
     </>
   );

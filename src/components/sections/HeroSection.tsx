@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Heading, Text } from "@/components/ui/Typography";
 import { CtaButton } from "@/components/ui/CtaButton";
 import { Container } from "@/components/layout/Container";
-import { cn } from "@/lib/utils";
 
 interface HeroSectionProps {
   title?: React.ReactNode;
@@ -16,9 +15,7 @@ interface HeroSectionProps {
   ctaLabel?: string;
   ctaHref?: string;
   ctaVariant?: "white" | "filled";
-  /** "sm" keeps a primary + secondary pair on one line. */
   ctaSize?: "sm" | "md";
-  secondaryCta?: { label: string; href: string };
   subtitle?: string;
   /**
    * Promotes the subtitle to the page <h1> and drops the title to <h2>, keeping
@@ -29,10 +26,6 @@ interface HeroSectionProps {
   subtitleAsH1?: boolean;
   bullets?: string[];
   hideCta?: boolean;
-}
-
-function isExternalHref(href: string) {
-  return /^https?:\/\//i.test(href);
 }
 
 interface BlurScaleHeadingProps {
@@ -142,7 +135,6 @@ export function HeroSection({
   ctaHref,
   ctaVariant = "white",
   ctaSize = "md",
-  secondaryCta,
   subtitle,
   subtitleAsH1 = false,
   bullets,
@@ -271,28 +263,6 @@ export function HeroSection({
                         {displayCtaLabel}
                       </CtaButton>
                     </Link>
-
-                    {secondaryCta && (
-                      <Link
-                        href={secondaryCta.href}
-                        // An off-site target opens in a new tab, so a visitor
-                        // reading a partner page does not lose their place.
-                        {...(isExternalHref(secondaryCta.href)
-                          ? { target: "_blank", rel: "noopener noreferrer" }
-                          : {})}
-                        // Sizing uses the typography-* utilities, not text-*:
-                        // tailwind-merge treats text-* as one group, so a size
-                        // class there silently strips text-white.
-                        className={cn(
-                          "inline-flex items-center rounded-full border-2 border-white font-body font-semibold text-white transition-colors hover:bg-white/10",
-                          ctaSize === "sm"
-                            ? "px-5 py-2 typography-p3"
-                            : "px-7 py-3 typography-p2"
-                        )}
-                      >
-                        {secondaryCta.label}
-                      </Link>
-                    )}
                   </div>
                 )}
               </div>

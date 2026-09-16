@@ -9,6 +9,7 @@ import { CtaButton } from "@/components/ui/CtaButton";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface ExpertiseSalesforceSectionProps {
   heading: ReactNode;
@@ -21,8 +22,10 @@ interface ExpertiseSalesforceSectionProps {
   /**
    * "contain" is the original transparent-badge treatment. "framed" is the
    * partner-page photo: a white rounded card with the image cropped to fill.
+   * "framed-wide" (Figma 791:40) is the same white card with a landscape
+   * photo, top aligned with the heading, with more room between heading and copy.
    */
-  imageVariant?: "contain" | "framed";
+  imageVariant?: "contain" | "framed" | "framed-wide";
   /** Drop the mark when the heading already carries an inline one. */
   hideMark?: boolean;
   ctaLabel?: string;
@@ -41,12 +44,20 @@ export function ExpertiseSalesforceSection({
   ctaHref,
 }: ExpertiseSalesforceSectionProps) {
   const copy = paragraphs?.length ? paragraphs : text ? [text] : [];
-  const isFramed = imageVariant === "framed";
+  const isWide = imageVariant === "framed-wide";
+  const isFramed = imageVariant === "framed" || isWide;
 
   return (
     <Section className="py-16 md:py-24 bg-white">
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-24 items-center">
+        <div
+          className={cn(
+            "grid grid-cols-1 gap-12",
+            isWide
+              ? "items-start lg:grid-cols-[621fr_521fr] lg:gap-[88px]"
+              : "items-center lg:grid-cols-[1.5fr_1fr] lg:gap-24"
+          )}
+        >
           {/* Left Column: Content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -59,15 +70,19 @@ export function ExpertiseSalesforceSection({
             <Heading as="h2" className="text-[#000000] leading-tight">
               {heading}
             </Heading>
-            {copy.map((paragraph, index) => (
-              <Text
-                key={index}
-                variant="p2"
-                className="text-gray-700 leading-relaxed"
-              >
-                {paragraph}
-              </Text>
-            ))}
+            {/* The wrapper keeps the original 24px rhythm for the other variants
+                (it sits in a gap-6 column); "rounded" opens it up to Figma. */}
+            <div className={cn("flex flex-col", isWide ? "mt-4 gap-7.5" : "gap-6")}>
+              {copy.map((paragraph, index) => (
+                <Text
+                  key={index}
+                  variant="p2"
+                  className={cn("leading-relaxed", isWide ? "text-text-body" : "text-gray-700")}
+                >
+                  {paragraph}
+                </Text>
+              ))}
+            </div>
 
             {ctaLabel && ctaHref && (
               <Link href={ctaHref} className="mt-2">
@@ -84,17 +99,25 @@ export function ExpertiseSalesforceSection({
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             className={
               isFramed
-                ? "relative mx-auto w-full max-w-md rounded-[28px] bg-white p-3 shadow-[0px_4px_34px_0px_rgba(0,0,0,0.12)]"
+                ? cn(
+                    "relative w-full rounded-[28px] bg-white p-3 shadow-[0px_4px_34px_0px_rgba(0,0,0,0.12)]",
+                    !isWide && "mx-auto max-w-md"
+                  )
                 : "relative w-full max-w-md mx-auto aspect-square"
             }
           >
             {isFramed ? (
-              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[20px]">
+              <div
+                className={cn(
+                  "relative w-full overflow-hidden rounded-[20px]",
+                  isWide ? "aspect-[521/411]" : "aspect-[3/4]"
+                )}
+              >
                 <Image
                   src={image}
                   alt={imageAlt}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 448px"
+                  sizes={isWide ? "(min-width: 1024px) 40vw, 100vw" : "(max-width: 1024px) 100vw, 448px"}
                   className="object-cover object-center"
                 />
               </div>

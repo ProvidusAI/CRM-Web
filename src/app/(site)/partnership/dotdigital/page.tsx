@@ -218,14 +218,12 @@ export default async function DotdigitalPartnerPage() {
         }
         hideMark
         paragraphs={[
-          "Our certified Salesforce experts focus on data quality, practical automation, consent control, and long-term system management.",
-          "Your team receives a tested setup and clear records of how the connection works.",
+          "Dotdigital provides the Salesforce connector. ProvidusCRM makes sure it works with the Salesforce org, data, users, and marketing processes around it.",
+          "Our certified Salesforce experts focus on data quality, practical automation, consent control, and long-term system management. Your team receives a tested setup and clear records of how the connection works.",
         ]}
-        image="/images/dotdigital/why-choose.webp"
+        image="/images/dotdigital-image.webp"
         imageAlt="ProvidusCRM consultants reviewing a Dotdigital and Salesforce setup"
-        imageVariant="framed"
-        ctaLabel="Start Your Dotdigital Implementation"
-        ctaHref="/contact"
+        imageVariant="framed-wide"
       />
 
       {/* 7. Blog strip */}
@@ -236,7 +234,6 @@ export default async function DotdigitalPartnerPage() {
       {/* 8. CTA */}
       <CtaSection
         title="Ready to Connect Dotdigital With Salesforce?"
-        backgroundImage="/images/partnership/cta-bg.webp"
       />
     </>
   );
