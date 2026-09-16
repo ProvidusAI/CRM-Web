@@ -31,6 +31,7 @@ test.describe("Blog summary card and CTA banner", () => {
   test("summary card sits inside the article above the body", async ({ page }) => {
     const href = await findPostWith(page, "blog-summary-card");
     test.skip(href === null, "no post has a summary card yet");
+    await page.goto(href!);
 
     const card = page.locator("article").getByTestId("blog-summary-card");
     await expect(card).toBeVisible();
@@ -44,6 +45,7 @@ test.describe("Blog summary card and CTA banner", () => {
   test("CTA banner renders inside the article body", async ({ page }) => {
     const href = await findPostWith(page, "blog-cta-banner");
     test.skip(href === null, "no post has a CTA banner yet");
+    await page.goto(href!);
 
     const banner = page.locator("article").getByTestId("blog-cta-banner").first();
     await expect(banner).toBeVisible();
