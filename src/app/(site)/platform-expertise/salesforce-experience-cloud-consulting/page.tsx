@@ -74,7 +74,6 @@ export default async function SalesforceExperienceCloudConsultingPage() {
           "Portals connected to live Salesforce data",
           "Ongoing governance so access stays accurate as the portal grows"
         ]}
-        hideCta
       />
 
       {/* 2. Trusted Section */}

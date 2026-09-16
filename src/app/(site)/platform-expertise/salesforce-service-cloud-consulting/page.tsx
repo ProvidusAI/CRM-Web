@@ -74,7 +74,6 @@ export default async function SalesforceServiceCloudConsultingPage() {
           "Reporting that reflects actual resolutions",
           "Ongoing monitoring so routing and reporting stay aligned",
         ]}
-        hideCta
       />
 
       {/* 2. Trusted / Partners Section */}

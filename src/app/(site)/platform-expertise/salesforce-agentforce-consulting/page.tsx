@@ -75,7 +75,6 @@ export default async function SalesforceAgentforceConsultingPage() {
           "Human escalation built in for anything outside the rules",
           "Start with a working pilot",
         ]}
-        hideCta
       />
 
       {/* 2. Trusted / Partners Section */}

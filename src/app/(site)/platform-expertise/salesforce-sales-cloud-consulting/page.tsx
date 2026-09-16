@@ -75,7 +75,6 @@ export default async function SalesforceSalesCloudConsultingPage() {
           "Clean pipeline data and accurate forecasts",
           "AI and Agentforce-ready solutions"
         ]}
-        hideCta
       />
 
       {/* 2. Trusted Section */}

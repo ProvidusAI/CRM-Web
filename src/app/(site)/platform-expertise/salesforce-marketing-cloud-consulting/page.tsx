@@ -74,7 +74,6 @@ export default async function SalesforceMarketingCloudConsultingPage() {
           "Higher deliverability and tighter targeting",
           "GDPR-ready consent and preference management",
         ]}
-        hideCta
       />
 
       {/* 2. Trusted / Partners Section */}

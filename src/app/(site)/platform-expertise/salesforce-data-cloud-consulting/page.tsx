@@ -77,7 +77,6 @@ export default async function SalesforceDataCloudConsultingPage() {
           "Data accurate enough for reports and AI features",
           "Ongoing monitoring so accuracy does not drift"
         ]}
-        hideCta
       />
 
       {/* 2. Trusted Section */}
