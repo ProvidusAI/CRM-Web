@@ -7,6 +7,7 @@ import { CtaButton } from "@/components/ui/CtaButton";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { Reveal } from "@/components/ui/Reveal";
 import { Heading, Text } from "@/components/ui/Typography";
+import { cn } from "@/lib/utils";
 
 export interface SplitChecklistImage {
   src: string;
@@ -22,8 +23,14 @@ interface SplitChecklistSectionProps {
   items: string[];
 }
 
-// Figma 369:625 — left content column + right blue gradient checklist panel,
-// stacked below on smaller screens.
+// Figma 369:625 — left content column + right pink "pain point" panel of
+// red-cross rows, stacked below on smaller screens. The CMS allows at most two
+// images, shown in the design's 338:204 split.
+const IMAGE_BOXES = [
+  { aspect: "aspect-[338/254]", sizes: "(min-width: 1024px) 26vw, 60vw" },
+  { aspect: "aspect-[204/254]", sizes: "(min-width: 1024px) 16vw, 38vw" },
+];
+
 export function SplitChecklistSection({
   title,
   text,
@@ -37,9 +44,11 @@ export function SplitChecklistSection({
   return (
     <Section background="white">
       <Container>
-        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
-          <Reveal>
-            <div>
+        {/* Columns stretch to the same height so the images can sit on the
+            panel's bottom edge. */}
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+          <Reveal height="100%">
+            <div className="flex h-full flex-col">
               {title ? (
                 <Heading as="h2" className="text-black">
                   {title} <GreenLineMark className="ml-2 inline-block h-8 w-auto align-baseline" />
@@ -51,25 +60,30 @@ export function SplitChecklistSection({
                 </Text>
               ) : null}
               {ctaLabel && ctaHref ? (
-                <Link href={ctaHref} className="mt-8 inline-block">
+                <Link href={ctaHref} className="mt-8 self-start">
                   <CtaButton variant="filled" size="sm">
                     {ctaLabel}
                   </CtaButton>
                 </Link>
               ) : null}
               {images && images.length > 0 ? (
-                <div className="mt-10 flex gap-4">
-                  {images.map((image, index) => (
+                // pt-10 keeps the gap when the column has no spare height;
+                // mt-auto pushes the row down when it does.
+                <div className="mt-auto grid grid-cols-[338fr_204fr] gap-5 pt-10">
+                  {images.slice(0, IMAGE_BOXES.length).map((image, index) => (
                     <div
                       key={`${image.src}-${index}`}
-                      className="relative aspect-[4/3] w-1/2 overflow-hidden rounded-[12px]"
+                      className={cn(
+                        "relative overflow-hidden rounded-[22px]",
+                        IMAGE_BOXES[index].aspect
+                      )}
                     >
                       <Image
                         src={image.src}
                         alt={image.alt}
                         fill
                         className="object-cover"
-                        sizes="(min-width: 1024px) 25vw, 50vw"
+                        sizes={IMAGE_BOXES[index].sizes}
                       />
                     </div>
                   ))}
@@ -78,34 +92,23 @@ export function SplitChecklistSection({
             </div>
           </Reveal>
 
-          <Reveal delay={0.1}>
-            <div
-              className="rounded-[29px] p-[25px]"
-              style={{
-                background: "linear-gradient(132deg, #1C95DA 7%, #236FAB 88%)",
-              }}
-            >
-              <ul className="flex flex-col gap-3">
+          <Reveal delay={0.1} height="100%">
+            <div className="h-full rounded-[29px] bg-linear-to-b from-transparent from-[15%] to-checklist-red-end to-[109%] p-[25px]">
+              <ul className="flex flex-col gap-[25px]">
                 {items.map((row, index) => (
                   <li
                     key={`${row}-${index}`}
-                    className="flex min-h-[56px] items-center gap-3 rounded-[16px] bg-gradient-to-r from-[rgba(255,255,255,0.12)] to-transparent px-4 py-3"
+                    className="flex min-h-[56px] items-center gap-3.5 rounded-[16px] bg-linear-to-r from-white/12 to-transparent pr-4"
                   >
-                    <span
+                    <Image
+                      src="/images/checklist-cross.webp"
+                      alt=""
                       aria-hidden="true"
-                      className="h-[25px] w-[25px] shrink-0 bg-brand-green-light"
-                      style={{
-                        maskImage: 'url("/images/check-bold-mask.png")',
-                        WebkitMaskImage: 'url("/images/check-bold-mask.png")',
-                        maskSize: "contain",
-                        WebkitMaskSize: "contain",
-                        maskRepeat: "no-repeat",
-                        WebkitMaskRepeat: "no-repeat",
-                        maskPosition: "center",
-                        WebkitMaskPosition: "center",
-                      }}
+                      width={50}
+                      height={50}
+                      className="-ml-[3px] size-[50px] shrink-0"
                     />
-                    <span className="text-[16px] leading-[20px] font-medium text-white">
+                    <span className="text-[16px] leading-[20px] font-medium text-gray-500">
                       {row}
                     </span>
                   </li>
