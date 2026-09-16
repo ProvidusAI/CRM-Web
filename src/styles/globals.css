@@ -103,6 +103,13 @@
   --color-summary-blue-end: #154278;
   --color-banner-grey-start: #616161;
   --color-banner-grey-end: #0a0a0a;
+  /* "Is This You?" checklist panel (Figma 369:625) */
+  --color-checklist-red-end: #ffbfbc;
+  /* Pain points grid (Figma 593:16) */
+  --color-pain-card: #f6faff;
+  --color-pain-title: #19689f;
+  --color-icon-badge-start: #308fff;
+  --color-icon-badge-end: #247ac9;
 }
 
 /* ─── Base Styles ────────────────────────────────────────────── */

@@ -68,10 +68,11 @@ const designColorOptions = [
   { title: "Marketing Gold", value: "#F4AC3B" },
 ];
 
-const serviceImageField = (name: string, title: string) =>
+const serviceImageField = (name: string, title: string, description?: string) =>
   defineField({
     name,
     title,
+    description,
     type: "image",
     options: { hotspot: true },
     fields: [
@@ -311,7 +312,11 @@ export const servicePage = defineType({
                   rows: 4,
                   validation: (rule) => rule.required(),
                 }),
-                serviceImageField("icon", "Icon image"),
+                serviceImageField(
+                  "icon",
+                  "Icon image",
+                  "Optional. A white icon on a transparent background, shown in the blue circle. Leave empty to use the default icon for this card's position."
+                ),
               ],
             },
           ],

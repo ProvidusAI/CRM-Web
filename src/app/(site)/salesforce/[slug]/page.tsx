@@ -256,7 +256,6 @@ export default async function SalesforceServicePage({
           title: item.title,
           text: item.text ?? "",
           icon: imageUrl(item.icon),
-          iconAlt: item.icon?.alt,
         }))}
       />
     ),

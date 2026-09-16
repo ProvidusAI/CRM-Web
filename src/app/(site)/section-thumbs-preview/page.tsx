@@ -24,22 +24,18 @@ export default function SectionThumbsPreviewPage() {
             {
               title: "Uncontrolled automation",
               text: "Someone built a workflow rule two years ago for a process that has since changed. The rule still runs. Nobody remembers why it's there.",
-              icon: "/images/salesforce-consulting.svg",
             },
             {
               title: "Inconsistent access management",
               text: "Someone granted access six months ago. Nobody revoked it when the project ended. Your access model widens quietly.",
-              icon: "/images/salesforce-integration.svg",
             },
             {
               title: "Poor Salesforce release management",
               text: "Three times a year, a release changes how something works. A customisation built two years earlier starts behaving differently.",
-              icon: "/images/salesforce-development.svg",
             },
             {
               title: "Sluggish user adoption",
               text: "When nobody adjusts the system to match how the team works, workarounds appear. A spreadsheet reappears.",
-              icon: "/images/salesforce-customisation.svg",
             },
           ]}
         />
