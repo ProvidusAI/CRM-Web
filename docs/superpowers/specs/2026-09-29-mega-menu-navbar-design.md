@@ -107,11 +107,11 @@ Values from Figma; colours become `@theme` tokens where they are new.
   - Hire Talent: `/salesforce-recruitment-agency`.
 - **Panel:** 800px wide, white, radius 20px, shadow `0 0 19px
   rgb(0 0 0 / 0.11)`. It is centred on the header rather than aligned to
-  the trigger: `Positioner` `anchor` is the nav list and `align="center"`.
+  the trigger: `Positioner` `anchor` is the header row and `align="center"`, which puts it at the page centre as in Figma.
   Every panel is the same width, and its height fits the content.
 - **Caret:** a 21×17 white triangle on the panel's top edge, pointing at the
   open trigger. It sits inside the popup and shares its shadow. Its x offset
-  (trigger centre minus list centre) is set as a CSS variable on the popup
+  (trigger centre minus header-row centre) is set as a CSS variable on the popup
   and transitions with the panel.
 - **Gap:** the panel's top edge sits 32px below the trigger (15px to the
   caret tip).
@@ -131,8 +131,13 @@ Values from Figma; colours become `@theme` tokens where they are new.
     Company.
   - Each link: 15px gap, then Roboto medium 16px/20px `#3C3C3C` wrapping
     at 179px.
-- **Bottom padding:** a uniform 40px. Figma varies it by a few pixels per
-  panel; within 6px is the accepted tolerance.
+- **Vertical spacing:** follows Figma per panel type.
+  - Services panel: rows start 56px from the top, the link grid starts at
+    70px, and there is 38px bottom padding.
+  - Single-category panels: the row starts at 42px, the links at 56px, and
+    there is 48px bottom padding.
+  - The panel is at least as tall as its left column. Heights within 6px of
+    Figma are accepted.
 - **Icons:** a 25px brand-green circle with the white glyph centred at its
   intrinsic size.
 - **Category switching:** hovering or focusing a category row makes it
