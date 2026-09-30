@@ -79,6 +79,18 @@ test.describe("Desktop mega menu", () => {
 
   const panel = (page: Page) => page.locator('[data-slot="nav-panel"]');
 
+  // Move like a real pointer. Base UI's hover safe-polygon disables sibling
+  // triggers while one is hover-open, so Playwright's teleporting .hover()
+  // fails its hit-test; a stepped move leaves the polygon first, as a user does.
+  async function hoverTrigger(page: Page, name: string) {
+    const box = await page
+      .getByRole("navigation", { name: "Primary" })
+      .getByRole("button", { name, exact: true })
+      .boundingBox();
+    if (!box) throw new Error(`${name} trigger not rendered`);
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2, { steps: 12 });
+  }
+
   test("top level has three panel triggers and two links", async ({ page }) => {
     const nav = page.getByRole("navigation", { name: "Primary" });
     for (const label of ["Services", "Partnership", "Company"]) {
@@ -95,7 +107,7 @@ test.describe("Desktop mega menu", () => {
   });
 
   test("Services panel switches category on hover", async ({ page }) => {
-    await page.getByRole("button", { name: "Services", exact: true }).hover();
+    await hoverTrigger(page, "Services");
     const link = (name: string) => panel(page).getByRole("link", { name, exact: true });
 
     await expect(link("Salesforce Consulting Services")).toBeVisible();
@@ -115,13 +127,13 @@ test.describe("Desktop mega menu", () => {
   test("Partnership and Company panels", async ({ page }) => {
     const link = (name: string) => panel(page).getByRole("link", { name, exact: true });
 
-    await page.getByRole("button", { name: "Partnership", exact: true }).hover();
+    await hoverTrigger(page, "Partnership");
     await expect(link("FinDock")).toHaveAttribute("href", "/partnership/findock");
     await expect(link("Fundraise Up")).toHaveAttribute("href", "/partnership/fundraise-up");
     await expect(link("Dotdigital")).toHaveAttribute("href", "/partnership/dotdigital");
     await expect(link("Partnership")).toHaveAttribute("href", "/partnership");
 
-    await page.getByRole("button", { name: "Company", exact: true }).hover();
+    await hoverTrigger(page, "Company");
     await expect(link("About Us")).toHaveAttribute("href", "/about");
     await expect(link("Blog")).toHaveAttribute("href", "/blog");
   });
@@ -143,7 +155,7 @@ test.describe("Desktop mega menu", () => {
   });
 
   test("clicking a panel link navigates and closes the panel", async ({ page }) => {
-    await page.getByRole("button", { name: "Company", exact: true }).hover();
+    await hoverTrigger(page, "Company");
     await panel(page).getByRole("link", { name: "Blog", exact: true }).click();
     await expect(page).toHaveURL(/\/blog$/);
     await expect(panel(page)).toBeHidden();
