@@ -110,6 +110,12 @@
   --color-pain-title: #19689f;
   --color-icon-badge-start: #308fff;
   --color-icon-badge-end: #247ac9;
+  /* Mega menu navbar (Figma 851:2892) */
+  --color-nav-text: #2e2e2e;
+  --color-nav-link: #3c3c3c;
+  --color-nav-category: #141414;
+  --color-nav-panel-side: #e9ffe4;
+  --drop-shadow-nav-panel: 0 0 19px rgb(0 0 0 / 0.11);
 }
 
 /* ─── Base Styles ────────────────────────────────────────────── */

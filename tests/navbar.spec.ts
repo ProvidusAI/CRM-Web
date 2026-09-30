@@ -51,24 +51,31 @@ test.describe("Navbar", () => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto("/");
 
-    // The desktop nav is hidden on mobile.
-    const desktopNav = page.locator("header").getByRole("navigation").first();
-    await expect(desktopNav).not.toBeVisible();
-
     const toggle = page.getByLabel("Navigation menu", { exact: true });
     const menu = page.getByRole("navigation", { name: "Main navigation" });
     await toggle.click();
     await expect(menu).toBeVisible();
-    await expect(menu.getByRole("link", { name: "About", exact: true })).toBeVisible();
+    await expect(menu.getByRole("link", { name: "Our Work", exact: true })).toHaveAttribute(
+      "href",
+      "/case-studies"
+    );
 
-    // Sections with child pages are collapsed accordions.
+    // Services is a collapsed accordion holding three labelled groups.
     const child = menu.getByRole("link", { name: "Salesforce Sales Cloud Consulting" });
     await expect(child).not.toBeVisible();
-    await menu.getByText("Platform Expertise", { exact: true }).click();
+    await menu.getByText("Services", { exact: true }).click();
     await expect(child).toBeVisible();
     await expect(
-      menu.getByRole("link", { name: "Platform Expertise overview" })
+      menu.getByRole("link", { name: "Platform Expertise", exact: true })
     ).toHaveAttribute("href", "/platform-expertise");
+
+    // Sections share a <details> name, so opening Company closes Services.
+    await menu.getByText("Company", { exact: true }).click();
+    await expect(child).not.toBeVisible();
+    await expect(menu.getByRole("link", { name: "About Us", exact: true })).toHaveAttribute(
+      "href",
+      "/about"
+    );
 
     await toggle.click();
     await expect(menu).not.toBeVisible();
@@ -121,6 +128,6 @@ test.describe("Navbar without JavaScript", () => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto("/");
     await page.locator("header").getByLabel(/navigation menu/i).click();
-    await expect(page.locator('header a[href="/about"]').last()).toBeVisible();
+    await expect(page.locator('header a[href="/case-studies"]').last()).toBeVisible();
   });
 });

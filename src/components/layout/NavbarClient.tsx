@@ -3,12 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import type { KeyboardEvent, MouseEvent } from "react";
 import { usePathname } from "next/navigation";
-import { ChevronDown } from "lucide-react";
 import { CtaButton } from "@/components/ui/CtaButton";
 import type { NavItem } from "@/types";
 import { Container } from "./Container";
+import { MobileNav } from "./MobileNav";
+import { buildNav } from "./navConfig";
 
 interface DropdownNavItem extends NavItem {
   children?: NavItem[];
@@ -16,21 +16,6 @@ interface DropdownNavItem extends NavItem {
 
 interface NavbarClientProps {
   salesforceServices: NavItem[];
-}
-
-// The mobile menu is a native <details>, so the burger works the moment the
-// server HTML paints. As a React-state button it ignored taps for ~3s on a
-// throttled phone until hydration, and for good when a bundle stalled.
-function closeMenuOnEscape(e: KeyboardEvent<HTMLDetailsElement>) {
-  if (e.key !== "Escape" || !e.currentTarget.open) return;
-  e.currentTarget.open = false;
-  e.currentTarget.querySelector("summary")?.focus();
-}
-
-function closeMenuOnLinkClick(e: MouseEvent<HTMLDivElement>) {
-  if (!(e.target as Element).closest("a")) return;
-  const menu = e.currentTarget.closest("details");
-  if (menu) menu.open = false;
 }
 
 export function NavbarClient({ salesforceServices }: NavbarClientProps) {
@@ -79,103 +64,7 @@ export function NavbarClient({ salesforceServices }: NavbarClientProps) {
             </Link>
           </div>
 
-          <details className="group/menu lg:hidden" onKeyDown={closeMenuOnEscape}>
-            {/* -m-1 p-3: a 44px tap target with the icon where p-2 had it. */}
-            <summary
-              aria-label="Navigation menu"
-              className="-m-1 flex cursor-pointer touch-manipulation list-none items-center justify-center p-3 text-[#2E2E2E] [&::-webkit-details-marker]:hidden"
-            >
-              <svg
-                className="h-5 w-5 group-open/menu:hidden"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-              <svg
-                className="hidden h-5 w-5 group-open/menu:block"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </summary>
-
-            {/* Fixed under the 72px header row with its own scroll: inline in
-                the sticky header it was pinned with it, so on a short screen
-                its lower items could never scroll into view. */}
-            <div
-              className="fixed inset-x-0 top-18 bottom-0 overflow-y-auto overscroll-contain border-t border-gray-100 bg-white"
-              onClick={closeMenuOnLinkClick}
-            >
-              <Container>
-                <nav aria-label="Main navigation" className="flex flex-col gap-1 py-4">
-                  {navItems.map((item) =>
-                    item.children ? (
-                      <details
-                        key={item.href}
-                        name="mobile-nav-section"
-                        className="group/section"
-                      >
-                        <summary className="text-p3 flex cursor-pointer list-none items-center justify-between px-2 py-2 text-[#2E2E2E] [&::-webkit-details-marker]:hidden">
-                          {item.label}
-                          <ChevronDown
-                            aria-hidden="true"
-                            className="h-4 w-4 transition-transform group-open/section:rotate-180"
-                          />
-                        </summary>
-                        <div className="mb-2 ml-4 flex flex-col gap-1 border-l border-gray-100 pl-4">
-                          {[
-                            { label: `${item.label} overview`, href: item.href },
-                            ...item.children,
-                          ].map((child) => (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              className="text-p4 px-2 py-2 text-[#5F5F5F] transition-colors hover:text-brand-blue"
-                              aria-current={isActive(child.href) ? "page" : undefined}
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </details>
-                    ) : (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className="text-p3 px-2 py-2 text-[#2E2E2E] transition-colors hover:text-brand-blue"
-                        aria-current={isActive(item.href) ? "page" : undefined}
-                      >
-                        {item.label}
-                      </Link>
-                    )
-                  )}
-                  <div className="mt-2 border-t border-gray-100 pt-4">
-                    <Link href="/contact">
-                      <CtaButton variant="filled" size="sm" className="w-full">
-                        Let&apos;s Connect
-                      </CtaButton>
-                    </Link>
-                  </div>
-                </nav>
-              </Container>
-            </div>
-          </details>
+          <MobileNav entries={buildNav(salesforceServices)} />
         </div>
       </Container>
     </header>
