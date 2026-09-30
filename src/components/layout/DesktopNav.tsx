@@ -196,16 +196,22 @@ function PanelBody({ categories, active, onActivate, pathname }: PanelBodyProps)
                 className="ml-[269px] grid w-[493px] list-none grid-cols-[219px_219px] gap-x-[54px] gap-y-10"
                 style={{ paddingTop: rowTop + 14, paddingBottom: bottom }}
               >
+                {/* Figma's two-line link rows are 32px boxes that the 40px
+                    label overflows by 4px each way, giving a 72px pitch at
+                    the 40px gap. The label's -my-1 reproduces that, and
+                    self-center keeps one-line labels centred on the icon.
+                    The link's py-1 -my-1 wraps its focus ring round the
+                    overflow without changing the layout. */}
                 {category.links.map((link) => (
                   <li key={link.href}>
                     <NavigationMenuLink
                       closeOnClick
                       active={pathname === link.href}
                       render={<NextLink href={link.href} />}
-                      className="flex items-start gap-[15px] rounded-md text-nav-link outline-none transition-colors hover:text-brand-green focus-visible:ring-2 focus-visible:ring-brand-green/50 motion-reduce:transition-none"
+                      className="-my-1 flex items-start gap-[15px] rounded-md py-1 text-nav-link outline-none transition-colors hover:text-brand-green focus-visible:ring-2 focus-visible:ring-brand-green/50 motion-reduce:transition-none"
                     >
                       <NavIconBadge icon={link.icon} />
-                      <span className="mt-0.5 typography-p3 !font-medium !leading-5">
+                      <span className="-my-1 self-center typography-p3 !font-medium !leading-5">
                         {link.label}
                       </span>
                     </NavigationMenuLink>
