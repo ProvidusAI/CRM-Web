@@ -21,7 +21,7 @@ import { isInSection, type NavCategory, type NavEntry } from "./navConfig";
 // highlighted item (the open panel, or the current section when none is
 // open) turns semibold green with a 1px underline.
 const TOP_ITEM =
-  "group/top relative flex cursor-pointer items-center rounded-md p-2.5 typography-p4 !leading-[25px] whitespace-nowrap text-nav-text outline-none transition-colors hover:text-brand-green focus-visible:ring-2 focus-visible:ring-brand-green/50 data-[highlight]:!font-semibold data-[highlight]:text-brand-green motion-reduce:transition-none";
+  "group/top relative flex cursor-pointer items-center rounded-md p-2.5 typography-p4 !leading-[25px] whitespace-nowrap text-nav-text outline-none transition-colors hover:text-brand-green focus-visible:ring-2 focus-visible:ring-brand-green data-[highlight]:!font-semibold data-[highlight]:text-brand-green motion-reduce:transition-none";
 
 // Trigger bottom sits 13.5px above the 72px header row's bottom edge; the
 // panel's top edge is 32px below the trigger (15px gap + 17px caret).
@@ -160,6 +160,8 @@ function PanelBody({ categories, active, onActivate, pathname }: PanelBodyProps)
       {categories.map((category, index) => {
         const isActive = index === active;
         const rowClass = cn(
+          // w-[234px] matches the left-column gradient stop in NavigationMenu's
+          // popup background (…_234px,…_234px) — keep the two in sync.
           "absolute left-0 flex w-[234px] items-center gap-[15px] px-6 typography-p3 !font-bold !leading-7 text-nav-category outline-none transition-colors focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-green motion-reduce:transition-none",
           single && "justify-center",
           isActive && "bg-brand-green-light"
@@ -181,7 +183,15 @@ function PanelBody({ categories, active, onActivate, pathname }: PanelBodyProps)
                 render={<NextLink href={category.href} />}
                 className={rowClass}
                 style={rowStyle}
-                onMouseEnter={() => onActivate(index)}
+                onMouseEnter={(e) => {
+                  // Pointer crossing to another category while keyboard focus
+                  // is on a link inside the active grid must not let that
+                  // grid unmount and drop focus to <body>.
+                  if (e.currentTarget.closest('[data-slot="nav-panel"]')?.contains(document.activeElement)) {
+                    e.currentTarget.focus();
+                  }
+                  onActivate(index);
+                }}
                 onFocus={() => onActivate(index)}
               >
                 {rowContent}
@@ -208,7 +218,7 @@ function PanelBody({ categories, active, onActivate, pathname }: PanelBodyProps)
                       closeOnClick
                       active={pathname === link.href}
                       render={<NextLink href={link.href} />}
-                      className="-my-1 flex items-start gap-[15px] rounded-md py-1 text-nav-link outline-none transition-colors hover:text-brand-green focus-visible:ring-2 focus-visible:ring-brand-green/50 motion-reduce:transition-none"
+                      className="-my-1 flex items-start gap-[15px] rounded-md py-1 text-nav-link outline-none transition-colors hover:text-brand-green focus-visible:ring-2 focus-visible:ring-brand-green motion-reduce:transition-none"
                     >
                       <NavIconBadge icon={link.icon} />
                       <span className="-my-1 self-center typography-p3 !font-medium !leading-5">

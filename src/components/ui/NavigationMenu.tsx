@@ -74,7 +74,13 @@ export function NavigationMenuPanel({ anchor, sideOffset, caretOffset }: Navigat
     <Primitive.Portal>
       {/* Blurs the page below the header, and takes the outside click that
           closes the menu so nothing underneath is activated. */}
-      <Primitive.Backdrop className="fixed inset-x-0 top-18 bottom-0 z-40 backdrop-blur-[8px] transition-opacity duration-200 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0 motion-reduce:transition-none" />
+      <Primitive.Backdrop
+        className={cn(
+          "fixed inset-x-0 top-18 bottom-0 z-40 backdrop-blur-[8px] transition-opacity",
+          MORPH,
+          "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0"
+        )}
+      />
       <Primitive.Positioner
         anchor={anchor}
         side="bottom"
@@ -90,6 +96,8 @@ export function NavigationMenuPanel({ anchor, sideOffset, caretOffset }: Navigat
           style={{ "--caret-offset": `${caretOffset}px` } as CSSProperties}
           className={cn(
             "relative h-(--popup-height) w-(--popup-width) origin-(--transform-origin) rounded-[20px] outline-none",
+            // 234px matches DesktopNav's PanelBody row width (rowClass's
+            // w-[234px] / ml-[269px] on the link grid) — keep in sync.
             "bg-[linear-gradient(to_right,var(--color-nav-panel-side)_234px,var(--color-white)_234px)]",
             "drop-shadow-nav-panel transition-[opacity,scale,width,height]",
             MORPH,
@@ -99,7 +107,10 @@ export function NavigationMenuPanel({ anchor, sideOffset, caretOffset }: Navigat
         >
           <span
             aria-hidden="true"
-            className="absolute bottom-full left-[calc(50%+var(--caret-offset)-10.5px)] h-[17px] w-[21px] bg-white [clip-path:polygon(50%_0,100%_100%,0_100%)] transition-[left] duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+            className={cn(
+              "absolute bottom-full left-[calc(50%+var(--caret-offset)-10.5px)] h-[17px] w-[21px] bg-white [clip-path:polygon(50%_0,100%_100%,0_100%)] transition-[left]",
+              MORPH
+            )}
           />
           <Primitive.Viewport className="relative size-full overflow-hidden rounded-[20px]" />
         </Primitive.Popup>

@@ -1,4 +1,4 @@
-import { test, expect, type Page } from "@playwright/test";
+import { test, expect, type Locator, type Page } from "@playwright/test";
 
 test.describe("Navbar", () => {
   test.beforeEach(async ({ page }) => {
@@ -27,6 +27,7 @@ test.describe("Navbar", () => {
   test("mobile menu opens, collapses child pages, and closes", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto("/");
+    await expect(page.getByRole("navigation", { name: "Primary" })).toBeHidden();
 
     const toggle = page.getByLabel("Navigation menu", { exact: true });
     const menu = page.getByRole("navigation", { name: "Main navigation" });
@@ -82,13 +83,19 @@ test.describe("Desktop mega menu", () => {
   // Move like a real pointer. Base UI's hover safe-polygon disables sibling
   // triggers while one is hover-open, so Playwright's teleporting .hover()
   // fails its hit-test; a stepped move leaves the polygon first, as a user does.
-  async function hoverTrigger(page: Page, name: string) {
-    const box = await page
-      .getByRole("navigation", { name: "Primary" })
-      .getByRole("button", { name, exact: true })
-      .boundingBox();
-    if (!box) throw new Error(`${name} trigger not rendered`);
+  // The same teleport-vs-flake problem hits in-panel category hovers, so this
+  // takes a Locator rather than being trigger-specific.
+  async function pointAt(page: Page, target: Locator) {
+    const box = await target.boundingBox();
+    if (!box) throw new Error("target not rendered");
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2, { steps: 12 });
+  }
+
+  async function hoverTrigger(page: Page, name: string) {
+    await pointAt(
+      page,
+      page.getByRole("navigation", { name: "Primary" }).getByRole("button", { name, exact: true })
+    );
   }
 
   test("top level has three panel triggers and two links", async ({ page }) => {
@@ -113,11 +120,11 @@ test.describe("Desktop mega menu", () => {
     await expect(link("Salesforce Consulting Services")).toBeVisible();
     await expect(link("Salesforce Services")).toHaveAttribute("href", "/services");
 
-    await link("Industries We Serve").hover();
+    await pointAt(page, link("Industries We Serve"));
     await expect(link("Salesforce Health Cloud Consulting")).toBeVisible();
     await expect(link("Salesforce Consulting Services")).toHaveCount(0);
 
-    await link("Platform Expertise").hover();
+    await pointAt(page, link("Platform Expertise"));
     await expect(link("Salesforce Agentforce Consulting")).toHaveAttribute(
       "href",
       "/platform-expertise/salesforce-agentforce-consulting"
