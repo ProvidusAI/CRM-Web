@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 
 test.describe("Navbar", () => {
   test.beforeEach(async ({ page }) => {
@@ -9,29 +9,6 @@ test.describe("Navbar", () => {
     // Header renders desktop + mobile logo variants; assert the first.
     const logo = page.getByRole("img", { name: "ProvidusCRM" }).first();
     await expect(logo).toBeVisible();
-  });
-
-  test("renders all navigation links", async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 800 });
-    // The primary nav lives in the header. Footer also has <nav> elements,
-    // so scope to the header to avoid matching those.
-    const nav = page.locator("header").getByRole("navigation").first();
-    await expect(nav).toBeVisible();
-
-    const links = [
-      { label: "About", href: "/about" },
-      { label: "Services", href: "/services" },
-      { label: "Industry", href: "/industries" },
-      { label: "Platform Expertise", href: "/platform-expertise" },
-      { label: "Case Studies", href: "/case-studies" },
-      { label: "Blog", href: "/blog" },
-    ];
-
-    for (const { label, href } of links) {
-      const link = nav.getByRole("link", { name: label, exact: true }).first();
-      await expect(link).toBeVisible();
-      await expect(link).toHaveAttribute("href", href);
-    }
   });
 
   test("renders Let's Connect CTA button", async ({ page }) => {
@@ -91,6 +68,85 @@ test.describe("Navbar", () => {
     const cta = page.locator('header a[href="/contact"]').last();
     await cta.scrollIntoViewIfNeeded();
     await expect(cta).toBeInViewport();
+  });
+});
+
+test.describe("Desktop mega menu", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto("/");
+  });
+
+  const panel = (page: Page) => page.locator('[data-slot="nav-panel"]');
+
+  test("top level has three panel triggers and two links", async ({ page }) => {
+    const nav = page.getByRole("navigation", { name: "Primary" });
+    for (const label of ["Services", "Partnership", "Company"]) {
+      await expect(nav.getByRole("button", { name: label, exact: true })).toBeVisible();
+    }
+    await expect(nav.getByRole("link", { name: "Our Work", exact: true })).toHaveAttribute(
+      "href",
+      "/case-studies"
+    );
+    await expect(nav.getByRole("link", { name: "Hire Talent", exact: true })).toHaveAttribute(
+      "href",
+      "/salesforce-recruitment-agency"
+    );
+  });
+
+  test("Services panel switches category on hover", async ({ page }) => {
+    await page.getByRole("button", { name: "Services", exact: true }).hover();
+    const link = (name: string) => panel(page).getByRole("link", { name, exact: true });
+
+    await expect(link("Salesforce Consulting Services")).toBeVisible();
+    await expect(link("Salesforce Services")).toHaveAttribute("href", "/services");
+
+    await link("Industries We Serve").hover();
+    await expect(link("Salesforce Health Cloud Consulting")).toBeVisible();
+    await expect(link("Salesforce Consulting Services")).toHaveCount(0);
+
+    await link("Platform Expertise").hover();
+    await expect(link("Salesforce Agentforce Consulting")).toHaveAttribute(
+      "href",
+      "/platform-expertise/salesforce-agentforce-consulting"
+    );
+  });
+
+  test("Partnership and Company panels", async ({ page }) => {
+    const link = (name: string) => panel(page).getByRole("link", { name, exact: true });
+
+    await page.getByRole("button", { name: "Partnership", exact: true }).hover();
+    await expect(link("FinDock")).toHaveAttribute("href", "/partnership/findock");
+    await expect(link("Fundraise Up")).toHaveAttribute("href", "/partnership/fundraise-up");
+    await expect(link("Dotdigital")).toHaveAttribute("href", "/partnership/dotdigital");
+    await expect(link("Partnership")).toHaveAttribute("href", "/partnership");
+
+    await page.getByRole("button", { name: "Company", exact: true }).hover();
+    await expect(link("About Us")).toHaveAttribute("href", "/about");
+    await expect(link("Blog")).toHaveAttribute("href", "/blog");
+  });
+
+  test("Escape closes the panel", async ({ page }) => {
+    await page.getByRole("button", { name: "Services", exact: true }).click();
+    await expect(panel(page)).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(panel(page)).toBeHidden();
+  });
+
+  test("keyboard reaches a category's links", async ({ page }) => {
+    await page.getByRole("button", { name: "Services", exact: true }).click();
+    await panel(page).getByRole("link", { name: "Industries We Serve", exact: true }).focus();
+    await page.keyboard.press("Tab");
+    await expect(
+      panel(page).getByRole("link", { name: "Salesforce Health Cloud Consulting", exact: true })
+    ).toBeFocused();
+  });
+
+  test("clicking a panel link navigates and closes the panel", async ({ page }) => {
+    await page.getByRole("button", { name: "Company", exact: true }).hover();
+    await panel(page).getByRole("link", { name: "Blog", exact: true }).click();
+    await expect(page).toHaveURL(/\/blog$/);
+    await expect(panel(page)).toBeHidden();
   });
 });
 
