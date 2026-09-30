@@ -69,7 +69,7 @@ export function MobileNav({ entries }: { entries: NavEntry[] }) {
                 <Link
                   key={entry.href}
                   href={entry.href}
-                  className="typography-p3 px-2 py-2 text-nav-text transition-colors hover:text-brand-green"
+                  className="typography-p3 px-2 py-2 text-nav-text transition-colors hover:text-brand-green motion-reduce:transition-none"
                   aria-current={current(entry.href)}
                 >
                   {entry.label}
@@ -90,7 +90,7 @@ export function MobileNav({ entries }: { entries: NavEntry[] }) {
                           <Link
                             href={category.href}
                             aria-current={current(category.href)}
-                            className="typography-p4 !font-semibold px-2 py-2 text-nav-category transition-colors hover:text-brand-green"
+                            className="typography-p4 !font-semibold px-2 py-2 text-nav-category transition-colors hover:text-brand-green motion-reduce:transition-none"
                           >
                             {/* Services has three named groups; a single-group
                                 panel links its overview page instead. */}
@@ -102,7 +102,7 @@ export function MobileNav({ entries }: { entries: NavEntry[] }) {
                             key={link.href}
                             href={link.href}
                             aria-current={current(link.href)}
-                            className="typography-p4 flex items-center gap-3 px-2 py-2 text-gray-text transition-colors hover:text-brand-green"
+                            className="typography-p4 flex items-center gap-3 px-2 py-2 text-gray-text transition-colors hover:text-brand-green motion-reduce:transition-none"
                           >
                             <NavIconBadge icon={link.icon} />
                             {link.label}
