@@ -98,6 +98,7 @@
   --color-gray-text: #5f5f5f;
   --color-migration-blue: #308fff;
   --color-footer-blue: #124f87;
+  --color-footer-link: #9bd0ff;
   /* Blog summary card and CTA banner gradients (Figma 602:856, 605:920) */
   --color-summary-blue-start: #267de4;
   --color-summary-blue-end: #154278;
@@ -201,6 +202,27 @@
 
 @utility animate-marquee {
   animation: marquee 30s linear infinite;
+}
+
+/* Vertical marquee for the events photo columns. The column renders its
+   photo set twice, so translating by -50% loops seamlessly. The duration is
+   set inline per column so every column moves at the same speed. */
+@keyframes marquee-up {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@utility animate-marquee-up {
+  animation: marquee-up 40s linear infinite;
+}
+
+@utility animate-marquee-down {
+  animation: marquee-up 40s linear infinite reverse;
 }
 
 @utility scrollbar-hide {

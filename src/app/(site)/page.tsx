@@ -10,12 +10,12 @@ import {
   PageBlogsSection,
   FaqSection,
   PlatformsSection,
+  EventsSection,
   TeamGallerySection,
 } from "@/components/sections";
 import NextDynamic from "next/dynamic";
 
 const PartnersSection = NextDynamic(() => import("@/components/sections/PartnersSection").then((mod) => mod.PartnersSection));
-const TeamSection = NextDynamic(() => import("@/components/sections/TeamSection").then((mod) => mod.TeamSection));
 
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { getSitePageJsonLd } from "@/lib/siteJsonLd";
@@ -118,10 +118,10 @@ export default async function HomePage() {
           caseStudies={caseStudies.cards}
         />
       )}
-      <TeamSection />
       {blogs.posts.length > 0 && (
         <PageBlogsSection title={blogs.title} posts={blogs.posts} />
       )}
+      <EventsSection />
       <PlatformsSection />
       <FaqSection title="Frequently Asked Questions" faqs={faqs} />
       <TeamGallerySection />
