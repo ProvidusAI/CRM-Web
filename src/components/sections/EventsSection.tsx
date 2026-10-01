@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState, type CSSProperties } from "react";
+import { Container } from "@/components/layout/Container";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { Heading } from "@/components/ui/Typography";
 import {
@@ -75,7 +76,15 @@ function photosFor(event: EventSlide) {
   );
 }
 
-function PhotoColumn({ photos, direction }: { photos: string[]; direction: "up" | "down" }) {
+function PhotoColumn({
+  photos,
+  direction,
+  active,
+}: {
+  photos: string[];
+  direction: "up" | "down";
+  active: boolean;
+}) {
   const set = Array.from(
     { length: Math.ceil(MIN_PHOTOS_PER_SET / photos.length) },
     () => photos
@@ -88,7 +97,8 @@ function PhotoColumn({ photos, direction }: { photos: string[]; direction: "up" 
       <ul
         className={cn(
           "flex flex-col",
-          direction === "up" ? "animate-marquee-up" : "animate-marquee-down"
+          direction === "up" ? "animate-marquee-up" : "animate-marquee-down",
+          !active && "[animation-play-state:paused]"
         )}
         style={{ animationDuration: `${set.length * SECONDS_PER_PHOTO}s` }}
       >
@@ -170,12 +180,12 @@ export function EventsSection() {
 
   return (
     <section aria-labelledby="events-heading" className="pt-24 pb-20">
-      <div className="mx-auto mb-12 flex max-w-[1440px] flex-col items-center px-4 text-center sm:px-6 lg:px-8">
+      <Container className="mb-12 flex flex-col items-center text-center">
         <GreenLineMark className="mb-6 h-auto w-16" />
         <Heading as="h2" id="events-heading" className="text-black">
           Events &amp; Industry Conferences We Attend
         </Heading>
-      </div>
+      </Container>
 
       <div
         className="relative"
@@ -186,19 +196,23 @@ export function EventsSection() {
           <CarouselContent className="ml-0">
             {EVENTS.map((event, index) => {
               const photos = photosFor(event);
+              // Below xl the logo is capped at 96px tall; reserve that box up front.
+              const smW = Math.min(
+                event.logo.width,
+                Math.round((96 * event.logo.width) / event.logo.height)
+              );
               return (
                 <CarouselItem
                   key={event.folder}
                   className="pl-0"
                   aria-label={`Event ${index + 1} of ${EVENTS.length}: ${event.name}`}
                 >
-                  <div className="relative h-full overflow-hidden xl:h-[703px]">
+                  <div className="relative h-full overflow-hidden bg-neutral-900 xl:h-[703px]">
                     <Image
                       src={`/images/events/${event.folder}/bg.webp`}
                       alt=""
                       fill
                       sizes="100vw"
-                      priority={index === 0}
                       className="object-cover"
                     />
                     {/* Figma 725:3235: 494px text column at x=101/y=86; photo
@@ -210,8 +224,13 @@ export function EventsSection() {
                           alt={event.name}
                           width={event.logo.width}
                           height={event.logo.height}
-                          style={{ "--logo-w": `${event.logo.width}px` } as CSSProperties}
-                          className="h-auto max-h-24 w-auto max-w-full self-start xl:max-h-none xl:w-(--logo-w)"
+                          style={
+                            {
+                              "--logo-w": `${event.logo.width}px`,
+                              "--logo-w-sm": `${smW}px`,
+                            } as CSSProperties
+                          }
+                          className="h-auto w-[min(var(--logo-w-sm),100%)] self-start xl:w-(--logo-w)"
                         />
                         <p className="typography-p3 text-white xl:typography-p2 xl:!leading-8">
                           {event.description}
@@ -222,8 +241,8 @@ export function EventsSection() {
                         aria-label={`ProvidusCRM at ${event.name}`}
                         className="grid h-[360px] w-full max-w-[564px] shrink-0 grid-cols-2 gap-[38px] xl:h-full xl:w-[564px]"
                       >
-                        <PhotoColumn photos={photos.filter((_, i) => i % 2 === 0)} direction="up" />
-                        <PhotoColumn photos={photos.filter((_, i) => i % 2 === 1)} direction="down" />
+                        <PhotoColumn photos={photos.filter((_, i) => i % 2 === 0)} direction="up" active={index === selected} />
+                        <PhotoColumn photos={photos.filter((_, i) => i % 2 === 1)} direction="down" active={index === selected} />
                       </div>
                     </div>
                   </div>
@@ -277,13 +296,10 @@ export function EventsSection() {
           </div>
         </div>
 
-        {/* Announced only once autoplay has stopped, so it doesn't speak every 8s. */}
-        <p
-          data-testid="events-status"
-          aria-live={stopped ? "polite" : "off"}
-          className="sr-only"
-        >
-          {current.name}, event {selected + 1} of {EVENTS.length}
+        {/* Always a polite live region, but empty until autoplay has stopped, so
+            it never speaks every 8s and the first manual change is announced. */}
+        <p data-testid="events-status" aria-live="polite" className="sr-only">
+          {stopped && `${current.name}, event ${selected + 1} of ${EVENTS.length}`}
         </p>
       </div>
     </section>
