@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { Heading } from "@/components/ui/Typography";
 import {
@@ -100,7 +100,7 @@ function PhotoColumn({ photos, direction }: { photos: string[]; direction: "up" 
                 src={src}
                 alt=""
                 fill
-                sizes="(min-width: 1024px) 263px, 45vw"
+                sizes="(min-width: 1280px) 263px, 45vw"
                 className="object-cover"
               />
             </div>
@@ -192,7 +192,7 @@ export function EventsSection() {
                   className="pl-0"
                   aria-label={`Event ${index + 1} of ${EVENTS.length}: ${event.name}`}
                 >
-                  <div className="relative h-full overflow-hidden lg:h-[703px]">
+                  <div className="relative h-full overflow-hidden xl:h-[703px]">
                     <Image
                       src={`/images/events/${event.folder}/bg.webp`}
                       alt=""
@@ -203,23 +203,24 @@ export function EventsSection() {
                     />
                     {/* Figma 725:3235: 494px text column at x=101/y=86; photo
                         columns 263px wide, 38px apart, 100px from the right. */}
-                    <div className="relative mx-auto flex h-full max-w-[1440px] flex-col gap-10 px-4 pt-12 pb-40 sm:px-6 lg:flex-row lg:justify-between lg:gap-12 lg:px-[100px] lg:py-0">
-                      <div className="flex max-w-[494px] flex-col gap-6 lg:gap-[45px] lg:pt-[86px]">
+                    <div className="relative mx-auto flex h-full max-w-[1440px] flex-col gap-10 px-4 pt-12 pb-40 sm:px-6 xl:flex-row xl:justify-between xl:gap-12 xl:px-[100px] xl:py-0">
+                      <div className="flex max-w-[494px] flex-col gap-6 xl:gap-[45px] xl:pt-[86px]">
                         <Image
                           src={`/images/events/${event.folder}/logo.webp`}
                           alt={event.name}
                           width={event.logo.width}
                           height={event.logo.height}
-                          className="h-auto max-h-24 w-auto max-w-full self-start lg:max-h-none"
+                          style={{ "--logo-w": `${event.logo.width}px` } as CSSProperties}
+                          className="h-auto max-h-24 w-auto max-w-full self-start xl:max-h-none xl:w-(--logo-w)"
                         />
-                        <p className="typography-p3 text-white lg:typography-p2 lg:!leading-8">
+                        <p className="typography-p3 text-white xl:typography-p2 xl:!leading-8">
                           {event.description}
                         </p>
                       </div>
                       <div
                         role="img"
                         aria-label={`ProvidusCRM at ${event.name}`}
-                        className="grid h-[360px] shrink-0 grid-cols-2 gap-[38px] lg:h-full lg:w-[564px]"
+                        className="grid h-[360px] shrink-0 grid-cols-2 gap-[38px] xl:h-full xl:w-[564px]"
                       >
                         <PhotoColumn photos={photos.filter((_, i) => i % 2 === 0)} direction="up" />
                         <PhotoColumn photos={photos.filter((_, i) => i % 2 === 1)} direction="down" />
@@ -234,8 +235,8 @@ export function EventsSection() {
 
         {/* One shared set of controls, so offscreen slides add no tab stops.
             Desktop: 100px from the left, 38px from the slide bottom. */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-8 lg:bottom-[38px]">
-          <div className="mx-auto flex max-w-[1440px] justify-center px-4 sm:px-6 lg:justify-start lg:px-[100px]">
+        <div className="pointer-events-none absolute inset-x-0 bottom-8 xl:bottom-[38px]">
+          <div className="mx-auto flex max-w-[1440px] justify-center px-4 sm:px-6 xl:justify-start xl:px-[100px]">
             <div className="pointer-events-auto flex items-center">
               <button
                 type="button"
