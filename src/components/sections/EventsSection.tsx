@@ -132,7 +132,7 @@ function ArrowIcon({ direction }: { direction: "left" | "right" }) {
 }
 
 const ARROW_BUTTON =
-  "-m-2.5 flex size-11 cursor-pointer items-center justify-center rounded-full text-white transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white motion-reduce:transition-none";
+  "-m-2.5 flex size-11 cursor-pointer items-center justify-center rounded-full text-white transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:cursor-default disabled:opacity-40 motion-reduce:transition-none";
 
 export function EventsSection() {
   const [api, setApi] = useState<CarouselApi>(undefined);
@@ -242,6 +242,8 @@ export function EventsSection() {
               <button
                 type="button"
                 aria-label="Previous event"
+                // Inert until Embla is ready: a click before hydration did nothing.
+                disabled={!api}
                 className={ARROW_BUTTON}
                 onClick={() => {
                   setStopped(true);
@@ -261,6 +263,8 @@ export function EventsSection() {
               <button
                 type="button"
                 aria-label="Next event"
+                // Inert until Embla is ready: a click before hydration did nothing.
+                disabled={!api}
                 className={ARROW_BUTTON}
                 onClick={() => {
                   setStopped(true);
