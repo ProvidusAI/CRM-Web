@@ -100,7 +100,7 @@ function PhotoColumn({ photos, direction }: { photos: string[]; direction: "up" 
                 src={src}
                 alt=""
                 fill
-                sizes="(min-width: 1280px) 263px, 45vw"
+                sizes="(min-width: 640px) 263px, 45vw"
                 className="object-cover"
               />
             </div>
@@ -203,7 +203,7 @@ export function EventsSection() {
                     />
                     {/* Figma 725:3235: 494px text column at x=101/y=86; photo
                         columns 263px wide, 38px apart, 100px from the right. */}
-                    <div className="relative mx-auto flex h-full max-w-[1440px] flex-col gap-10 px-4 pt-12 pb-40 sm:px-6 xl:flex-row xl:justify-between xl:gap-12 xl:px-[100px] xl:py-0">
+                    <div className="relative mx-auto flex h-full max-w-[1440px] flex-col gap-10 px-4 pt-12 pb-44 sm:px-6 xl:flex-row xl:justify-between xl:gap-12 xl:px-[100px] xl:py-0">
                       <div className="flex max-w-[494px] flex-col gap-6 xl:gap-[45px] xl:pt-[86px]">
                         <Image
                           src={`/images/events/${event.folder}/logo.webp`}
@@ -220,7 +220,7 @@ export function EventsSection() {
                       <div
                         role="img"
                         aria-label={`ProvidusCRM at ${event.name}`}
-                        className="grid h-[360px] shrink-0 grid-cols-2 gap-[38px] xl:h-full xl:w-[564px]"
+                        className="grid h-[360px] w-full max-w-[564px] shrink-0 grid-cols-2 gap-[38px] xl:h-full xl:w-[564px]"
                       >
                         <PhotoColumn photos={photos.filter((_, i) => i % 2 === 0)} direction="up" />
                         <PhotoColumn photos={photos.filter((_, i) => i % 2 === 1)} direction="down" />
@@ -234,8 +234,9 @@ export function EventsSection() {
         </Carousel>
 
         {/* One shared set of controls, so offscreen slides add no tab stops.
-            Desktop: 100px from the left, 38px from the slide bottom. */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-8 xl:bottom-[38px]">
+            Desktop: arrow 100px from the left; the counter's 104px blue fill
+            has its 10px ring outside it, 36px above the slide bottom. */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-8 xl:bottom-9">
           <div className="mx-auto flex max-w-[1440px] justify-center px-4 sm:px-6 xl:justify-start xl:px-[100px]">
             <div className="pointer-events-auto flex items-center">
               <button
@@ -251,7 +252,7 @@ export function EventsSection() {
               </button>
               <div
                 aria-hidden="true"
-                className="mx-4 flex size-[104px] items-center justify-center rounded-full border-[10px] border-migration-blue/30 bg-migration-blue bg-clip-padding"
+                className="mx-1.5 flex size-[124px] items-center justify-center rounded-full border-[10px] border-migration-blue/30 bg-migration-blue bg-clip-padding"
               >
                 <span className="typography-p3 !text-[18px] !leading-7 !font-semibold text-white">
                   {pad(selected + 1)}/{pad(EVENTS.length)}
