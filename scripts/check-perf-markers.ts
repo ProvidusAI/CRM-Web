@@ -5,7 +5,9 @@
 // tool still competes with first paint.
 const target = process.argv.slice(2).find((arg) => arg !== "--") ?? "http://localhost:3001/";
 
-const TRACKING_HOSTS = ["hs-scripts.com", "contentsquare.net", "clarity.ms", "googletagmanager.com"];
+// Only the src-loaded tags can be detected: GTM and Clarity are inline
+// snippets, which next/script never preloads under any strategy.
+const TRACKING_HOSTS = ["hs-scripts.com", "contentsquare.net"];
 
 function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
