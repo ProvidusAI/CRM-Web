@@ -145,7 +145,8 @@ export function Footer() {
             <Image src="/images/linkedin.svg" alt="" width={20} height={20} className="h-5 w-5 object-contain" />
           </Link>
 
-          <p className="flex items-center gap-3 text-footer-link" aria-label="Rated 4.9 out of 5">
+          <p className="flex items-center gap-3 text-footer-link">
+            <span className="sr-only">Rated 4.9 out of 5</span>
             <Image src="/images/providus-mark.svg" alt="" width={22} height={25} className="h-6 w-auto" />
             <span aria-hidden="true" className="font-heading text-[26px] font-semibold leading-none">
               Rating: 4.9
