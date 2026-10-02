@@ -43,9 +43,11 @@ export function HubSpotScript() {
 
   return (
     <>
+      {/* lazyOnload: HubSpot's analytics blocked the main thread for ~2s on
+          load. Route changes queue into window._hsq and replay when it loads. */}
       <Script
         id="hubspot-tracking"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         src={hubspotTrackingScriptUrl(hubspotPortalId)}
       />
       {/* useSearchParams would opt every page out of static rendering without this. */}

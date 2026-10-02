@@ -2,6 +2,7 @@
   "name": "nextjs-project",
   "version": "0.1.0",
   "private": true,
+  "browserslist": ["chrome 111", "edge 111", "firefox 111", "safari 16.4"],
   "scripts": {
     "dev": "next dev -p 3002",
     "build": "next build",
@@ -20,6 +21,7 @@
     "check:new-sections": "tsx scripts/check-new-sections.ts",
     "check:slugs": "tsx scripts/check-slugs.ts",
     "check:blog-blocks": "tsx scripts/check-blog-blocks.ts",
+    "check:perf-markers": "tsx scripts/check-perf-markers.ts",
     "import:migration": "tsx scripts/import-migration-page.ts",
     "thumbs:sections": "tsx scripts/capture-section-thumbnails.ts",
     "sanity:deploy": "sanity deploy",

@@ -86,6 +86,11 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  experimental: {
+    // Ship CSS inside the HTML instead of a render-blocking stylesheet
+    // request (Lighthouse "render-blocking requests", ~270ms on desktop).
+    inlineCss: true,
+  },
   images: {
     qualities: [75, 78, 82],
     remotePatterns: [

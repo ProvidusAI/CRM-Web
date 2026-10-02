@@ -12,7 +12,7 @@ export function ContentsquareScript() {
   return (
     <Script
       id="contentsquare"
-      strategy="afterInteractive"
+      strategy="lazyOnload"
       src={`https://t.contentsquare.net/uxa/${CONTENTSQUARE_TAG_ID}.js`}
     />
   );
