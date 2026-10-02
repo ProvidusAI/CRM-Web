@@ -21,14 +21,14 @@ export function CertifiedSection({ title, description }: CertifiedSectionProps) 
           className="pointer-events-none absolute inset-0 hidden md:block"
         >
           <Image
-            src="/images/certified-left.webp"
+            src="/images/certified-left-1240w.webp"
             alt=""
             width={1236}
             height={1385}
             className="absolute bottom-0 left-[7%] h-auto w-[42.5%]"
           />
           <Image
-            src="/images/certified-right.webp"
+            src="/images/certified-right-1240w.webp"
             alt=""
             width={1236}
             height={1385}

@@ -92,6 +92,9 @@ const nextConfig: NextConfig = {
     inlineCss: true,
   },
   images: {
+    // 1440 sits between Next's 1200 and 1920 steps, so full-bleed images on
+    // ~1280-1440px screens no longer download a 1920-wide file.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1920, 2048, 3840],
     qualities: [75, 78, 82],
     remotePatterns: [
       {
