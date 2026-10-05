@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import type { PortableTextBlock } from "next-sanity";
 import { Container } from "@/components/layout/Container";
@@ -31,6 +32,60 @@ interface TableRowValue {
 
 interface TableValue {
   rows?: TableRowValue[];
+}
+
+const LINK_CLASS = "text-brand-blue underline-offset-4 hover:underline";
+
+function ContentLink({
+  href,
+  openInNewTab,
+  children,
+}: {
+  href: string;
+  openInNewTab?: boolean;
+  children: ReactNode;
+}) {
+  if (href.startsWith("http") || openInNewTab) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={LINK_CLASS}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={LINK_CLASS}>
+      {children}
+    </Link>
+  );
+}
+
+// @sanity/table cells are plain strings, so editors write links as Markdown:
+// [link text](https://example.com). Only safe schemes become links; anything
+// else (e.g. javascript:) stays as the literal text.
+const CELL_LINK = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+const SAFE_HREF = /^(https?:\/\/|mailto:|tel:|\/|#)/i;
+
+export function renderTableCell(cell: string): ReactNode {
+  const parts: ReactNode[] = [];
+  let last = 0;
+
+  for (const match of cell.matchAll(CELL_LINK)) {
+    const [whole, text, href] = match;
+    const start = match.index ?? 0;
+    if (!SAFE_HREF.test(href)) continue;
+    if (start > last) parts.push(cell.slice(last, start));
+    parts.push(
+      <ContentLink key={start} href={href}>
+        {text}
+      </ContentLink>
+    );
+    last = start + whole.length;
+  }
+
+  if (parts.length === 0) return cell;
+  if (last < cell.length) parts.push(cell.slice(last));
+  return parts;
 }
 
 const components: PortableTextComponents = {
@@ -87,29 +142,10 @@ const components: PortableTextComponents = {
   marks: {
     link: ({ value, children }) => {
       const link = value as LinkMarkValue | undefined;
-      const href = link?.href || "#";
-      const isExternal = href.startsWith("http");
-
-      if (isExternal || link?.openInNewTab) {
-        return (
-          <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-blue underline-offset-4 hover:underline"
-          >
-            {children}
-          </a>
-        );
-      }
-
       return (
-        <Link
-          href={href}
-          className="text-brand-blue underline-offset-4 hover:underline"
-        >
+        <ContentLink href={link?.href || "#"} openInNewTab={link?.openInNewTab}>
           {children}
-        </Link>
+        </ContentLink>
       );
     },
   },
@@ -135,7 +171,7 @@ const components: PortableTextComponents = {
                     variant="p3"
                     className="border border-gray-border px-4 py-3 font-semibold text-black"
                   >
-                    {cell}
+                    {renderTableCell(cell)}
                   </Text>
                 ))}
               </tr>
@@ -150,7 +186,7 @@ const components: PortableTextComponents = {
                       variant="p3"
                       className="border border-gray-border px-4 py-3 text-gray-500"
                     >
-                      {cell}
+                      {renderTableCell(cell)}
                     </Text>
                   ))}
                 </tr>
