@@ -185,6 +185,8 @@ export const BLOG_POST_QUERY = defineQuery(`
     },
     summaryHeading,
     summaryText,
+    summaryPrimaryButton { label, link },
+    summarySecondaryButton { label, link, variant },
     seo {
       ${seoProjection}
     },

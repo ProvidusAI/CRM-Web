@@ -150,6 +150,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <BlogSummaryCard
                 heading={post.summaryHeading}
                 text={post.summaryText}
+                primaryButton={post.summaryPrimaryButton}
+                secondaryButton={post.summarySecondaryButton}
               />
               <PortableContent value={post.body} contained={false} />
             </article>

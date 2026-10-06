@@ -5,9 +5,19 @@ import Link from "next/link";
 import { CtaButton } from "@/components/ui/CtaButton";
 import { Heading, Text } from "@/components/ui/Typography";
 
+type ButtonVariant = "filled" | "white";
+
+interface SummaryButton {
+  label?: string;
+  link?: string;
+  variant?: ButtonVariant;
+}
+
 interface BlogSummaryCardProps {
   heading?: string;
   text?: string;
+  primaryButton?: SummaryButton;
+  secondaryButton?: SummaryButton;
 }
 
 // Figma 602:856 shows nine badges; the site ships ten, so the tenth is unused.
@@ -21,7 +31,22 @@ export function splitParagraphs(text: string): string[] {
     .filter(Boolean);
 }
 
-export function BlogSummaryCard({ heading, text }: BlogSummaryCardProps) {
+/** The first button falls back to "Let's Connect" → /contact; the second shows only when fully filled. */
+export function summaryButtons(primary?: SummaryButton, secondary?: SummaryButton) {
+  const buttons: { label: string; link: string; variant: ButtonVariant }[] = [
+    {
+      label: primary?.label?.trim() || "Let's Connect",
+      link: primary?.link?.trim() || "/contact",
+      variant: "filled",
+    },
+  ];
+  const label = secondary?.label?.trim();
+  const link = secondary?.link?.trim();
+  if (label && link) buttons.push({ label, link, variant: secondary?.variant ?? "filled" });
+  return buttons;
+}
+
+export function BlogSummaryCard({ heading, text, primaryButton, secondaryButton }: BlogSummaryCardProps) {
   const displayHeading = heading?.trim();
   const paragraphs = splitParagraphs(text ?? "");
 
@@ -65,11 +90,20 @@ export function BlogSummaryCard({ heading, text }: BlogSummaryCardProps) {
             </Text>
           ))}
         </div>
-        <Link href="/contact" className="mt-8 inline-block">
-          <CtaButton variant="filled" size="sm">
-            Let&apos;s Connect
-          </CtaButton>
-        </Link>
+        <div className="mt-8 flex flex-wrap gap-4">
+          {summaryButtons(primaryButton, secondaryButton).map((button) => (
+            <Link
+              key={button.label}
+              href={button.link}
+              {...(button.link.startsWith("http") && { target: "_blank", rel: "noopener noreferrer" })}
+              className="inline-block"
+            >
+              <CtaButton variant={button.variant} size="sm">
+                {button.label}
+              </CtaButton>
+            </Link>
+          ))}
+        </div>
       </div>
     </aside>
   );

@@ -83,6 +83,8 @@ export interface BlogPost extends BlogPostListItem {
   body?: PortableTextBlock[];
   summaryHeading?: string;
   summaryText?: string;
+  summaryPrimaryButton?: { label?: string; link?: string };
+  summarySecondaryButton?: { label?: string; link?: string; variant?: "filled" | "white" };
   seo?: SeoFields;
   jsonLd?: JsonLdField;
 }

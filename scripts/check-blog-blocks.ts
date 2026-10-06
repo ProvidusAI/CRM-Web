@@ -1,7 +1,7 @@
 import { post } from "../src/sanity/schemaTypes/post";
 import { blockContent } from "../src/sanity/schemaTypes/blockContent";
 import type { BlogPost, CtaBannerBlock } from "../src/sanity/lib/types";
-import { BlogSummaryCard, splitParagraphs } from "../src/components/sanity/BlogSummaryCard";
+import { BlogSummaryCard, splitParagraphs, summaryButtons } from "../src/components/sanity/BlogSummaryCard";
 import { BlogCtaBanner } from "../src/components/sanity/BlogCtaBanner";
 
 const failures: string[] = [];
@@ -36,6 +36,11 @@ check("drops whitespace-only paragraphs", splitParagraphs("  \n\nOnly").length =
 check("summary hidden when heading blank", BlogSummaryCard({ heading: "  ", text: "Body" }) === null, "rendered with blank heading");
 check("summary hidden when text blank", BlogSummaryCard({ heading: "Summary", text: "" }) === null, "rendered with blank text");
 check("summary hidden when both undefined", BlogSummaryCard({}) === null, "rendered with nothing");
+const defaults = summaryButtons();
+check("first button defaults to Let's Connect → /contact", defaults.length === 1 && defaults[0].link === "/contact" && defaults[0].label.startsWith("Let"), JSON.stringify(defaults));
+const custom = summaryButtons({ label: "Talk", link: "/x" }, { label: "Cases", link: "/case-studies", variant: "white" });
+check("custom buttons pass through", JSON.stringify(custom) === JSON.stringify([{ label: "Talk", link: "/x", variant: "filled" }, { label: "Cases", link: "/case-studies", variant: "white" }]), JSON.stringify(custom));
+check("second button needs label and link", summaryButtons(undefined, { label: "Cases" }).length === 1, "rendered a half-filled second button");
 check("summary renders when both filled", BlogSummaryCard({ heading: "Summary", text: "Body" }) !== null, "expected an element");
 
 // ── CTA banner ──────────────────────────────────────────────────

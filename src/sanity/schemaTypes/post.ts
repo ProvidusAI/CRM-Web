@@ -78,6 +78,55 @@ export const post = defineType({
       group: "summary",
     }),
     defineField({
+      name: "summaryPrimaryButton",
+      title: "First button",
+      description: "Leave empty to keep \"Let's Connect\" → /contact.",
+      type: "object",
+      group: "summary",
+      fields: [
+        defineField({ name: "label", title: "Label", type: "string", placeholder: "Let's Connect" }),
+        defineField({
+          name: "link",
+          title: "Link",
+          description: "A page on this site (/contact) or a full address (https://…).",
+          type: "url",
+          placeholder: "/contact",
+          validation: (rule) => rule.uri({ scheme: ["http", "https", "mailto", "tel"], allowRelative: true }),
+        }),
+      ],
+    }),
+    defineField({
+      name: "summarySecondaryButton",
+      title: "Second button",
+      description: "Optional. Appears only when both the label and the link are filled.",
+      type: "object",
+      group: "summary",
+      fields: [
+        defineField({ name: "label", title: "Label", type: "string" }),
+        defineField({
+          name: "link",
+          title: "Link",
+          description: "A page on this site (/case-studies) or a full address (https://…).",
+          type: "url",
+          validation: (rule) => rule.uri({ scheme: ["http", "https", "mailto", "tel"], allowRelative: true }),
+        }),
+        defineField({
+          name: "variant",
+          title: "Style",
+          type: "string",
+          options: {
+            list: [
+              { title: "Green", value: "filled" },
+              { title: "White", value: "white" },
+            ],
+            layout: "radio",
+            direction: "horizontal",
+          },
+          initialValue: "filled",
+        }),
+      ],
+    }),
+    defineField({
       name: "seo",
       title: "SEO",
       type: "seo",
