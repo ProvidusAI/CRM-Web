@@ -78,6 +78,7 @@ const badges = [
   { src: "/images/footer-badges/7.webp", alt: "G2 Highest User Adoption, Small Business, Spring 2025", width: 169, height: 195 },
   { src: "/images/footer-badges/8.webp", alt: "SourceForge Customers Love Us", width: 189, height: 171 },
   { src: "/images/footer-badges/9.webp", alt: "G2 Best Meets Requirements, Spring 2025", width: 158, height: 181 },
+  { src: "/images/footer-badges/10.webp", alt: "Pledge 1% Proud Member", width: 151, height: 168 },
 ];
 
 const linkedInUrl = "https://www.linkedin.com/showcase/providuscrmuk/";
