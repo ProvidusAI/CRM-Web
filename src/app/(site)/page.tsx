@@ -10,6 +10,7 @@ import {
   PageBlogsSection,
   FaqSection,
   PlatformsSection,
+  partnerLogos,
   EventsSection,
   TeamGallerySection,
 } from "@/components/sections";
@@ -111,6 +112,10 @@ export default async function HomePage() {
       <WhatWeDoSection />
       <ExpertiseSection />
       <IndustriesSection />
+      <PlatformsSection
+        title="Built On Partnerships With the World's Top Platforms"
+        logos={partnerLogos}
+      />
       <WhyChooseSection />
       {caseStudies.cards.length > 0 && (
         <ServiceCaseStudiesSection

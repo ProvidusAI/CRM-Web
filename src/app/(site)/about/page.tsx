@@ -5,6 +5,7 @@ import {
   BelieveSection,
   TeamThoughtsSection,
   PlatformsSection,
+  partnerLogos,
   ExploreSection,
   ServiceCaseStudiesSection,
   CtaSection,
@@ -71,7 +72,7 @@ export default async function AboutPage() {
       <BelieveSection />
       <PlatformsSection
         title="Built On Partnerships With the World's Top Platforms"
-        limit={4}
+        logos={partnerLogos}
       />
       <TeamThoughtsSection />
       {caseStudies.cards.length > 0 && (

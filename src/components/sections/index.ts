@@ -9,7 +9,7 @@ export { ExpertiseSection } from "./ExpertiseSection";
 export { ExpertiseStackSection } from "./ExpertiseStackSection";
 export { IndustriesSection } from "./IndustriesSection";
 export { IndustryDetailSection } from "./IndustryDetailSection";
-export { PlatformsSection } from "./PlatformsSection";
+export { PlatformsSection, partnerLogos } from "./PlatformsSection";
 export { WhyChooseSection, reasons } from "./WhyChooseSection";
 export { FaqSection } from "./FaqSection";
 export { ExpertiseDescriptionSection } from "./ExpertiseDescriptionSection";

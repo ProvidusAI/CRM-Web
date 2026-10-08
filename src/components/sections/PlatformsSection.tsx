@@ -18,18 +18,23 @@ const defaultLogos = [
   "/images/platform-logos/12.webp",
 ];
 
+/** "Built On Partnerships…" — About page and homepage. */
+export const partnerLogos = [
+  ...defaultLogos.slice(0, 4),
+  "/images/partnership-logos/pledge.webp",
+  "/images/partnership-logos/digital-data-cloud.webp",
+  "/images/partnership-logos/stripe.webp",
+];
+
 interface PlatformsSectionProps {
   title?: string;
   logos?: string[];
-  limit?: number;
 }
 
 export function PlatformsSection({
   title = "Platforms We Work With",
   logos = defaultLogos,
-  limit,
 }: PlatformsSectionProps) {
-  const displayLogos = limit ? logos.slice(0, limit) : logos;
 
   return (
     <section
@@ -53,36 +58,40 @@ export function PlatformsSection({
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10 justify-items-center">
-          {displayLogos.map((logo, index) => (
-            <Reveal 
-              key={index} 
-              direction="up" 
-              delay={0.1 + (index % 4) * 0.1}
+        {/* Flex, not grid, so a short last row centres (Figma 4 + 3). Widths
+            mirror a 2/3/4-column grid with the 24px gap. */}
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-10">
+          {logos.map((logo, index) => (
+            // Reveal pins an inline width: 100%, so the column width lives on a wrapper.
+            <div
+              key={index}
+              className="w-[calc(50%-12px)] md:w-[calc((100%-48px)/3)] lg:w-[calc(25%-18px)]"
             >
-              {/* Shrinks to its column on phones (a fixed 258px pair made every
-                  page ~480px wide, which also stretched the fixed mobile menu
-                  past the screen); still exactly 258x138 once the column fits. */}
-              <div
-                className="bg-white flex items-center justify-center p-4 md:p-6 transition-all hover:scale-105"
-                style={{
-                  width: "100%",
-                  maxWidth: "258px",
-                  aspectRatio: "258 / 138",
-                  borderRadius: "20px",
-                  boxShadow: "16.77px 25.15px 25.15px 0px #38A81B0D, -16.77px 25.15px 25.15px 0px #38A81B0D"
-                }}
-              >
-                <div className="relative w-full h-full max-w-[180px] max-h-[80px]">
-                  <Image
-                    src={logo}
-                    alt="Platform Logo"
-                    fill
-                    className="object-contain"
-                  />
+              <Reveal direction="up" delay={0.1 + (index % 4) * 0.1}>
+                {/* Shrinks to its column on phones (a fixed 258px pair made every
+                    page ~480px wide, which also stretched the fixed mobile menu
+                    past the screen); still exactly 258x138 once the column fits. */}
+                <div
+                  className="mx-auto flex items-center justify-center bg-white p-4 transition-all hover:scale-105 md:p-6"
+                  style={{
+                    width: "100%",
+                    maxWidth: "258px",
+                    aspectRatio: "258 / 138",
+                    borderRadius: "20px",
+                    boxShadow: "16.77px 25.15px 25.15px 0px #38A81B0D, -16.77px 25.15px 25.15px 0px #38A81B0D"
+                  }}
+                >
+                  <div className="relative w-full h-full max-w-[180px] max-h-[80px]">
+                    <Image
+                      src={logo}
+                      alt="Platform Logo"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                 </div>
-              </div>
-            </Reveal>
+              </Reveal>
+            </div>
           ))}
         </div>
       </Container>
