@@ -83,9 +83,8 @@ const badges = [
 
 const linkedInUrl = "https://www.linkedin.com/showcase/providuscrmuk/";
 
-// Figma shows FAQ, Term of Service and Privacy Policy here. Those pages don't
-// exist yet, so the links stay out until they do (add { label, href } entries).
-const legalLinks: { label: string; href: string }[] = [];
+// Figma shows FAQ, Term of Service and Privacy Policy here; add the others as their pages ship.
+const legalLinks = [{ label: "Privacy Policy", href: "/privacy-policy" }];
 
 export function Footer() {
   return (
