@@ -61,6 +61,7 @@ export default async function SalesforceHealthCloudConsultingPage() {
       <SalesforceServiceHero
         badgeTitle="Certified"
         badgeSubtitle="Salesforce Partner in the UK"
+        kicker="Salesforce Health Cloud Consultant & Implementation Partner in the UK"
         title="Patient Data Synced Across Your Systems With Salesforce Health Cloud"
         description="At ProvidusCRM, we configure Salesforce Health Cloud and connect it to your EHR, telehealth platform, and other clinical systems. Healthcare teams see clinical and non-clinical information, including medical history, social determinants of health, and care plan status, in one place."
         bullets={[

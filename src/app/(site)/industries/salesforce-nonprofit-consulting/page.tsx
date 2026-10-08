@@ -59,6 +59,7 @@ export default async function SalesforceNonprofitConsultingPage() {
       <SalesforceServiceHero
         badgeTitle="Certified"
         badgeSubtitle="Salesforce Partner in the UK"
+        kicker="Salesforce Nonprofit Consulting & Implementation Partner"
         title="Your Fundraising, Programme & Grant Data In One Place"
         description="Create lasting donor relationships, pull presentable reports, and track grant milestones with our Salesforce Nonprofit Cloud consulting and implementation services. We configure Salesforce NPC and NPSP so donor, program, grant, and volunteer data live in one connected system."
         bullets={[

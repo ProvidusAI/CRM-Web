@@ -67,6 +67,7 @@ export default async function SalesforceFinancialServicesCloudConsultingPage() {
       <SalesforceServiceHero
         badgeTitle="Certified"
         badgeSubtitle="Salesforce Partner in the UK"
+        kicker="Salesforce Financial Services Cloud Consultant & Implementation Partner in the UK"
         title="One Household Record, Zero Disconnected Accounts"
         description="With ProvidusCRM, you get to work with certified consultants who configure Salesforce Financial Services Cloud around your actual client structure: households, financial accounts, assets, liabilities, and policies, connected to your core banking, portfolio, or policy administration systems."
         bullets={[
