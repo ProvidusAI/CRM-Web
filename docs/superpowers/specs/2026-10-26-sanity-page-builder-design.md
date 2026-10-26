@@ -164,7 +164,7 @@ These replace JSX and raw strings that pages pass today. The full list per page 
 
 ## Seed (`scripts/seed-pages.ts`, one-shot)
 
-- **Reads:** imports the static route constants and component defaults directly, so the copy is not retyped.
+- **Reads:** one seed module per route under `scripts/seed-pages/`. It holds the route's constants, copied verbatim from the route file (Next rejects extra exports from `page.tsx`, so they cannot be imported), plus the section list translated from the route's JSX. Component defaults are imported from the components themselves.
 - **Builds:** one document per route, with sections in today's order and today's prop values.
 - **Images:**
   - Uploads each referenced `public/` image once, deduplicated by path, and keeps the original filename.
@@ -218,7 +218,7 @@ The controller does all of this itself, not a subagent.
    4. industry and partnership family
    5. new recruitment and privacy components
 
-   Each batch gets a unit check that the adapter output equals the props the route passes today, built from the route's own constants.
+   Each batch gets adapter unit tests (Playwright unit-style specs, like `tests/table-links.spec.ts`). Fidelity itself is proven by the stage 3 DOM reconciliation.
 3. **Seed `preview/`, then reconcile** every page (verification steps 1–2) and fix renderers and fields until it matches.
 4. **Switch:**
    - Seed the final slugs; delete the preview documents.
@@ -231,7 +231,7 @@ The controller does all of this itself, not a subagent.
 - **Production writes:** the seed writes to the production dataset. That is why every run is gated on user confirmation, and why the preview prefix comes first.
 - **Live site timing:** the live site keeps serving `main` until the branch is merged. Merging before the final seed exists would make migrated routes 404.
 - **Unconfigured environments:** without Sanity env vars, migrated routes 404. That is decision 2, and it is accepted.
-- **Draft content:** the read token can render drafts when no perspective is set. The page query uses `perspective: "published"` explicitly.
+- **Draft content:** `apiVersion` is `2026-03-01`, which defaults to the `published` perspective, so drafts never render. Stage 1 asserts this with a draft-only fixture check in the reconciliation notes.
 
 ## Out of scope
 
