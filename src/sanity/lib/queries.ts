@@ -457,3 +457,32 @@ export const SERVICE_PAGE_QUERY = defineQuery(`
     }
   }
 `);
+
+// Section-type projections that need dereferencing; everything else is plain
+// data (images are read from their asset refs, see imageRef.ts). Section tasks
+// that hold references append a `_type == "…" => { … }` clause here.
+const pageSectionsProjection = `
+  ...
+`;
+
+export const PAGE_QUERY = defineQuery(`
+  *[_type == "page" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    clipOverflowX,
+    seo {
+      ${seoProjection}
+    },
+    jsonLd {
+      ${jsonLdProjection}
+    },
+    sections[] {
+      ${pageSectionsProjection}
+    }
+  }
+`);
+
+export const PAGE_SLUGS_QUERY = defineQuery(`
+  *[_type == "page" && defined(slug.current)].slug.current
+`);

@@ -396,3 +396,15 @@ export interface ServicePage {
   descriptionSection?: ServiceDescriptionContent;
   cta?: ServiceCtaContent;
 }
+
+export interface PageDocument {
+  _id: string;
+  title: string;
+  slug: string;
+  clipOverflowX?: boolean;
+  seo?: SeoFields;
+  jsonLd?: JsonLdField;
+  // Typed as PageSectionData[] (components/sanity/page-builder/types) at the
+  // route; declared loosely here so lib types never import from components.
+  sections?: unknown[];
+}

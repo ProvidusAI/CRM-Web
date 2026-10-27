@@ -6,7 +6,7 @@ export type JsonLdValue =
 
 export function resolveJsonLd(
   jsonLd?: JsonLdField,
-  fallback?: JsonLdValue
+  fallback?: JsonLdValue | null
 ): JsonLdValue | null {
   if (jsonLd?.enabled === false) {
     return null;
