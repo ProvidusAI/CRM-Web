@@ -4,6 +4,7 @@ import { visionTool } from "@sanity/vision";
 import { table } from "@sanity/table";
 import { apiVersion, dataset, projectId } from "@/sanity/env";
 import { schemaTypes } from "@/sanity/schemaTypes";
+import { structure } from "@/sanity/structure";
 
 export default defineConfig({
   name: "providus-crm",
@@ -15,7 +16,7 @@ export default defineConfig({
     types: schemaTypes,
   },
   plugins: [
-    structureTool(),
+    structureTool({ structure }),
     visionTool({
       defaultApiVersion: apiVersion,
     }),

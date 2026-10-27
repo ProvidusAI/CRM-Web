@@ -3,9 +3,11 @@ import { blockContent } from "./blockContent";
 import { caseStudy } from "./caseStudy";
 import { category } from "./category";
 import { jsonLd } from "./jsonLd";
+import { page } from "./page";
 import { pageBlogs } from "./pageBlogs";
 import { pageCaseStudies } from "./pageCaseStudies";
 import { post } from "./post";
+import { sectionTypes } from "./sections";
 import { seo } from "./seo";
 import { servicePage } from "./servicePage";
 import { sitePageJsonLd } from "./sitePageJsonLd";
@@ -24,4 +26,6 @@ export const schemaTypes = [
   blockContent,
   seo,
   jsonLd,
+  page,
+  ...sectionTypes,
 ];
