@@ -99,19 +99,24 @@ export const PAGE_CASE_STUDIES_QUERY = defineQuery(`
   }
 `);
 
+// Shared by the page-blogs document and the page builder's blog strip.
+const pageBlogPostProjection = `
+  _id,
+  title,
+  slug,
+  publishedAt,
+  "categories": categories[]->title,
+  heroImage {
+    ${imageProjection}
+  }
+`;
+
 export const PAGE_BLOGS_QUERY = defineQuery(`
   *[_type == "pageBlogs" && pageKey == $pageKey][0] {
     pageKey,
     sectionTitle,
     posts[]->{
-      _id,
-      title,
-      slug,
-      publishedAt,
-      "categories": categories[]->title,
-      heroImage {
-        ${imageProjection}
-      }
+      ${pageBlogPostProjection}
     }
   }
 `);
@@ -462,7 +467,21 @@ export const SERVICE_PAGE_QUERY = defineQuery(`
 // data (images are read from their asset refs, see imageRef.ts). Section tasks
 // that hold references append a `_type == "…" => { … }` clause here.
 const pageSectionsProjection = `
-  ...
+  ...,
+  _type == "serviceCaseStudiesSection" => {
+    caseStudies[]->{
+      title,
+      slug,
+      technologies,
+      industry,
+      coverImage { asset->{ url } }
+    }
+  },
+  _type == "pageBlogsSection" => {
+    posts[]->{
+      ${pageBlogPostProjection}
+    }
+  }
 `;
 
 export const PAGE_QUERY = defineQuery(`

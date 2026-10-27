@@ -29,11 +29,14 @@ export const partnerLogos = [
 interface PlatformsSectionProps {
   title?: string;
   logos?: string[];
+  /** Alt text per logo, same order as `logos`. Missing entries read "Platform Logo". */
+  alts?: string[];
 }
 
 export function PlatformsSection({
   title = "Platforms We Work With",
   logos = defaultLogos,
+  alts,
 }: PlatformsSectionProps) {
 
   return (
@@ -84,7 +87,7 @@ export function PlatformsSection({
                   <div className="relative w-full h-full max-w-[180px] max-h-[80px]">
                     <Image
                       src={logo}
-                      alt="Platform Logo"
+                      alt={alts?.[index] || "Platform Logo"}
                       fill
                       className="object-contain"
                     />

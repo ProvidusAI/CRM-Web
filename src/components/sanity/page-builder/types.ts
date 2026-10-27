@@ -17,6 +17,13 @@ import type { ExpertiseStackSectionData } from "./adapters/ExpertiseStackSection
 import type { ExpertiseSectionData } from "./adapters/ExpertiseSection";
 import type { IdentityResolutionSectionData } from "./adapters/IdentityResolutionSection";
 import type { SalesforceServiceHeroData } from "./adapters/SalesforceServiceHero";
+import type { PageBlogsSectionData } from "./adapters/PageBlogsSection";
+import type { ServiceCaseStudiesSectionData } from "./adapters/ServiceCaseStudiesSection";
+import type { WhyChooseSectionData } from "./adapters/WhyChooseSection";
+import type { FaqSectionData } from "./adapters/FaqSection";
+import type { WhatWeDoSectionData } from "./adapters/WhatWeDoSection";
+import type { CertifiedSectionData } from "./adapters/CertifiedSection";
+import type { PlatformsSectionData } from "./adapters/PlatformsSection";
 
 export interface SectionSpacing {
   top?: number;
@@ -54,4 +61,11 @@ export type PageSectionData =
   | ExpertiseFeaturesSectionData
   | ExpertiseStackSectionData
   | ExpertiseSectionData
-  | IdentityResolutionSectionData;
+  | IdentityResolutionSectionData
+  | PageBlogsSectionData
+  | ServiceCaseStudiesSectionData
+  | WhyChooseSectionData
+  | FaqSectionData
+  | WhatWeDoSectionData
+  | CertifiedSectionData
+  | PlatformsSectionData;

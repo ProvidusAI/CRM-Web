@@ -3,7 +3,8 @@ import "server-only";
 import type { ServiceCaseStudyCard } from "@/components/sections/ServiceCaseStudiesSection";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { PAGE_CASE_STUDIES_QUERY } from "@/sanity/lib/queries";
-import type { PageCaseStudies, SanityImage } from "@/sanity/lib/types";
+import { toServiceCaseStudyCards } from "@/lib/caseStudyCards";
+import type { PageCaseStudies } from "@/sanity/lib/types";
 
 export type PageCaseStudyKey =
   | "home"
@@ -31,10 +32,6 @@ interface PageCaseStudiesResult {
   cards: ServiceCaseStudyCard[];
 }
 
-function imageUrl(image?: SanityImage) {
-  return image?.asset?.url;
-}
-
 /**
  * Fetches the case studies an editor selected for a given page in Sanity
  * ("Page case studies" document, keyed by pageKey).
@@ -48,13 +45,5 @@ export async function getPageCaseStudies(
     tags: ["page-case-studies", "case-studies"],
   });
 
-  const cards = (data?.caseStudies ?? []).map((caseStudy) => ({
-    title: caseStudy.title,
-    slug: caseStudy.slug.current,
-    image: imageUrl(caseStudy.coverImage) || "/images/case-study.webp",
-    label: caseStudy.technologies?.[0] || "Salesforce Consulting",
-    category: caseStudy.industry,
-  }));
-
-  return { title: data?.sectionTitle, cards };
+  return { title: data?.sectionTitle, cards: toServiceCaseStudyCards(data?.caseStudies) };
 }

@@ -1,9 +1,10 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 import { Section } from "@/components/layout/Section";
 import { Heading, Text } from "@/components/ui/Typography";
 
 interface CertifiedSectionProps {
-  title?: string;
+  title?: ReactNode;
   description?: string;
 }
 

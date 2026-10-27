@@ -16,6 +16,13 @@ import { expertiseFeaturesSectionAdapter } from "./adapters/ExpertiseFeaturesSec
 import { expertiseStackSectionAdapter } from "./adapters/ExpertiseStackSection";
 import { expertiseSectionAdapter } from "./adapters/ExpertiseSection";
 import { identityResolutionSectionAdapter } from "./adapters/IdentityResolutionSection";
+import { pageBlogsSectionAdapter } from "./adapters/PageBlogsSection";
+import { serviceCaseStudiesSectionAdapter } from "./adapters/ServiceCaseStudiesSection";
+import { whyChooseSectionAdapter } from "./adapters/WhyChooseSection";
+import { faqSectionAdapter } from "./adapters/FaqSection";
+import { whatWeDoSectionAdapter } from "./adapters/WhatWeDoSection";
+import { certifiedSectionAdapter } from "./adapters/CertifiedSection";
+import { platformsSectionAdapter } from "./adapters/PlatformsSection";
 import type { SectionAdapter } from "./types";
 
 // _type → adapter. Section tasks add one entry each.
@@ -38,4 +45,11 @@ export const SECTION_ADAPTERS: Record<string, SectionAdapter<never>> = {
   expertiseStackSection: expertiseStackSectionAdapter,
   expertiseSection: expertiseSectionAdapter,
   identityResolutionSection: identityResolutionSectionAdapter,
+  pageBlogsSection: pageBlogsSectionAdapter,
+  serviceCaseStudiesSection: serviceCaseStudiesSectionAdapter,
+  whyChooseSection: whyChooseSectionAdapter,
+  faqSection: faqSectionAdapter,
+  whatWeDoSection: whatWeDoSectionAdapter,
+  certifiedSection: certifiedSectionAdapter,
+  platformsSection: platformsSectionAdapter,
 };

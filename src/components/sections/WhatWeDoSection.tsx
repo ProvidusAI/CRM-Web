@@ -167,6 +167,8 @@ const tabs: WhatWeDoTab[] = [
   },
 ];
 
+export const DEFAULT_WHAT_WE_DO_TABS = tabs;
+
 export function WhatWeDoSection({
   title,
   tabs: customTabs,
