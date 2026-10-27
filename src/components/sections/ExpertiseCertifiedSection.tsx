@@ -6,9 +6,11 @@ import { motion } from "framer-motion";
 
 interface ExpertiseCertifiedSectionProps {
   images: string[];
+  /** Per-badge alt text, matched to `images` by index. Blank entries keep "Certification N". */
+  alts?: string[];
 }
 
-export function ExpertiseCertifiedSection({ images }: ExpertiseCertifiedSectionProps) {
+export function ExpertiseCertifiedSection({ images, alts }: ExpertiseCertifiedSectionProps) {
   if (!images || images.length === 0) return null;
 
   return (
@@ -26,7 +28,7 @@ export function ExpertiseCertifiedSection({ images }: ExpertiseCertifiedSectionP
             <div key={`cert-1-${idx}`} className="shrink-0 w-[120px] h-[120px] md:w-[150px] md:h-[150px] relative">
               <Image
                 src={src}
-                alt={`Certification ${idx + 1}`}
+                alt={alts?.[idx] || `Certification ${idx + 1}`}
                 fill
                 sizes="150px"
                 className="object-contain"
@@ -38,7 +40,7 @@ export function ExpertiseCertifiedSection({ images }: ExpertiseCertifiedSectionP
             <div key={`cert-2-${idx}`} className="shrink-0 w-[120px] h-[120px] md:w-[150px] md:h-[150px] relative">
               <Image
                 src={src}
-                alt={`Certification ${idx + 1}`}
+                alt={alts?.[idx] || `Certification ${idx + 1}`}
                 fill
                 sizes="150px"
                 className="object-contain"

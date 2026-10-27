@@ -6,8 +6,85 @@ import { Heading, Text } from "@/components/ui/Typography";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
-export function IdentityResolutionSection() {
+export interface IdentityResolutionColumn {
+  title: string;
+  /** Two paragraphs today; any number renders. */
+  paragraphs: string[];
+}
+
+export interface IdentityResolutionContent {
+  /** First heading line; a line break (desktop only) follows it. */
+  headingStart: string;
+  /** Second heading line; the green squiggle follows it. */
+  headingEnd: string;
+  introParagraphs: string[];
+  desktopImage: string;
+  desktopImageAlt: string;
+  mobileImage: string;
+  mobileImageAlt: string;
+  /** Laid out as three columns (md and up). */
+  columns: IdentityResolutionColumn[];
+}
+
+const DIAGRAM_ALT = "How Identity Resolution Works Diagram";
+
+export const DEFAULT_IDENTITY_RESOLUTION: IdentityResolutionContent = {
+  headingStart: "How Identity",
+  headingEnd: "Resolution Works",
+  introParagraphs: [
+    "Identity resolution decides whether two records belong to the same person.",
+    "Get it right, and every dashboard, segment, and AI feature downstream becomes trustworthy. Get it wrong, and you cannot trust anything Data Cloud produces.",
+  ],
+  desktopImage: "/images/data-cloud-identity.svg",
+  desktopImageAlt: DIAGRAM_ALT,
+  mobileImage: "/images/platform-expertise/identiy-mob.png",
+  mobileImageAlt: DIAGRAM_ALT,
+  columns: [
+    {
+      title: "The Two Failure modes",
+      paragraphs: [
+        "Exact-match-only rules miss obvious duplicates: \"John Smith\" and \"J. Smith\" pointing at the same phone number stay as separate profiles.",
+        "Loose, misdirected matching goes the other way, merging two different people who share a common name and a nearby postcode. The right configuration sits between these extremes.",
+      ],
+    },
+    {
+      title: "Here's An Example",
+      paragraphs: [
+        "Consider \"J. Smith, jsmith@email.com, mobile ending 4471, London SW1\" and \"John Smith, john.smith@personalemail.com, mobile ending 4471, London SW1\".",
+        "A default configuration keeps them as two profiles. A properly configured multi-attribute rule merges them into one unified profile with two known email addresses, tuned against real sample data.",
+      ],
+    },
+    {
+      title: "Survivorship Rules",
+      paragraphs: [
+        "Once records merge, Data Cloud picks which field values win. Consent should use \"most restrictive wins\" to avoid contacting opt-outs.",
+        "Loyalty status should use \"highest value wins\" to avoid downgrading customers. Our consultants make these decisions field by field, documented with your data owners.",
+      ],
+    },
+  ],
+};
+
+// Column rhythm by position, as the three hand-written columns had it.
+function columnClass(index: number, count: number) {
+  if (index === 0) return "md:pr-12 md:border-r border-gray-300";
+  if (index === count - 1) return "md:pl-12";
+  return "md:px-12 md:border-r border-gray-300";
+}
+
+type IdentityResolutionSectionProps = Partial<IdentityResolutionContent>;
+
+export function IdentityResolutionSection({
+  headingStart = DEFAULT_IDENTITY_RESOLUTION.headingStart,
+  headingEnd = DEFAULT_IDENTITY_RESOLUTION.headingEnd,
+  introParagraphs = DEFAULT_IDENTITY_RESOLUTION.introParagraphs,
+  desktopImage = DEFAULT_IDENTITY_RESOLUTION.desktopImage,
+  desktopImageAlt = DEFAULT_IDENTITY_RESOLUTION.desktopImageAlt,
+  mobileImage = DEFAULT_IDENTITY_RESOLUTION.mobileImage,
+  mobileImageAlt = DEFAULT_IDENTITY_RESOLUTION.mobileImageAlt,
+  columns = DEFAULT_IDENTITY_RESOLUTION.columns,
+}: IdentityResolutionSectionProps) {
   return (
     <Section className="py-20 md:py-32 bg-white">
       <Container>
@@ -20,8 +97,8 @@ export function IdentityResolutionSection() {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <Heading as="h2" className="text-black font-bold leading-tight">
-              How Identity <br className="hidden md:block" />
-              Resolution Works{" "}
+              {headingStart} <br className="hidden md:block" />
+              {headingEnd}{" "}
               <GreenLineMark className="inline-block h-8 md:h-10 w-auto align-baseline" />
             </Heading>
           </motion.div>
@@ -33,12 +110,11 @@ export function IdentityResolutionSection() {
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             className="flex flex-col gap-6"
           >
-            <Text variant="p2" className="text-gray-700">
-              Identity resolution decides whether two records belong to the same person.
-            </Text>
-            <Text variant="p2" className="text-gray-700">
-              Get it right, and every dashboard, segment, and AI feature downstream becomes trustworthy. Get it wrong, and you cannot trust anything Data Cloud produces.
-            </Text>
+            {introParagraphs.map((paragraph, index) => (
+              <Text key={index} variant="p2" className="text-gray-700">
+                {paragraph}
+              </Text>
+            ))}
           </motion.div>
         </div>
 
@@ -53,8 +129,8 @@ export function IdentityResolutionSection() {
           {/* Desktop: wide horizontal diagram */}
           <div className="relative hidden md:block w-full aspect-[1236/193] min-h-[190px]">
             <Image
-              src="/images/data-cloud-identity.svg"
-              alt="How Identity Resolution Works Diagram"
+              src={desktopImage}
+              alt={desktopImageAlt}
               fill
               className="object-contain"
             />
@@ -62,8 +138,8 @@ export function IdentityResolutionSection() {
           {/* Mobile: tall vertical diagram */}
           <div className="relative md:hidden w-full max-w-[420px] mx-auto aspect-[599/1323]">
             <Image
-              src="/images/platform-expertise/identiy-mob.png"
-              alt="How Identity Resolution Works Diagram"
+              src={mobileImage}
+              alt={mobileImageAlt}
               fill
               sizes="(max-width: 768px) 100vw, 420px"
               className="object-contain"
@@ -73,62 +149,29 @@ export function IdentityResolutionSection() {
 
         {/* Bottom 3 Columns */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0">
-          {/* Column 1 */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="md:pr-12 md:border-r border-gray-300"
-          >
-            <Heading as="h3" level="h4" className="text-black font-bold mb-6">
-              The Two Failure modes
-            </Heading>
-            <Text variant="p4" className="text-gray-600 leading-relaxed mb-6">
-              Exact-match-only rules miss obvious duplicates: &quot;John Smith&quot; and &quot;J. Smith&quot; pointing at the same phone number stay as separate profiles.
-            </Text>
-            <Text variant="p4" className="text-gray-600 leading-relaxed">
-              Loose, misdirected matching goes the other way, merging two different people who share a common name and a nearby postcode. The right configuration sits between these extremes.
-            </Text>
-          </motion.div>
-
-          {/* Column 2 */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="md:px-12 md:border-r border-gray-300"
-          >
-            <Heading as="h3" level="h4" className="text-black font-bold mb-6">
-              Here&apos;s An Example
-            </Heading>
-            <Text variant="p4" className="text-gray-600 leading-relaxed mb-6">
-              Consider &quot;J. Smith, jsmith@email.com, mobile ending 4471, London SW1&quot; and &quot;John Smith, john.smith@personalemail.com, mobile ending 4471, London SW1&quot;.
-            </Text>
-            <Text variant="p4" className="text-gray-600 leading-relaxed">
-              A default configuration keeps them as two profiles. A properly configured multi-attribute rule merges them into one unified profile with two known email addresses, tuned against real sample data.
-            </Text>
-          </motion.div>
-
-          {/* Column 3 */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className="md:pl-12"
-          >
-            <Heading as="h3" level="h4" className="text-black font-bold mb-6">
-              Survivorship Rules
-            </Heading>
-            <Text variant="p4" className="text-gray-600 leading-relaxed mb-6">
-              Once records merge, Data Cloud picks which field values win. Consent should use &quot;most restrictive wins&quot; to avoid contacting opt-outs.
-            </Text>
-            <Text variant="p4" className="text-gray-600 leading-relaxed">
-              Loyalty status should use &quot;highest value wins&quot; to avoid downgrading customers. Our consultants make these decisions field by field, documented with your data owners.
-            </Text>
-          </motion.div>
+          {columns.map((column, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+              className={columnClass(index, columns.length)}
+            >
+              <Heading as="h3" level="h4" className="text-black font-bold mb-6">
+                {column.title}
+              </Heading>
+              {column.paragraphs.map((paragraph, pIndex) => (
+                <Text
+                  key={pIndex}
+                  variant="p4"
+                  className={cn("text-gray-600 leading-relaxed", pIndex < column.paragraphs.length - 1 && "mb-6")}
+                >
+                  {paragraph}
+                </Text>
+              ))}
+            </motion.div>
+          ))}
         </div>
       </Container>
     </Section>

@@ -12,7 +12,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/Carousel";
 import { Heading, Text } from "@/components/ui/Typography";
-import { PLATFORM_HREFS } from "@/lib/platformPages";
+import { resolvePlatformHref } from "@/lib/platformPages";
 
 export interface ExpertiseItem {
   id: number | string;
@@ -20,6 +20,8 @@ export interface ExpertiseItem {
   icon: string;
   text: string;
   shadow: string;
+  /** Overrides the title lookup in PLATFORM_HREFS. */
+  href?: string;
 }
 
 export const expertiseItems: ExpertiseItem[] = [
@@ -123,9 +125,9 @@ export function ExpertiseSection({ title, items }: ExpertiseSectionProps) {
                   />
                 </div>
 
-                {PLATFORM_HREFS[item.title] ? (
+                {resolvePlatformHref(item.title, item.href) ? (
                   <Link
-                    href={PLATFORM_HREFS[item.title]}
+                    href={resolvePlatformHref(item.title, item.href)!}
                     className="mb-4 shrink-0 hover:underline"
                     aria-label={`Explore ${item.title} consulting`}
                   >

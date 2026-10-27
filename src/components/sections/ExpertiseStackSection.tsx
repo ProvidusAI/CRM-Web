@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 // `href` is set only for clouds with a dedicated internal page; those cards'
 // arrow buttons link, the rest render a non-interactive arrow.
-interface ExpertiseItem {
+export interface ExpertiseStackItem {
   title: string;
   subtitle: string;
   text: string;
@@ -20,7 +20,7 @@ interface ExpertiseItem {
   hidden?: boolean;
 }
 
-const expertiseData: ExpertiseItem[] = [
+export const DEFAULT_STACK_ITEMS: ExpertiseStackItem[] = [
   {
     title: "Experience Cloud",
     subtitle: "Give customers, partners, and teams a self-service portal that works.",
@@ -87,12 +87,16 @@ const expertiseData: ExpertiseItem[] = [
   },
 ];
 
-export function ExpertiseStackSection() {
+interface ExpertiseStackSectionProps {
+  items?: ExpertiseStackItem[];
+}
+
+export function ExpertiseStackSection({ items = DEFAULT_STACK_ITEMS }: ExpertiseStackSectionProps) {
   return (
     <section className="relative bg-white pb-32">
       <Container>
         <div className="flex flex-col relative">
-          {expertiseData.filter((item) => !item.hidden).map((item, index) => (
+          {items.filter((item) => !item.hidden).map((item, index) => (
             <Card 
               key={index} 
               index={index} 

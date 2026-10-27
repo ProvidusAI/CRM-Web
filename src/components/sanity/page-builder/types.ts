@@ -6,6 +6,16 @@ import type { HeroSectionData } from "./adapters/HeroSection";
 import type { IndustryCtaSectionData } from "./adapters/IndustryCtaSection";
 import type { PartnersSectionData } from "./adapters/PartnersSection";
 import type { SalesforceConsultCtaSectionData } from "./adapters/SalesforceConsultCtaSection";
+import type { ExpertiseSalesforceSectionData } from "./adapters/ExpertiseSalesforceSection";
+import type { ExpertisePlatformsSectionData } from "./adapters/ExpertisePlatformsSection";
+import type { ExpertiseDescriptionSectionData } from "./adapters/ExpertiseDescriptionSection";
+import type { ExpertiseCertifiedSectionData } from "./adapters/ExpertiseCertifiedSection";
+import type { ExpertiseImplementationSectionData } from "./adapters/ExpertiseImplementationSection";
+import type { ExpertiseChallengesSectionData } from "./adapters/ExpertiseChallengesSection";
+import type { ExpertiseFeaturesSectionData } from "./adapters/ExpertiseFeaturesSection";
+import type { ExpertiseStackSectionData } from "./adapters/ExpertiseStackSection";
+import type { ExpertiseSectionData } from "./adapters/ExpertiseSection";
+import type { IdentityResolutionSectionData } from "./adapters/IdentityResolutionSection";
 import type { SalesforceServiceHeroData } from "./adapters/SalesforceServiceHero";
 
 export interface SectionSpacing {
@@ -34,4 +44,14 @@ export type PageSectionData =
   | IndustryCtaSectionData
   | SalesforceConsultCtaSectionData
   | ContactSectionData
-  | PartnersSectionData;
+  | PartnersSectionData
+  | ExpertiseSalesforceSectionData
+  | ExpertisePlatformsSectionData
+  | ExpertiseDescriptionSectionData
+  | ExpertiseCertifiedSectionData
+  | ExpertiseImplementationSectionData
+  | ExpertiseChallengesSectionData
+  | ExpertiseFeaturesSectionData
+  | ExpertiseStackSectionData
+  | ExpertiseSectionData
+  | IdentityResolutionSectionData;

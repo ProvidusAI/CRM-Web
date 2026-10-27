@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/Carousel";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { Heading, Text } from "@/components/ui/Typography";
-import { PLATFORM_HREFS } from "@/lib/platformPages";
+import { resolvePlatformHref } from "@/lib/platformPages";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
@@ -23,6 +23,8 @@ export interface ExpertisePlatformItem {
   text: string;
   icon: string;
   bgGradient: string;
+  /** Overrides the title lookup in PLATFORM_HREFS. */
+  href?: string;
 }
 
 interface ExpertisePlatformsSectionProps {
@@ -99,9 +101,9 @@ export function ExpertisePlatformsSection({
                   )}
 
                   <div className="mt-auto w-full pt-20">
-                    {PLATFORM_HREFS[item.title] ? (
+                    {resolvePlatformHref(item.title, item.href) ? (
                       <Link
-                        href={PLATFORM_HREFS[item.title]}
+                        href={resolvePlatformHref(item.title, item.href)!}
                         className="inline-block hover:underline"
                         aria-label={`Explore ${item.title} consulting`}
                       >
