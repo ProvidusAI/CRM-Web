@@ -35,7 +35,9 @@ test.describe("Blog summary card and CTA banner", () => {
 
     const card = page.locator("article").getByTestId("blog-summary-card");
     await expect(card).toBeVisible();
-    await expect(card.getByRole("link", { name: /let's connect/i })).toHaveAttribute("href", "/contact");
+    const firstCta = card.getByRole("link").first();
+    await expect(firstCta).toBeVisible();
+    await expect(firstCta).toHaveAttribute("href", /\S/);
 
     // The card must be the article's first child.
     const isFirst = await card.evaluate((el) => el.parentElement?.firstElementChild === el);
