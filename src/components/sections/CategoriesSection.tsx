@@ -4,7 +4,19 @@ import { Section } from "@/components/layout/Section";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Reveal } from "@/components/ui/Reveal";
 
-const categories = [
+export interface CategoryItem {
+  title: string;
+  text: string;
+  icon: string;
+  /** A CSS gradient; the card background. */
+  boxGradient: string;
+  /** A CSS gradient; the icon tile. */
+  iconGradient: string;
+  /** Leaves the title unlinked when empty. */
+  href?: string;
+}
+
+export const DEFAULT_CATEGORIES: CategoryItem[] = [
   {
     title: "Salesforce Consulting",
     text: "First, we learn how the business actually runs. Then, we build a CRM strategy around that reality. Our consultants assess workflows, spot gaps, and map out Salesforce roadmaps tied to clear business goals. In other words, no guesswork.",
@@ -79,9 +91,13 @@ const iconShadow = `
   0px 0.71px 0.71px -0.54px #ABABABA3
 `;
 
-export function CategoriesSection() {
+interface CategoriesSectionProps {
+  categories?: CategoryItem[];
+}
+
+export function CategoriesSection({ categories = DEFAULT_CATEGORIES }: CategoriesSectionProps) {
   // Group categories into pairs for alternating rows
-  const rows = [];
+  const rows: CategoryItem[][] = [];
   for (let i = 0; i < categories.length; i += 2) {
     rows.push(categories.slice(i, i + 2));
   }

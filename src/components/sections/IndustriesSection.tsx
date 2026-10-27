@@ -16,7 +16,7 @@ interface IndustriesSectionProps {
   items?: IndustrySectionItem[];
 }
 
-const industries: IndustrySectionItem[] = [
+export const DEFAULT_INDUSTRIES: IndustrySectionItem[] = [
   {
     title: "Non-Profit Cloud",
     image: "/images/non-profit.webp",
@@ -55,7 +55,7 @@ const industries: IndustrySectionItem[] = [
 ];
 
 export function IndustriesSection({ title, items }: IndustriesSectionProps) {
-  const displayItems = items && items.length > 0 ? items : industries;
+  const displayItems = items && items.length > 0 ? items : DEFAULT_INDUSTRIES;
 
   return (
     <section className="py-24 bg-white">

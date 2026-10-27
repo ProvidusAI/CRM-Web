@@ -7,7 +7,28 @@ import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function ExploreSection() {
+export interface ExploreTile {
+  title: string;
+  href: string;
+  image: string;
+  imageAlt: string;
+}
+
+/** In layout order: the tall tile on the left, then the two stacked on the right. */
+export const DEFAULT_EXPLORE_TILES: ExploreTile[] = [
+  { title: "Our Services", href: "/services", image: "/images/our-services.webp", imageAlt: "Our Services" },
+  { title: "Our Industry Expertise", href: "/industries", image: "/images/our-industry.webp", imageAlt: "Industry Expertise" },
+  { title: "Our Platform Expertise", href: "/platform-expertise", image: "/images/our-platform.webp", imageAlt: "Platform Expertise" },
+];
+
+interface ExploreSectionProps {
+  title?: string;
+  /** Three tiles; their colours and sizes follow the position. */
+  tiles?: ExploreTile[];
+}
+
+export function ExploreSection({ title = "Explore ProvidusCRM", tiles = DEFAULT_EXPLORE_TILES }: ExploreSectionProps) {
+  const [services, industries, platforms] = tiles;
   return (
     <section className="py-24 bg-white">
       <Container>
@@ -15,7 +36,7 @@ export function ExploreSection() {
         <Reveal direction="up" delay={0.1}>
           <div className="flex flex-col items-center text-center mb-16">
             <Heading as="h2" className="text-black font-bold text-center">
-              Explore ProvidusCRM
+              {title}
             </Heading>
           </div>
         </Reveal>
@@ -26,7 +47,7 @@ export function ExploreSection() {
           {/* Left Column (40%) - Green Box */}
           <div className="lg:col-span-4 h-full">
             <Reveal direction="left" delay={0.2} className="h-full">
-              <Link href="/services" className="block h-full">
+              <Link href={services.href} className="block h-full">
                 <motion.div
                   className="relative w-full h-[500px] lg:h-[504px] overflow-hidden flex flex-col justify-between p-10 cursor-pointer select-none group"
                   style={{
@@ -39,7 +60,7 @@ export function ExploreSection() {
                   {/* Text Content */}
                   <div className="relative z-10 flex flex-col gap-4">
                     <Heading as="h3" className="text-white">
-                      Our Services
+                      {services.title}
                     </Heading>
                     <Text
                       variant="p3"
@@ -73,8 +94,8 @@ export function ExploreSection() {
                       transition={{ duration: 0.4 }}
                     >
                       <Image
-                        src="/images/our-services.webp"
-                        alt="Our Services"
+                        src={services.image}
+                        alt={services.imageAlt}
                         fill
                         sizes="(min-width: 1024px) 38vw, 100vw"
                         className="object-contain object-right-bottom"
@@ -91,7 +112,7 @@ export function ExploreSection() {
 
             {/* Top Box - Blue Box */}
             <Reveal direction="right" delay={0.2}>
-              <Link href="/industries" className="block">
+              <Link href={industries.href} className="block">
                 <motion.div
                   className="relative w-full h-[240px] overflow-hidden flex flex-col justify-between p-10 cursor-pointer select-none group"
                   style={{
@@ -104,7 +125,7 @@ export function ExploreSection() {
                   {/* Text Content */}
                   <div className="relative z-10 flex flex-col gap-4 max-w-[55%]">
                     <Heading as="h3" className="text-white">
-                      Our Industry Expertise
+                      {industries.title}
                     </Heading>
                     <Text
                       variant="p3"
@@ -128,8 +149,8 @@ export function ExploreSection() {
                       transition={{ duration: 0.4 }}
                     >
                       <Image
-                        src="/images/our-industry.webp"
-                        alt="Industry Expertise"
+                        src={industries.image}
+                        alt={industries.imageAlt}
                         fill
                         sizes="(min-width: 1024px) 30vw, 100vw"
                         className="object-contain object-right-bottom"
@@ -142,7 +163,7 @@ export function ExploreSection() {
 
             {/* Bottom Box - Grey Box */}
             <Reveal direction="right" delay={0.3}>
-              <Link href="/platform-expertise" className="block">
+              <Link href={platforms.href} className="block">
                 <motion.div
                   className="relative w-full h-[240px] overflow-hidden flex flex-col justify-between p-10 cursor-pointer select-none group"
                   style={{
@@ -155,7 +176,7 @@ export function ExploreSection() {
                   {/* Text Content */}
                   <div className="relative z-10 flex flex-col gap-4 max-w-[55%]">
                     <Heading as="h3" className="text-white">
-                      Our Platform Expertise
+                      {platforms.title}
                     </Heading>
                     <Text
                       variant="p3"
@@ -179,8 +200,8 @@ export function ExploreSection() {
                       transition={{ duration: 0.4 }}
                     >
                       <Image
-                        src="/images/our-platform.webp"
-                        alt="Platform Expertise"
+                        src={platforms.image}
+                        alt={platforms.imageAlt}
                         fill
                         sizes="(min-width: 1024px) 30vw, 100vw"
                         className="object-contain object-right-bottom"

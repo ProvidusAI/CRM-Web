@@ -8,7 +8,7 @@ import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Reveal } from "@/components/ui/Reveal";
 
-const believeCards: CardItem[] = [
+export const DEFAULT_BELIEVE_CARDS: BelieveCardItem[] = [
   {
     title: "Build What Matters",
     description: "We dig past surface-level requirements to understand what the business actually needs. As a result, the solutions we deliver fix root causes, not symptoms.",
@@ -37,12 +37,12 @@ const believeCards: CardItem[] = [
 
 interface BelieveSectionProps {
   title?: string;
-  cards?: CardItem[];
+  cards?: BelieveCardItem[];
 }
 
 export function BelieveSection({
   title = "What We Believe In",
-  cards = believeCards,
+  cards = DEFAULT_BELIEVE_CARDS,
 }: BelieveSectionProps) {
   return (
     <section className="relative overflow-hidden py-24 bg-white">
@@ -89,7 +89,7 @@ export function BelieveSection({
   );
 }
 
-interface CardItem {
+export interface BelieveCardItem {
   title: string;
   description: string;
   icon: string;
@@ -99,7 +99,7 @@ interface CardItem {
   href?: string;
 }
 
-function BelieveCard({ card }: { card: CardItem }) {
+function BelieveCard({ card }: { card: BelieveCardItem }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (

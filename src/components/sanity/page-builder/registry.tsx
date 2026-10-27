@@ -23,6 +23,13 @@ import { faqSectionAdapter } from "./adapters/FaqSection";
 import { whatWeDoSectionAdapter } from "./adapters/WhatWeDoSection";
 import { certifiedSectionAdapter } from "./adapters/CertifiedSection";
 import { platformsSectionAdapter } from "./adapters/PlatformsSection";
+import { industriesSectionAdapter } from "./adapters/IndustriesSection";
+import { believeSectionAdapter } from "./adapters/BelieveSection";
+import { teamThoughtsSectionAdapter } from "./adapters/TeamThoughtsSection";
+import { teamGallerySectionAdapter } from "./adapters/TeamGallerySection";
+import { exploreSectionAdapter } from "./adapters/ExploreSection";
+import { eventsSectionAdapter } from "./adapters/EventsSection";
+import { categoriesSectionAdapter } from "./adapters/CategoriesSection";
 import type { SectionAdapter } from "./types";
 
 // _type → adapter. Section tasks add one entry each.
@@ -52,4 +59,11 @@ export const SECTION_ADAPTERS: Record<string, SectionAdapter<never>> = {
   whatWeDoSection: whatWeDoSectionAdapter,
   certifiedSection: certifiedSectionAdapter,
   platformsSection: platformsSectionAdapter,
+  industriesSection: industriesSectionAdapter,
+  believeSection: believeSectionAdapter,
+  teamThoughtsSection: teamThoughtsSectionAdapter,
+  teamGallerySection: teamGallerySectionAdapter,
+  exploreSection: exploreSectionAdapter,
+  eventsSection: eventsSectionAdapter,
+  categoriesSection: categoriesSectionAdapter,
 };

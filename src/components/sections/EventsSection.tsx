@@ -13,50 +13,65 @@ import {
 } from "@/components/ui/Carousel";
 import { cn } from "@/lib/utils";
 
-interface EventSlide {
+export interface EventSlide {
   name: string;
-  folder: string;
-  /** Display size: half the 2x logo export. */
-  logo: { width: number; height: number };
-  photoCount: number;
   description: string;
+  /** Full-bleed slide background. */
+  bg: string;
+  /** `width`/`height` are the display size: half the 2x logo export. */
+  logo: { src: string; width: number; height: number; alt?: string };
+  /** Scroll in two columns, alternating; decorative. */
+  photos: string[];
 }
 
 // Figma 725:3235 and its three sibling frames. Images live in
 // public/images/events/<folder>/ as bg.webp, logo.webp and 1..N.webp.
-const EVENTS: EventSlide[] = [
-  {
-    name: "TechCrunch Disrupt",
-    folder: "disrupt",
-    logo: { width: 416, height: 82 },
-    photoCount: 8,
-    description:
-      "The world's leading gathering of startups, investors, and tech innovators. ProvidusCRM attends to connect with growing businesses looking to scale smarter with Salesforce.",
-  },
-  {
-    name: "Singapore FinTech Festival",
-    folder: "singapore-fintect",
-    logo: { width: 342, height: 158 },
-    photoCount: 4,
-    description:
-      "The largest fintech event in the world, bringing together banks, regulators, and technology providers across Asia and beyond. ProvidusCRM joins to explore how Salesforce is shaping financial services and CRM strategy in the fintech space.",
-  },
-  {
-    name: "GITEX Asia Singapore",
-    folder: "gitex-singapre",
-    logo: { width: 254, height: 147 },
-    photoCount: 4,
-    description:
-      "One of the largest technology exhibitions globally, held in Dubai, covering everything from AI to enterprise software. ProvidusCRM attends to showcase our Salesforce consulting and implementation expertise to businesses across the Middle East and beyond.",
-  },
-  {
-    name: "AI Everything Middle East & Africa, Egypt",
-    folder: "ai-egypt",
-    logo: { width: 170, height: 194 },
-    photoCount: 4,
-    description:
-      "A leading AI-focused event bringing together innovators, enterprises, and government bodies across the MENA region. ProvidusCRM takes part to discuss how AI and Salesforce, including Agentforce, are transforming customer relationship management.",
-  },
+function seedEvent(
+  folder: string,
+  name: string,
+  logo: { width: number; height: number },
+  photoCount: number,
+  description: string
+): EventSlide {
+  const dir = `/images/events/${folder}`;
+  return {
+    name,
+    description,
+    bg: `${dir}/bg.webp`,
+    logo: { src: `${dir}/logo.webp`, ...logo },
+    photos: Array.from({ length: photoCount }, (_, i) => `${dir}/${i + 1}.webp`),
+  };
+}
+
+export const DEFAULT_EVENTS: EventSlide[] = [
+  seedEvent(
+    "disrupt",
+    "TechCrunch Disrupt",
+    { width: 416, height: 82 },
+    8,
+    "The world's leading gathering of startups, investors, and tech innovators. ProvidusCRM attends to connect with growing businesses looking to scale smarter with Salesforce."
+  ),
+  seedEvent(
+    "singapore-fintect",
+    "Singapore FinTech Festival",
+    { width: 342, height: 158 },
+    4,
+    "The largest fintech event in the world, bringing together banks, regulators, and technology providers across Asia and beyond. ProvidusCRM joins to explore how Salesforce is shaping financial services and CRM strategy in the fintech space."
+  ),
+  seedEvent(
+    "gitex-singapre",
+    "GITEX Asia Singapore",
+    { width: 254, height: 147 },
+    4,
+    "One of the largest technology exhibitions globally, held in Dubai, covering everything from AI to enterprise software. ProvidusCRM attends to showcase our Salesforce consulting and implementation expertise to businesses across the Middle East and beyond."
+  ),
+  seedEvent(
+    "ai-egypt",
+    "AI Everything Middle East & Africa, Egypt",
+    { width: 170, height: 194 },
+    4,
+    "A leading AI-focused event bringing together innovators, enterprises, and government bodies across the MENA region. ProvidusCRM takes part to discuss how AI and Salesforce, including Agentforce, are transforming customer relationship management."
+  ),
 ];
 
 const AUTOPLAY_MS = 8000;
@@ -69,13 +84,6 @@ function pad(n: number) {
   return String(n).padStart(2, "0");
 }
 
-function photosFor(event: EventSlide) {
-  return Array.from(
-    { length: event.photoCount },
-    (_, i) => `/images/events/${event.folder}/${i + 1}.webp`
-  );
-}
-
 function PhotoColumn({
   photos,
   direction,
@@ -85,6 +93,8 @@ function PhotoColumn({
   direction: "up" | "down";
   active: boolean;
 }) {
+  // A single photo leaves the other column empty; Math.ceil(3 / 0) would throw.
+  if (!photos.length) return <div className="h-full overflow-hidden" />;
   const set = Array.from(
     { length: Math.ceil(MIN_PHOTOS_PER_SET / photos.length) },
     () => photos
@@ -144,7 +154,15 @@ function ArrowIcon({ direction }: { direction: "left" | "right" }) {
 const ARROW_BUTTON =
   "-m-2.5 flex size-11 cursor-pointer items-center justify-center rounded-full text-white transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:cursor-default disabled:opacity-40 motion-reduce:transition-none";
 
-export function EventsSection() {
+interface EventsSectionProps {
+  title?: string;
+  events?: EventSlide[];
+}
+
+export function EventsSection({
+  title = "Events & Industry Conferences We Attend",
+  events = DEFAULT_EVENTS,
+}: EventsSectionProps) {
   const [api, setApi] = useState<CarouselApi>(undefined);
   const [selected, setSelected] = useState(0);
   // Autoplay stops for good once the visitor takes over, or never starts
@@ -176,14 +194,14 @@ export function EventsSection() {
     return () => clearTimeout(timer);
   }, [api, stopped, hovered, selected]);
 
-  const current = EVENTS[selected];
+  const current = events[selected];
 
   return (
     <section aria-labelledby="events-heading" className="pt-24 pb-20">
       <Container className="mb-12 flex flex-col items-center text-center">
         <GreenLineMark className="mb-6 h-auto w-16" />
         <Heading as="h2" id="events-heading" className="text-black">
-          Events &amp; Industry Conferences We Attend
+          {title}
         </Heading>
       </Container>
 
@@ -194,8 +212,8 @@ export function EventsSection() {
       >
         <Carousel opts={{ loop: true }} setApi={setApi} aria-label="Events">
           <CarouselContent className="ml-0">
-            {EVENTS.map((event, index) => {
-              const photos = photosFor(event);
+            {events.map((event, index) => {
+              const { photos } = event;
               // Below xl the logo is capped at 96px tall; reserve that box up front.
               const smW = Math.min(
                 event.logo.width,
@@ -203,13 +221,13 @@ export function EventsSection() {
               );
               return (
                 <CarouselItem
-                  key={event.folder}
+                  key={`${event.name}-${index}`}
                   className="pl-0"
-                  aria-label={`Event ${index + 1} of ${EVENTS.length}: ${event.name}`}
+                  aria-label={`Event ${index + 1} of ${events.length}: ${event.name}`}
                 >
                   <div className="relative h-full overflow-hidden bg-neutral-900 xl:h-[703px]">
                     <Image
-                      src={`/images/events/${event.folder}/bg.webp`}
+                      src={event.bg}
                       alt=""
                       fill
                       sizes="100vw"
@@ -220,8 +238,8 @@ export function EventsSection() {
                     <div className="relative mx-auto flex h-full max-w-[1440px] flex-col gap-10 px-4 pt-12 pb-44 sm:px-6 xl:flex-row xl:justify-between xl:gap-12 xl:px-[100px] xl:py-0">
                       <div className="flex max-w-[494px] flex-col gap-6 xl:gap-[45px] xl:pt-[86px]">
                         <Image
-                          src={`/images/events/${event.folder}/logo.webp`}
-                          alt={event.name}
+                          src={event.logo.src}
+                          alt={event.logo.alt ?? event.name}
                           width={event.logo.width}
                           height={event.logo.height}
                           style={
@@ -276,7 +294,7 @@ export function EventsSection() {
                 className="mx-1.5 flex size-[124px] items-center justify-center rounded-full border-[10px] border-migration-blue/30 bg-migration-blue bg-clip-padding"
               >
                 <span className="typography-p3 !text-[18px] !leading-7 !font-semibold text-white">
-                  {pad(selected + 1)}/{pad(EVENTS.length)}
+                  {pad(selected + 1)}/{pad(events.length)}
                 </span>
               </div>
               <button
@@ -299,7 +317,7 @@ export function EventsSection() {
         {/* Always a polite live region, but empty until autoplay has stopped, so
             it never speaks every 8s and the first manual change is announced. */}
         <p data-testid="events-status" aria-live="polite" className="sr-only">
-          {stopped && `${current.name}, event ${selected + 1} of ${EVENTS.length}`}
+          {stopped && `${current.name}, event ${selected + 1} of ${events.length}`}
         </p>
       </div>
     </section>

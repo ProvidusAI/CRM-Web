@@ -24,6 +24,13 @@ import type { FaqSectionData } from "./adapters/FaqSection";
 import type { WhatWeDoSectionData } from "./adapters/WhatWeDoSection";
 import type { CertifiedSectionData } from "./adapters/CertifiedSection";
 import type { PlatformsSectionData } from "./adapters/PlatformsSection";
+import type { IndustriesSectionData } from "./adapters/IndustriesSection";
+import type { BelieveSectionData } from "./adapters/BelieveSection";
+import type { TeamThoughtsSectionData } from "./adapters/TeamThoughtsSection";
+import type { TeamGallerySectionData } from "./adapters/TeamGallerySection";
+import type { ExploreSectionData } from "./adapters/ExploreSection";
+import type { EventsSectionData } from "./adapters/EventsSection";
+import type { CategoriesSectionData } from "./adapters/CategoriesSection";
 
 export interface SectionSpacing {
   top?: number;
@@ -68,4 +75,11 @@ export type PageSectionData =
   | FaqSectionData
   | WhatWeDoSectionData
   | CertifiedSectionData
-  | PlatformsSectionData;
+  | PlatformsSectionData
+  | IndustriesSectionData
+  | BelieveSectionData
+  | TeamThoughtsSectionData
+  | TeamGallerySectionData
+  | ExploreSectionData
+  | EventsSectionData
+  | CategoriesSectionData;

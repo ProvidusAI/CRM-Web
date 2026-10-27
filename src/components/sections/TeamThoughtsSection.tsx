@@ -14,7 +14,20 @@ import {
 } from "@/components/ui/Carousel";
 import { cn } from "@/lib/utils";
 
-const teamThoughts = [
+export interface TeamThoughtsMember {
+  /** Keys the slide, so it must be unique. */
+  id: string | number;
+  name: string;
+  /** The name as the quote card prints it. */
+  displayName: string;
+  designation: string;
+  /** The designation as the quote card prints it. */
+  fullDesignation: string;
+  image: string;
+  quote: string;
+}
+
+export const DEFAULT_TEAM_THOUGHTS: TeamThoughtsMember[] = [
   {
     id: 1,
     name: "Mohsin J. Khan",
@@ -53,8 +66,6 @@ const teamThoughts = [
   }
 ];
 
-type TeamMember = (typeof teamThoughts)[number];
-
 function QuoteIcon() {
   return (
     <svg width="60" height="44" viewBox="0 0 60 44" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +79,7 @@ const AUTOPLAY_MS = 6000;
 // Below md the member cards are dropped: each quote card is a slide instead.
 // It advances on a timer until the visitor swipes or taps a dot, then stays
 // under their control (and never autoplays with reduced motion).
-function MobileTeamCarousel({ members }: { members: TeamMember[] }) {
+function MobileTeamCarousel({ members }: { members: TeamThoughtsMember[] }) {
   const [api, setApi] = useState<CarouselApi>(undefined);
   const [selected, setSelected] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -160,9 +171,19 @@ function MobileTeamCarousel({ members }: { members: TeamMember[] }) {
   );
 }
 
-export function TeamThoughtsSection() {
+interface TeamThoughtsSectionProps {
+  title?: string;
+  subtitle?: string;
+  members?: TeamThoughtsMember[];
+}
+
+export function TeamThoughtsSection({
+  title = "Meet Our Team",
+  subtitle = "Our team of technology experts and industry leaders leads our expertise, solutions, and success stories.",
+  members = DEFAULT_TEAM_THOUGHTS,
+}: TeamThoughtsSectionProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeMember = teamThoughts[activeIndex];
+  const activeMember = members[activeIndex];
 
   return (
     <section className="mt-24 relative py-24 overflow-hidden bg-[#1E5D8F]">
@@ -186,16 +207,16 @@ export function TeamThoughtsSection() {
               className="w-16 h-auto mb-6"
             />
             <Heading as="h2" className="text-white font-bold mb-4">
-              Meet Our Team
+              {title}
             </Heading>
             <Text variant="p2" className="text-white/80 max-w-2xl">
-              Our team of technology experts and industry leaders leads our expertise, solutions, and success stories.
+              {subtitle}
             </Text>
           </div>
         </Reveal>
 
         <Reveal direction="up" delay={0.2} className="md:hidden">
-          <MobileTeamCarousel members={teamThoughts} />
+          <MobileTeamCarousel members={members} />
         </Reveal>
 
         <div className="hidden md:block">
@@ -283,7 +304,7 @@ export function TeamThoughtsSection() {
 
           {/* Small Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamThoughts.map((member, index) => {
+            {members.map((member, index) => {
               const isActive = activeIndex === index;
               return (
                 <Reveal

@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Heading } from "@/components/ui/Typography";
 import { cn } from "@/lib/utils";
 
-interface GalleryPhoto {
+export interface TeamGalleryPhoto {
   src: string;
   alt: string;
   /** Box shape from the Figma frame, where every box is 346px tall. */
@@ -19,7 +19,7 @@ interface GalleryPhoto {
 // Figma 723:4. Within a row the aspect ratios share the 346 denominator, so
 // the boxes stay equal-height as the grid scales; max-h caps them at 346px
 // once the container outgrows the 1240px design width.
-const topRow: GalleryPhoto[] = [
+export const DEFAULT_TOP_ROW: TeamGalleryPhoto[] = [
   {
     src: "/images/gallery/1.webp",
     alt: "The ProvidusCRM team together at the office",
@@ -37,7 +37,7 @@ const topRow: GalleryPhoto[] = [
   },
 ];
 
-const bottomRow: GalleryPhoto[] = [
+export const DEFAULT_BOTTOM_ROW: TeamGalleryPhoto[] = [
   {
     src: "/images/gallery/3.webp",
     alt: "Two ProvidusCRM consultants working through a solution on a laptop",
@@ -60,7 +60,7 @@ const bottomRow: GalleryPhoto[] = [
   },
 ];
 
-function GalleryTile({ photo, delay }: { photo: GalleryPhoto; delay: number }) {
+function GalleryTile({ photo, delay }: { photo: TeamGalleryPhoto; delay: number }) {
   return (
     <Reveal direction="up" delay={delay}>
       {/* isolate keeps Safari clipping the zoomed image to the rounded corners */}
@@ -82,7 +82,22 @@ function GalleryTile({ photo, delay }: { photo: GalleryPhoto; delay: number }) {
   );
 }
 
-export function TeamGallerySection() {
+interface TeamGallerySectionProps {
+  /** First line of the heading; the second starts a new line from md up. */
+  headingStart?: string;
+  headingEnd?: string;
+  /** Two boxes: 752fr and 466fr wide from md up. */
+  topRow?: TeamGalleryPhoto[];
+  /** Three equal boxes from md up. */
+  bottomRow?: TeamGalleryPhoto[];
+}
+
+export function TeamGallerySection({
+  headingStart = "Work With Experts Across CRM,",
+  headingEnd = "AI, Sales, Marketing, and More!",
+  topRow = DEFAULT_TOP_ROW,
+  bottomRow = DEFAULT_BOTTOM_ROW,
+}: TeamGallerySectionProps) {
   return (
     <Section>
       <Container>
@@ -90,8 +105,8 @@ export function TeamGallerySection() {
           <div className="mb-10 flex flex-col items-center text-center md:mb-16">
             <GreenLineMark className="mb-6 h-auto w-16" />
             <Heading as="h2" className="text-black">
-              <span className="md:block">Work With Experts Across CRM,</span>{" "}
-              <span className="md:block">AI, Sales, Marketing, and More!</span>
+              <span className="md:block">{headingStart}</span>{" "}
+              <span className="md:block">{headingEnd}</span>
             </Heading>
           </div>
         </Reveal>
