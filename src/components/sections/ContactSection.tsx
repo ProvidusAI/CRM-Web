@@ -18,7 +18,7 @@ const emptyContactFormState = {
 export const DEFAULT_CONTACT_INTRO =
   "Get in touch with by filling out the form or via the contact details below.";
 /** A new line renders as a line break. */
-export const DEFAULT_CONTACT_ADDRESS = "9 Appold St, London EC2A 2AP,\nUnited Kingdom";
+export const DEFAULT_CONTACT_ADDRESS = "9 Appold St, London EC2A 2AP, \nUnited Kingdom";
 export const DEFAULT_CONTACT_EMAIL = "connect@providuscrm.co.uk";
 export const DEFAULT_CONTACT_PHONE = "+44 7777 973577";
 
