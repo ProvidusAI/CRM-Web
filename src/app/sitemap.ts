@@ -1,10 +1,12 @@
 import type { MetadataRoute } from 'next'
 import { sanityFetch } from '@/sanity/lib/fetch'
+import { sitemapPageEntries } from '@/lib/sitemapPages'
 
 const SITEMAP_QUERY = `*[
   _type == "post" && defined(slug.current)
   || _type == "caseStudy" && defined(slug.current)
   || (_type == "servicePage" && status == "published" && defined(slug.current))
+  || (_type == "page" && defined(slug.current))
 ]{
   _type,
   "slug": slug.current,
@@ -50,11 +52,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const allItems = (await sanityFetch<SitemapItem[]>({
     query: SITEMAP_QUERY,
-    tags: ['posts', 'case-studies', 'service-pages'],
+    tags: ['posts', 'case-studies', 'service-pages', 'pages'],
     revalidate: 3600,
   })) ?? []
 
   const dynamicUrls = [
+    ...sitemapPageEntries(allItems.filter((i) => i._type === 'page')),
     ...allItems
       .filter((i) => i._type === 'post')
       .map((p) => ({

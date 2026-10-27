@@ -31,7 +31,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!slug) return {};
   const page = await getPage(slug, true);
   if (!page) return {};
-  return buildPageMetadata({ seo: page.seo, title: page.title, canonicalPath: slugToPath(page.slug) });
+  const metadata = buildPageMetadata({ seo: page.seo, title: page.title, canonicalPath: slugToPath(page.slug) });
+  return slug.startsWith("preview/") ? { ...metadata, robots: { index: false, follow: false } } : metadata;
 }
 
 export default async function SanityPage({ params }: { params: Params }) {

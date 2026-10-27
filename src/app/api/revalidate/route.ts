@@ -1,5 +1,6 @@
 import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
+import { slugToPath } from "@/lib/pagePaths";
 import { revalidateSecret } from "@/sanity/env";
 
 interface SanityWebhookBody {
@@ -70,6 +71,14 @@ export async function POST(request: NextRequest) {
 
   if (body._type === "sitePageJsonLd") {
     revalidateTag("json-ld");
+  }
+
+  if (body._type === "page") {
+    revalidateTag("pages");
+    if (slug) {
+      revalidateTag(`page:${slug}`);
+      revalidatePath(slugToPath(slug));
+    }
   }
 
   return NextResponse.json({ revalidated: true, now: Date.now() });
