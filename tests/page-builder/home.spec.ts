@@ -11,7 +11,7 @@ import { DEFAULT_INDUSTRIES } from "@/components/sections/IndustriesSection";
 import { DEFAULT_BELIEVE_CARDS } from "@/components/sections/BelieveSection";
 import { DEFAULT_TEAM_THOUGHTS } from "@/components/sections/TeamThoughtsSection";
 import { DEFAULT_TOP_ROW, DEFAULT_BOTTOM_ROW } from "@/components/sections/TeamGallerySection";
-import { DEFAULT_EXPLORE_TILES } from "@/components/sections/ExploreSection";
+import { DEFAULT_EXPLORE_TILES } from "@/data/exploreTiles";
 import { DEFAULT_EVENTS } from "@/components/sections/EventsSection";
 import { DEFAULT_CATEGORIES } from "@/components/sections/CategoriesSection";
 import { categoriesSection } from "@/sanity/schemaTypes/sections/categoriesSection";
@@ -323,17 +323,24 @@ test.describe("eventsSection adapter", () => {
     expect(props(eventsSectionAdapter({ _type: "eventsSection", _key: "k", title: "" })).title).toBeUndefined();
   });
 
-  test("the defaults keep today's four events, logo sizes and folder paths", () => {
-    expect(DEFAULT_EVENTS.map((e) => e.name)).toEqual([
-      "TechCrunch Disrupt",
-      "Singapore FinTech Festival",
-      "GITEX Asia Singapore",
-      "AI Everything Middle East & Africa, Egypt",
-    ]);
-    expect(DEFAULT_EVENTS[0].logo).toMatchObject({ width: 416, height: 82, src: "/images/events/disrupt/logo.webp" });
-    expect(DEFAULT_EVENTS[0].photos).toHaveLength(8);
-    expect(DEFAULT_EVENTS[1].bg).toBe("/images/events/singapore-fintect/bg.webp");
-    expect(DEFAULT_EVENTS[2].photos[3]).toBe("/images/events/gitex-singapre/4.webp");
+  test("the defaults keep today's four events: names, copy, logo sizes, photo counts and folder paths", () => {
+    const folders = ["disrupt", "singapore-fintect", "gitex-singapre", "ai-egypt"];
+    const expected = [
+      { name: "TechCrunch Disrupt", width: 416, height: 82, photos: 8, copy: "The world's leading gathering of startup" },
+      { name: "Singapore FinTech Festival", width: 342, height: 158, photos: 4, copy: "The largest fintech event in the world, " },
+      { name: "GITEX Asia Singapore", width: 254, height: 147, photos: 4, copy: "One of the largest technology exhibition" },
+      { name: "AI Everything Middle East & Africa, Egypt", width: 170, height: 194, photos: 4, copy: "A leading AI-focused event bringing toge" },
+    ];
+    expect(DEFAULT_EVENTS).toHaveLength(4);
+    DEFAULT_EVENTS.forEach((event, i) => {
+      const dir = `/images/events/${folders[i]}`;
+      const want = expected[i];
+      expect(event.name).toBe(want.name);
+      expect(event.description.slice(0, 40), want.name).toBe(want.copy);
+      expect(event.logo, want.name).toEqual({ src: `${dir}/logo.webp`, width: want.width, height: want.height });
+      expect(event.bg, want.name).toBe(`${dir}/bg.webp`);
+      expect(event.photos, want.name).toEqual(Array.from({ length: want.photos }, (_, n) => `${dir}/${n + 1}.webp`));
+    });
   });
 });
 

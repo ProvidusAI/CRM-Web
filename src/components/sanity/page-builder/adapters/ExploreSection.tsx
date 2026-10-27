@@ -1,4 +1,5 @@
-import { DEFAULT_EXPLORE_TILES, ExploreSection } from "@/components/sections/ExploreSection";
+import { ExploreSection } from "@/components/sections/ExploreSection";
+import { DEFAULT_EXPLORE_TILES } from "@/data/exploreTiles";
 import { imageAlt, imageSrc, type SanityImageValue } from "@/sanity/lib/imageRef";
 import type { SectionAdapter, SectionBase } from "../types";
 
