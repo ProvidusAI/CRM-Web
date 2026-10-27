@@ -169,7 +169,14 @@ export type ServiceBenefitIconKey =
   | "maturity"
   | "visibility"
   | "view360"
-  | "partnership";
+  | "partnership"
+  // Process steps the partnership pages draw (ClipboardList, Workflow, Cog,
+  // FileCheck2, HeartHandshake).
+  | "review"
+  | "plan"
+  | "configure"
+  | "test"
+  | "launch";
 
 export type ServiceBenefitColorTheme =
   | "blue"

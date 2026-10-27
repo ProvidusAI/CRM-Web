@@ -1,12 +1,17 @@
 import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
 import {
+  ClipboardList,
+  Cog,
   Eye,
+  FileCheck2,
   Handshake,
+  HeartHandshake,
   Layers,
   RotateCw,
   TrendingUp,
   Users,
+  Workflow,
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
@@ -30,13 +35,18 @@ interface ServiceBenefitsSectionProps {
   items: ServiceBenefitCard[];
 }
 
-const iconMap: Record<ServiceBenefitIconKey, LucideIcon> = {
+export const SERVICE_BENEFIT_ICONS: Record<ServiceBenefitIconKey, LucideIcon> = {
   roi: TrendingUp,
   adoption: Users,
   maturity: Layers,
   visibility: Eye,
   view360: RotateCw,
   partnership: Handshake,
+  review: ClipboardList,
+  plan: Workflow,
+  configure: Cog,
+  test: FileCheck2,
+  launch: HeartHandshake,
 };
 
 const themeClasses: Record<ServiceBenefitColorTheme, string> = {
@@ -77,7 +87,7 @@ export function ServiceBenefitsSection({
 
         <div className="relative mt-14 space-y-8">
           {items.map((item, index) => {
-            const Icon = item.icon ?? iconMap[item.iconKey || "roi"];
+            const Icon = item.icon ?? SERVICE_BENEFIT_ICONS[item.iconKey || "roi"];
             const theme = themeClasses[item.colorTheme || "blue"];
 
             return (

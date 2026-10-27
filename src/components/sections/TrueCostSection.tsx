@@ -79,9 +79,9 @@ export function TrueCostSection({
               ))}
 
               <div className="mt-10 flex flex-col gap-10">
-                {cards.map((card) => (
+                {cards.map((card, cardIndex) => (
                   <article
-                    key={card.title}
+                    key={cardIndex}
                     className="rounded-[29px] border border-[color:var(--color-card-border)] p-8 shadow-[var(--shadow-cost-card)] sm:p-10"
                     style={{ backgroundColor: card.background }}
                   >
@@ -122,8 +122,8 @@ export function TrueCostSection({
 
                       {card.bullets && card.bullets.length > 0 && (
                         <ul className="mt-4 list-disc space-y-1 pl-6">
-                          {card.bullets.map((bullet) => (
-                            <Text key={bullet} as="li" variant="p3" className="text-black">
+                          {card.bullets.map((bullet, bulletIndex) => (
+                            <Text key={bulletIndex} as="li" variant="p3" className="text-black">
                               {bullet}
                             </Text>
                           ))}
@@ -155,8 +155,8 @@ export function TrueCostSection({
                 )}
 
                 <dl className="mt-8 space-y-6">
-                  {highlights.map((highlight) => (
-                    <div key={highlight.label}>
+                  {highlights.map((highlight, highlightIndex) => (
+                    <div key={highlightIndex}>
                       <Text
                         as="dt"
                         variant="p2"

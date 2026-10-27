@@ -30,6 +30,15 @@ import { teamGallerySectionAdapter } from "./adapters/TeamGallerySection";
 import { exploreSectionAdapter } from "./adapters/ExploreSection";
 import { eventsSectionAdapter } from "./adapters/EventsSection";
 import { categoriesSectionAdapter } from "./adapters/CategoriesSection";
+import { splitComparisonSectionAdapter } from "./adapters/SplitComparisonSection";
+import { serviceBenefitsSectionAdapter } from "./adapters/ServiceBenefitsSection";
+import { organisationTypesSectionAdapter } from "./adapters/OrganisationTypesSection";
+import { outcomeCardsSectionAdapter } from "./adapters/OutcomeCardsSection";
+import { explainerCardsSectionAdapter } from "./adapters/ExplainerCardsSection";
+import { trueCostSectionAdapter } from "./adapters/TrueCostSection";
+import { solutionTypesSectionAdapter } from "./adapters/SolutionTypesSection";
+import { industryDetailSectionAdapter } from "./adapters/IndustryDetailSection";
+import { comparisonSectionAdapter } from "./adapters/ComparisonSection";
 import type { SectionAdapter } from "./types";
 
 // _type → adapter. Section tasks add one entry each.
@@ -66,4 +75,13 @@ export const SECTION_ADAPTERS: Record<string, SectionAdapter<never>> = {
   exploreSection: exploreSectionAdapter,
   eventsSection: eventsSectionAdapter,
   categoriesSection: categoriesSectionAdapter,
+  splitComparisonSection: splitComparisonSectionAdapter,
+  serviceBenefitsSection: serviceBenefitsSectionAdapter,
+  organisationTypesSection: organisationTypesSectionAdapter,
+  outcomeCardsSection: outcomeCardsSectionAdapter,
+  explainerCardsSection: explainerCardsSectionAdapter,
+  trueCostSection: trueCostSectionAdapter,
+  solutionTypesSection: solutionTypesSectionAdapter,
+  industryDetailSection: industryDetailSectionAdapter,
+  comparisonSection: comparisonSectionAdapter,
 };

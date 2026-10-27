@@ -31,6 +31,15 @@ import type { TeamGallerySectionData } from "./adapters/TeamGallerySection";
 import type { ExploreSectionData } from "./adapters/ExploreSection";
 import type { EventsSectionData } from "./adapters/EventsSection";
 import type { CategoriesSectionData } from "./adapters/CategoriesSection";
+import type { SplitComparisonSectionData } from "./adapters/SplitComparisonSection";
+import type { ServiceBenefitsSectionData } from "./adapters/ServiceBenefitsSection";
+import type { OrganisationTypesSectionData } from "./adapters/OrganisationTypesSection";
+import type { OutcomeCardsSectionData } from "./adapters/OutcomeCardsSection";
+import type { ExplainerCardsSectionData } from "./adapters/ExplainerCardsSection";
+import type { TrueCostSectionData } from "./adapters/TrueCostSection";
+import type { SolutionTypesSectionData } from "./adapters/SolutionTypesSection";
+import type { IndustryDetailSectionData } from "./adapters/IndustryDetailSection";
+import type { ComparisonSectionData } from "./adapters/ComparisonSection";
 
 export interface SectionSpacing {
   top?: number;
@@ -82,4 +91,13 @@ export type PageSectionData =
   | TeamGallerySectionData
   | ExploreSectionData
   | EventsSectionData
-  | CategoriesSectionData;
+  | CategoriesSectionData
+  | SplitComparisonSectionData
+  | ServiceBenefitsSectionData
+  | OrganisationTypesSectionData
+  | OutcomeCardsSectionData
+  | ExplainerCardsSectionData
+  | TrueCostSectionData
+  | SolutionTypesSectionData
+  | IndustryDetailSectionData
+  | ComparisonSectionData;

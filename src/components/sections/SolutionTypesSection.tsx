@@ -61,9 +61,9 @@ export function SolutionTypesSection({
 
         {/* 3 + 2 layout: wrapping keeps the trailing row centred, as in the design. */}
         <div className="mt-12 flex flex-wrap justify-center gap-x-[21px] gap-y-[29px] lg:mt-16">
-          {cards.map((card) => (
+          {cards.map((card, index) => (
             <article
-              key={card.title}
+              key={index}
               className={`${CARD} flex flex-col p-[26px]`}
               style={{ borderColor: card.color }}
             >

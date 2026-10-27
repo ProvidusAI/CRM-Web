@@ -108,9 +108,9 @@ export function ComparisonSection({
               {negativeTitle}
             </Heading>
             <ul className="mt-8 space-y-[30px]">
-              {negativeItems.map((item) => (
+              {negativeItems.map((item, index) => (
                 <Text
-                  key={item}
+                  key={index}
                   as="li"
                   variant="p3"
                   className="font-medium text-[color:var(--color-compare-muted)]"
@@ -147,9 +147,9 @@ export function ComparisonSection({
             </Heading>
 
             <ul className="mt-[38px] space-y-[12.488px]">
-              {positiveItems.map((item) => (
+              {positiveItems.map((item, index) => (
                 <li
-                  key={item}
+                  key={index}
                   className="flex h-[56.198px] items-center gap-[9px] rounded-[16.651px] pl-[12.64px] pr-4"
                   style={{ backgroundImage: PILL_GRADIENT }}
                 >

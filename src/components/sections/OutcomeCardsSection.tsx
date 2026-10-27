@@ -41,9 +41,9 @@ export function OutcomeCardsSection({ cards }: OutcomeCardsSectionProps) {
             columnClasses[Math.min(cards.length, 4)]
           )}
         >
-          {cards.map((card) => (
+          {cards.map((card, index) => (
             <article
-              key={card.title}
+              key={index}
               className="flex h-full flex-col rounded-[16px] bg-linear-to-b from-white to-[#EDF4FC] p-7 shadow-[0px_4px_24px_0px_rgba(29,112,197,0.08)]"
             >
               <div className="relative mb-8 size-11 shrink-0">
