@@ -1,4 +1,12 @@
 import type { ReactNode } from "react";
+import type { ContactSectionData } from "./adapters/ContactSection";
+import type { CtaSectionData } from "./adapters/CtaSection";
+import type { ExpertiseCtaSectionData } from "./adapters/ExpertiseCtaSection";
+import type { HeroSectionData } from "./adapters/HeroSection";
+import type { IndustryCtaSectionData } from "./adapters/IndustryCtaSection";
+import type { PartnersSectionData } from "./adapters/PartnersSection";
+import type { SalesforceConsultCtaSectionData } from "./adapters/SalesforceConsultCtaSection";
+import type { SalesforceServiceHeroData } from "./adapters/SalesforceServiceHero";
 
 export interface SectionSpacing {
   top?: number;
@@ -18,4 +26,12 @@ export type SectionAdapter<T> = (section: T) => ReactNode;
  * Union of every section's data type. Section tasks add a member here, e.g.
  * `| CtaSectionData`, when they register an adapter.
  */
-export type PageSectionData = SectionBase;
+export type PageSectionData =
+  | HeroSectionData
+  | SalesforceServiceHeroData
+  | CtaSectionData
+  | ExpertiseCtaSectionData
+  | IndustryCtaSectionData
+  | SalesforceConsultCtaSectionData
+  | ContactSectionData
+  | PartnersSectionData;

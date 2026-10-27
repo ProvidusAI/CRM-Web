@@ -17,6 +17,8 @@ interface ExpertiseCtaSectionProps {
   buttonHref: string;
   image1: string;
   image2: string;
+  image1Alt?: string;
+  image2Alt?: string;
 }
 
 export function ExpertiseCtaSection({
@@ -26,6 +28,8 @@ export function ExpertiseCtaSection({
   buttonHref,
   image1,
   image2,
+  image1Alt = "Consultation Team",
+  image2Alt = "Salesforce Astro",
 }: ExpertiseCtaSectionProps) {
   return (
     <Section className="py-16 md:py-24 bg-white">
@@ -43,7 +47,7 @@ export function ExpertiseCtaSection({
             <div className="relative flex-1 rounded-[24px] overflow-hidden shadow-md">
               <Image
                 src={image1}
-                alt="Consultation Team"
+                alt={image1Alt}
                 fill
                 sizes="(max-width: 1024px) 50vw, 25vw"
                 className="object-cover"
@@ -53,7 +57,7 @@ export function ExpertiseCtaSection({
             <div className="relative flex-1 rounded-[24px] overflow-hidden">
               <Image
                 src={image2}
-                alt="Salesforce Astro"
+                alt={image2Alt}
                 fill
                 sizes="(max-width: 1024px) 50vw, 25vw"
                 className="object-contain"

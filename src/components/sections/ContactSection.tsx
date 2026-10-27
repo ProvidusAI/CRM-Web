@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { Fragment, useState, type FormEvent } from "react";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Reveal } from "@/components/ui/Reveal";
@@ -15,7 +15,26 @@ const emptyContactFormState = {
   message: "",
 };
 
-export function ContactSection() {
+export const DEFAULT_CONTACT_INTRO =
+  "Get in touch with by filling out the form or via the contact details below.";
+/** A new line renders as a line break. */
+export const DEFAULT_CONTACT_ADDRESS = "9 Appold St, London EC2A 2AP,\nUnited Kingdom";
+export const DEFAULT_CONTACT_EMAIL = "connect@providuscrm.co.uk";
+export const DEFAULT_CONTACT_PHONE = "+44 7777 973577";
+
+interface ContactSectionProps {
+  intro?: string;
+  address?: string;
+  email?: string;
+  phone?: string;
+}
+
+export function ContactSection({
+  intro = DEFAULT_CONTACT_INTRO,
+  address = DEFAULT_CONTACT_ADDRESS,
+  email = DEFAULT_CONTACT_EMAIL,
+  phone = DEFAULT_CONTACT_PHONE,
+}: ContactSectionProps) {
   const [formState, setFormState] = useState(emptyContactFormState);
   const [status, setStatus] = useState<
     "idle" | "submitting" | "success" | "error"
@@ -89,7 +108,7 @@ export function ContactSection() {
                 </Heading>
 
                 <Text className="text-white/85 !text-[15px] md:!text-[18px] font-body leading-relaxed max-w-md">
-                  Get in touch with by filling out the form or via the contact details below.
+                  {intro}
                 </Text>
               </Reveal>
 
@@ -102,7 +121,12 @@ export function ContactSection() {
                       <MapPin className="w-6 h-6 text-brand-green-light" aria-hidden="true" />
                     </div>
                     <span className="font-body font-normal text-[15px] md:text-[18px] text-white/90 leading-relaxed max-w-sm">
-                      9 Appold St, London EC2A 2AP, <br />United Kingdom
+                      {address.split("\n").map((line, i) => (
+                        <Fragment key={i}>
+                          {i > 0 && <br />}
+                          {line}
+                        </Fragment>
+                      ))}
                     </span>
                   </div>
                 </Reveal>
@@ -114,10 +138,10 @@ export function ContactSection() {
                       <Mail className="w-6 h-6 text-brand-green-light" aria-hidden="true" />
                     </div>
                     <a
-                      href="mailto:connect@providuscrm.co.uk"
+                      href={`mailto:${email}`}
                       className="font-body font-normal text-[15px] md:text-[18px] text-white hover:text-brand-green-light transition-colors leading-relaxed"
                     >
-                      connect@providuscrm.co.uk
+                      {email}
                     </a>
                   </div>
                 </Reveal>
@@ -129,10 +153,10 @@ export function ContactSection() {
                       <Phone className="w-6 h-6 text-brand-green-light" aria-hidden="true" />
                     </div>
                     <a
-                      href="tel:+447777973577"
+                      href={`tel:${phone.replace(/[^\d+]/g, "")}`}
                       className="font-body font-normal text-[15px] md:text-[18px] text-white hover:text-brand-green-light transition-colors leading-relaxed"
                     >
-                      +44 7777 973577
+                      {phone}
                     </a>
                   </div>
                 </Reveal>

@@ -9,6 +9,8 @@ interface HeroSectionProps {
   title?: React.ReactNode;
   description?: string;
   image?: string;
+  /** Alt text for the right-hand image. */
+  imageAlt?: string;
   imageClassName?: string;
   hideImage?: boolean;
   /** Defaults to `/contact`; pass `ctaHref` to override the target. */
@@ -129,6 +131,7 @@ export function HeroSection({
   title,
   description,
   image,
+  imageAlt = "Business meeting",
   imageClassName = "object-cover object-center",
   hideImage = false,
   ctaLabel,
@@ -272,7 +275,7 @@ export function HeroSection({
                 <div className="relative w-full h-full rounded-[32px] overflow-hidden">
                   <Image
                     src={displayImage}
-                    alt="Business meeting"
+                    alt={imageAlt}
                     fill
                     sizes="(min-width: 1800px) 824px, (min-width: 1280px) 46vw, (min-width: 1024px) 50vw, 0px"
                     className={imageClassName}
