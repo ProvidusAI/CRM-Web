@@ -1,5 +1,9 @@
-// Lives in (coded), not (site): a loading boundary above the CMS catch-all streams a 200 before notFound() runs.
 /**
+ * Lives in the (coded) route group on purpose: a loading boundary above the
+ * CMS catch-all would stream a 200 before notFound() runs, so unknown paths
+ * would never return 404. Routes outside (coded) (CMS pages and the
+ * not-yet-migrated static pages) render without this fallback.
+ *
  * The outer box reserves a full viewport on purpose. Next serialises this
  * Suspense fallback into every prerendered page ahead of the real content, so
  * the browser can paint it before the `$RC` swap lands. Reserving a viewport

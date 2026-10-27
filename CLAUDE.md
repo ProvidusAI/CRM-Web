@@ -34,7 +34,7 @@ Playwright's `webServer` reuses an existing dev server locally, so `pnpm test` w
 ### Route groups
 
 - `src/app/(site)/` — all public pages; owns the shared layout (Navbar, Footer, skip link, `<main id="main-content">`), `error.tsx`, `not-found.tsx`.
-  Routes that stay in code live under `(site)/(coded)/` together with `loading.tsx`; CMS pages (`[...slug]`) render without that loading boundary so `notFound()` returns a real 404.
+  Routes that stay in code live under `(site)/(coded)/` with `loading.tsx`; every other `(site)` route (the CMS catch-all `[...slug]` and static pages awaiting migration) renders without that loading boundary, so `notFound()` returns a real 404.
 - `src/app/studio/[[...tool]]/` — embedded Sanity Studio at `/studio`, outside the site layout.
 - `src/app/api/` — `contact`, `service-inquiry` (Resend email), `revalidate` (Sanity webhook).
 - `src/app/sitemap.ts` / `robots.ts` — sitemap merges static routes with published CMS content.
