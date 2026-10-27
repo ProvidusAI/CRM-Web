@@ -1,3 +1,4 @@
+// Lives in (coded), not (site): a loading boundary above the CMS catch-all streams a 200 before notFound() runs.
 /**
  * The outer box reserves a full viewport on purpose. Next serialises this
  * Suspense fallback into every prerendered page ahead of the real content, so
