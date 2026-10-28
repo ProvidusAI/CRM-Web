@@ -11,7 +11,7 @@ export const partnersSection = defineSection({
       title: "Logos",
       type: "array",
       description: "Leave empty for the standard partner strip.",
-      of: [{ type: "image", options: { hotspot: true }, fields: [altField] }],
+      of: [{ type: "image", fields: [altField] }],
     }),
   ],
 });

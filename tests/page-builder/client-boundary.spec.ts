@@ -33,7 +33,10 @@ function valueImports(source: string): [string, string][] {
 
 test("adapters import only components, never other values, from client modules", () => {
   const offenders: string[] = [];
-  for (const file of fs.readdirSync(ADAPTERS_DIR).filter((f) => f.endsWith(".tsx") || f.endsWith(".ts"))) {
+  const files = fs.readdirSync(ADAPTERS_DIR).filter((f) => f.endsWith(".tsx") || f.endsWith(".ts"));
+  // Guards against a moved directory or bad filter making the scan pass vacuously.
+  expect(files.length, "adapter files scanned").toBeGreaterThanOrEqual(40);
+  for (const file of files) {
     const source = fs.readFileSync(path.join(ADAPTERS_DIR, file), "utf8");
     for (const [name, mod] of valueImports(source)) {
       const resolved = resolveAlias(mod);

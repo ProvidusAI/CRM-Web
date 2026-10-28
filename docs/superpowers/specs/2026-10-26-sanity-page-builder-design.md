@@ -96,7 +96,7 @@ identical to today at desktop (1440px) and mobile (375px).
   - Adapters convert the Sanity shape into the component's own exported item types, following the `salesforce/[slug]` precedent. Sections never receive raw documents.
   - Each section renders inside `<div data-section-type="…" id={anchorId}>`. When `spacing` is set, it adds `style={{ paddingTop, paddingBottom }}`, or a negative margin where the replacement rule below needs one.
   - With `spacing` empty the wrapper adds nothing, so the component's built-in rhythm survives.
-- **Consecutive dark bands:** where the renderer would otherwise produce a gap between two dark sections, an explicit top spacing replaces the component's top margin; it is never added on top of it. Reconciliation (below) proves it.
+- **Consecutive dark bands (superseded):** no section uses spacing; it is additive and never replaces the component's own margin. Original rule: where the renderer would otherwise produce a gap between two dark sections, an explicit top spacing replaces the component's top margin; it is never added on top of it. Reconciliation (below) proves it.
 
 **Section types.** There is one per component in `inventory-components.md`, plus new components for the inline blocks:
 

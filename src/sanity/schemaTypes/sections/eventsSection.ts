@@ -40,7 +40,7 @@ export const eventsSection = defineSection({
               title: "Photos",
               type: "array",
               description: "They scroll in two columns, alternating. Decorative, so they have no alt text.",
-              of: [{ type: "image", options: { hotspot: true } }],
+              of: [{ type: "image" }],
             }),
           ],
           preview: { select: { title: "name", media: "logo" } },

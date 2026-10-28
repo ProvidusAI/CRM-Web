@@ -3,7 +3,7 @@ import type { ServiceCaseStudyCard } from "@/components/sections/ServiceCaseStud
 /** The fields a card needs; both the page-case-studies query and the page builder's projection supply them. */
 export interface CaseStudyCardSource {
   title: string;
-  slug: { current: string };
+  slug?: { current?: string };
   coverImage?: { asset?: { url?: string } };
   technologies?: string[];
   industry?: string;
@@ -16,11 +16,18 @@ export interface CaseStudyCardSource {
  * adapter and its spec can use the same mapping.
  */
 export function toServiceCaseStudyCards(caseStudies?: CaseStudyCardSource[]): ServiceCaseStudyCard[] {
-  return (caseStudies ?? []).map((caseStudy) => ({
-    title: caseStudy.title,
-    slug: caseStudy.slug.current,
-    image: caseStudy.coverImage?.asset?.url || "/images/case-study.webp",
-    label: caseStudy.technologies?.[0] || "Salesforce Consulting",
-    category: caseStudy.industry,
-  }));
+  // A referenced case study without a slug has no page to link to; skip it rather than throw.
+  return (caseStudies ?? []).flatMap((caseStudy) =>
+    caseStudy.slug?.current
+      ? [
+          {
+            title: caseStudy.title,
+            slug: caseStudy.slug.current,
+            image: caseStudy.coverImage?.asset?.url || "/images/case-study.webp",
+            label: caseStudy.technologies?.[0] || "Salesforce Consulting",
+            category: caseStudy.industry,
+          },
+        ]
+      : []
+  );
 }

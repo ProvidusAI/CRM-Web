@@ -125,10 +125,21 @@ list of sections; each section type has a Sanity schema
 (`src/components/sanity/page-builder/registry.tsx`). Page title, SEO and JSON-LD
 live on the document.
 
+Adding a section type touches all of these:
+
+- the schema file in `src/sanity/schemaTypes/sections/`, exported from `sections/index.ts`
+- the adapter in `page-builder/adapters/`
+- the entry in `page-builder/registry.tsx`
+- the `PageSectionData` union in `page-builder/types.ts`
+- `pageSectionsProjection` (`src/sanity/lib/queries.ts`), if the section references documents
+
 Studio lists (Pages in the sidebar):
 
 - **Parent pages**: slug has one level (`home`, `about`, `industries`, ...).
 - **Dynamic pages**: slug has two or more levels (`industries/salesforce-health-cloud-consulting`).
+- **All pages**: every `page` document, including drafts that have no slug yet (those appear in neither list above).
+
+The legacy `pageBlogs` / `pageCaseStudies` types are hidden from the sidebar (schemas stay registered so old documents remain valid), and Static page SEO / JSON-LD list only the `blog` and `case-studies` keys, the routes still in code.
 
 Slug rules (validated in Studio, source in `src/lib/pagePaths.ts`):
 
@@ -143,9 +154,9 @@ Slug rules (validated in Studio, source in `src/lib/pagePaths.ts`):
   paths are redirected too, so they cannot be used.
 - Pages whose slug starts with `preview/` are not indexed and not in the sitemap.
 
-Every section has a **Layout** tab. **Spacing override** (top/bottom px) adds padding
-around the section on top of its built-in spacing; leave it empty to keep the default. **Anchor id** lets links
-jump to the section.
+Every section has a **Layout** tab. **Extra space** (add above / add below, px) adds blank
+space outside the section on top of its built-in spacing; it cannot reduce it, and the gap uses the
+page background. Leave it empty to keep the default. **Anchor id** lets links jump to the section.
 
 Publishing a page is live within seconds through the revalidation webhook (the
 filter must include `page`); without it, within the fetch's 300s window. Sitemap entries
@@ -190,4 +201,8 @@ referenced post revalidates `posts`, which these pages also subscribe to.
 
 ## Notes
 
-The site builds even when Sanity environment variables are missing. In that state, blog and case-study listings show empty states and `/studio` uses placeholder config until real env values are provided.
+Pages require Sanity. Every site page, including `/`, is a `page` document, so a production build
+fails (`generateStaticParams` throws "Sanity page documents missing") when the Sanity environment
+variables are missing or the `home` page does not exist. In dev, the same situation serves 404s. Blog and
+case-study listings still show empty states without Sanity, and `/studio` uses placeholder config until
+real env values are provided.

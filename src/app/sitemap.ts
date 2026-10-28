@@ -10,6 +10,7 @@ const SITEMAP_QUERY = `*[
 ]{
   _type,
   "slug": slug.current,
+  "noIndex": seo.noIndex,
   publishedAt,
   _updatedAt
 }`
@@ -17,6 +18,7 @@ const SITEMAP_QUERY = `*[
 type SitemapItem = {
   _type: string;
   slug: string;
+  noIndex?: boolean;
   publishedAt?: string;
   _updatedAt?: string;
 };

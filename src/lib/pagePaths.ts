@@ -58,10 +58,6 @@ export function segmentsToSlug(segments: string[] | undefined): string | null {
   return slug === "home" ? null : slug;
 }
 
-export function pageDocumentId(slug: string): string {
-  return `page-${slug.replace(/[/.]/g, "-")}`;
-}
-
 export function slugDepth(slug: string): number {
   return slug.split("/").length;
 }

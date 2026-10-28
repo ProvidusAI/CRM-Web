@@ -41,6 +41,15 @@ const caseStudy = (over: Record<string, unknown> = {}) => ({
 });
 
 test.describe("registry", () => {
+  test("skips a case study without a slug instead of throwing", () => {
+    const cards = toServiceCaseStudyCards([
+      caseStudy({ slug: undefined }),
+      caseStudy({ slug: {} }),
+      caseStudy({ slug: { current: "kept" } }),
+    ]);
+    expect(cards.map((c) => c.slug)).toEqual(["kept"]);
+  });
+
   test("registers the seven listing and shared home section types", () => {
     for (const name of [
       "pageBlogsSection",

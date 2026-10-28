@@ -11,7 +11,7 @@ export const expertiseCertifiedSection = defineSection({
       title: "Badges",
       type: "array",
       description: "Alt text left empty reads \"Certification 1\", \"Certification 2\", and so on.",
-      of: [{ type: "image", options: { hotspot: true }, fields: [altField] }],
+      of: [{ type: "image", fields: [altField] }],
     }),
   ],
 });

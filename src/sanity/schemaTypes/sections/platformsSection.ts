@@ -12,7 +12,7 @@ export const platformsSection = defineSection({
       title: "Logos",
       type: "array",
       description: "Leave empty for the standard twelve platform logos.",
-      of: [{ type: "image", options: { hotspot: true }, fields: [altField] }],
+      of: [{ type: "image", fields: [altField] }],
     }),
   ],
   previewTitle: "title",

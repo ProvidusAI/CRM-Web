@@ -4,7 +4,7 @@ import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { PageSections } from "@/components/sanity/page-builder/PageSections";
 import type { PageSectionData } from "@/components/sanity/page-builder/types";
 import { resolveJsonLd } from "@/lib/jsonLd";
-import { segmentsToSlug, slugToPath } from "@/lib/pagePaths";
+import { pageSlugError, segmentsToSlug, slugToPath } from "@/lib/pagePaths";
 import { buildPageMetadata } from "@/lib/seo";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { PAGE_QUERY, PAGE_SLUGS_QUERY } from "@/sanity/lib/queries";
@@ -22,13 +22,20 @@ async function getPage(slug: string, metadata = false) {
 
 export async function generateStaticParams() {
   const slugs = (await sanityFetch<string[]>({ query: PAGE_SLUGS_QUERY, tags: ["pages"], metadata: true })) ?? [];
+  // Every site page lives in Sanity: a build without config or documents would ship an all-404 site.
+  if (process.env.NODE_ENV === "production" && !slugs.includes("home")) {
+    throw new Error(
+      'Sanity page documents missing — check NEXT_PUBLIC_SANITY_PROJECT_ID / NEXT_PUBLIC_SANITY_DATASET and that the "home" page exists.'
+    );
+  }
   // "home" is served by the optional catch-all's empty segment ("/").
   return slugs.map((s) => ({ slug: s === "home" ? [] : s.split("/") }));
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const slug = segmentsToSlug((await params).slug);
-  if (!slug) return {};
+  // Studio cannot publish such slugs, so skip the fetch for junk paths (/wp-login.php, /.env).
+  if (!slug || pageSlugError(slug)) return {};
   const page = await getPage(slug, true);
   if (!page) return {};
   const metadata = buildPageMetadata({ seo: page.seo, title: page.title, canonicalPath: slugToPath(page.slug) });
@@ -37,7 +44,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
 export default async function SanityPage({ params }: { params: Params }) {
   const slug = segmentsToSlug((await params).slug);
-  if (!slug) notFound();
+  if (!slug || pageSlugError(slug)) notFound();
   const page = await getPage(slug);
   if (!page) notFound();
 

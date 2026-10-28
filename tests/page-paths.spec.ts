@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { pageSlugError, slugToPath, segmentsToSlug, pageDocumentId, slugDepth } from "@/lib/pagePaths";
+import { pageSlugError, slugToPath, segmentsToSlug, slugDepth } from "@/lib/pagePaths";
 
 test.describe("page paths", () => {
   test("home maps to / and /home is not a page", () => {
@@ -13,11 +13,6 @@ test.describe("page paths", () => {
     expect(slugToPath("industries/salesforce-health-cloud-consulting")).toBe("/industries/salesforce-health-cloud-consulting");
     expect(slugDepth("about")).toBe(1);
     expect(slugDepth("industries/x")).toBe(2);
-  });
-  test("ids use dashes, never dots", () => {
-    expect(pageDocumentId("home")).toBe("page-home");
-    expect(pageDocumentId("preview/industries/x")).toBe("page-preview-industries-x");
-    expect(pageDocumentId("a.b")).not.toContain(".");
   });
   test("slug validation", () => {
     expect(pageSlugError("about")).toBeNull();

@@ -9,9 +9,11 @@ interface DefineSectionOptions {
 }
 
 /**
- * Every page-builder section shares a "Layout" group: a spacing override and an
- * anchor id. Spacing left empty keeps the component's built-in rhythm, so a
- * seeded page renders exactly like the static page it replaced.
+ * Every page-builder section shares a "Layout" group: extra space and an
+ * anchor id. Extra space is additive (it never reduces the component's own
+ * spacing) and left empty keeps the built-in rhythm, so a seeded page renders
+ * exactly like the static page it replaced. The data shape stays `spacing.top`
+ * / `spacing.bottom`.
  */
 export function defineSection({ name, title, fields, previewTitle }: DefineSectionOptions) {
   return defineType({
@@ -26,13 +28,14 @@ export function defineSection({ name, title, fields, previewTitle }: DefineSecti
       ...fields.map((f) => ({ ...f, group: f.group ?? "content" })),
       defineField({
         name: "spacing",
-        title: "Spacing override",
+        title: "Extra space",
         type: "object",
         group: "layout",
-        description: "Leave empty to keep the section's normal spacing.",
+        description:
+          "Adds blank space outside the section, on top of its built-in spacing. It cannot reduce it, and the gap uses the page background.",
         fields: [
-          defineField({ name: "top", title: "Top (px)", type: "number", validation: (r) => r.integer() }),
-          defineField({ name: "bottom", title: "Bottom (px)", type: "number", validation: (r) => r.integer() }),
+          defineField({ name: "top", title: "Add above (px)", type: "number", validation: (r) => r.integer().min(0) }),
+          defineField({ name: "bottom", title: "Add below (px)", type: "number", validation: (r) => r.integer().min(0) }),
         ],
       }),
       defineField({

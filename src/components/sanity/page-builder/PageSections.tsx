@@ -2,7 +2,11 @@ import type { CSSProperties } from "react";
 import { SECTION_ADAPTERS } from "./registry";
 import type { PageSectionData, SectionSpacing } from "./types";
 
-/** Only the sides an editor set; undefined keeps the component's own rhythm. */
+/**
+ * "Extra space": padding added outside the component, on top of its built-in
+ * spacing (it cannot reduce it). Only the sides an editor set; undefined keeps
+ * the component's own rhythm.
+ */
 export function sectionWrapperStyle(spacing?: SectionSpacing): CSSProperties | undefined {
   if (!spacing) return undefined;
   const style: CSSProperties = {};

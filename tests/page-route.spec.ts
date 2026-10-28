@@ -21,6 +21,13 @@ test.describe("page catch-all route", () => {
     expect(res?.status()).toBe(404);
   });
 
+  test("junk paths 404 without a lookup", async ({ page }) => {
+    for (const path of ["/wp-login.php", "/.env"]) {
+      const res = await page.goto(path);
+      expect(res?.status(), path).toBe(404);
+    }
+  });
+
   test("an unknown nested path 404s", async ({ page }) => {
     const res = await page.goto("/industries/does-not-exist-xyz");
     expect(res?.status()).toBe(404);
