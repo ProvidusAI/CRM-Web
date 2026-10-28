@@ -24,6 +24,10 @@ test.describe("page paths", () => {
     expect(pageSlugError("industries/salesforce-health-cloud-consulting")).toBeNull();
     expect(pageSlugError("salesforce-recruitment-agency")).toBeNull();
     expect(pageSlugError("home")).toBeNull();
+    // The /services index is a CMS page; only /services/<slug> stays in code.
+    expect(pageSlugError("services")).toBeNull();
+    expect(pageSlugError("services/salesforce-consulting-services")).not.toBeNull();
+    expect(pageSlugError("preview/services")).toBeNull();
     for (const bad of ["Home", "/about", "about/", "a//b", "a b", "home/x", "blog", "blog/x", "case-studies", "services/x",
       "salesforce", "studio", "api/x", "section-thumbs-preview", "staff-augmentation", "salesforce-foo",
       "platform-expertise/salesforce-education-cloud-consulting", "platform-expertise/salesforce-commerce-cloud-consulting"]) {

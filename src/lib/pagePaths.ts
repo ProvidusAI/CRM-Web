@@ -3,6 +3,9 @@
  * pages); "home" is served at "/". The reserved list mirrors routes that stay
  * in code and the redirects in next.config.ts, which run before routing and
  * would otherwise shadow a page with that slug.
+ *
+ * Segments in NESTED_ONLY_SEGMENTS are reserved for child paths only: their
+ * index is a CMS page, but /<segment>/<slug> stays in code (services/[slug]).
  */
 export const RESERVED_FIRST_SEGMENTS = [
   "blog",
@@ -14,6 +17,8 @@ export const RESERVED_FIRST_SEGMENTS = [
   "section-thumbs-preview",
   "staff-augmentation",
 ] as const;
+
+const NESTED_ONLY_SEGMENTS: readonly string[] = ["services"];
 
 /** Exact paths next.config.ts redirects away. */
 const REDIRECTED_SLUGS = [
@@ -30,7 +35,8 @@ export function pageSlugError(slug: string): string | null {
   }
   const [first] = segments;
   if (first === "home" && segments.length > 1) return "\"home\" is the homepage and cannot have child pages.";
-  if ((RESERVED_FIRST_SEGMENTS as readonly string[]).includes(first)) {
+  const nestedOnly = NESTED_ONLY_SEGMENTS.includes(first);
+  if ((RESERVED_FIRST_SEGMENTS as readonly string[]).includes(first) && !(nestedOnly && segments.length === 1)) {
     return `"/${first}" is handled by the site code and cannot be a page.`;
   }
   // next.config.ts redirects /salesforce-* (except the recruitment agency page).
