@@ -139,3 +139,26 @@ test("resolveCurated fills curated sections, drops the placeholder, fetches once
   expect(out.sections[3]).not.toHaveProperty("title");
   expect(JSON.stringify(out)).not.toContain("__curated");
 });
+
+test("prepareDocument keeps existing _keys, so Portable Text marks still match their markDefs", async () => {
+  const body = [
+    {
+      _type: "block", _key: "b1", style: "normal",
+      markDefs: [{ _key: "m1", _type: "link", href: "mailto:a@b.co" }],
+      children: [
+        { _type: "span", _key: "s1", text: "Mail ", marks: [] },
+        { _type: "span", _key: "s2", text: "a@b.co", marks: ["m1"] },
+      ],
+    },
+  ];
+  const doc = await prepareDocument(
+    { slug: "p", title: "P", seoFallback: { title: "P" }, sections: [{ _type: "richTextSection", body }] },
+    { prefix: "", upload: noUpload, legacy: {} }
+  );
+  const out = ((doc.sections as Record<string, unknown>[])[0].body as typeof body)[0];
+  expect(out._key).toBe("b1");
+  expect(out.children.map((c) => c._key)).toEqual(["s1", "s2"]);
+  const defKeys = out.markDefs.map((d) => d._key);
+  expect(defKeys).toEqual(["m1"]);
+  for (const c of out.children) for (const m of c.marks) if (!["strong", "em"].includes(m)) expect(defKeys).toContain(m);
+});

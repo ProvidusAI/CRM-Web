@@ -5,8 +5,9 @@ import { commercePage, educationPage, financialServicesPage, healthPage, nonprof
 import { dotdigitalPage, findockPage, fundraiseUpPage } from "./partnership";
 import { industriesPage, partnershipPage, platformExpertisePage, servicesPage } from "./parents";
 import { agentforcePage, dataCloudPage, experienceCloudPage, marketingCloudPage, salesCloudPage, serviceCloudPage } from "./platform-expertise";
+import { privacyPage } from "./privacy";
 import { recruitmentPage } from "./recruitment";
 import type { SeedPage } from "./types";
 
 /** Appended to by the per-page modules (Tasks 11a-11f). */
-export const SEED_PAGES: SeedPage[] = [homePage, aboutPage, contactPage, industriesPage, partnershipPage, platformExpertisePage, servicesPage, commercePage, educationPage, financialServicesPage, healthPage, nonprofitPage, agentforcePage, dataCloudPage, experienceCloudPage, marketingCloudPage, salesCloudPage, serviceCloudPage, dotdigitalPage, findockPage, fundraiseUpPage, recruitmentPage];
+export const SEED_PAGES: SeedPage[] = [homePage, aboutPage, contactPage, industriesPage, partnershipPage, platformExpertisePage, servicesPage, commercePage, educationPage, financialServicesPage, healthPage, nonprofitPage, agentforcePage, dataCloudPage, experienceCloudPage, marketingCloudPage, salesCloudPage, serviceCloudPage, dotdigitalPage, findockPage, fundraiseUpPage, recruitmentPage, privacyPage];
