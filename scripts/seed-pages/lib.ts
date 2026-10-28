@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import type { SanityClient } from "@sanity/client";
 import { pageDocumentId, pageSlugError } from "../../src/lib/pagePaths";
-import type { ImagePlaceholder, LegacyEntry, LegacyValues, SeedPage } from "./types";
+import type { ImagePlaceholder, LegacyEntry, LegacyValues, SeedPage, SeedSection } from "./types";
 
 export type { ImagePlaceholder, LegacyEntry, LegacyValues, SeedPage, SeedSection } from "./types";
 
@@ -34,6 +34,33 @@ export async function legacyRefs(client: SanityClient, key: string) {
     caseStudiesTitle: cs?.sectionTitle,
     postsTitle: pb?.sectionTitle,
   };
+}
+
+/** Placeholder a module spreads into a case-studies / posts section; resolveCurated fills it in. */
+export const curated = (kind: "caseStudies" | "posts", key: string) => ({ __curated: { kind, key } });
+
+/**
+ * Replace every `curated(...)` placeholder with the CMS's current selection
+ * (title omitted when the editor set none). One fetch per key.
+ */
+export async function resolveCurated(
+  page: SeedPage,
+  fetchRefs: (key: string) => Promise<Awaited<ReturnType<typeof legacyRefs>>>
+): Promise<SeedPage> {
+  const fetched = new Map<string, ReturnType<typeof fetchRefs>>();
+  const sections: SeedSection[] = [];
+  for (const section of page.sections) {
+    const { __curated, ...rest } = section as SeedSection & { __curated?: { kind: "caseStudies" | "posts"; key: string } };
+    if (!__curated) {
+      sections.push(section);
+      continue;
+    }
+    if (!fetched.has(__curated.key)) fetched.set(__curated.key, fetchRefs(__curated.key));
+    const refs = await fetched.get(__curated.key)!;
+    const title = __curated.kind === "caseStudies" ? refs.caseStudiesTitle : refs.postsTitle;
+    sections.push({ ...rest, ...(title && { title }), [__curated.kind]: refs[__curated.kind] });
+  }
+  return { ...page, sections };
 }
 
 /**

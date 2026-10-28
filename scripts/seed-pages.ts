@@ -17,7 +17,7 @@ import { createReadStream, existsSync, readFileSync, writeFileSync } from "node:
 import path from "node:path";
 import { createClient } from "@sanity/client";
 import { pageDocumentId } from "../src/lib/pagePaths";
-import { describeError, mergeLegacy, prepareDocument, validateTargets, type LegacyValues } from "./seed-pages/lib";
+import { describeError, legacyRefs, mergeLegacy, prepareDocument, resolveCurated, validateTargets, type LegacyValues } from "./seed-pages/lib";
 import { SEED_PAGES } from "./seed-pages/index"; // explicit: "./seed-pages" would resolve to this file
 
 // Same .env / .env.local loading as import-migration-page.ts, but with Next's
@@ -100,7 +100,10 @@ async function main() {
   const legacy = await loadLegacy();
   const cache = new Map<string, Promise<string>>();
   const docs = [];
-  for (const page of pages) docs.push(await prepareDocument(page, { prefix, upload, legacy, cache }));
+  for (const page of pages) {
+    const resolved = await resolveCurated(page, (key) => legacyRefs(client, key));
+    docs.push(await prepareDocument(resolved, { prefix, upload, legacy, cache }));
+  }
 
   if (dryRun) {
     const out = path.join(process.env.TMPDIR ?? "/tmp", "seed-pages.json");

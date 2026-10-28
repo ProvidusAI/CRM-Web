@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import type { SanityClient } from "@sanity/client";
-import { img, heading, prepareDocument, mergeLegacy, describeError, validateTargets, legacyRefs, type LegacyValues } from "../scripts/seed-pages/lib";
+import { img, heading, prepareDocument, mergeLegacy, describeError, validateTargets, legacyRefs, curated, resolveCurated, type LegacyValues } from "../scripts/seed-pages/lib";
 
 test("prepareDocument uploads each image once, adds _keys, applies the prefix", async () => {
   const uploads: string[] = [];
@@ -100,4 +100,42 @@ test("legacyRefs filters falsy ids", async () => {
   const r = await legacyRefs(client as unknown as SanityClient, "k");
   expect(r.caseStudies).toEqual([{ _type: "reference", _ref: "c1" }]);
   expect(r.posts).toEqual([{ _type: "reference", _ref: "p1" }]);
+});
+
+test("resolveCurated fills curated sections, drops the placeholder, fetches once per key", async () => {
+  const calls: string[] = [];
+  const fetchRefs = async (key: string) => {
+    calls.push(key);
+    return {
+      caseStudies: [{ _type: "reference" as const, _ref: "c1" }],
+      posts: [{ _type: "reference" as const, _ref: "p1" }],
+      caseStudiesTitle: key === "home" ? "Our Work" : "",
+      postsTitle: undefined,
+    };
+  };
+  const base = { slug: "home", title: "Home", seoFallback: { title: "H" } };
+  const out = await resolveCurated(
+    {
+      ...base,
+      sections: [
+        { _type: "heroSection" },
+        { _type: "serviceCaseStudiesSection", viewAllHref: "/case-studies", ...curated("caseStudies", "home") },
+        { _type: "pageBlogsSection", ...curated("posts", "home") },
+        { _type: "pageBlogsSection", ...curated("posts", "about") },
+      ],
+    },
+    fetchRefs
+  );
+  expect(calls).toEqual(["home", "about"]);
+  expect(out.sections[0]).toEqual({ _type: "heroSection" });
+  expect(out.sections[1]).toEqual({
+    _type: "serviceCaseStudiesSection",
+    viewAllHref: "/case-studies",
+    title: "Our Work",
+    caseStudies: [{ _type: "reference", _ref: "c1" }],
+  });
+  // No title configured (undefined or empty): the key is absent, not "".
+  expect(out.sections[2]).toEqual({ _type: "pageBlogsSection", posts: [{ _type: "reference", _ref: "p1" }] });
+  expect(out.sections[3]).not.toHaveProperty("title");
+  expect(JSON.stringify(out)).not.toContain("__curated");
 });
