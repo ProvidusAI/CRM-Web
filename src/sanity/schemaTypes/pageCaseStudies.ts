@@ -1,53 +1,8 @@
 import { defineField, defineType } from "sanity";
 
-const pageOptions = [
-  { title: "Home", value: "home" },
-  { title: "About", value: "about" },
-  { title: "Services", value: "services" },
-  { title: "Platform Expertise", value: "platform-expertise" },
-  { title: "Partnership", value: "partnership" },
-  {
-    title: "Platform Expertise — Sales Cloud",
-    value: "salesforce-sales-cloud-consulting",
-  },
-  {
-    title: "Platform Expertise — Service Cloud",
-    value: "salesforce-service-cloud-consulting",
-  },
-  {
-    title: "Platform Expertise — Marketing Cloud",
-    value: "salesforce-marketing-cloud-consulting",
-  },
-  {
-    title: "Platform Expertise — Experience Cloud",
-    value: "salesforce-experience-cloud-consulting",
-  },
-  {
-    title: "Platform Expertise — Data Cloud",
-    value: "salesforce-data-cloud-consulting",
-  },
-  {
-    title: "Platform Expertise — Agentforce",
-    value: "salesforce-agentforce-consulting",
-  },
-  { title: "Industries", value: "industries" },
-  {
-    title: "Industries — Health Cloud",
-    value: "salesforce-health-cloud-consulting",
-  },
-  {
-    title: "Industries — Nonprofit",
-    value: "salesforce-nonprofit-consulting",
-  },
-  {
-    title: "Industries — Financial Services Cloud",
-    value: "salesforce-financial-services-cloud-consulting",
-  },
-  {
-    title: "Industries — Commerce Cloud",
-    value: "salesforce-commerce-cloud-consulting",
-  },
-];
+// Legacy: pages are Sanity `page` documents now and choose case studies on the
+// section itself. No coded page uses this document, so there is nothing to pick.
+const pageOptions: { title: string; value: string }[] = [];
 
 export const pageCaseStudies = defineType({
   name: "pageCaseStudies",

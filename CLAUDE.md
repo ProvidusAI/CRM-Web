@@ -34,7 +34,7 @@ Playwright's `webServer` reuses an existing dev server locally, so `pnpm test` w
 ### Route groups
 
 - `src/app/(site)/` — all public pages; owns the shared layout (Navbar, Footer, skip link, `<main id="main-content">`), `error.tsx`, `not-found.tsx`.
-  Routes that stay in code live under `(site)/(coded)/` with `loading.tsx`; every other `(site)` route (the CMS catch-all `[...slug]` and static pages awaiting migration) renders without that loading boundary, so `notFound()` returns a real 404.
+  Pages are CMS-driven: `(site)/[[...slug]]/page.tsx` renders Sanity `page` documents (`home` is slug `home` at `/`; `/home` is a 404). Routes that stay in code (`blog`, `case-studies`, `services/[slug]`, `salesforce/[slug]`, `section-thumbs-preview`) live under `(site)/(coded)/` with `loading.tsx`; the catch-all sits outside it so `notFound()` returns a real 404.
 - `src/app/studio/[[...tool]]/` — embedded Sanity Studio at `/studio`, outside the site layout.
 - `src/app/api/` — `contact`, `service-inquiry` (Resend email), `revalidate` (Sanity webhook).
 - `src/app/sitemap.ts` / `robots.ts` — sitemap merges static routes with published CMS content.
@@ -43,7 +43,9 @@ Playwright's `webServer` reuses an existing dev server locally, so `pnpm test` w
 
 ### Sanity integration
 
-Content is **optional at build time**. `isSanityConfigured` (`src/sanity/env.ts`) is false without env vars, and `sanityFetch` returns `null` — pages must render empty states or fall back to hardcoded data rather than throw. `src/data/salesforceServicePage.ts` is the fallback for the service page when the CMS has no document.
+Content is **optional at build time**. `isSanityConfigured` (`src/sanity/env.ts`) is false without env vars, and `sanityFetch` returns `null` — pages must render empty states or fall back to hardcoded data rather than throw. `src/data/salesforceServicePage.ts` is the fallback for the service page when the CMS has no document. The exception is `page` documents: every site page (including `/`) lives only in Sanity, so without CMS config they 404.
+
+**Page builder.** A `page` document is a slug plus an ordered `sections` array, rendered by `PageSections` (`components/sanity/page-builder/`) through the section registry. Adding a section type means a schema (`sanity/schemaTypes/sections/`), an adapter (`page-builder/adapters/`, maps the Sanity data into the section's own item types) and a registry entry in `registry.tsx`. Slug rules and reserved paths are in `lib/pagePaths.ts`; sitemap entries come from `lib/sitemapPages.ts`. See `SANITY.md`. The one-shot seed that created the pages was removed; it lives in git history (the commit before "serve static pages from Sanity page documents").
 
 `sanityFetch` (`src/sanity/lib/fetch.ts`) is `server-only` and picks one of four clients based on `readToken` and a `metadata` flag: metadata reads disable stega (visual-editing overlay encoding), which would otherwise corrupt `<title>`/OG strings. Always pass `metadata: true` when fetching for `generateMetadata`.
 
@@ -53,10 +55,10 @@ Cache invalidation is tag-based. Every fetch passes `tags`; `/api/revalidate` ma
 
 Three composed helpers, all CMS-overridable with code fallbacks:
 - `lib/seo.ts` → `buildPageMetadata()` merges Sanity `seo` fields over fallbacks and absolutizes URLs.
-- `lib/staticPageSeo.ts` → `generateStaticPageMetadata(pageKey, fallback)` for fixed routes; `StaticPageKey` is a closed union.
+- `lib/staticPageSeo.ts` → `generateStaticPageMetadata(pageKey, fallback)` for the fixed routes still in code (`blog`, `case-studies`); `StaticPageKey` is a closed union. CMS pages carry their own `seo` field.
 - `lib/jsonLd.ts` / `siteJsonLd.ts` + `<JsonLdScript>` for structured data.
 
-`lib/pageCaseStudies.ts` works the same way — editors pick case studies per page via a `pageKey`-keyed document; `PageCaseStudyKey` is a closed union. Adding a page that shows curated case studies means extending that union.
+`lib/pageCaseStudies.ts` (a `pageKey`-keyed document; `PageCaseStudyKey` is a closed union) is legacy: no coded page uses it now (the union is `never`), because CMS pages pick case studies on the section. Extend the union only if a coded page needs it.
 
 ### Components
 

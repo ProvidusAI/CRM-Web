@@ -22,7 +22,6 @@
     "check:slugs": "tsx scripts/check-slugs.ts",
     "check:blog-blocks": "tsx scripts/check-blog-blocks.ts",
     "check:perf-markers": "tsx scripts/check-perf-markers.ts",
-    "seed:pages": "tsx scripts/seed-pages.ts",
     "import:migration": "tsx scripts/import-migration-page.ts",
     "thumbs:sections": "tsx scripts/capture-section-thumbnails.ts",
     "sanity:deploy": "sanity deploy",

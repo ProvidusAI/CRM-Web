@@ -7,6 +7,15 @@ test.describe("page catch-all route", () => {
     await expect(page.locator("footer")).toBeVisible();
   });
 
+  test("/ is served from the home page document", async ({ page }) => {
+    const res = await page.goto("/");
+    expect(res?.status()).toBe(200);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveAccessibleName(
+      /Custom Salesforce Solutions For Your CRM Innovation Goals/
+    );
+    await expect(page.getByRole("img", { name: "Salesforce Partner" }).first()).toBeVisible();
+  });
+
   test("/home is not a page", async ({ page }) => {
     const res = await page.goto("/home");
     expect(res?.status()).toBe(404);

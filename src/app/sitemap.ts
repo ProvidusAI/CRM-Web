@@ -22,32 +22,10 @@ type SitemapItem = {
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Only routes still served from code; every Sanity `page` comes from the query below.
   const staticUrls: MetadataRoute.Sitemap = [
-    { url: 'https://providuscrm.co.uk', lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
-    { url: 'https://providuscrm.co.uk/about', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
-    { url: 'https://providuscrm.co.uk/partnership', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: 'https://providuscrm.co.uk/partnership/findock', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: 'https://providuscrm.co.uk/partnership/fundraise-up', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: 'https://providuscrm.co.uk/partnership/dotdigital', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: 'https://providuscrm.co.uk/services', lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
-    { url: 'https://providuscrm.co.uk/salesforce-recruitment-agency', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
-    { url: 'https://providuscrm.co.uk/industries', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
-    { url: 'https://providuscrm.co.uk/industries/salesforce-health-cloud-consulting', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: 'https://providuscrm.co.uk/industries/salesforce-nonprofit-consulting', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: 'https://providuscrm.co.uk/industries/salesforce-financial-services-cloud-consulting', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: 'https://providuscrm.co.uk/industries/salesforce-education-cloud-consulting', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: 'https://providuscrm.co.uk/industries/salesforce-commerce-cloud-consulting', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: 'https://providuscrm.co.uk/platform-expertise', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
-    { url: 'https://providuscrm.co.uk/platform-expertise/salesforce-sales-cloud-consulting', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: 'https://providuscrm.co.uk/platform-expertise/salesforce-service-cloud-consulting', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: 'https://providuscrm.co.uk/platform-expertise/salesforce-marketing-cloud-consulting', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: 'https://providuscrm.co.uk/platform-expertise/salesforce-experience-cloud-consulting', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: 'https://providuscrm.co.uk/platform-expertise/salesforce-data-cloud-consulting', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: 'https://providuscrm.co.uk/platform-expertise/salesforce-agentforce-consulting', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: 'https://providuscrm.co.uk/case-studies', lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
     { url: 'https://providuscrm.co.uk/blog', lastModified: new Date(), changeFrequency: 'daily', priority: 0.7 },
-    { url: 'https://providuscrm.co.uk/contact', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
-    { url: 'https://providuscrm.co.uk/privacy-policy', lastModified: new Date(), changeFrequency: 'yearly', priority: 0.3 },
   ]
 
   const allItems = (await sanityFetch<SitemapItem[]>({

@@ -22,8 +22,8 @@ async function getPage(slug: string, metadata = false) {
 
 export async function generateStaticParams() {
   const slugs = (await sanityFetch<string[]>({ query: PAGE_SLUGS_QUERY, tags: ["pages"], metadata: true })) ?? [];
-  // "home" is served by the optional catch-all's empty segment (Task 13).
-  return slugs.filter((s) => s !== "home").map((s) => ({ slug: s.split("/") }));
+  // "home" is served by the optional catch-all's empty segment ("/").
+  return slugs.map((s) => ({ slug: s === "home" ? [] : s.split("/") }));
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {

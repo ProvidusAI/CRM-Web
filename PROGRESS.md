@@ -83,3 +83,6 @@
 - [x] PartnersSection: Changed alt text from "Partner logo" to "Partner N logo"
 - [x] lib/seo.ts: Added alt property to OG images array
 - [x] Carousel.tsx: Already has `disabled:opacity-50` (no change needed)
+
+## Sanity page builder switch (feat/sanity-page-builder)
+- [x] The 23 static pages (home, about, contact, industries, partnership, platform-expertise, privacy-policy, recruitment, services index) are Sanity `page` documents served by `(site)/[[...slug]]`; their route files, the seed script and the legacy page-key options are removed. `/` is prerendered via `generateStaticParams` (`slug: []`) and revalidated by tag, replacing the old `force-static` home export. See `SANITY.md`.

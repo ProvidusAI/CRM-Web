@@ -6,24 +6,11 @@ import { PAGE_CASE_STUDIES_QUERY } from "@/sanity/lib/queries";
 import { toServiceCaseStudyCards } from "@/lib/caseStudyCards";
 import type { PageCaseStudies } from "@/sanity/lib/types";
 
-export type PageCaseStudyKey =
-  | "home"
-  | "about"
-  | "services"
-  | "platform-expertise"
-  | "industries"
-  | "partnership"
-  | "salesforce-sales-cloud-consulting"
-  | "salesforce-service-cloud-consulting"
-  | "salesforce-marketing-cloud-consulting"
-  | "salesforce-experience-cloud-consulting"
-  | "salesforce-data-cloud-consulting"
-  | "salesforce-agentforce-consulting"
-  | "salesforce-commerce-cloud-consulting"
-  | "salesforce-health-cloud-consulting"
-  | "salesforce-nonprofit-consulting"
-  | "salesforce-financial-services-cloud-consulting"
-  | "staff-augmentation";
+/**
+ * No code-owned page shows curated case studies any more: CMS pages pick them
+ * on the section itself. Extend this union if a coded page needs them again.
+ */
+export type PageCaseStudyKey = never;
 
 interface PageCaseStudiesResult {
   /** Optional heading override. Undefined falls back to the section default. */
