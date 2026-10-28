@@ -10,20 +10,23 @@
 import { createReadStream, existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { createClient } from "@sanity/client";
-import { prepareDocument, type LegacyValues } from "./seed-pages/lib";
+import { describeError, mergeLegacy, prepareDocument, validateTargets, type LegacyValues } from "./seed-pages/lib";
 import { SEED_PAGES } from "./seed-pages/index"; // explicit: "./seed-pages" would resolve to this file
 
-// Same .env / .env.local loading as import-migration-page.ts (existing vars win).
+// Same .env / .env.local loading as import-migration-page.ts, but with Next's
+// precedence: shell env > .env.local > .env. Keys set by the shell are never touched.
+const shellKeys = new Set(Object.keys(process.env));
 for (const file of [".env", ".env.local"]) {
   if (!existsSync(file)) continue;
   for (const line of readFileSync(file, "utf8").split(/\r?\n/)) {
     const m = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/);
-    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, "");
+    if (m && !shellKeys.has(m[1])) process.env[m[1]] = m[2].replace(/^["']|["']$/g, "");
   }
 }
 
 const dryRun = process.argv.includes("--dry-run");
 const prefix = process.env.SEED_SLUG_PREFIX ?? "";
+const force = process.argv.includes("--force");
 const only = process.argv.find((a) => a.startsWith("--only="))?.slice(7);
 const token = process.env.SANITY_API_WRITE_TOKEN;
 if (!token && !dryRun) {
@@ -46,24 +49,34 @@ async function loadLegacy(): Promise<LegacyValues> {
     client.fetch<{ pageKey: string; seo?: Record<string, unknown>; jsonLd?: LegacyValues[string]["jsonLd"] }[]>(`*[_type == "staticPageSeo"]{ pageKey, seo, jsonLd }`),
     client.fetch<{ pageKey: string; jsonLd?: LegacyValues[string]["jsonLd"] }[]>(`*[_type == "sitePageJsonLd"]{ pageKey, jsonLd }`),
   ]);
-  const legacy: LegacyValues = {};
-  for (const d of jsonLdDocs) legacy[d.pageKey] = { ...legacy[d.pageKey], jsonLd: d.jsonLd };
-  // staticPageSeo.jsonLd wins over sitePageJsonLd, matching getSitePageJsonLd.
-  for (const d of seoDocs) legacy[d.pageKey] = { seo: d.seo, jsonLd: d.jsonLd?.schemaJson ? d.jsonLd : legacy[d.pageKey]?.jsonLd };
-  return legacy;
+  return mergeLegacy(seoDocs, jsonLdDocs);
 }
 
 async function upload(publicPath: string): Promise<string> {
-  if (dryRun) return `image-dryrun${publicPath.length}-1x1-png`; // no network
   const file = path.join(process.cwd(), "public", publicPath);
+  if (dryRun) {
+    // No network, but a missing file must fail the dry run, not the real one.
+    if (!existsSync(file)) throw new Error(`Image not found: public${publicPath}`);
+    return `image-dryrun${publicPath.length}-1x1-png`;
+  }
   const asset = await client.assets.upload("image", createReadStream(file), { filename: path.basename(file) });
   return asset._id;
 }
 
 async function main() {
+  const pages = SEED_PAGES.filter((p) => !only || p.slug === only);
+  const problems = validateTargets(pages, prefix);
+  if (problems.length) throw new Error(`Invalid seed targets:\n  ${problems.join("\n  ")}`);
+  if (SEED_PAGES.length === 0 && dryRun && !only) {
+    console.log("Dry run: 0 documents (SEED_PAGES is empty)");
+    return;
+  }
+  if (pages.length === 0) {
+    throw new Error(only ? `--only=${only} matches no seed page.` : "SEED_PAGES is empty; nothing to seed.");
+  }
+
   const legacy = await loadLegacy();
   const cache = new Map<string, Promise<string>>();
-  const pages = SEED_PAGES.filter((p) => !only || p.slug === only);
   const docs = [];
   for (const page of pages) docs.push(await prepareDocument(page, { prefix, upload, legacy, cache }));
 
@@ -73,6 +86,15 @@ async function main() {
     console.log(`Dry run: ${docs.length} documents written to ${out}`);
     return;
   }
+
+  const { projectId, dataset } = client.config();
+  console.log(`Target: project ${projectId}, dataset ${dataset}, prefix "${prefix}", ${docs.length} documents`);
+  if (prefix === "" && !force) {
+    // Final slugs: refuse to overwrite live pages (published or draft) without --force.
+    const ids = docs.flatMap((d) => [d._id, `drafts.${d._id}`]);
+    const existing = await client.fetch<string[]>(`*[_id in $ids]._id`, { ids });
+    if (existing.length) throw new Error(`Refusing to overwrite existing documents (pass --force): ${existing.join(", ")}`);
+  }
   const tx = client.transaction();
   for (const doc of docs) tx.createOrReplace(doc);
   await tx.commit();
@@ -80,6 +102,7 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error(err);
+  // Never log the error object: network errors carry the request, including the Authorization header.
+  console.error(describeError(err));
   process.exit(1);
 });

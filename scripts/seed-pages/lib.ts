@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import type { SanityClient } from "@sanity/client";
-import { pageDocumentId } from "../../src/lib/pagePaths";
-import type { ImagePlaceholder, LegacyValues, SeedPage } from "./types";
+import { pageDocumentId, pageSlugError } from "../../src/lib/pagePaths";
+import type { ImagePlaceholder, LegacyEntry, LegacyValues, SeedPage } from "./types";
 
 export type { ImagePlaceholder, LegacyEntry, LegacyValues, SeedPage, SeedSection } from "./types";
 
@@ -29,11 +29,82 @@ export async function legacyRefs(client: SanityClient, key: string) {
     ),
   ]);
   return {
-    caseStudies: (cs?.ids ?? []).map(ref) as Ref[],
-    posts: (pb?.ids ?? []).map(ref) as Ref[],
+    caseStudies: (cs?.ids ?? []).filter(Boolean).map(ref) as Ref[],
+    posts: (pb?.ids ?? []).filter(Boolean).map(ref) as Ref[],
     caseStudiesTitle: cs?.sectionTitle,
     postsTitle: pb?.sectionTitle,
   };
+}
+
+/**
+ * Safe one-line description of a thrown value. Never log the error object itself:
+ * get-it attaches the raw http.ClientRequest (with the Authorization header) to
+ * network errors.
+ */
+export function describeError(err: unknown): string {
+  let out = err instanceof Error ? err.message : String(err);
+  if (typeof err === "object" && err !== null) {
+    const { statusCode, responseBody } = err as { statusCode?: unknown; responseBody?: unknown };
+    if (typeof statusCode === "number") out += ` (status ${statusCode})`;
+    if (typeof statusCode === "number" && responseBody !== undefined) {
+      const body = typeof responseBody === "string" ? responseBody : JSON.stringify(responseBody);
+      if (body) out += `: ${body.length > 500 ? `${body.slice(0, 500)}...` : body}`;
+    }
+  }
+  return out;
+}
+
+/**
+ * Combine staticPageSeo and sitePageJsonLd docs the way getSitePageJsonLd does:
+ * `pageSeo?.jsonLd || pageJsonLd?.jsonLd`, so any truthy staticPageSeo.jsonLd
+ * wins (even `{ enabled: false }` with no schemaJson).
+ */
+export function mergeLegacy(
+  seoDocs: { pageKey: string; seo?: Record<string, unknown>; jsonLd?: LegacyEntry["jsonLd"] }[],
+  jsonLdDocs: { pageKey: string; jsonLd?: LegacyEntry["jsonLd"] }[]
+): LegacyValues {
+  const legacy: LegacyValues = {};
+  for (const d of jsonLdDocs) legacy[d.pageKey] = { ...legacy[d.pageKey], jsonLd: d.jsonLd };
+  for (const d of seoDocs) legacy[d.pageKey] = { seo: d.seo, jsonLd: d.jsonLd ? d.jsonLd : legacy[d.pageKey]?.jsonLd };
+  return legacy;
+}
+
+/** Pure pre-flight checks (no network): prefix shape, final slugs, duplicates. */
+export function validateTargets(pages: SeedPage[], prefix: string): string[] {
+  const errors: string[] = [];
+  if (prefix !== "" && !/^[a-z0-9-]+\/$/.test(prefix)) {
+    errors.push(`SEED_SLUG_PREFIX "${prefix}" must be empty or look like "preview/".`);
+  }
+  const seen = new Set<string>();
+  for (const p of pages) {
+    const final = `${prefix}${p.slug}`;
+    // A prefix like "preview/" is fine even if a reserved word would trip the final check.
+    const err = pageSlugError(final) && prefix !== "" ? pageSlugError(p.slug) : pageSlugError(final);
+    if (err) errors.push(`${final}: ${err}`);
+    if (seen.has(final)) errors.push(`${final}: duplicate slug in SEED_PAGES.`);
+    seen.add(final);
+  }
+  return errors;
+}
+
+/** True for values that must not override a code fallback (empty, or an image without an asset). */
+function isEmptyLegacyValue(v: unknown): boolean {
+  if (v === undefined || v === null || v === "") return true;
+  if (Array.isArray(v)) return v.length === 0;
+  if (typeof v === "object") {
+    const o = v as Record<string, unknown>;
+    return !("asset" in o) && Object.keys(o).every((k) => ["_type", "alt", "crop", "hotspot"].includes(k));
+  }
+  return false;
+}
+
+function isParsableJson(s: string): boolean {
+  try {
+    JSON.parse(s);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function isPlaceholder(v: unknown): v is ImagePlaceholder {
@@ -52,6 +123,7 @@ async function walk(value: unknown, upload: (p: string) => Promise<string>, cach
   if (Array.isArray(value)) {
     const out = [];
     for (const item of value) {
+      if (item === undefined) continue;
       const walked = await walk(item, upload, cache);
       // Sanity requires a _key on every object in an array (images included);
       // plain string arrays (bullets, pill rows) stay as they are.
@@ -85,9 +157,10 @@ export async function prepareDocument(
     ...(page.seoFallback.image && { ogImage: img(page.seoFallback.image) }),
   };
   for (const [k, v] of Object.entries(legacy.seo ?? {})) {
-    if (v !== undefined && v !== null && v !== "" && !(Array.isArray(v) && v.length === 0)) seo[k] = v;
+    if (!isEmptyLegacyValue(v)) seo[k] = v;
   }
-  const jsonLd = legacy.jsonLd?.schemaJson || legacy.jsonLd?.enabled === false
+  // Mirrors resolveJsonLd: disabled stays disabled; valid JSON is kept; otherwise the code fallback.
+  const jsonLd = (legacy.jsonLd?.schemaJson && isParsableJson(legacy.jsonLd.schemaJson)) || legacy.jsonLd?.enabled === false
     ? legacy.jsonLd
     : page.jsonLdFallback
       ? { enabled: true, schemaJson: JSON.stringify(page.jsonLdFallback, null, 2) }
