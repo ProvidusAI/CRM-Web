@@ -10,6 +10,7 @@ import { SECTION_ADAPTERS } from "@/components/sanity/page-builder/registry";
 import { reasons } from "@/components/sections/WhyChooseSection";
 import { DEFAULT_WHAT_WE_DO_TABS } from "@/components/sections/WhatWeDoSection";
 import { toServiceCaseStudyCards } from "@/lib/caseStudyCards";
+import { imageSrc } from "@/sanity/lib/imageRef";
 import { toBlogTeaserCards } from "@/lib/blogTeaserCards";
 
 const img = (hash: string, alt?: string) => ({
@@ -116,6 +117,71 @@ test.describe("serviceCaseStudiesSection adapter", () => {
     expect(serviceCaseStudiesSectionAdapter({ _type: "serviceCaseStudiesSection", _key: "k", caseStudies: [] })).toBeNull();
     expect(serviceCaseStudiesSectionAdapter({ _type: "serviceCaseStudiesSection", _key: "k" })).toBeNull();
     expect(serviceCaseStudiesSectionAdapter({ _type: "serviceCaseStudiesSection", _key: "k", caseStudies: [null] })).toBeNull();
+  });
+});
+
+test.describe("serviceCaseStudiesSection inline cards", () => {
+  const inline = (over: Record<string, unknown> = {}) => ({
+    _key: "c1",
+    title: "Inline project",
+    slug: "inline-project",
+    image: img("abc123"),
+    label: "Health Cloud",
+    category: "Healthcare",
+    ...over,
+  });
+
+  test("maps inline cards field by field", () => {
+    const p = props(
+      serviceCaseStudiesSectionAdapter({
+        _type: "serviceCaseStudiesSection",
+        _key: "k",
+        inlineCards: [inline(), inline({ _key: "c2", title: "Bare", slug: "bare", label: undefined, category: undefined })],
+        viewAllHref: "/case-studies",
+      }),
+    );
+    expect(p.caseStudies).toEqual([
+      {
+        title: "Inline project",
+        slug: "inline-project",
+        image: imageSrc(img("abc123")),
+        label: "Health Cloud",
+        category: "Healthcare",
+      },
+      { title: "Bare", slug: "bare", image: imageSrc(img("abc123")), label: undefined, category: undefined },
+    ]);
+    expect(p.viewAllHref).toBe("/case-studies");
+  });
+
+  test("references win over inline cards", () => {
+    const docs = [caseStudy()];
+    const p = props(
+      serviceCaseStudiesSectionAdapter({ _type: "serviceCaseStudiesSection", _key: "k", caseStudies: docs, inlineCards: [inline()] }),
+    );
+    expect(p.caseStudies).toEqual(toServiceCaseStudyCards(docs));
+  });
+
+  test("only broken references fall through to the inline cards", () => {
+    const p = props(
+      serviceCaseStudiesSectionAdapter({ _type: "serviceCaseStudiesSection", _key: "k", caseStudies: [null], inlineCards: [inline()] }),
+    );
+    expect((p.caseStudies as unknown[]).length).toBe(1);
+  });
+
+  test("no references and no inline cards renders nothing", () => {
+    expect(serviceCaseStudiesSectionAdapter({ _type: "serviceCaseStudiesSection", _key: "k", caseStudies: [], inlineCards: [] })).toBeNull();
+  });
+
+  test("an inline card without an image is skipped", () => {
+    const p = props(
+      serviceCaseStudiesSectionAdapter({
+        _type: "serviceCaseStudiesSection",
+        _key: "k",
+        inlineCards: [inline({ image: undefined }), inline({ _key: "c2", title: "Kept", slug: "kept" })],
+      }),
+    );
+    expect((p.caseStudies as { title: string }[]).map((c) => c.title)).toEqual(["Kept"]);
+    expect(serviceCaseStudiesSectionAdapter({ _type: "serviceCaseStudiesSection", _key: "k", inlineCards: [inline({ image: undefined })] })).toBeNull();
   });
 });
 
