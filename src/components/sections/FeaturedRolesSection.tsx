@@ -15,49 +15,19 @@ import { Heading, Text } from "@/components/ui/Typography";
 import { GreenLineMark } from "@/components/ui/GreenLineMark";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
+import { DEFAULT_FEATURED_ROLES, type FeaturedRole } from "@/data/featuredRoles";
 
-interface FeaturedRole {
-  title: string;
-  details: string[];
-  description: string;
+export type { FeaturedRole };
+
+interface FeaturedRolesSectionProps {
+  title?: string;
+  roles?: FeaturedRole[];
 }
 
-// Figma 462:341, 462:342, 462:352, 462:446, 462:456 — copy verbatim, in
-// left-to-right Figma order.
-const FEATURED_ROLES: FeaturedRole[] = [
-  {
-    title: "Salesforce Product Manager",
-    details: ["£65,000 - £85,000 + Bonus", "Remote", "Full Time"],
-    description:
-      "ProvidusCRM is hiring a Salesforce Product Manager to own Salesforce strategy, roadmap, governance, adoption and delivery across commercial teams in a global payments environment.",
-  },
-  {
-    title: "Senior Salesforce Architect",
-    details: ["£90,000 - £110,000", "Remote", "Full Time"],
-    description:
-      "ProvidusCRM is hiring a Senior Salesforce Architect to shape Salesforce CRM strategy, lead platform architecture, and support digital transformation across customer technology services.",
-  },
-  {
-    title: "Salesforce Project Manager",
-    details: ["£65,000 - £85,000 + Bonus", "Remote", "Full Time"],
-    description:
-      "ProvidusCRM is hiring a Salesforce Project Manager to lead full lifecycle implementations, manage stakeholders, and deliver large-scale Salesforce transformation projects across enterprise and mid-market clients.",
-  },
-  {
-    title: "Salesforce CPQ Specialist & Revenue Cloud Consultant",
-    details: ["£65,000 - £85,000 + Bonus", "Remote", "Full Time"],
-    description:
-      "ProvidusCRM is hiring a Salesforce RCA / CPQ Technical Consultant to design Revenue Cloud solutions, build complex CPQ functionality, and deliver enterprise Quote-to-Cash transformations.",
-  },
-  {
-    title: "Salesforce Delivery Manager",
-    details: ["£75,000 - £95,000", "Remote", "12 Month Fixed-Term Contract"],
-    description:
-      "ProvidusCRM is hiring a Salesforce Delivery Manager to lead enterprise Salesforce transformation, manage governance, stakeholders and partners, and drive successful business adoption.",
-  },
-];
-
-export function FeaturedRolesCarousel() {
+export function FeaturedRolesSection({
+  title = "Featured Roles",
+  roles = DEFAULT_FEATURED_ROLES,
+}: FeaturedRolesSectionProps) {
   const [emblaApi, setEmblaApi] = useState<CarouselApi>(undefined);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -80,7 +50,7 @@ export function FeaturedRolesCarousel() {
         <div className="text-center">
           <GreenLineMark className="mx-auto h-auto w-16" />
           <Heading as="h2" className="mt-5 text-black">
-            Featured Roles
+            {title}
           </Heading>
         </div>
       </Container>
@@ -95,7 +65,7 @@ export function FeaturedRolesCarousel() {
         >
           <Container>
             <CarouselContent className="pb-2 pt-2">
-              {FEATURED_ROLES.map((role, index) => (
+              {roles.map((role, index) => (
                 <CarouselItem
                   key={`${role.title}-${index}`}
                   className="basis-[85%] sm:basis-1/2 lg:basis-1/3"

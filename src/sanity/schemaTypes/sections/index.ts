@@ -40,6 +40,13 @@ import { trueCostSection } from "./trueCostSection";
 import { solutionTypesSection } from "./solutionTypesSection";
 import { industryDetailSection } from "./industryDetailSection";
 import { comparisonSection } from "./comparisonSection";
+import { richTextSection } from "./richTextSection";
+import { recruitmentIntroSection } from "./recruitmentIntroSection";
+import { talentPillsSection } from "./talentPillsSection";
+import { hiringModelsSection } from "./hiringModelsSection";
+import { processStepsSection } from "./processStepsSection";
+import { whyBandSection } from "./whyBandSection";
+import { featuredRolesSection } from "./featuredRolesSection";
 
 // Every page-builder section type. Section tasks append to this list.
 export const sectionTypes: ReturnType<typeof defineSection>[] = [
@@ -84,6 +91,13 @@ export const sectionTypes: ReturnType<typeof defineSection>[] = [
   solutionTypesSection,
   industryDetailSection,
   comparisonSection,
+  richTextSection,
+  recruitmentIntroSection,
+  talentPillsSection,
+  hiringModelsSection,
+  processStepsSection,
+  whyBandSection,
+  featuredRolesSection,
 ];
 
 export const pageSectionMembers = sectionTypes.map((t) => ({ type: t.name }));

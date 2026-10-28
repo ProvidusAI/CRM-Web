@@ -39,6 +39,13 @@ import { trueCostSectionAdapter } from "./adapters/TrueCostSection";
 import { solutionTypesSectionAdapter } from "./adapters/SolutionTypesSection";
 import { industryDetailSectionAdapter } from "./adapters/IndustryDetailSection";
 import { comparisonSectionAdapter } from "./adapters/ComparisonSection";
+import { richTextSectionAdapter } from "./adapters/RichTextSection";
+import { recruitmentIntroSectionAdapter } from "./adapters/RecruitmentIntroSection";
+import { talentPillsSectionAdapter } from "./adapters/TalentPillsSection";
+import { hiringModelsSectionAdapter } from "./adapters/HiringModelsSection";
+import { processStepsSectionAdapter } from "./adapters/ProcessStepsSection";
+import { whyBandSectionAdapter } from "./adapters/WhyBandSection";
+import { featuredRolesSectionAdapter } from "./adapters/FeaturedRolesSection";
 import type { SectionAdapter } from "./types";
 
 // _type → adapter. Section tasks add one entry each.
@@ -84,4 +91,11 @@ export const SECTION_ADAPTERS: Record<string, SectionAdapter<never>> = {
   solutionTypesSection: solutionTypesSectionAdapter,
   industryDetailSection: industryDetailSectionAdapter,
   comparisonSection: comparisonSectionAdapter,
+  richTextSection: richTextSectionAdapter,
+  recruitmentIntroSection: recruitmentIntroSectionAdapter,
+  talentPillsSection: talentPillsSectionAdapter,
+  hiringModelsSection: hiringModelsSectionAdapter,
+  processStepsSection: processStepsSectionAdapter,
+  whyBandSection: whyBandSectionAdapter,
+  featuredRolesSection: featuredRolesSectionAdapter,
 };

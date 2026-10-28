@@ -40,6 +40,13 @@ import type { TrueCostSectionData } from "./adapters/TrueCostSection";
 import type { SolutionTypesSectionData } from "./adapters/SolutionTypesSection";
 import type { IndustryDetailSectionData } from "./adapters/IndustryDetailSection";
 import type { ComparisonSectionData } from "./adapters/ComparisonSection";
+import type { RichTextSectionData } from "./adapters/RichTextSection";
+import type { RecruitmentIntroSectionData } from "./adapters/RecruitmentIntroSection";
+import type { TalentPillsSectionData } from "./adapters/TalentPillsSection";
+import type { HiringModelsSectionData } from "./adapters/HiringModelsSection";
+import type { ProcessStepsSectionData } from "./adapters/ProcessStepsSection";
+import type { WhyBandSectionData } from "./adapters/WhyBandSection";
+import type { FeaturedRolesSectionData } from "./adapters/FeaturedRolesSection";
 
 export interface SectionSpacing {
   top?: number;
@@ -100,4 +107,11 @@ export type PageSectionData =
   | TrueCostSectionData
   | SolutionTypesSectionData
   | IndustryDetailSectionData
-  | ComparisonSectionData;
+  | ComparisonSectionData
+  | RichTextSectionData
+  | RecruitmentIntroSectionData
+  | TalentPillsSectionData
+  | HiringModelsSectionData
+  | ProcessStepsSectionData
+  | WhyBandSectionData
+  | FeaturedRolesSectionData;
