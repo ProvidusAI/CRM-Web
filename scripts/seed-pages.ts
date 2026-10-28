@@ -6,10 +6,17 @@
  *   SEED_SLUG_PREFIX=preview/ pnpm seed:pages --dry-run
  *   SEED_SLUG_PREFIX=preview/ pnpm seed:pages
  *   pnpm seed:pages                       # final slugs
+ *   pnpm seed:pages --force               # final slugs, overwriting existing pages
+ *   --only=<slug>                         # seed a single page
+ *
+ * Always run --dry-run first: it is the gate for missing image files (it checks
+ * every public/ path exists, with no network write). Without --force, a run with
+ * no prefix refuses if any target document already exists.
  */
 import { createReadStream, existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { createClient } from "@sanity/client";
+import { pageDocumentId } from "../src/lib/pagePaths";
 import { describeError, mergeLegacy, prepareDocument, validateTargets, type LegacyValues } from "./seed-pages/lib";
 import { SEED_PAGES } from "./seed-pages/index"; // explicit: "./seed-pages" would resolve to this file
 
@@ -75,6 +82,21 @@ async function main() {
     throw new Error(only ? `--only=${only} matches no seed page.` : "SEED_PAGES is empty; nothing to seed.");
   }
 
+  // Non-dry runs: confirm the target and refuse overwrites BEFORE loadLegacy or any asset upload.
+  if (!dryRun) {
+    const { projectId, dataset } = client.config();
+    console.log(`Target: project ${projectId}, dataset ${dataset}, prefix "${prefix}", ${pages.length} documents`);
+    if (prefix === "" && !force) {
+      // Final slugs: refuse to overwrite live pages (published or draft) without --force.
+      const ids = pages.flatMap((p) => {
+        const id = pageDocumentId(prefix + p.slug);
+        return [id, `drafts.${id}`];
+      });
+      const existing = await client.fetch<string[]>(`*[_id in $ids]._id`, { ids });
+      if (existing.length) throw new Error(`Refusing to overwrite existing documents (pass --force): ${existing.join(", ")}`);
+    }
+  }
+
   const legacy = await loadLegacy();
   const cache = new Map<string, Promise<string>>();
   const docs = [];
@@ -87,14 +109,6 @@ async function main() {
     return;
   }
 
-  const { projectId, dataset } = client.config();
-  console.log(`Target: project ${projectId}, dataset ${dataset}, prefix "${prefix}", ${docs.length} documents`);
-  if (prefix === "" && !force) {
-    // Final slugs: refuse to overwrite live pages (published or draft) without --force.
-    const ids = docs.flatMap((d) => [d._id, `drafts.${d._id}`]);
-    const existing = await client.fetch<string[]>(`*[_id in $ids]._id`, { ids });
-    if (existing.length) throw new Error(`Refusing to overwrite existing documents (pass --force): ${existing.join(", ")}`);
-  }
   const tx = client.transaction();
   for (const doc of docs) tx.createOrReplace(doc);
   await tx.commit();

@@ -78,8 +78,7 @@ export function validateTargets(pages: SeedPage[], prefix: string): string[] {
   const seen = new Set<string>();
   for (const p of pages) {
     const final = `${prefix}${p.slug}`;
-    // A prefix like "preview/" is fine even if a reserved word would trip the final check.
-    const err = pageSlugError(final) && prefix !== "" ? pageSlugError(p.slug) : pageSlugError(final);
+    const err = pageSlugError(final);
     if (err) errors.push(`${final}: ${err}`);
     if (seen.has(final)) errors.push(`${final}: duplicate slug in SEED_PAGES.`);
     seen.add(final);

@@ -86,10 +86,12 @@ test("validateTargets: prefix shape, bad slugs, duplicates", () => {
   const p = (slug: string) => ({ slug, title: "t", seoFallback: { title: "t" }, sections: [] });
   expect(validateTargets([p("home"), p("industries/x")], "preview/")).toEqual([]);
   expect(validateTargets([p("home")], "")).toEqual([]);
-  expect(validateTargets([p("home")], "Preview/")).toHaveLength(1);
-  expect(validateTargets([p("home")], "a/b/")).toHaveLength(1);
+  expect(validateTargets([p("home")], "Preview/").length).toBeGreaterThan(0);
+  expect(validateTargets([p("home")], "a/b/").length).toBeGreaterThan(0);
   expect(validateTargets([p("Bad Slug")], "preview/")).toHaveLength(1);
   expect(validateTargets([p("blog")], "")).toHaveLength(1);
+  expect(validateTargets([p("x")], "blog/")).toHaveLength(1);
+  expect(validateTargets([p("x")], "api/")).toHaveLength(1);
   expect(validateTargets([p("about"), p("about")], "")).toHaveLength(1);
 });
 
