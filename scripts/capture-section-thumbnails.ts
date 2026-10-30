@@ -44,7 +44,54 @@ const missed: string[] = [];
 // element as PNG, then re-encode to WebP inside the browser via canvas — no
 // external tool or new dependency required.
 async function encodeWebp(page: import("@playwright/test").Page, locator: import("@playwright/test").Locator, filePath: string) {
-  const png = await locator.screenshot({ type: "png" });
+  await writeFile(filePath, await toWebp(page, await locator.screenshot({ type: "png" })));
+}
+
+// Page-builder sections: every CMS page wraps each section in
+// <div data-section-type="…">, so the first instance of each type on these
+// pages is its thumbnail. Tall sections are clipped so the picker stays legible.
+const SECTION_OUT_DIR = path.join(OUT_DIR, "sections");
+const SECTION_MAX_HEIGHT = 900;
+const PAGE_PATHS = [
+  "/", "/about", "/contact", "/services", "/industries", "/partnership", "/platform-expertise",
+  "/salesforce-recruitment-agency", "/privacy-policy",
+  "/industries/salesforce-nonprofit-consulting", "/industries/salesforce-commerce-cloud-consulting",
+  "/industries/salesforce-education-cloud-consulting", "/industries/salesforce-health-cloud-consulting",
+  "/platform-expertise/salesforce-data-cloud-consulting", "/platform-expertise/salesforce-agentforce-consulting",
+  "/partnership/dotdigital", "/partnership/findock", "/partnership/fundraise-up",
+];
+
+async function captureSectionTypes(page: import("@playwright/test").Page) {
+  await mkdir(SECTION_OUT_DIR, { recursive: true });
+  const done = new Set<string>();
+  for (const pagePath of PAGE_PATHS) {
+    await page.goto(`${BASE_URL}${pagePath}`, { waitUntil: "load" });
+    // The fixed navbar and Next's dev badge would otherwise sit on top of the shots.
+    await page.addStyleTag({ content: "header, nextjs-portal { visibility: hidden !important; }" });
+    const types = await page.$$eval("[data-section-type]", (els) =>
+      [...new Set(els.map((el) => el.getAttribute("data-section-type") ?? ""))],
+    );
+    for (const type of types) {
+      if (!type || done.has(type)) continue;
+      const locator = page.locator(`[data-section-type="${type}"]`).first();
+      await locator.scrollIntoViewIfNeeded();
+      await page.waitForTimeout(600);
+      const box = await locator.boundingBox();
+      if (!box || box.height < 40) continue; // e.g. an empty case-study list renders nothing
+      const scrollY = await page.evaluate(() => window.scrollY);
+      const png = await page.screenshot({
+        type: "png",
+        fullPage: true,
+        clip: { x: box.x, y: box.y + scrollY, width: box.width, height: Math.min(box.height, SECTION_MAX_HEIGHT) },
+      });
+      await writeFile(path.join(SECTION_OUT_DIR, `${type}.webp`), await toWebp(page, png));
+      done.add(type);
+    }
+  }
+  return done;
+}
+
+async function toWebp(page: import("@playwright/test").Page, png: Buffer) {
   const webpBase64 = await page.evaluate(async (pngBase64) => {
     const img = new Image();
     img.src = `data:image/png;base64,${pngBase64}`;
@@ -52,19 +99,15 @@ async function encodeWebp(page: import("@playwright/test").Page, locator: import
     const canvas = document.createElement("canvas");
     canvas.width = img.width;
     canvas.height = img.height;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) throw new Error("canvas 2d context unavailable");
-    ctx.drawImage(img, 0, 0);
-    const blob = await new Promise<Blob | null>((resolve) =>
-      canvas.toBlob(resolve, "image/webp", 0.75),
-    );
+    canvas.getContext("2d")?.drawImage(img, 0, 0);
+    const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/webp", 0.75));
     if (!blob) throw new Error("canvas.toBlob webp failed");
     const bytes = new Uint8Array(await blob.arrayBuffer());
     let binary = "";
     for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
     return btoa(binary);
   }, png.toString("base64"));
-  await writeFile(filePath, Buffer.from(webpBase64, "base64"));
+  return Buffer.from(webpBase64, "base64");
 }
 
 async function main() {
@@ -97,6 +140,11 @@ async function main() {
         await unlink(filePath).catch(() => {});
       }
     }
+    const sectionTypesCaptured = await captureSectionTypes(page);
+    const { sectionTypes } = await import("../src/sanity/schemaTypes/sections");
+    const missing = sectionTypes.map((t) => t.name).filter((name) => !sectionTypesCaptured.has(name));
+    console.log(`Page-builder thumbnails: ${sectionTypesCaptured.size}/${sectionTypes.length}`);
+    if (missing.length > 0) missed.push(`page-builder sections not on any listed page: ${missing.join(", ")}`);
   } finally {
     await browser.close();
   }

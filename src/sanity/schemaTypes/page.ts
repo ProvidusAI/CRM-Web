@@ -40,7 +40,23 @@ export const page = defineType({
       initialValue: false,
       description: "Wraps the page so wide decorations cannot cause sideways scrolling. Leave off for pages with sticky sections (e.g. the homepage stack).",
     }),
-    defineField({ name: "sections", title: "Sections", type: "array", group: "content", of: pageSectionMembers }),
+    defineField({
+      name: "sections",
+      title: "Sections",
+      type: "array",
+      group: "content",
+      of: pageSectionMembers,
+      options: {
+        // Thumbnails come from `pnpm thumbs:sections`, which screenshots each
+        // section type from the live pages into public/studio-thumbnails/sections/.
+        insertMenu: {
+          views: [
+            { name: "grid", previewImageUrl: (type) => `/studio-thumbnails/sections/${type}.webp` },
+            { name: "list" },
+          ],
+        },
+      },
+    }),
     defineField({ name: "seo", title: "SEO", type: "seo", group: "seo" }),
     defineField({ name: "jsonLd", title: "JSON-LD", type: "jsonLd", group: "seo" }),
   ],
