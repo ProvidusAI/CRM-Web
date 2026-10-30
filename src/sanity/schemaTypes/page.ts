@@ -1,6 +1,7 @@
 import { defineField, defineType, type SlugValue } from "sanity";
 import { pageSlugError, slugToPath } from "@/lib/pagePaths";
 import { pageSectionMembers } from "./sections";
+import { sectionInsertMenuGroups } from "./sections/insertMenuGroups";
 
 export const page = defineType({
   name: "page",
@@ -50,6 +51,7 @@ export const page = defineType({
         // Thumbnails come from `pnpm thumbs:sections`, which screenshots each
         // section type from the live pages into public/studio-thumbnails/sections/.
         insertMenu: {
+          groups: sectionInsertMenuGroups,
           views: [
             { name: "grid", previewImageUrl: (type) => `/studio-thumbnails/sections/${type}.webp` },
             { name: "list" },
