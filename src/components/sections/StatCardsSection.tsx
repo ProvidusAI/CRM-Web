@@ -36,7 +36,7 @@ export function StatCardsSection({ title, items }: StatCardsSectionProps) {
           {items.map((item, index) => (
             <li
               key={`${item.label}-${index}`}
-              className="overflow-hidden rounded-[30px] border border-card-border/60 bg-white shadow-[0_12px_26px_rgba(0,0,0,0.04),0_46px_46px_rgba(0,0,0,0.04)]"
+              className="overflow-hidden rounded-[30px] bg-white shadow-[0_12px_26px_rgba(0,0,0,0.04),0_46px_46px_rgba(0,0,0,0.04)]"
             >
               <div
                 className={cn(
