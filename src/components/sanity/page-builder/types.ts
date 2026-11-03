@@ -48,6 +48,7 @@ import type { ProcessStepsSectionData } from "./adapters/ProcessStepsSection";
 import type { WhyBandSectionData } from "./adapters/WhyBandSection";
 import type { FeaturedRolesSectionData } from "./adapters/FeaturedRolesSection";
 import type { BenefitCardsSectionData } from "./adapters/BenefitCardsSection";
+import type { StatCardsSectionData } from "./adapters/StatCardsSection";
 
 export interface SectionSpacing {
   top?: number;
@@ -116,4 +117,5 @@ export type PageSectionData =
   | ProcessStepsSectionData
   | WhyBandSectionData
   | FeaturedRolesSectionData
-  | BenefitCardsSectionData;
+  | BenefitCardsSectionData
+  | StatCardsSectionData;

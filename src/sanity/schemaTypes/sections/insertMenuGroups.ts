@@ -18,6 +18,7 @@ export const sectionInsertMenuGroups = [
       "expertiseCertifiedSection",
       "expertiseSalesforceSection",
       "eventsSection",
+      "statCardsSection",
     ],
   },
   {

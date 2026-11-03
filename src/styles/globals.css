@@ -49,6 +49,8 @@
   --color-card-border: #d9d9d9;
   --color-text-heading: #2a2a2a;
   --color-text-body: #3e3e3e;
+  --color-stat-navy: #0b1d3f;
+  --color-stat-sky: #308fff;
   --shadow-cost-card: 0px 4px 23px 10px rgba(0, 0, 0, 0.05);
   /* Nonprofit / solution types (Figma 54:394) — exact values from the design */
   --color-type-teal: #1ba6a8;

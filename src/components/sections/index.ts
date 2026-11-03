@@ -58,4 +58,5 @@ export { ProcessStepsSection } from "./ProcessStepsSection";
 export { WhyBandSection } from "./WhyBandSection";
 export { FeaturedRolesSection } from "./FeaturedRolesSection";
 export { BenefitCardsSection } from "./BenefitCardsSection";
+export { StatCardsSection } from "./StatCardsSection";
 export { RichTextSection } from "./RichTextSection";

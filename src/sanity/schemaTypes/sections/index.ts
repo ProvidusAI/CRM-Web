@@ -48,6 +48,7 @@ import { processStepsSection } from "./processStepsSection";
 import { whyBandSection } from "./whyBandSection";
 import { featuredRolesSection } from "./featuredRolesSection";
 import { benefitCardsSection } from "./benefitCardsSection";
+import { statCardsSection } from "./statCardsSection";
 
 // Every page-builder section type. Section tasks append to this list.
 export const sectionTypes: ReturnType<typeof defineSection>[] = [
@@ -100,6 +101,7 @@ export const sectionTypes: ReturnType<typeof defineSection>[] = [
   whyBandSection,
   featuredRolesSection,
   benefitCardsSection,
+  statCardsSection,
 ];
 
 export const pageSectionMembers = sectionTypes.map((t) => ({ type: t.name }));
