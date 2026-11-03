@@ -55,5 +55,5 @@ export default async function SanityPage({ params }: { params: Params }) {
     </>
   );
 
-  return page.clipOverflowX ? <div className="overflow-x-hidden bg-white">{body}</div> : body;
+  return page.clipOverflowX ? <div className="overflow-x-clip bg-white">{body}</div> : body;
 }
