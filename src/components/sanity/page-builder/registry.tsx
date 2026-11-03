@@ -46,6 +46,7 @@ import { hiringModelsSectionAdapter } from "./adapters/HiringModelsSection";
 import { processStepsSectionAdapter } from "./adapters/ProcessStepsSection";
 import { whyBandSectionAdapter } from "./adapters/WhyBandSection";
 import { featuredRolesSectionAdapter } from "./adapters/FeaturedRolesSection";
+import { benefitCardsSectionAdapter } from "./adapters/BenefitCardsSection";
 import type { SectionAdapter } from "./types";
 
 // _type → adapter. Section tasks add one entry each.
@@ -98,4 +99,5 @@ export const SECTION_ADAPTERS: Record<string, SectionAdapter<never>> = {
   processStepsSection: processStepsSectionAdapter,
   whyBandSection: whyBandSectionAdapter,
   featuredRolesSection: featuredRolesSectionAdapter,
+  benefitCardsSection: benefitCardsSectionAdapter,
 };

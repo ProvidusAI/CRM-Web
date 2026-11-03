@@ -57,4 +57,5 @@ export { HiringModelsSection } from "./HiringModelsSection";
 export { ProcessStepsSection } from "./ProcessStepsSection";
 export { WhyBandSection } from "./WhyBandSection";
 export { FeaturedRolesSection } from "./FeaturedRolesSection";
+export { BenefitCardsSection } from "./BenefitCardsSection";
 export { RichTextSection } from "./RichTextSection";

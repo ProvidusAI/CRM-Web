@@ -32,6 +32,7 @@ export const sectionInsertMenuGroups = [
       "expertiseImplementationSection",
       "expertiseFeaturesSection",
       "serviceBenefitsSection",
+      "benefitCardsSection",
     ],
   },
   {
