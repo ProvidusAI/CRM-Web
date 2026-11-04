@@ -32,6 +32,12 @@ interface ExpertisePlatformsSectionProps {
   items: ExpertisePlatformItem[];
 }
 
+// Cards added in the Studio without a background cycle through the palette
+// instead of rendering flat white next to the seeded ones.
+const DEFAULT_GRADIENTS = ["#FFDBED", "#CAEFFF", "#E8EAFF", "#D8E9FF", "#DBFFFB", "#D8FFE0", "#FFF3D8"].map(
+  (tint) => `linear-gradient(59.61deg, #F4F4F4 45%, ${tint} 119.24%)`,
+);
+
 export function ExpertisePlatformsSection({
   title,
   items,
@@ -87,10 +93,10 @@ export function ExpertisePlatformsSection({
               >
                 <div 
                   className="relative overflow-hidden rounded-[24px] p-8 md:p-10 h-full min-h-[380px] flex flex-col items-start transition-transform hover:-translate-y-1 shadow-sm"
-                  style={{ background: item.bgGradient }}
+                  style={{ background: item.bgGradient || DEFAULT_GRADIENTS[index % DEFAULT_GRADIENTS.length] }}
                 >
                   {item.icon && (
-                    <div className="absolute top-8 right-8 w-[64px] h-[64px] md:w-[80px] md:h-[80px]">
+                    <div className="absolute top-8 right-8 h-[60px] w-[60px]">
                       <Image
                         src={item.icon}
                         alt={item.title}

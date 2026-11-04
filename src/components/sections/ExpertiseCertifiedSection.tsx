@@ -31,6 +31,8 @@ export function ExpertiseCertifiedSection({ images, alts }: ExpertiseCertifiedSe
                 alt={alts?.[idx] || `Certification ${idx + 1}`}
                 fill
                 sizes="150px"
+                // The track is already translated when the observer runs, so lazy badges load late and leave gaps.
+                loading="eager"
                 className="object-contain"
               />
             </div>
@@ -43,6 +45,8 @@ export function ExpertiseCertifiedSection({ images, alts }: ExpertiseCertifiedSe
                 alt={alts?.[idx] || `Certification ${idx + 1}`}
                 fill
                 sizes="150px"
+                // The track is already translated when the observer runs, so lazy badges load late and leave gaps.
+                loading="eager"
                 className="object-contain"
               />
             </div>
