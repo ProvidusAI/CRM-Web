@@ -29,9 +29,9 @@ interface BenefitCardsSectionProps {
 
 // Height of the fixed navbar the pinned block sits under.
 const PIN_TOP = 88;
-// Pin only where the whole block fits beside the navbar; elsewhere, and for
+// Pin only where the whole block fits beside the navbar (same media as the `pin:` variant in globals.css); elsewhere, and for
 // reduced motion, the cards just stack and the page scrolls normally.
-const PIN_QUERY = "(min-width: 1280px) and (min-height: 760px) and (prefers-reduced-motion: no-preference)";
+const PIN_QUERY = "(min-width: 1280px) and (min-height: 740px) and (prefers-reduced-motion: no-preference)";
 
 export function BenefitCardsSection({ title, image, items }: BenefitCardsSectionProps) {
   const outer = useRef<HTMLDivElement>(null);
@@ -93,7 +93,7 @@ export function BenefitCardsSection({ title, image, items }: BenefitCardsSection
               </Heading>
             </div>
 
-            <div className="mt-12 flex flex-col gap-8 md:mt-[70px] xl:flex-row xl:items-stretch xl:gap-[39px]">
+            <div className="mt-12 flex flex-col gap-8 md:mt-[70px] pin:flex-row pin:items-stretch pin:gap-[39px]">
               {image && (
                 <Image
                   src={image.src}
@@ -101,7 +101,7 @@ export function BenefitCardsSection({ title, image, items }: BenefitCardsSection
                   width={image.width}
                   height={image.height}
                   sizes="(min-width: 640px) 320px, 100vw"
-                  className="mx-auto h-auto w-full max-w-[320px] shrink-0 rounded-2xl object-cover xl:mx-0 xl:w-[320px]"
+                  className="mx-auto h-auto w-full max-w-[320px] shrink-0 rounded-2xl object-cover pin:mx-0 pin:w-[320px]"
                 />
               )}
               {/* Pinned: the image sets the row height and the list slides through it. */}
