@@ -28,18 +28,19 @@ interface BenefitCardsSectionProps {
   items: BenefitCardItem[];
 }
 
-// Height of the fixed navbar the pinned block sits under.
+// Height of the fixed navbar the pinned row sits under.
 const PIN_TOP = 88;
-// Pin only where the whole block fits beside the navbar ; elsewhere, and for
-// reduced motion, the cards just stack and the page scrolls normally.
-const PIN_QUERY = "(min-width: 1280px) and (min-height: 740px) and (prefers-reduced-motion: no-preference)";
+// Only the image + cards row pins (the heading scrolls away first), so it fits
+// any laptop height. Narrow screens and reduced motion get the plain stacked list.
+const PIN_QUERY = "(min-width: 1280px) and (prefers-reduced-motion: no-preference)";
 
 export function BenefitCardsSection({ title, image, items }: BenefitCardsSectionProps) {
   const outer = useRef<HTMLDivElement>(null);
   const viewport = useRef<HTMLDivElement>(null);
   const list = useRef<HTMLUListElement>(null);
   const [pinned, setPinned] = useState(false);
-  // How far the list has to travel to show its last card.
+  // The pinned row's height, and how far the list has to travel to show its last card.
+  const [rowHeight, setRowHeight] = useState(0);
   const [overflow, setOverflow] = useState(0);
 
   useEffect(() => {
@@ -52,8 +53,11 @@ export function BenefitCardsSection({ title, image, items }: BenefitCardsSection
 
   useEffect(() => {
     if (!pinned || !viewport.current || !list.current) return;
-    const measure = () =>
-      setOverflow(Math.max(0, (list.current?.scrollHeight ?? 0) - (viewport.current?.clientHeight ?? 0)));
+    const measure = () => {
+      const height = viewport.current?.clientHeight ?? 0;
+      setRowHeight(height);
+      setOverflow(Math.max(0, (list.current?.scrollHeight ?? 0) - height));
+    };
     const ro = new ResizeObserver(measure);
     ro.observe(viewport.current);
     ro.observe(list.current);
@@ -78,23 +82,21 @@ export function BenefitCardsSection({ title, image, items }: BenefitCardsSection
   return (
     <Section className="bg-white py-16 md:py-24">
       <Container>
-        <div
-          ref={outer}
-          className="mx-auto max-w-[1240px]"
-          style={pinned ? { height: `calc(100vh - ${PIN_TOP}px + ${overflow}px)` } : undefined}
-        >
-          <div
-            className={pinned ? "sticky flex flex-col justify-center" : undefined}
-            style={pinned ? { top: PIN_TOP, height: `calc(100vh - ${PIN_TOP}px)` } : undefined}
-          >
-            <div className="text-center">
-              <Image src="/images/green-line.svg" alt="" aria-hidden="true" width={64} height={24} className="mx-auto h-auto w-16" />
-              <Heading as="h2" className="mx-auto mt-5 max-w-3xl text-black">
-                {title}
-              </Heading>
-            </div>
+        <div className="mx-auto max-w-[1240px]">
+          <div className="text-center">
+            <Image src="/images/green-line.svg" alt="" aria-hidden="true" width={64} height={24} className="mx-auto h-auto w-16" />
+            <Heading as="h2" className="mx-auto mt-5 max-w-3xl text-black">
+              {title}
+            </Heading>
+          </div>
 
-            <div className={cn("mt-12 flex flex-col gap-8 md:mt-[70px] xl:flex-row xl:gap-[39px]", pinned ? "xl:items-stretch" : "xl:items-start")}>
+          {/* Pinned: the row sticks under the navbar while the page scrolls through the extra height.
+              (Sticky is bounded by the content box, so this must be height, not padding.) */}
+          <div ref={outer} style={pinned && rowHeight ? { height: rowHeight + overflow } : undefined}>
+            <div
+              className={cn("mt-12 flex flex-col gap-8 md:mt-[70px] xl:flex-row xl:gap-[39px]", pinned ? "sticky xl:items-stretch" : "xl:items-start")}
+              style={pinned ? { top: PIN_TOP } : undefined}
+            >
               {image && (
                 <Image
                   src={image.src}
