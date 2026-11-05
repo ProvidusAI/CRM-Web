@@ -106,7 +106,7 @@ export function ExpertisePlatformsSection({
                     </div>
                   )}
 
-                  <div className="mt-auto w-full pt-20">
+                  <div className="w-full pt-20">
                     {resolvePlatformHref(item.title, item.href) ? (
                       <Link
                         href={resolvePlatformHref(item.title, item.href)!}
