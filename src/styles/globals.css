@@ -237,6 +237,31 @@
   }
 }
 
+/* Rounded brand-blue scrollbar on a pale track (the card lists). Chrome and
+   Safari take the ::-webkit-scrollbar rules; Firefox the standard properties.
+   Chrome ignores ::-webkit-scrollbar once scrollbar-color is set, so the
+   standard properties are scoped to engines without the pseudo-elements. */
+@utility scrollbar-blue {
+  @supports not selector(::-webkit-scrollbar) {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-brand-blue) var(--color-brand-blue-light);
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--color-brand-blue-light);
+    border-radius: 9999px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-brand-blue);
+    border-radius: 9999px;
+  }
+}
+
 @utility contain-layout {
   contain: layout paint;
 }
