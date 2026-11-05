@@ -1,9 +1,5 @@
 @import "tailwindcss";
 
-/* Screens where a pinned, scroll-driven section fits beside the navbar.
-   BenefitCardsSection uses the same query in JS to decide whether to pin. */
-@custom-variant pin (@media (min-width: 1280px) and (min-height: 740px));
-
 /* ─── Google Fonts ─────────────────────────────────────────── */
 /* ─── Design Tokens ─────────────────────────────────────────── */
 /* Only colors, fonts, spacing, and radius live here.            */
