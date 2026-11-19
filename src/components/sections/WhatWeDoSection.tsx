@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
@@ -17,6 +17,8 @@ export interface WhatWeDoTab {
   content: {
     heading: string;
     text: string;
+    /** Rich text (links, bold) rendered instead of `text` when present. */
+    body?: ReactNode;
     bullets?: string[];
   };
   link?: WhatWeDoTabLink;
@@ -310,11 +312,12 @@ export function WhatWeDoSection({
               )}
 
               <div className="space-y-6">
-                {activeContent?.text.split('\n\n').map((p, i) => (
-                  <Text key={i} variant="p2" className="text-gray-700 leading-relaxed">
-                    {p}
-                  </Text>
-                ))}
+                {activeContent?.body ??
+                  activeContent?.text.split("\n\n").map((p, i) => (
+                    <Text key={i} variant="p2" className="text-gray-700 leading-relaxed">
+                      {p}
+                    </Text>
+                  ))}
               </div>
 
               {activeContent?.bullets && (

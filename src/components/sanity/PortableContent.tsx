@@ -36,7 +36,7 @@ interface TableValue {
 
 const LINK_CLASS = "text-brand-blue underline-offset-4 hover:underline";
 
-function ContentLink({
+export function ContentLink({
   href,
   openInNewTab,
   children,
